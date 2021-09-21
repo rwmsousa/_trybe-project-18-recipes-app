@@ -1,18 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [button, setButton] = useState('true');
+  const history = useHistory();
 
   const handleChange = ({ target: { value } }) => {
     const validEmail = /\S+@\S+\.\S+/;
-    const magicNumber = 5;
+    const magicNumber = 6;
     setPassword(value);
 
     if (validEmail.test(email) && password.length >= magicNumber) {
       setButton(!button);
     }
+  };
+
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    history.push('/comidas');
   };
 
   return (
@@ -42,6 +50,7 @@ function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ button }
+        onClick={ handleClick }
       >
         Entrar
       </button>
