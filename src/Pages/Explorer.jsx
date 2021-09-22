@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../Components/Footer';
+import Footer from '../components/Footer';
 
 function Explorer() {
   return (

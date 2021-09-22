@@ -52,7 +52,7 @@ describe('Testa pagina Login.js', () => {
     expect(button).not.toHaveAttribute('disabled');
   });
 
-  test('', () => {
+  test('Verifica que ao clicar no botão redireciona para a página /comidas', () => {
     const { history } = renderWithRouter(<App />);
 
     const inputEmail = screen.getByPlaceholderText(/insira seu e-mail/i);
