@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Form from '../components';
+import Form from '../components/Form';
 import Context from '../Context/Context';
 import './login.css';
 
