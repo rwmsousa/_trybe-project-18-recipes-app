@@ -14,7 +14,7 @@ function Form() {
 
   return (
     <form className="login-form">
-      <div className="field input-group mb-3">
+      <div className="field ">
         <span className="fa fa-user" />
         <input
           type="email"
@@ -24,7 +24,7 @@ function Form() {
           onChange={ (e) => setEmail(e.target.value) }
         />
       </div>
-      <div className="field space">
+      <div className="field space ">
         <span className="fa fa-lock" />
         <input
           type={ showPassword }
