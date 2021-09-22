@@ -15,8 +15,8 @@
   background: rgba(0, 0, 0, 0.7);
   content: '';
   height: 100%;
-  position: absolute;
   left: 0;
+  position: absolute;
   top: 0;
   width: 100%;
 }
@@ -26,8 +26,8 @@
   left: 50%;
   padding: 60px 32px;
   position: absolute;
-  top: 60%;
   text-align: center;
+  top: 60%;
   transform: translate(-50%, -50%);
   width: 370px;
   z-index: 99;
