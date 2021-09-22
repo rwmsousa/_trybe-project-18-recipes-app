@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 
 function Provider({ children }) {
-  const [currentPage, setCurrentPage] = useState(''); // variável utilizada para alterar o título da página no header.
+  const [currentPage, setCurrentPage] = useState('');
+  // variável utilizada para alterar o título da página no header.
+  const [foodName, setFoodName] = useState([]);
 
-  const providerValue = { currentPage, setCurrentPage };
+  const providerValue = {
+    currentPage,
+    setCurrentPage,
+    foodName,
+    setFoodName,
+  };
 
   return (
     <Context.Provider value={ providerValue }>
