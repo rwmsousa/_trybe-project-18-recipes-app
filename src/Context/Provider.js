@@ -7,12 +7,16 @@ function Provider({ children }) {
   const [currentPage, setCurrentPage] = useState(''); // variável utilizada para alterar o título da página no header.
   const [searchText, setSearchText] = useState('');
   const [searchRadio, setSearchRadio] = useState('');// variável utilizada
+  const [foodName, setFoodName] = useState([]);
+
   const handleSearchText = ({ target: { value } }) => {
     setSearchText(value);
   };
+
   const handleRadio = ({ target: { value } }) => {
     setSearchRadio(value);
   };
+
   const handleClick = () => {
     if (searchRadio === 'searchIngredient') {
       fetchIngredient(searchText);
@@ -24,7 +28,9 @@ function Provider({ children }) {
       fetchFirstLetter(searchText);
     }
   };
-  const providerValue = { currentPage,
+
+  const providerValue = {
+    currentPage,
     setCurrentPage,
     fetchIngredient,
     handleSearchText,
@@ -33,7 +39,10 @@ function Provider({ children }) {
     handleClick,
     searchRadio,
     setSearchRadio,
-    handleRadio };
+    handleRadio,
+    foodName,
+    setFoodName,
+  };
 
   return (
     <Context.Provider value={ providerValue }>
