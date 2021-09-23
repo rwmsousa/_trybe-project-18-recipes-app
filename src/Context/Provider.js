@@ -8,6 +8,7 @@ function Provider({ children }) {
   const [searchText, setSearchText] = useState('');
   const [searchRadio, setSearchRadio] = useState('');// variável utilizada
   const [foodName, setFoodName] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const handleSearchText = ({ target: { value } }) => {
     setSearchText(value);
@@ -42,6 +43,8 @@ function Provider({ children }) {
     handleRadio,
     foodName,
     setFoodName,
+    categories,
+    setCategories,
   };
 
   return (

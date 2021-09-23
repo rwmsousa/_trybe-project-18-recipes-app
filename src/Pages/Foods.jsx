@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../Context/Context';
+import { fetchByCategory } from '../services';
 
 function Foods() {
   const [foods, setFoods] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const { setCurrentPage } = useContext(Context);
+  const { setCurrentPage, categories, setCategories } = useContext(Context);
 
   useEffect(() => {
     async function fetchFoods() {
@@ -31,28 +31,15 @@ function Foods() {
 
       const magicNumber = 5;
       const SplitArray = meals.splice(0, magicNumber);
-
       setCategories(SplitArray);
     }
     fetchCategories();
-  }, []);
+  });
 
-  const HandleClick = ({ target: { name } }) => {
-    const results = fetch(`www.themealdb.com/api/json/v1/1/filter.php?c=${name}`)
-      .then((response) => (
-        response
-          .json()
-          .then((data) => data)
-      ));
-    console.log(results);
+  const HandleClick = async ({ target: { name } }) => {
+    const test = await fetchByCategory(name);
+    setFoods(test);
   };
-  // async function HandleClick({ target: { name } }) {
-  //   const results = await fetch(
-  //     `www.themealdb.com/api/json/v1/1/filter.php?c=${name}`,
-  //   );
-  //   const data = await results.json();
-  //   console.log(data);
-  // };
 
   return (
     <div className="foods">
