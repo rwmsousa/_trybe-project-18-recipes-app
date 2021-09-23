@@ -17,9 +17,6 @@ function Header() {
   // tela de perfil
   // receitas Feitas
   // receitas Favoritas
-  // const response = await fetch('https://swapi-trybe.herokuapp.com/api/planets/%27);
-  //     const data = await response.json();
-  //     return data.results;
 
   const [showSearch, setShowSearch] = useState(false);
   const { currentPage, searchText, handleSearchText,

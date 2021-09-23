@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import drinkicon from '../images/drinkIcon.svg';
 import exploreicon from '../images/exploreIcon.svg';
 import mealicon from '../images/mealIcon.svg';
-import './Footer.css';
+import '../css/Footer.css';
 
 function Footer() {
   return (

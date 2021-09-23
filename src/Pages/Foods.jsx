@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Context from '../Context/Context';
 
 function Foods() {
   const [foods, setFoods] = useState([]);
   const [categories, setCategories] = useState([]);
+  const { setCurrentPage } = useContext(Context);
 
   useEffect(() => {
     async function fetchFoods() {
-      const { meals } = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-        .then((data) => data.json());
+      const { meals } = await fetch(
+        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
+      ).then((data) => data.json());
 
       const magicNumber = 12;
       const SplitArray = meals.splice(0, magicNumber);
@@ -17,12 +20,14 @@ function Foods() {
       setFoods(SplitArray);
     }
     fetchFoods();
-  }, []);
+    setCurrentPage('Comidas');
+  }, [setCurrentPage]);
 
   useEffect(() => {
     async function fetchCategories() {
-      const { meals } = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list')
-        .then((data) => data.json());
+      const { meals } = await fetch(
+        'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
+      ).then((data) => data.json());
 
       const magicNumber = 5;
       const SplitArray = meals.splice(0, magicNumber);
@@ -61,7 +66,7 @@ function Foods() {
             name={ category.strCategory }
             onClick={ (event) => HandleClick(event) }
           >
-            { category.strCategory }
+            {category.strCategory}
           </button>
         ))}
       </ul>
@@ -74,8 +79,7 @@ function Foods() {
               width="150px"
               data-testid={ `${idx}-card-img` }
             />
-            <p data-testid={ `${idx}-card-name` }>{ food.strMeal }</p>
-
+            <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
           </li>
         ))}
       </ul>

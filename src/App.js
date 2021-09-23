@@ -10,7 +10,8 @@ function App() {
       <Route path="/comidas" component={ Foods } />
       <Route path="/bebidas" component={ Drinks } />
       <Route path="/profile" component={ Profile } />
-      <Route exact path="/explorar" component={ Explorer } />
+      <Route path="/explorar" component={ Explorer } />
+      {/* <Route path="/bebidas/{id}" component={ DrinkDetail } /> */ }
       <Route exact path="/" component={ Login } />
     </Switch>
   );

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import Context from '../Context/Context';
 
 function Drinks() {
   const [drinks, setDrinks] = useState([]);
   const [categories, setCategories] = useState([]);
+  const { setCurrentPage } = useContext(Context);
 
   useEffect(() => {
     async function fetchDrinks() {
@@ -17,7 +19,8 @@ function Drinks() {
       setDrinks(SplitArray);
     }
     fetchDrinks();
-  }, []);
+    setCurrentPage('Bebidas');
+  }, [setCurrentPage]);
 
   useEffect(() => {
     async function fetchCategories() {
