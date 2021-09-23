@@ -13,7 +13,7 @@ function ExploreByAreaFood() {
   return (
     <div>
       <Header />
-      <h1> ExploreByAreaFood </h1>
+      <h1 data-testid="page-title"> Explorar Origem </h1>
       <Footer />
     </div>
   );

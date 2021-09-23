@@ -13,7 +13,7 @@ function ExploreByIngredientDrink() {
   return (
     <div>
       <Header />
-      <h1> ExploreByIngredientDrink </h1>
+      <h1 data-testid="page-title"> Explorar Ingredientes </h1>
       <Footer />
     </div>
   );

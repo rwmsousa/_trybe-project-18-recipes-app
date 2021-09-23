@@ -13,7 +13,7 @@ function ExplorerFoods() {
   return (
     <div>
       <Header />
-      <h1> ExplorerFoods </h1>
+      <h1 data-testid="page-title"> Explorar Comidas </h1>
       <Footer />
     </div>
   );

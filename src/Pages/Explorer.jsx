@@ -13,7 +13,7 @@ function Explorer() {
   return (
     <div>
       <Header />
-      <h1> Explorer </h1>
+      <h1 data-testid="page-title"> Explorar </h1>
       <Footer />
     </div>
   );
