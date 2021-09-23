@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 
-function Profile() {
+function ExplorerDrinks() {
   const { setCurrentPage } = useContext(Context);
 
   useEffect(() => {
@@ -13,10 +13,10 @@ function Profile() {
   return (
     <div>
       <Header />
-      <h1> Profile </h1>
+      <h1> ExplorerDrinks </h1>
       <Footer />
     </div>
   );
 }
 
-export default Profile;
+export default ExplorerDrinks;
