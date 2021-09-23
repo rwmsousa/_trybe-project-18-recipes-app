@@ -15,7 +15,7 @@ import FoodDetail from './FoodDetail';
 import FoodInProgress from './FoodInProgress';
 import RecipesMade from './RecipesMade';
 
-export default {
+export {
   Login,
   Drinks,
   Foods,
