@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../Context/Context';
-import { fetchByCategory } from '../services';
+import { fetchByCategoryFoods } from '../services';
 
 function Foods() {
   const [foods, setFoods] = useState([]);
@@ -37,8 +37,8 @@ function Foods() {
   });
 
   const HandleClick = async ({ target: { name } }) => {
-    const test = await fetchByCategory(name);
-    setFoods(test);
+    const arrayCategory = await fetchByCategoryFoods(name);
+    setFoods(arrayCategory);
   };
 
   return (

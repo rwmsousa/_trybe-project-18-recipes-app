@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
+import { fetchByCategoryDrinks } from '../services';
 
 function Drinks() {
   const [drinks, setDrinks] = useState([]);
@@ -35,6 +36,11 @@ function Drinks() {
     fetchCategories();
   }, []);
 
+  const HandleClick = async ({ target: { name } }) => {
+    const arrayCategory = await fetchByCategoryDrinks(name);
+    setDrinks(arrayCategory);
+  };
+
   return (
     <div>
       <Header />
@@ -44,6 +50,8 @@ function Drinks() {
             type="button"
             key={ category.strCategory }
             data-testid={ `${category.strCategory}-category-filter` }
+            name={ category.strCategory }
+            onClick={ (event) => HandleClick(event) }
           >
             { category.strCategory }
           </button>
