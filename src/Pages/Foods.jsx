@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../Context/Context';
@@ -53,6 +54,9 @@ function Foods() {
     <div className="foods">
       <Header />
       <ul>
+        <button type="button" onClick={ () => setFoods(foodsClone) }>
+          All
+        </button>
         {categories.map((category) => (
           <button
             type="button"
@@ -76,6 +80,7 @@ function Foods() {
               data-testid={ `${idx}-card-img` }
             />
             <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
+            <Link to={ `/comidas/${food.idMeal}` }>detalhes</Link>
           </li>
         ))}
       </ul>
