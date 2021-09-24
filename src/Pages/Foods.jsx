@@ -53,6 +53,9 @@ function Foods() {
     <div className="foods">
       <Header />
       <ul>
+        <button type="button" onClick={ () => setFoods(foodsClone) }>
+          All
+        </button>
         {categories.map((category) => (
           <button
             type="button"

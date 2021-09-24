@@ -53,6 +53,9 @@ function Drinks() {
     <div>
       <Header />
       <ul>
+        <button type="button" onClick={ () => setDrinks(drinksClone) }>
+          All
+        </button>
         {categories.map((category) => (
           <button
             type="button"
