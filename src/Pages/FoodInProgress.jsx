@@ -4,11 +4,12 @@ import Header from '../components/Header';
 import Context from '../Context/Context';
 
 function FoodInProgress() {
-  const { setCurrentPage } = useContext(Context);
+  const { setCurrentPage, setShowProfile } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Detalhes');
-  }, [setCurrentPage]);
+    setShowProfile(false);
+  }, [setCurrentPage, setShowProfile]);
 
   return (
     <div>
