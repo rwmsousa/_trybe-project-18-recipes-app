@@ -6,8 +6,10 @@ import { fetchByCategoryDrinks } from '../services';
 
 function Drinks() {
   const [drinks, setDrinks] = useState([]);
+  const [drinksClone, setDrinksClone] = useState([]);
   const [categories, setCategories] = useState([]);
   const { setCurrentPage } = useContext(Context);
+  const [actualCategory, setActualCategory] = useState('');
 
   useEffect(() => {
     async function fetchDrinks() {
@@ -18,6 +20,7 @@ function Drinks() {
       const SplitArray = response.drinks.splice(0, magicNumber);
 
       setDrinks(SplitArray);
+      setDrinksClone(SplitArray);
     }
     fetchDrinks();
     setCurrentPage('Bebidas');
@@ -36,9 +39,14 @@ function Drinks() {
     fetchCategories();
   }, []);
 
-  const HandleClick = async ({ target: { name } }) => {
-    const arrayCategory = await fetchByCategoryDrinks(name);
-    setDrinks(arrayCategory);
+  const HandleClick = async ({ target: { name, value } }) => {
+    if (actualCategory === value) {
+      setDrinks(drinksClone);
+    } else {
+      const arrayCategory = await fetchByCategoryDrinks(name);
+      setDrinks(arrayCategory);
+      setActualCategory(value);
+    }
   };
 
   return (
@@ -51,6 +59,7 @@ function Drinks() {
             key={ category.strCategory }
             data-testid={ `${category.strCategory}-category-filter` }
             name={ category.strCategory }
+            value={ category.strCategory }
             onClick={ (event) => HandleClick(event) }
           >
             { category.strCategory }
