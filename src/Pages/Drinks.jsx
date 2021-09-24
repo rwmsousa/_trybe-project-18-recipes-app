@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
@@ -79,6 +80,7 @@ function Drinks() {
               data-testid={ `${idx}-card-img` }
             />
             <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
+            <Link to={ `/bebidas/${drink.idDrink}` }>detalhes</Link>
           </li>
         ))}
       </ul>
