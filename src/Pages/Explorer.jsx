@@ -5,11 +5,15 @@ import Header from '../components/Header';
 import Context from '../Context/Context';
 
 function Explorer() {
-  const { setCurrentPage } = useContext(Context);
+  const {
+    setCurrentPage,
+    setShowTitlePage,
+    setSearchButton } = useContext(Context);
 
   useEffect(() => {
-    setCurrentPage('Detalhes');
-  }, [setCurrentPage]);
+    setCurrentPage('Explorar');
+    setSearchButton(false);
+  }, [setCurrentPage, setShowTitlePage, setSearchButton]);
 
   return (
     <div>

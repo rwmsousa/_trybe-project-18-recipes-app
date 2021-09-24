@@ -18,28 +18,35 @@ import {
   ExploreByAreaFood,
   ExploreByIngredientFood,
   ExploreByIngredientDrink,
-  ExplorerDrinks
+  ExplorerDrinks,
 } from './Pages/Index';
 
 function App() {
   return (
     <Switch>
-      <Route path="/comidas" component={ Foods } />
+      <Route exact path="/" component={ Login } />
+      <Route exact path="/comidas" component={ Foods } />
+      <Route exact path="/bebidas" component={ Drinks } />
       <Route path="/comidas/:id" component={ FoodDetail } />
-      <Route path="/comidas/:id/in-progress" component={ FoodInProgress } />
-      <Route path="/bebidas" component={ Drinks } />
       <Route path="/bebidas/:id" component={ DrinkDetail } />
+      <Route path="/comidas/:id/in-progress" component={ FoodInProgress } />
       <Route path="/bebidas/:id/in-progress" component={ DrinkInProgress } />
-      <Route path="/explorar" component={ Explorer } />
-      <Route path="/explorar/comidas" component={ ExplorerFoods } />
-      <Route path="/explorar/comidas/area" component={ ExploreByAreaFood } />
-      <Route path="/explorar/comidas/ingredientes" component={ ExploreByIngredientFood } />
+      <Route exact path="/explorar" component={ Explorer } />
+      <Route exact path="/explorar/comidas" component={ ExplorerFoods } />
+      <Route exact path="/explorar/bebidas" component={ ExplorerDrinks } />
+      <Route
+        path="/explorar/comidas/ingredientes"
+        component={ ExploreByIngredientFood }
+      />
       <Route path="/explorar/bebidas" component={ ExplorerDrinks } />
-      <Route path="/explorar/bebidas/ingredientes" component={ ExploreByIngredientDrink } />
+      <Route
+        path="/explorar/bebidas/ingredientes"
+        component={ ExploreByIngredientDrink }
+      />
       <Route path="/perfil" component={ Profile } />
+      <Route path="/explorar/comidas/area" component={ ExploreByAreaFood } />
       <Route path="/receitas-feitas" component={ RecipesMade } />
       <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
-      <Route exact path="/" component={ Login } />
     </Switch>
   );
 }

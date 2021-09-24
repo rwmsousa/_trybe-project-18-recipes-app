@@ -1,26 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 
 function Header() {
-  // HEADER NAS PÁGINAS:
-  // Comidas
-  // Bebidas
-  // explorar
-  // explorar Comidas
-  // explorar Comidas por ingrediente
-  // explorar Bebidas
-  // explorar Bebidas por ingrediente
-  // explorar comidas por local de origem
-  // tela de perfil
-  // receitas Feitas
-  // receitas Favoritas
-
   const [showSearch, setShowSearch] = useState(false);
-  const { currentPage, searchText, handleSearchText,
-    handleClick, handleRadio } = useContext(Context);
+  const { showProfile, showTitlePage, showSearchButton } = useContext(Context);
+  const {
+    currentPage,
+    searchText,
+    handleSearchText,
+    handleClick,
+    handleRadio,
+  } = useContext(Context);
 
   const renderSearch = () => (
     <div className="search">
@@ -74,8 +67,8 @@ function Header() {
     </div>
   );
 
-  return (
-    <div className="header">
+  const menuItemProfile = () => (
+    <div>
       <Link to="/profile">
         <img
           className="btnProfile"
@@ -84,7 +77,19 @@ function Header() {
           alt="icone de profile"
         />
       </Link>
-      <h1 className="pageTitle" data-testid="page-title">{ currentPage }</h1>
+    </div>
+  );
+
+  const menuItemTitlePage = () => (
+    <div>
+      <h1 className="pageTitle" data-testid="page-title">
+        {currentPage}
+      </h1>
+    </div>
+  );
+
+  const menuItemSearch = () => (
+    <div>
       <button
         type="button"
         onClick={ () => setShowSearch(!showSearch) }
@@ -97,7 +102,15 @@ function Header() {
           alt="icone de pesquisar"
         />
       </button>
-      { showSearch ? renderSearch() : false }
+    </div>
+  );
+
+  return (
+    <div className="header">
+      {showProfile ? menuItemProfile() : false}
+      {showTitlePage ? menuItemTitlePage() : false}
+      { showSearchButton ? menuItemSearch() : false }
+      {showSearch ? renderSearch() : false}
     </div>
   );
 }
