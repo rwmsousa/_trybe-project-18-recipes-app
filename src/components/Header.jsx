@@ -69,7 +69,7 @@ function Header() {
 
   const menuItemProfile = () => (
     <div>
-      <Link to="/profile">
+      <Link to="/perfil">
         <img
           className="btnProfile"
           src={ profileIcon }

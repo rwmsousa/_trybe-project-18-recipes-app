@@ -30,6 +30,9 @@ function Login() {
     localStorage.setItem('user', JSON
       .stringify({ email }));
     history.push('/comidas');
+    localStorage.setItem('doneRecipes', []);
+    localStorage.setItem('favoriteRecipes', []);
+    localStorage.setItem('inProgressRecipes', {});
   };
 
   const handleShowPassword = () => {
