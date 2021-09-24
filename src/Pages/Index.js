@@ -6,6 +6,7 @@ import Profile from './Profile';
 import DrinkDetail from './DrinkDetail';
 import DrinkInProgress from './DrinkInProgress';
 import ExploreByAreaFood from './ExploreByAreaFood';
+import ExploreByAreaDrinks from './ExploreByAreaDrinks';
 import ExploreByIngredientFood from './ExploreByIngredientFood';
 import ExploreByIngredientDrink from './ExploreByIngredientDrink';
 import ExplorerDrinks from './ExplorerDrinks';
@@ -24,6 +25,7 @@ export {
   DrinkDetail,
   DrinkInProgress,
   ExploreByAreaFood,
+  ExploreByAreaDrinks,
   ExploreByIngredientDrink,
   ExploreByIngredientFood,
   ExplorerDrinks,

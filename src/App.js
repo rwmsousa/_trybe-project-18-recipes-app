@@ -16,6 +16,7 @@ import {
   FavoriteRecipes,
   ExplorerFoods,
   ExploreByAreaFood,
+  ExploreByAreaDrinks,
   ExploreByIngredientFood,
   ExploreByIngredientDrink,
   ExplorerDrinks,
@@ -45,6 +46,7 @@ function App() {
           component={ ExploreByIngredientDrink }
         />
         <Route path="/explorar/comidas/area" component={ ExploreByAreaFood } />
+        <Route path="/explorar/bebidas/area" component={ ExploreByAreaDrinks } />
         <Route exact path="/perfil" component={ Profile } />
         <Route path="/receitas-feitas" component={ RecipesMade } />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
