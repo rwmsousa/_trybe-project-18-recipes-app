@@ -4,12 +4,18 @@ import Header from '../components/Header';
 import Context from '../Context/Context';
 
 function FoodDetail() {
-  const { setCurrentPage, setShowProfile } = useContext(Context);
+  const {
+    setCurrentPage,
+    setShowProfile,
+    setShowTitlePage,
+    setSearchButton } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Detalhes');
     setShowProfile(false);
-  }, [setCurrentPage, setShowProfile]);
+    setShowTitlePage(false);
+    setSearchButton(false);
+  }, [setCurrentPage, setShowTitlePage, setShowProfile, setSearchButton]);
 
   return (
     <div>

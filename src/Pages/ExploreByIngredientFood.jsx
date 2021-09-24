@@ -4,16 +4,18 @@ import Header from '../components/Header';
 import Context from '../Context/Context';
 
 function ExploreByIngredientFood() {
-  const { setCurrentPage } = useContext(Context);
+  const {
+    setCurrentPage,
+    setSearchButton } = useContext(Context);
 
   useEffect(() => {
-    setCurrentPage('Detalhes');
-  }, [setCurrentPage]);
+    setCurrentPage('Explorar Ingredientes');
+    setSearchButton(false);
+  }, [setCurrentPage, setSearchButton]);
 
   return (
     <div>
       <Header />
-      <h1 data-testid="page-title"> Explorar Ingredientes </h1>
       <Footer />
     </div>
   );

@@ -4,16 +4,18 @@ import Header from '../components/Header';
 import Context from '../Context/Context';
 
 function FavoriteRecipes() {
-  const { setCurrentPage } = useContext(Context);
+  const {
+    setCurrentPage,
+    setSearchButton } = useContext(Context);
 
   useEffect(() => {
-    setCurrentPage('Detalhes');
-  }, [setCurrentPage]);
+    setCurrentPage('Receitas Favoritas');
+    setSearchButton(false);
+  }, [setCurrentPage, setSearchButton]);
 
   return (
     <div>
       <Header />
-      <h1> FavoriteRecipes </h1>
       <Footer />
     </div>
   );

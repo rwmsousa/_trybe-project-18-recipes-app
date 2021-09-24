@@ -7,13 +7,12 @@ function ExploreByAreaFood() {
   const { setCurrentPage } = useContext(Context);
 
   useEffect(() => {
-    setCurrentPage('Detalhes');
+    setCurrentPage('Explorar Origem');
   }, [setCurrentPage]);
 
   return (
     <div>
       <Header />
-      <h1 data-testid="page-title"> Explorar Origem </h1>
       <Footer />
     </div>
   );
