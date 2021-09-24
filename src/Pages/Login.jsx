@@ -15,10 +15,10 @@ function Login() {
   const handleChange = ({ target: { value } }) => {
     const getButton = document.getElementById('submit-button');
     const validEmail = /\S+@\S+\.\S+/;
-    const magicNumber = 6;
+    const magicNumber = 5;
     setPassword(value);
 
-    if (validEmail.test(email) && password.length >= magicNumber) {
+    if (validEmail.test(email) && password.length > magicNumber) {
       setButton(!button);
       getButton.classList.add('test');
     }

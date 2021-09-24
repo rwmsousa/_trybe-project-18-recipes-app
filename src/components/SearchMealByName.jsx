@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Context from '../Context/Context';
 
 function SearchMealByName(type, food) {
   const value = useContext(Context);
   console.log(value);
-  const [food, setFood] = useState([]);
+  console.log(type);
+  console.log(food);
 
   return (
     <span>cae</span>
