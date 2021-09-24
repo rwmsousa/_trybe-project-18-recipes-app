@@ -2,11 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../Context/Context';
+import { fetchByCategoryFoods } from '../services';
 
 function Foods() {
   const [foods, setFoods] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const { setCurrentPage } = useContext(Context);
+  const { setCurrentPage, categories, setCategories } = useContext(Context);
 
   useEffect(() => {
     async function fetchFoods() {
@@ -31,11 +31,15 @@ function Foods() {
 
       const magicNumber = 5;
       const SplitArray = meals.splice(0, magicNumber);
-
       setCategories(SplitArray);
     }
     fetchCategories();
-  }, []);
+  });
+
+  const HandleClick = async ({ target: { name } }) => {
+    const arrayCategory = await fetchByCategoryFoods(name);
+    setFoods(arrayCategory);
+  };
 
   return (
     <div className="foods">
@@ -46,6 +50,8 @@ function Foods() {
             type="button"
             key={ category.strCategory }
             data-testid={ `${category.strCategory}-category-filter` }
+            name={ category.strCategory }
+            onClick={ (event) => HandleClick(event) }
           >
             {category.strCategory}
           </button>
