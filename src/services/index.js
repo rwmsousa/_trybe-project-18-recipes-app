@@ -36,3 +36,18 @@ export async function fetchByCategoryDrinks(category) {
 
   return SplitArray;
 }
+
+export async function fetchRandomFoodDetails() {
+  const response = await
+  fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+  const data = await response.json();
+  const { meals } = data;
+  return meals;
+}
+
+export async function fetchRandomDrinkDetails() {
+  const response = await
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+  const data = await response.json();
+  return data;
+}
