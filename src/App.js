@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import {
   Login,
   Foods,
@@ -17,7 +17,7 @@ import {
   ExplorerFoods,
   ExploreByAreaFood,
   ExploreByIngredientFood,
-  ExploreByIngredientDrinks,
+  ExploreByIngredientDrink,
   ExplorerDrinks
 } from './Pages/Index';
 
@@ -35,7 +35,7 @@ function App() {
       <Route path="/explorar/comidas/area" component={ ExploreByAreaFood } />
       <Route path="/explorar/comidas/ingredientes" component={ ExploreByIngredientFood } />
       <Route path="/explorar/bebidas" component={ ExplorerDrinks } />
-      <Route path="/explorar/bebidas/ingredientes" component={ ExploreByIngredientDrinks } />
+      <Route path="/explorar/bebidas/ingredientes" component={ ExploreByIngredientDrink } />
       <Route path="/perfil" component={ Profile } />
       <Route path="/receitas-feitas" component={ RecipesMade } />
       <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
