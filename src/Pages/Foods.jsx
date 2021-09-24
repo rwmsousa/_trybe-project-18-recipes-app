@@ -6,6 +6,8 @@ import { fetchByCategoryFoods } from '../services';
 
 function Foods() {
   const [foods, setFoods] = useState([]);
+  const [foodsClone, setFoodsClone] = useState([]);
+  const [actualCategory, setActualCategory] = useState('');
   const { setCurrentPage, categories, setCategories } = useContext(Context);
 
   useEffect(() => {
@@ -18,6 +20,7 @@ function Foods() {
       const SplitArray = meals.splice(0, magicNumber);
 
       setFoods(SplitArray);
+      setFoodsClone(SplitArray);
     }
     fetchFoods();
     setCurrentPage('Comidas');
@@ -36,9 +39,14 @@ function Foods() {
     fetchCategories();
   });
 
-  const HandleClick = async ({ target: { name } }) => {
-    const arrayCategory = await fetchByCategoryFoods(name);
-    setFoods(arrayCategory);
+  const HandleClick = async ({ target: { name, value } }) => {
+    if (actualCategory === value) {
+      setFoods(foodsClone);
+    } else {
+      const arrayCategory = await fetchByCategoryFoods(name);
+      setFoods(arrayCategory);
+      setActualCategory(value);
+    }
   };
 
   return (
@@ -51,6 +59,7 @@ function Foods() {
             key={ category.strCategory }
             data-testid={ `${category.strCategory}-category-filter` }
             name={ category.strCategory }
+            value={ category.strCategory }
             onClick={ (event) => HandleClick(event) }
           >
             {category.strCategory}
