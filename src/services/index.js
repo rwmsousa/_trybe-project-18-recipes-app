@@ -19,10 +19,8 @@ export async function fetchFirstLetter(firstLetter) {
 export async function fetchByCategoryFoods(category) {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
   const data = await response.json();
-
   const magicNumber = 12;
   const SplitArray = data.meals.splice(0, magicNumber);
-
   return SplitArray;
 }
 
@@ -30,10 +28,8 @@ export async function fetchByCategoryDrinks(category) {
   const response = await
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
   const { drinks } = await response.json();
-
   const magicNumber = 12;
   const SplitArray = drinks.splice(0, magicNumber);
-
   return SplitArray;
 }
 
