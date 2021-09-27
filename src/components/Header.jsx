@@ -3,17 +3,34 @@ import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
+import { fetchIngredient, fetchName, fetchFirstLetter } from '../services';
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);
-  const { showProfile, showTitlePage, showSearchButton } = useContext(Context);
-  const {
-    currentPage,
-    searchText,
-    handleSearchText,
-    handleClick,
-    handleRadio,
-  } = useContext(Context);
+  const [searchText, setSearchText] = useState('');
+  const [searchRadio, setSearchRadio] = useState('');
+  const { showProfile,
+    showTitlePage, showSearchButton, currentPage } = useContext(Context);
+
+  const handleSearchText = ({ target: { value } }) => {
+    setSearchText(value);
+  };
+
+  const handleRadio = ({ target: { value } }) => {
+    setSearchRadio(value);
+  };
+
+  const handleClick = () => {
+    if (searchRadio === 'searchIngredient') {
+      fetchIngredient(searchText);
+    }
+    if (searchRadio === 'searchName') {
+      fetchName(searchText);
+    }
+    if (searchRadio === 'firstLetter') {
+      fetchFirstLetter(searchText);
+    }
+  };
 
   const renderSearch = () => (
     <div className="search">
