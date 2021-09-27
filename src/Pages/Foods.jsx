@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../Context/Context';
@@ -9,7 +9,14 @@ function Foods() {
   const [foods, setFoods] = useState([]);
   const [foodsClone, setFoodsClone] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
-  const { setCurrentPage, categories, setCategories } = useContext(Context);
+  const {
+    setCurrentPage,
+    categories,
+    setCategories,
+    setDetails,
+    setYouTube,
+  } = useContext(Context);
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchFoods() {
@@ -38,7 +45,7 @@ function Foods() {
       setCategories(SplitArray);
     }
     fetchCategories();
-  });
+  }, [categories, setCategories]);
 
   const HandleClick = async ({ target: { name, value } }) => {
     if (actualCategory === value) {
@@ -50,11 +57,23 @@ function Foods() {
     }
   };
 
+  const handleLink = ({ target: { value } }) => {
+    const magicNumber = 24;
+    const recipeToDetail = foodsClone.filter((food) => food.idMeal === value);
+    setDetails(recipeToDetail);
+    setYouTube((recipeToDetail[0].strYoutube).substr(magicNumber));
+    history.push(`/comidas/${value}`);
+  };
+
   return (
     <div className="foods">
       <Header />
       <ul>
-        <button type="button" onClick={ () => setFoods(foodsClone) }>
+        <button
+          type="button"
+          onClick={ () => setFoods(foodsClone) }
+          data-testid="All-category-filter"
+        >
           All
         </button>
         {categories.map((category) => (
@@ -80,7 +99,9 @@ function Foods() {
               data-testid={ `${idx}-card-img` }
             />
             <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
-            <Link to={ `/comidas/${food.idMeal}` }>detalhes</Link>
+            <button value={ food.idMeal } type="button" onClick={ handleLink }>
+              detalhes
+            </button>
           </li>
         ))}
       </ul>
