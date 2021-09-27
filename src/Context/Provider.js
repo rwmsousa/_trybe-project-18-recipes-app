@@ -9,6 +9,8 @@ function Provider({ children }) {
   const [showProfile, setShowProfile] = useState(true);
   const [showTitlePage, setShowTitlePage] = useState(true);
   const [showSearchButton, setSearchButton] = useState(true);
+  const [details, setDetails] = useState();
+  const [youTube, setYouTube] = useState('');
 
   const providerValue = {
     currentPage,
@@ -23,6 +25,10 @@ function Provider({ children }) {
     setShowTitlePage,
     showSearchButton,
     setSearchButton,
+    details,
+    setDetails,
+    youTube,
+    setYouTube,
   };
 
   return (
