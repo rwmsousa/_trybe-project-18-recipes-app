@@ -47,3 +47,21 @@ export async function fetchRandomDrinkDetails() {
   const data = await response.json();
   return data;
 }
+
+export async function fetchIngredientofFoods() {
+  const response = await
+  fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+  const { meals } = await response.json();
+  const magicNumber = 12;
+  const SplitArray = meals.splice(0, magicNumber);
+  return SplitArray;
+}
+
+export async function fetchIngredientofDrinks() {
+  const response = await
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+  const { drinks } = await response.json();
+  const magicNumber = 12;
+  const SplitArray = drinks.splice(0, magicNumber);
+  return SplitArray;
+}

@@ -20,7 +20,6 @@ function ExplorerDrinks() {
     const response = await fetchRandomDrinkDetails();
     const { drinks } = response;
     const id = drinks[0].idDrink;
-    console.log(id);
     history.push(`/bebidas/${id}`);
   }
 
@@ -35,14 +34,14 @@ function ExplorerDrinks() {
           Por Ingredientes
         </button>
       </Link>
-      <Link
+      {/* <Link
         to="/explorar/bebidas/area"
         data-testid="explore-by-area"
       >
         <button type="button">
           Por Local de Origem
         </button>
-      </Link>
+      </Link> */}
       <button
         type="button"
         data-testid="explore-surprise"
