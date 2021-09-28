@@ -12,6 +12,7 @@ function Provider({ children }) {
   const [idFoodDetails, setIdFoodDetails] = useState('');
   const [idDrinkDetails, setIdDrinkDetails] = useState('');
   const [foods, setFoods] = useState([]);
+  const [drinks, setDrinks] = useState([]);
   const [details, setDetails] = useState();
   const [searchText, setSearchText] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
@@ -41,6 +42,8 @@ function Provider({ children }) {
     setFoods,
     details,
     setDetails,
+    drinks,
+    setDrinks,
   };
 
   return (

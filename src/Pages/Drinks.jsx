@@ -8,12 +8,11 @@ import { fetchByCategoryDrinks } from '../services';
 function Drinks() {
   const history = useHistory();
 
-  const [drinks, setDrinks] = useState([]);
   const [drinksClone, setDrinksClone] = useState([]);
   const [categories, setCategories] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
 
-  const { setCurrentPage, setIdDrinkDetails } = useContext(Context);
+  const { setCurrentPage, setIdDrinkDetails, drinks, setDrinks } = useContext(Context);
 
   useEffect(() => {
     async function fetchDrinks() {
@@ -43,7 +42,7 @@ function Drinks() {
       fetchDrinks();
     }
     setCurrentPage('Bebidas');
-  }, [setCurrentPage, history]);
+  }, [setCurrentPage, history, setDrinks]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -78,6 +77,8 @@ function Drinks() {
     history.push(`/bebidas/${value}`);
   };
 
+  // console.log(drinks);
+
   return (
     <div>
       <Header />
@@ -103,25 +104,26 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        {drinks.map((drink, idx) => (
-          <li key={ drink.idDrink }>
-            <img
-              src={ drink.strDrinkThumb }
-              alt={ `Bebida: ${drink.strDrink}` }
-              width="150px"
-              data-testid={ `${idx}-card-img` }
-            />
-            <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
-            <button
-              value={ drink.idDrink }
-              type="button"
-              onClick={ handleLink }
-              data-testid={ `${idx}-recipe-card` }
-            >
-              detalhes
-            </button>
-          </li>
-        ))}
+        { !drinks ? <p>Nenhum resultado encontrado!</p>
+          : drinks.map((drink, idx) => (
+            <li key={ drink.idDrink }>
+              <img
+                src={ drink.strDrinkThumb }
+                alt={ `Bebida: ${drink.strDrink}` }
+                width="150px"
+                data-testid={ `${idx}-card-img` }
+              />
+              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
+              <button
+                value={ drink.idDrink }
+                type="button"
+                onClick={ handleLink }
+                data-testid={ `${idx}-recipe-card` }
+              >
+                detalhes
+              </button>
+            </li>
+          ))}
       </ul>
       <Footer />
     </div>
