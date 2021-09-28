@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import { fetchByCategoryDrinks } from '../services';
 
 function Drinks() {
+  const history = useHistory();
+
   const [drinks, setDrinks] = useState([]);
   const [drinksClone, setDrinksClone] = useState([]);
   const [categories, setCategories] = useState([]);
-  const { setCurrentPage } = useContext(Context);
   const [actualCategory, setActualCategory] = useState('');
+  const { setCurrentPage, setIdDrinkDetails } = useContext(Context);
 
   useEffect(() => {
     async function fetchDrinks() {
@@ -33,7 +35,9 @@ function Drinks() {
         .then((data) => data.json());
 
       const magicNumber = 5;
-      const SplitArray = response.drinks.splice(0, magicNumber);
+      const SplitArray = response.drinks.filter((item, idx) => (
+        idx < magicNumber
+      ));
 
       setCategories(SplitArray);
     }
@@ -50,11 +54,23 @@ function Drinks() {
     }
   };
 
+  const handleLink = ({ target: { value } }) => {
+    // const magicNumber = 24;
+    // const recipeToDetail = drinksClone.filter((drink) => drink.idDrink === value);
+    // setDrinkDetails(recipeToDetail);
+    setIdDrinkDetails(value);
+    history.push(`/bebidas/${value}`);
+  };
+
   return (
     <div>
       <Header />
       <ul>
-        <button type="button" onClick={ () => setDrinks(drinksClone) }>
+        <button
+          type="button"
+          onClick={ () => setDrinks(drinksClone) }
+          data-testid="All-category-filter"
+        >
           All
         </button>
         {categories.map((category) => (
@@ -72,7 +88,7 @@ function Drinks() {
       </ul>
       <ul>
         {drinks.map((drink, idx) => (
-          <li data-testid={ `${idx}-recipe-card` } key={ drink.idDrink }>
+          <li key={ drink.idDrink }>
             <img
               src={ drink.strDrinkThumb }
               alt={ `Bebida: ${drink.strDrink}` }
@@ -80,7 +96,14 @@ function Drinks() {
               data-testid={ `${idx}-card-img` }
             />
             <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
-            <Link to={ `/bebidas/${drink.idDrink}` }>detalhes</Link>
+            <button
+              value={ drink.idDrink }
+              type="button"
+              onClick={ handleLink }
+              data-testid={ `${idx}-recipe-card` }
+            >
+              detalhes
+            </button>
           </li>
         ))}
       </ul>

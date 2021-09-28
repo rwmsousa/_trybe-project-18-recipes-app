@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
-import { fetchIngredient, fetchName, fetchFirstLetter } from '../services';
 
 function Provider({ children }) {
   const [currentPage, setCurrentPage] = useState(''); // variável utilizada para alterar o título da página no header.
@@ -12,40 +11,17 @@ function Provider({ children }) {
   const [showProfile, setShowProfile] = useState(true);
   const [showTitlePage, setShowTitlePage] = useState(true);
   const [showSearchButton, setSearchButton] = useState(true);
-  const [details, setDetails] = useState();
-  const [youTube, setYouTube] = useState('');
-
-  const handleSearchText = ({ target: { value } }) => {
-    setSearchText(value);
-  };
-
-  const handleRadio = ({ target: { value } }) => {
-    setSearchRadio(value);
-  };
-
-  const handleClick = () => {
-    if (searchRadio === 'searchIngredient') {
-      fetchIngredient(searchText);
-    }
-    if (searchRadio === 'searchName') {
-      fetchName(searchText);
-    }
-    if (searchRadio === 'firstLetter') {
-      fetchFirstLetter(searchText);
-    }
-  };
+  const [idFoodDetails, setIdFoodDetails] = useState('');
+  const [idDrinkDetails, setIdDrinkDetails] = useState('');
+  const [foods, setFoods] = useState([]);
 
   const providerValue = {
     currentPage,
     setCurrentPage,
-    fetchIngredient,
-    handleSearchText,
     searchText,
     setSearchText,
-    handleClick,
     searchRadio,
     setSearchRadio,
-    handleRadio,
     foodName,
     setFoodName,
     categories,
@@ -56,10 +32,12 @@ function Provider({ children }) {
     setShowTitlePage,
     showSearchButton,
     setSearchButton,
-    details,
-    setDetails,
-    youTube,
-    setYouTube,
+    idFoodDetails,
+    setIdFoodDetails,
+    idDrinkDetails,
+    setIdDrinkDetails,
+    foods,
+    setFoods,
   };
 
   return (

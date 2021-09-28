@@ -6,17 +6,19 @@ import Context from '../Context/Context';
 import { fetchByCategoryFoods } from '../services';
 
 function Foods() {
-  const [foods, setFoods] = useState([]);
+  const history = useHistory();
+
   const [foodsClone, setFoodsClone] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
   const {
     setCurrentPage,
     categories,
     setCategories,
-    setDetails,
-    setYouTube,
+    setIdFoodDetails,
+    foods,
+    setFoods,
+    // setYouTube,
   } = useContext(Context);
-  const history = useHistory();
 
   useEffect(() => {
     async function fetchFoods() {
@@ -25,7 +27,9 @@ function Foods() {
       ).then((data) => data.json());
 
       const magicNumber = 12;
-      const SplitArray = meals.splice(0, magicNumber);
+      const SplitArray = meals.filter((item, idx) => (
+        idx < magicNumber
+      ));
 
       setFoods(SplitArray);
       setFoodsClone(SplitArray);
@@ -41,11 +45,13 @@ function Foods() {
       ).then((data) => data.json());
 
       const magicNumber = 5;
-      const SplitArray = meals.splice(0, magicNumber);
+      const SplitArray = meals.filter((item, idx) => (
+        idx < magicNumber
+      ));
       setCategories(SplitArray);
     }
     fetchCategories();
-  }, [categories, setCategories]);
+  }, [setCategories]);
 
   const HandleClick = async ({ target: { name, value } }) => {
     if (actualCategory === value) {
@@ -58,12 +64,14 @@ function Foods() {
   };
 
   const handleLink = ({ target: { value } }) => {
-    const magicNumber = 24;
-    const recipeToDetail = foodsClone.filter((food) => food.idMeal === value);
-    setDetails(recipeToDetail);
-    setYouTube((recipeToDetail[0].strYoutube).substr(magicNumber));
+    // const magicNumber = 24;
+    // const recipeToDetail = foodsClone.filter((food) => food.idMeal === value);
+    setIdFoodDetails(value);
+    // setYouTube((recipeToDetail[0].strYoutube).substr(magicNumber));
     history.push(`/comidas/${value}`);
   };
+
+  console.log(foods);
 
   return (
     <div className="foods">
@@ -91,7 +99,7 @@ function Foods() {
       </ul>
       <ul>
         {foods.map((food, idx) => (
-          <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
+          <li key={ food.idMeal }>
             <img
               src={ food.strMealThumb }
               alt={ `Comida: ${food.strMeal}` }
@@ -99,7 +107,12 @@ function Foods() {
               data-testid={ `${idx}-card-img` }
             />
             <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
-            <button value={ food.idMeal } type="button" onClick={ handleLink }>
+            <button
+              value={ food.idMeal }
+              type="button"
+              onClick={ handleLink }
+              data-testid={ `${idx}-recipe-card` }
+            >
               detalhes
             </button>
           </li>
