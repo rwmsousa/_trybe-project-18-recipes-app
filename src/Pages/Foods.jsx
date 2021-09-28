@@ -19,6 +19,8 @@ function Foods() {
     setFoods,
   } = useContext(Context);
 
+  // console.log(foods);
+
   useEffect(() => {
     async function fetchFoods() {
       const { meals } = await fetch(
@@ -90,7 +92,7 @@ function Foods() {
   };
 
   return (
-    foods.length === 1 ? history.push(`/comidas/${foods[0].idMeal}`)
+    foods[0].length === 1 ? history.push(`/comidas/${foods[0].idMeal}`)
       : <div className="foods">
         <Header />
         <ul>
