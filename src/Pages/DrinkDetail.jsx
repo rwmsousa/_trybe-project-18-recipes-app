@@ -13,7 +13,8 @@ function DrinkDetail() {
     setShowProfile,
     setShowTitlePage,
     setSearchButton,
-    idDrinkDetails } = useContext(Context);
+    idDrinkDetails,
+  } = useContext(Context);
 
   const [drinksDetails, setDrinksDetails] = useState([]);
 
@@ -30,7 +31,7 @@ function DrinkDetail() {
       setDrinksDetails(getDrinkById);
     }
     drinkById();
-  }, []);
+  }, [idDrinkDetails]);
 
   if (drinksDetails.length > 0) {
     return (
@@ -41,31 +42,22 @@ function DrinkDetail() {
           data-testid="recipe-photo"
           width="400px"
         />
-        <h1 data-testid="recipe-title">{ drinksDetails[0].strDrink }</h1>
-        <span data-testid="recipe-category">{ drinksDetails[0].strAlcoholic }</span>
-        <button
-          type="button"
-          data-testid="share-btn"
-        >
+        <h1 data-testid="recipe-title">{drinksDetails[0].strDrink}</h1>
+        <span data-testid="recipe-category">
+          {drinksDetails[0].strAlcoholic}
+        </span>
+        <button type="button" data-testid="share-btn">
           <img src={ shareIcon } alt="share icon" />
         </button>
-        <button
-          type="button"
-          data-testid="favorite-btn"
-        >
+        <button type="button" data-testid="favorite-btn">
           <img src={ whiteHeartIcon } alt="favorites icon" />
         </button>
         <h3>Ingredientes</h3>
-        <IngredientsList
-          list={ drinksDetails }
-        />
-        <p data-testid="instructions">{ drinksDetails[0].strInstructions }</p>
+        <IngredientsList list={ drinksDetails } />
+        <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
         <h3>Recomendadas</h3>
         {/* nao entendi o que fazer aqui */}
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-        >
+        <button type="button" data-testid="start-recipe-btn">
           iniciar receita
         </button>
       </div>

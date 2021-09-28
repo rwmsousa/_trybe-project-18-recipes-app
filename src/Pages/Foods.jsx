@@ -17,7 +17,6 @@ function Foods() {
     setIdFoodDetails,
     foods,
     setFoods,
-    // setYouTube,
   } = useContext(Context);
 
   useEffect(() => {
@@ -54,7 +53,7 @@ function Foods() {
       fetchFoods();
     }
     setCurrentPage('Comidas');
-  }, [setCurrentPage, history]);
+  }, [setCurrentPage, history, setFoods]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -82,10 +81,7 @@ function Foods() {
   };
 
   const handleLink = ({ target: { value } }) => {
-    // const magicNumber = 24;
-    // const recipeToDetail = foodsClone.filter((food) => food.idMeal === value);
     setIdFoodDetails(value);
-    // setYouTube((recipeToDetail[0].strYoutube).substr(magicNumber));
     history.push(`/comidas/${value}`);
   };
 
@@ -114,26 +110,7 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        {foods.map((food, idx) => (
-          <li key={ food.idMeal }>
-            <img
-              src={ food.strMealThumb }
-              alt={ `Comida: ${food.strMeal}` }
-              width="150px"
-              data-testid={ `${idx}-card-img` }
-            />
-            <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
-            <button
-              value={ food.idMeal }
-              type="button"
-              onClick={ handleLink }
-              data-testid={ `${idx}-recipe-card` }
-            >
-              detalhes
-            </button>
-          </li>
-        ))}
-        {foods.length === 0 ? (<p> Nenhum Resultdo </p>)
+        {!foods ? <p>Nenhum resultado encontrado!</p>
           : foods.map((food, idx) => (
             <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
               <img

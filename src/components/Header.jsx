@@ -28,17 +28,14 @@ function Header() {
   async function handleClickSearch() {
     if (searchRadio === 'searchIngredient') {
       const { meals } = await fetchIngredientFoods(searchText);
-      // console.log(meals);
       setFoods(meals);
     }
     if (searchRadio === 'searchName') {
       const meals = await fetchNameFoods(searchText);
-      // console.log(meals);
       setFoods(meals);
     }
     if (searchRadio === 'firstLetter') {
       const meals = await fetchFirstLetterFoods(searchText);
-      // console.log(meals);
       setFoods(meals);
     }
   }
