@@ -16,27 +16,47 @@ function Drinks() {
 
   useEffect(() => {
     async function fetchDrinks() {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-        .then((data) => data.json());
+      const response = await fetch(
+        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+      ).then((data) => data.json());
       const magicNumber = 12;
       const SplitArray = response.drinks.splice(0, magicNumber);
 
       setDrinks(SplitArray);
       setDrinksClone(SplitArray);
     }
-    fetchDrinks();
+    async function fetchIngDrinks() {
+      const response = await fetch(
+        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+      ).then((data) => data.json());
+      const SplitArray = response.drinks.filter(
+        (i) => i.strIngredient1 === history.location.state[0],
+      );
+      if (SplitArray.length === 0) {
+        setDrinks([]);
+      } else {
+        setDrinks(SplitArray);
+        setDrinksClone(SplitArray);
+      }
+    }
+    if (history.action === 'PUSH') {
+      fetchIngDrinks();
+    } else {
+      fetchDrinks();
+    }
     setCurrentPage('Bebidas');
-  }, [setCurrentPage, setDrinks]);
+  }, [history, setCurrentPage, setDrinks]);
 
   useEffect(() => {
     async function fetchCategories() {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')
-        .then((data) => data.json());
+      const response = await fetch(
+        'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
+      ).then((data) => data.json());
 
       const magicNumber = 5;
-      const SplitArray = response.drinks.filter((item, idx) => (
-        idx < magicNumber
-      ));
+      const SplitArray = response.drinks.filter(
+        (item, idx) => idx < magicNumber,
+      );
 
       setCategories(SplitArray);
     }
@@ -58,7 +78,11 @@ function Drinks() {
     history.push(`/bebidas/${value}`);
   };
 
-  console.log(drinks);
+  if (drinks.length === 1) {
+    const { idDrink } = drinks[0];
+    setIdDrinkDetails(idDrink);
+    history.push(`/bebidas/${idDrink}`);
+  }
 
   return (
     <div>
@@ -80,13 +104,15 @@ function Drinks() {
             value={ category.strCategory }
             onClick={ (event) => HandleClick(event) }
           >
-            { category.strCategory }
+            {category.strCategory}
           </button>
         ))}
       </ul>
       <ul>
-        {drinks === [] ? (<p> Nenhum Resultdo </p>)
-          : drinks.map((drink, idx) => (
+        {drinks.length === 0 ? (
+          <p> Nenhum resultado encontrado! </p>
+        ) : (
+          drinks.map((drink, idx) => (
             <li key={ drink.idDrink }>
               <img
                 src={ drink.strDrinkThumb }
@@ -94,7 +120,7 @@ function Drinks() {
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
+              <p data-testid={ `${idx}-card-name` }>{drink.strDrink}</p>
               <button
                 value={ drink.idDrink }
                 type="button"
@@ -104,7 +130,8 @@ function Drinks() {
                 detalhes
               </button>
             </li>
-          ))}
+          ))
+        )}
       </ul>
       <Footer />
     </div>
