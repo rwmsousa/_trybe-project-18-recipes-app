@@ -55,7 +55,7 @@ function Drinks() {
       fetchDrinks();
     }
     setCurrentPage('Bebidas');
-  }, [history]);
+  }, [history, setCurrentPage, setDrinks]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -83,14 +83,15 @@ function Drinks() {
   };
 
   const handleLink = ({ target: { value } }) => {
-    // const magicNumber = 24;
-    // const recipeToDetail = drinksClone.filter((drink) => drink.idDrink === value);
-    // setDrinkDetails(recipeToDetail);
     setIdDrinkDetails(value);
     history.push(`/bebidas/${value}`);
   };
 
-  // console.log(drinks);
+  if (drinks.length === 1) {
+    const { idDrink } = drinks[0];
+    setIdDrinkDetails(idDrink);
+    history.push(`/bebidas/${idDrink}`);
+  }
 
   return (
     <div>
@@ -117,7 +118,9 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        {drinks.map((drink, idx) => (
+        {drinks.length === 0 ? (
+          <p> Nenhum resultado encontrado! </p>
+        ) : drinks.map((drink, idx) => (
           <li key={ drink.idDrink }>
             <img
               src={ drink.strDrinkThumb }
@@ -136,21 +139,6 @@ function Drinks() {
             </button>
           </li>
         ))}
-        {/* {drinks.length === 0 ? (<p> Nenhum Resultdo </p>)
-          : drinks.map((drink, idx) => (
-            <li data-testid={ `${idx}-recipe-card` } key={ drink.idMeal }>
-              <img
-                src={ drink.strMealThumb }
-                alt={ `Comida: ${drink.strMeal}` }
-                width="150px"
-                data-testid={ `${idx}-card-img` }
-              />
-              <p data-testid={ `${idx}-card-name` }>{drink.strMeal}</p>
-              <button value={ drink.idMeal } type="button" onClick={ handleLink }>
-                detalhes
-              </button>
-            </li>
-          ))} */}
       </ul>
       <Footer />
     </div>
