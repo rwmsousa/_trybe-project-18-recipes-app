@@ -132,7 +132,7 @@ function Foods() {
             ))}
         </ul>
         <Footer />
-        </div>
+      </div>
   );
 }
 
