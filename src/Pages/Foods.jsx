@@ -34,9 +34,27 @@ function Foods() {
       setFoods(SplitArray);
       setFoodsClone(SplitArray);
     }
-    fetchFoods();
+    async function fetchIngFoods() {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+        .then((data) => data.json());
+      const SplitArray = response.meals
+        .filter((i) => i.strIngredient1 === history.location.state[0]);
+      console.log(SplitArray);
+      if (SplitArray.length === 0) {
+        setFoods([]);
+        setFoodsClone([]);
+      } else {
+        setFoods(SplitArray);
+        setFoodsClone(SplitArray);
+      }
+    }
+    if (history.action === 'PUSH') {
+      fetchIngFoods();
+    } else {
+      fetchFoods();
+    }
     setCurrentPage('Comidas');
-  }, [setCurrentPage]);
+  }, [setCurrentPage, history]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -115,6 +133,21 @@ function Foods() {
             </button>
           </li>
         ))}
+        {foods.length === 0 ? (<p> Nenhum Resultdo </p>)
+          : foods.map((food, idx) => (
+            <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
+              <img
+                src={ food.strMealThumb }
+                alt={ `Comida: ${food.strMeal}` }
+                width="150px"
+                data-testid={ `${idx}-card-img` }
+              />
+              <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
+              <button value={ food.idMeal } type="button" onClick={ handleLink }>
+                detalhes
+              </button>
+            </li>
+          ))}
       </ul>
       <Footer />
     </div>
