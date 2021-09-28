@@ -71,71 +71,71 @@ function Drinks() {
       setDrinks(arrayCategory);
       setActualCategory(value);
     }
+  };
 
-    const handleLink = ({ target: { value } }) => {
-      setIdDrinkDetails(value);
-      history.push(`/bebidas/${value}`);
-    };
+  const handleLink = ({ target: { value } }) => {
+    setIdDrinkDetails(value);
+    history.push(`/bebidas/${value}`);
+  };
 
-    if (drinks.length === 1) {
-      const { idDrink } = drinks[0];
-      setIdDrinkDetails(idDrink);
-      history.push(`/bebidas/${idDrink}`);
-    }
+  if (drinks.length === 1) {
+    const { idDrink } = drinks[0];
+    setIdDrinkDetails(idDrink);
+    history.push(`/bebidas/${idDrink}`);
+  }
 
-    return (
-      <div>
-        <Header />
-        <ul>
+  return (
+    <div>
+      <Header />
+      <ul>
+        <button
+          type="button"
+          onClick={ () => setDrinks(drinksClone) }
+          data-testid="All-category-filter"
+        >
+          All
+        </button>
+        {categories.map((category) => (
           <button
             type="button"
-            onClick={ () => setDrinks(drinksClone) }
-            data-testid="All-category-filter"
+            key={ category.strCategory }
+            data-testid={ `${category.strCategory}-category-filter` }
+            name={ category.strCategory }
+            value={ category.strCategory }
+            onClick={ (event) => HandleClick(event) }
           >
-            All
+            {category.strCategory}
           </button>
-          {categories.map((category) => (
-            <button
-              type="button"
-              key={ category.strCategory }
-              data-testid={ `${category.strCategory}-category-filter` }
-              name={ category.strCategory }
-              value={ category.strCategory }
-              onClick={ (event) => HandleClick(event) }
-            >
-              {category.strCategory}
-            </button>
-          ))}
-        </ul>
-        <ul>
-          {drinks.length === 0 ? (
-            <p> Nenhum resultado encontrado! </p>
-          ) : (
-            drinks.map((drink, idx) => (
-              <li key={ drink.idDrink }>
-                <img
-                  src={ drink.strDrinkThumb }
-                  alt={ `Bebida: ${drink.strDrink}` }
-                  width="150px"
-                  data-testid={ `${idx}-card-img` }
-                />
-                <p data-testid={ `${idx}-card-name` }>{drink.strDrink}</p>
-                <button
-                  value={ drink.idDrink }
-                  type="button"
-                  onClick={ handleLink }
-                  data-testid={ `${idx}-recipe-card` }
-                >
-                  detalhes
-                </button>
-              </li>
-            ))
-          )}
-        </ul>
-        <Footer />
-      </div>
-    );
-  };
+        ))}
+      </ul>
+      <ul>
+        {drinks.length === 0 ? (
+          <p> Nenhum resultado encontrado! </p>
+        ) : (
+          drinks.map((drink, idx) => (
+            <li key={ drink.idDrink }>
+              <img
+                src={ drink.strDrinkThumb }
+                alt={ `Bebida: ${drink.strDrink}` }
+                width="150px"
+                data-testid={ `${idx}-card-img` }
+              />
+              <p data-testid={ `${idx}-card-name` }>{drink.strDrink}</p>
+              <button
+                value={ drink.idDrink }
+                type="button"
+                onClick={ handleLink }
+                data-testid={ `${idx}-recipe-card` }
+              >
+                detalhes
+              </button>
+            </li>
+          ))
+        )}
+      </ul>
+      <Footer />
+    </div>
+  );
 }
 
 export default Drinks;
