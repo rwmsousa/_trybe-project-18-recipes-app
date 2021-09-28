@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
-import { fetchByCategoryFoods } from '../services';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 import Context from '../Context/Context';
+import { fetchByCategoryFoods } from '../services';
 
 function Foods() {
   const history = useHistory();
@@ -33,12 +33,14 @@ function Foods() {
       setFoods(SplitArray);
       setFoodsClone(SplitArray);
     }
+
     async function fetchIngFoods() {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
         .then((data) => data.json());
+
       const SplitArray = response.meals
         .filter((i) => i.strIngredient1 === history.location.state[0]);
-      console.log(SplitArray);
+
       if (SplitArray.length === 0) {
         setFoods([]);
         setFoodsClone([]);
@@ -47,6 +49,7 @@ function Foods() {
         setFoodsClone(SplitArray);
       }
     }
+
     if (history.action === 'PUSH') {
       fetchIngFoods();
     } else {
@@ -65,6 +68,7 @@ function Foods() {
       const SplitArray = meals.filter((item, idx) => (
         idx < magicNumber
       ));
+
       setCategories(SplitArray);
     }
     fetchCategories();

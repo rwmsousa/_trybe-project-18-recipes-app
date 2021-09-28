@@ -9,40 +9,53 @@ function Drinks() {
   const history = useHistory();
 
   const [drinksClone, setDrinksClone] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
 
-  const { setCurrentPage, setIdDrinkDetails, drinks, setDrinks } = useContext(Context);
+  const {
+    setCurrentPage,
+    setIdDrinkDetails,
+    categories,
+    setCategories,
+    setDrinks,
+    drinks } = useContext(Context);
 
   useEffect(() => {
     async function fetchDrinks() {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
         .then((data) => data.json());
+
       const magicNumber = 12;
-      const SplitArray = response.drinks.splice(0, magicNumber);
+      const SplitArray = response.drinks.filter((item, idx) => (
+        idx < magicNumber
+      ));
 
       setDrinks(SplitArray);
       setDrinksClone(SplitArray);
     }
+
     async function fetchIngDrinks() {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
         .then((data) => data.json());
+
       const SplitArray = response.drinks
         .filter((i) => i.strIngredient1 === history.location.state[0]);
+
       if (SplitArray.length === 0) {
         setDrinks([]);
+        setDrinksClone([]);
       } else {
         setDrinks(SplitArray);
         setDrinksClone(SplitArray);
       }
     }
+
     if (history.action === 'PUSH') {
       fetchIngDrinks();
     } else {
       fetchDrinks();
     }
     setCurrentPage('Bebidas');
-  }, [setCurrentPage, history, setDrinks]);
+  }, [history]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -57,7 +70,7 @@ function Drinks() {
       setCategories(SplitArray);
     }
     fetchCategories();
-  }, []);
+  }, [setCategories]);
 
   const HandleClick = async ({ target: { name, value } }) => {
     if (actualCategory === value) {
@@ -104,26 +117,40 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        { !drinks ? <p>Nenhum resultado encontrado!</p>
+        {drinks.map((drink, idx) => (
+          <li key={ drink.idDrink }>
+            <img
+              src={ drink.strDrinkThumb }
+              alt={ `Bebida: ${drink.strDrink}` }
+              width="150px"
+              data-testid={ `${idx}-card-img` }
+            />
+            <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
+            <button
+              value={ drink.idDrink }
+              type="button"
+              onClick={ handleLink }
+              data-testid={ `${idx}-recipe-card` }
+            >
+              detalhes
+            </button>
+          </li>
+        ))}
+        {/* {drinks.length === 0 ? (<p> Nenhum Resultdo </p>)
           : drinks.map((drink, idx) => (
-            <li key={ drink.idDrink }>
+            <li data-testid={ `${idx}-recipe-card` } key={ drink.idMeal }>
               <img
-                src={ drink.strDrinkThumb }
-                alt={ `Bebida: ${drink.strDrink}` }
+                src={ drink.strMealThumb }
+                alt={ `Comida: ${drink.strMeal}` }
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
-              <button
-                value={ drink.idDrink }
-                type="button"
-                onClick={ handleLink }
-                data-testid={ `${idx}-recipe-card` }
-              >
+              <p data-testid={ `${idx}-card-name` }>{drink.strMeal}</p>
+              <button value={ drink.idMeal } type="button" onClick={ handleLink }>
                 detalhes
               </button>
             </li>
-          ))}
+          ))} */}
       </ul>
       <Footer />
     </div>
