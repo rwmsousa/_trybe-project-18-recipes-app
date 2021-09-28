@@ -26,20 +26,20 @@ function Foods() {
       ).then((data) => data.json());
 
       const magicNumber = 12;
-      const SplitArray = meals.filter((item, idx) => (
-        idx < magicNumber
-      ));
+      const SplitArray = meals.filter((item, idx) => idx < magicNumber);
 
       setFoods(SplitArray);
       setFoodsClone(SplitArray);
     }
 
     async function fetchIngFoods() {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-        .then((data) => data.json());
+      const response = await fetch(
+        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
+      ).then((data) => data.json());
 
-      const SplitArray = response.meals
-        .filter((i) => i.strIngredient1 === history.location.state[0]);
+      const SplitArray = response.meals.filter(
+        (i) => i.strIngredient1 === history.location.state[0],
+      );
 
       if (SplitArray.length === 0) {
         setFoods([]);
@@ -65,9 +65,7 @@ function Foods() {
       ).then((data) => data.json());
 
       const magicNumber = 5;
-      const SplitArray = meals.filter((item, idx) => (
-        idx < magicNumber
-      ));
+      const SplitArray = meals.filter((item, idx) => idx < magicNumber);
 
       setCategories(SplitArray);
     }
@@ -89,8 +87,12 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
+  if (foods.length === 1) {
+    const { idMeal } = foods[0];
+    setIdFoodDetails(idMeal);
+    history.push(`/comidas/${idMeal}`);
+  }
   console.log(foods);
-
   return (
     <div className="foods">
       <Header />
@@ -116,8 +118,10 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        {!foods ? <p>Nenhum resultado encontrado!</p>
-          : foods.map((food, idx) => (
+        {foods.length === 0 ? (
+          <p> Nenhum resultado encontrado! </p>
+        ) : (
+          foods.map((food, idx) => (
             <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
               <img
                 src={ food.strMealThumb }
@@ -130,7 +134,8 @@ function Foods() {
                 detalhes
               </button>
             </li>
-          ))}
+          ))
+        )}
       </ul>
       <Footer />
     </div>
