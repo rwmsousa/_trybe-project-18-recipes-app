@@ -17,7 +17,6 @@ function Foods() {
     setIdFoodDetails,
     foods,
     setFoods,
-    // setYouTube,
   } = useContext(Context);
 
   useEffect(() => {
@@ -57,7 +56,7 @@ function Foods() {
       fetchFoods();
     }
     setCurrentPage('Comidas');
-  }, [history]);
+  }, [setCurrentPage, history, setFoods]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -86,75 +85,54 @@ function Foods() {
   };
 
   const handleLink = ({ target: { value } }) => {
-    // const magicNumber = 24;
-    // const recipeToDetail = foodsClone.filter((food) => food.idMeal === value);
-    // setYouTube((recipeToDetail[0].strYoutube).substr(magicNumber));
     setIdFoodDetails(value);
     history.push(`/comidas/${value}`);
   };
 
   return (
-    <div className="foods">
-      <Header />
-      <ul>
-        <button
-          type="button"
-          onClick={ () => setFoods(foodsClone) }
-          data-testid="All-category-filter"
-        >
-          All
-        </button>
-        {categories.map((category) => (
+    foods.length === 1 ? history.push(`/comidas/${foods[0].idMeal}`)
+      : <div className="foods">
+        <Header />
+        <ul>
           <button
             type="button"
-            key={ category.strCategory }
-            data-testid={ `${category.strCategory}-category-filter` }
-            name={ category.strCategory }
-            value={ category.strCategory }
-            onClick={ (event) => HandleClick(event) }
+            onClick={ () => setFoods(foodsClone) }
+            data-testid="All-category-filter"
           >
-            {category.strCategory}
+            All
           </button>
-        ))}
-      </ul>
-      <ul>
-        {foods.map((food, idx) => (
-          <li key={ food.idMeal }>
-            <img
-              src={ food.strMealThumb }
-              alt={ `Comida: ${food.strMeal}` }
-              width="150px"
-              data-testid={ `${idx}-card-img` }
-            />
-            <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
+          {categories.map((category) => (
             <button
-              value={ food.idMeal }
               type="button"
-              onClick={ handleLink }
-              data-testid={ `${idx}-recipe-card` }
+              key={ category.strCategory }
+              data-testid={ `${category.strCategory}-category-filter` }
+              name={ category.strCategory }
+              value={ category.strCategory }
+              onClick={ (event) => HandleClick(event) }
             >
-              detalhes
+              {category.strCategory}
             </button>
-          </li>
-        ))}
-        {/* {foods.length === 0 ? (<p> Nenhum Resultdo </p>)
-          : foods.map((food, idx) => (
-            <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
-              <img
-                src={ food.strMealThumb }
-                alt={ `Comida: ${food.strMeal}` }
-                width="150px"
-                data-testid={ `${idx}-card-img` }
-              />
-              <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
-              <button value={ food.idMeal } type="button" onClick={ handleLink }>
-                detalhes
-              </button>
-            </li>
-          ))} */}
-      </ul>
-      <Footer />
-    </div>
+          ))}
+        </ul>
+        <ul>
+          {!foods ? <p>Nenhum resultado encontrado!</p>
+            : foods.map((food, idx) => (
+              <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
+                <img
+                  src={ food.strMealThumb }
+                  alt={ `Comida: ${food.strMeal}` }
+                  width="150px"
+                  data-testid={ `${idx}-card-img` }
+                />
+                <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
+                <button value={ food.idMeal } type="button" onClick={ handleLink }>
+                  detalhes
+                </button>
+              </li>
+            ))}
+        </ul>
+        <Footer />
+        </div>
   );
 }
 

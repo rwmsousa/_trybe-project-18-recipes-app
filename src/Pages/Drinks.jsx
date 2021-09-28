@@ -90,6 +90,8 @@ function Drinks() {
     history.push(`/bebidas/${value}`);
   };
 
+  // console.log(drinks);
+
   return (
     <div>
       <Header />

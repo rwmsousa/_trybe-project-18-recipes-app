@@ -3,15 +3,26 @@ import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
-import { fetchIngredientFoods, fetchNameFoods, fetchFirstLetterFoods } from '../services';
+import {
+  fetchIngredientFoods,
+  fetchNameFoods,
+  fetchFirstLetterFoods,
+  fetchIngredientDrinks,
+  fetchNameDrinks,
+  fetchFirstLetterDrinks,
+} from '../services';
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);
-  const { showProfile, showTitlePage, showSearchButton } = useContext(Context);
+
   const {
+    showProfile,
+    showTitlePage,
+    showSearchButton,
     currentPage,
     searchText,
     setFoods,
+    setDrinks,
     setSearchText,
     setSearchRadio,
     searchRadio,
@@ -26,20 +37,36 @@ function Header() {
   };
 
   async function handleClickSearch() {
-    if (searchRadio === 'searchIngredient') {
-      const { meals } = await fetchIngredientFoods(searchText);
-      // console.log(meals);
-      setFoods(meals);
+    if (currentPage === 'Comidas') {
+      switch (searchRadio) {
+      case 'searchIngredient':
+        setFoods(await fetchIngredientFoods(searchText));
+        break;
+      case 'searchName':
+        setFoods(await fetchNameFoods(searchText));
+        break;
+      case 'firstLetter':
+        setFoods(await fetchFirstLetterFoods(searchText));
+        break;
+      default:
+        break;
+      }
     }
-    if (searchRadio === 'searchName') {
-      const meals = await fetchNameFoods(searchText);
-      // console.log(meals);
-      setFoods(meals);
-    }
-    if (searchRadio === 'firstLetter') {
-      const meals = await fetchFirstLetterFoods(searchText);
-      // console.log(meals);
-      setFoods(meals);
+
+    if (currentPage === 'Bebidas') {
+      switch (searchRadio) {
+      case 'searchIngredient':
+        setDrinks(await fetchIngredientDrinks(searchText));
+        break;
+      case 'searchName':
+        setDrinks(await fetchNameDrinks(searchText));
+        break;
+      case 'firstLetter':
+        setDrinks(await fetchFirstLetterDrinks(searchText));
+        break;
+      default:
+        break;
+      }
     }
   }
 
@@ -137,7 +164,7 @@ function Header() {
     <div className="header">
       {showProfile ? menuItemProfile() : false}
       {showTitlePage ? menuItemTitlePage() : false}
-      { showSearchButton ? menuItemSearch() : false }
+      {showSearchButton ? menuItemSearch() : false}
       {showSearch ? renderSearch() : false}
     </div>
   );
