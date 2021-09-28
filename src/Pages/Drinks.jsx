@@ -9,53 +9,40 @@ function Drinks() {
   const history = useHistory();
 
   const [drinksClone, setDrinksClone] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
 
-  const {
-    setCurrentPage,
-    setIdDrinkDetails,
-    categories,
-    setCategories,
-    setDrinks,
-    drinks } = useContext(Context);
+  const { setCurrentPage, setIdDrinkDetails, drinks, setDrinks } = useContext(Context);
 
   useEffect(() => {
     async function fetchDrinks() {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
         .then((data) => data.json());
-
       const magicNumber = 12;
-      const SplitArray = response.drinks.filter((item, idx) => (
-        idx < magicNumber
-      ));
+      const SplitArray = response.drinks.splice(0, magicNumber);
 
       setDrinks(SplitArray);
       setDrinksClone(SplitArray);
     }
-
     async function fetchIngDrinks() {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
         .then((data) => data.json());
-
       const SplitArray = response.drinks
         .filter((i) => i.strIngredient1 === history.location.state[0]);
-
       if (SplitArray.length === 0) {
         setDrinks([]);
-        setDrinksClone([]);
       } else {
         setDrinks(SplitArray);
         setDrinksClone(SplitArray);
       }
     }
-
     if (history.action === 'PUSH') {
       fetchIngDrinks();
     } else {
       fetchDrinks();
     }
     setCurrentPage('Bebidas');
-  }, [history]);
+  }, [setCurrentPage, history, setDrinks]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -70,8 +57,7 @@ function Drinks() {
       setCategories(SplitArray);
     }
     fetchCategories();
-  }, [setCategories]);
-
+  }, []);
   const HandleClick = async ({ target: { name, value } }) => {
     if (actualCategory === value) {
       setDrinks(drinksClone);
@@ -79,7 +65,7 @@ function Drinks() {
       const arrayCategory = await fetchByCategoryDrinks(name);
       setDrinks(arrayCategory);
       setActualCategory(value);
-    }
+    
   };
 
   const handleLink = ({ target: { value } }) => {
@@ -90,7 +76,7 @@ function Drinks() {
     history.push(`/bebidas/${value}`);
   };
 
-  // console.log(drinks);
+  console.log(drinks);
 
   return (
     <div>
@@ -117,40 +103,26 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        {drinks.map((drink, idx) => (
-          <li key={ drink.idDrink }>
-            <img
-              src={ drink.strDrinkThumb }
-              alt={ `Bebida: ${drink.strDrink}` }
-              width="150px"
-              data-testid={ `${idx}-card-img` }
-            />
-            <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
-            <button
-              value={ drink.idDrink }
-              type="button"
-              onClick={ handleLink }
-              data-testid={ `${idx}-recipe-card` }
-            >
-              detalhes
-            </button>
-          </li>
-        ))}
-        {/* {drinks.length === 0 ? (<p> Nenhum Resultdo </p>)
+        { !drinks ? <p>Nenhum resultado encontrado!</p>
           : drinks.map((drink, idx) => (
-            <li data-testid={ `${idx}-recipe-card` } key={ drink.idMeal }>
+            <li key={ drink.idDrink }>
               <img
-                src={ drink.strMealThumb }
-                alt={ `Comida: ${drink.strMeal}` }
+                src={ drink.strDrinkThumb }
+                alt={ `Bebida: ${drink.strDrink}` }
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{drink.strMeal}</p>
-              <button value={ drink.idMeal } type="button" onClick={ handleLink }>
+              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
+              <button
+                value={ drink.idDrink }
+                type="button"
+                onClick={ handleLink }
+                data-testid={ `${idx}-recipe-card` }
+              >
                 detalhes
               </button>
             </li>
-          ))} */}
+          ))}
       </ul>
       <Footer />
     </div>
