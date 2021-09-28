@@ -70,6 +70,8 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
+  console.log(foods);
+
   return (
     <div className="foods">
       <Header />
@@ -95,7 +97,7 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        {foods === [] ? <p>Nenhum resultado encontrado!</p>
+        {!foods ? <p>Nenhum resultado encontrado!</p>
           : foods.map((food, idx) => (
             <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
               <img
