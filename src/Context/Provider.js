@@ -15,8 +15,11 @@ function Provider({ children }) {
   const [details, setDetails] = useState();
   const [searchText, setSearchText] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
+  const [drinks, setDrinks] = useState([]);
 
   const providerValue = {
+    drinks,
+    setDrinks,
     currentPage,
     setCurrentPage,
     searchText,
