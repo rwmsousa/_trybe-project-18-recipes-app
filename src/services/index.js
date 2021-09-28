@@ -8,32 +8,36 @@ export async function fetchIngredientFoods(ingredient) {
 export async function fetchNameFoods(name) {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
   const data = await response.json();
-  return data;
+  const { meals } = data;
+  return meals;
 }
 
 export async function fetchFirstLetterFoods(firstLetter) {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`);
   const data = await response.json();
-  return data;
+  const { meals } = data;
+  return meals;
 }
 
 export async function fetchIngredientDrinks(ingredient) {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
   const data = await response.json();
-  console.log(data);
-  return data;
+  const { drinks } = data;
+  return drinks;
 }
 
 export async function fetchNameDrinks(name) {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
   const data = await response.json();
-  return data;
+  const { drinks } = data;
+  return drinks;
 }
 
 export async function fetchFirstLetterDrinks(firstLetter) {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`);
   const data = await response.json();
-  return data;
+  const { drinks } = data;
+  return drinks;
 }
 
 export async function fetchByCategoryFoods(category) {

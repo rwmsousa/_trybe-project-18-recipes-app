@@ -36,55 +36,40 @@ function Header() {
     setSearchRadio(value);
   };
 
-  // async function handleClickSearch() {
-  //   if (currentPage === 'Comidas' && searchRadio === 'searchIngredient') {
-  //     const { meals } = await fetchIngredientFoods(searchText);
-  //     setFoods(meals);
-  //   } else if (currentPage === 'Comidas' && searchRadio === 'searchName') {
-  //     const { meals } = await fetchNameFoods(searchText);
-  //     setFoods(meals);
-  //   } else if (currentPage === 'Comidas' && searchRadio === 'firstLetter') {
-  //     const { meals } = await fetchFirstLetterFoods(searchText);
-  //     setFoods(meals);
-  //   } else if (currentPage === 'Bebidas' && searchRadio === 'searchIngredient') {
-  //     const { drinks } = await fetchIngredientDrinks(searchText);
-  //     setDrinks(drinks);
-  //   } else if (currentPage === 'Bebidas' && searchRadio === 'searchName') {
-  //     const { drinks } = await fetchNameDrinks(searchText);
-  //     setDrinks(drinks);
-  //   } else if (currentPage === 'Bebidas' && searchRadio === 'firstLetter') {
-  //     const { drinks } = await fetchFirstLetterDrinks(searchText);
-  //     setDrinks(drinks);
-  //   }
-  // }
-
   async function handleClickSearch() {
     if (currentPage === 'Comidas') {
       switch (searchRadio) {
       case 'searchIngredient':
         setFoods(await fetchIngredientFoods(searchText));
         break;
+      case 'searchName':
+        setFoods(await fetchNameFoods(searchText));
+        break;
+      case 'firstLetter':
+        setFoods(await fetchFirstLetterFoods(searchText));
+        break;
       default:
         break;
       }
     }
-    // } else if (currentPage === 'Comidas' && searchRadio === 'searchName') {
-    //   const { meals } = await fetchNameFoods(searchText);
-    //   setFoods(meals);
-    // } else if (currentPage === 'Comidas' && searchRadio === 'firstLetter') {
-    //   const { meals } = await fetchFirstLetterFoods(searchText);
-    //   setFoods(meals);
-    // } else if (currentPage === 'Bebidas' && searchRadio === 'searchIngredient') {
-    //   const { drinks } = await fetchIngredientDrinks(searchText);
-    //   setDrinks(drinks);
-    // } else if (currentPage === 'Bebidas' && searchRadio === 'searchName') {
-    //   const { drinks } = await fetchNameDrinks(searchText);
-    //   setDrinks(drinks);
-    // } else if (currentPage === 'Bebidas' && searchRadio === 'firstLetter') {
-    //   const { drinks } = await fetchFirstLetterDrinks(searchText);
-    //   setDrinks(drinks);
-    // }
+
+    if (currentPage === 'Bebidas') {
+      switch (searchRadio) {
+      case 'searchIngredient':
+        setDrinks(await fetchIngredientDrinks(searchText));
+        break;
+      case 'searchName':
+        setDrinks(await fetchNameDrinks(searchText));
+        break;
+      case 'firstLetter':
+        setDrinks(await fetchFirstLetterDrinks(searchText));
+        break;
+      default:
+        break;
+      }
+    }
   }
+
   const renderSearch = () => (
     <div className="search">
       <input
