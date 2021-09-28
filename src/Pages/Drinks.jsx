@@ -1,31 +1,48 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import { fetchByCategoryDrinks } from '../services';
 
 function Drinks() {
-  const [drinks, setDrinks] = useState([]);
+  const history = useHistory();
+
   const [drinksClone, setDrinksClone] = useState([]);
   const [categories, setCategories] = useState([]);
-  const { setCurrentPage } = useContext(Context);
   const [actualCategory, setActualCategory] = useState('');
+
+  const { setCurrentPage, setIdDrinkDetails, drinks, setDrinks } = useContext(Context);
 
   useEffect(() => {
     async function fetchDrinks() {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
         .then((data) => data.json());
-
       const magicNumber = 12;
       const SplitArray = response.drinks.splice(0, magicNumber);
 
       setDrinks(SplitArray);
       setDrinksClone(SplitArray);
     }
-    fetchDrinks();
+    async function fetchIngDrinks() {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+        .then((data) => data.json());
+      const SplitArray = response.drinks
+        .filter((i) => i.strIngredient1 === history.location.state[0]);
+      if (SplitArray.length === 0) {
+        setDrinks([]);
+      } else {
+        setDrinks(SplitArray);
+        setDrinksClone(SplitArray);
+      }
+    }
+    if (history.action === 'PUSH') {
+      fetchIngDrinks();
+    } else {
+      fetchDrinks();
+    }
     setCurrentPage('Bebidas');
-  }, [setCurrentPage]);
+  }, [setCurrentPage, history, setDrinks]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -33,7 +50,9 @@ function Drinks() {
         .then((data) => data.json());
 
       const magicNumber = 5;
-      const SplitArray = response.drinks.splice(0, magicNumber);
+      const SplitArray = response.drinks.filter((item, idx) => (
+        idx < magicNumber
+      ));
 
       setCategories(SplitArray);
     }
@@ -50,11 +69,25 @@ function Drinks() {
     }
   };
 
+  const handleLink = ({ target: { value } }) => {
+    // const magicNumber = 24;
+    // const recipeToDetail = drinksClone.filter((drink) => drink.idDrink === value);
+    // setDrinkDetails(recipeToDetail);
+    setIdDrinkDetails(value);
+    history.push(`/bebidas/${value}`);
+  };
+
+  // console.log(drinks);
+
   return (
     <div>
       <Header />
       <ul>
-        <button type="button" onClick={ () => setDrinks(drinksClone) }>
+        <button
+          type="button"
+          onClick={ () => setDrinks(drinksClone) }
+          data-testid="All-category-filter"
+        >
           All
         </button>
         {categories.map((category) => (
@@ -71,18 +104,26 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        {drinks.map((drink, idx) => (
-          <li data-testid={ `${idx}-recipe-card` } key={ drink.idDrink }>
-            <img
-              src={ drink.strDrinkThumb }
-              alt={ `Bebida: ${drink.strDrink}` }
-              width="150px"
-              data-testid={ `${idx}-card-img` }
-            />
-            <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
-            <Link to={ `/bebidas/${drink.idDrink}` }>detalhes</Link>
-          </li>
-        ))}
+        { !drinks ? <p>Nenhum resultado encontrado!</p>
+          : drinks.map((drink, idx) => (
+            <li key={ drink.idDrink }>
+              <img
+                src={ drink.strDrinkThumb }
+                alt={ `Bebida: ${drink.strDrink}` }
+                width="150px"
+                data-testid={ `${idx}-card-img` }
+              />
+              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
+              <button
+                value={ drink.idDrink }
+                type="button"
+                onClick={ handleLink }
+                data-testid={ `${idx}-recipe-card` }
+              >
+                detalhes
+              </button>
+            </li>
+          ))}
       </ul>
       <Footer />
     </div>

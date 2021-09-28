@@ -3,14 +3,30 @@ import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
-// import { fetchIngredientFoods, fetchNameFoods, fetchFirstLetterFoods } from '../services';
+import {
+  fetchIngredientFoods,
+  fetchNameFoods,
+  fetchFirstLetterFoods,
+  fetchIngredientDrinks,
+  fetchNameDrinks,
+  fetchFirstLetterDrinks,
+} from '../services';
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);
-  const [searchText, setSearchText] = useState('');
-  const [searchRadio, setSearchRadio] = useState('');
-  const { showProfile,
-    showTitlePage, showSearchButton, currentPage } = useContext(Context);
+
+  const {
+    showProfile,
+    showTitlePage,
+    showSearchButton,
+    currentPage,
+    searchText,
+    setFoods,
+    setDrinks,
+    setSearchText,
+    setSearchRadio,
+    searchRadio,
+  } = useContext(Context);
 
   const handleSearchText = ({ target: { value } }) => {
     setSearchText(value);
@@ -20,23 +36,39 @@ function Header() {
     setSearchRadio(value);
   };
 
-  const handleClick = () => {
-    // if (searchRadio === 'searchIngredient') {
-    //   fetchIngredientFoods(searchText);
-    // }
-    // if (searchRadio === 'searchName') {
-    //   fetchNameFoods(searchText);
-    // }
-    // if (searchRadio === 'firstLetter') {
-    //   fetchFirstLetterFoods(searchText);
-    // }
-    async function fetchIngredientFoods(ingredient) {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
-      const data = await response.json();
-      return data;
+  async function handleClickSearch() {
+    if (currentPage === 'Comidas') {
+      switch (searchRadio) {
+      case 'searchIngredient':
+        setFoods(await fetchIngredientFoods(searchText));
+        break;
+      case 'searchName':
+        setFoods(await fetchNameFoods(searchText));
+        break;
+      case 'firstLetter':
+        setFoods(await fetchFirstLetterFoods(searchText));
+        break;
+      default:
+        break;
+      }
     }
-    console.log(fetchIngredientFoods(searchText));
-  };
+
+    if (currentPage === 'Bebidas') {
+      switch (searchRadio) {
+      case 'searchIngredient':
+        setDrinks(await fetchIngredientDrinks(searchText));
+        break;
+      case 'searchName':
+        setDrinks(await fetchNameDrinks(searchText));
+        break;
+      case 'firstLetter':
+        setDrinks(await fetchFirstLetterDrinks(searchText));
+        break;
+      default:
+        break;
+      }
+    }
+  }
 
   const renderSearch = () => (
     <div className="search">
@@ -84,7 +116,7 @@ function Header() {
           onChange={ handleRadio }
         />
       </label>
-      <button type="button" className="fetchBtn" onClick={ handleClick }>
+      <button type="button" className="fetchBtn" onClick={ handleClickSearch }>
         pesquisar
       </button>
     </div>
@@ -132,7 +164,7 @@ function Header() {
     <div className="header">
       {showProfile ? menuItemProfile() : false}
       {showTitlePage ? menuItemTitlePage() : false}
-      { showSearchButton ? menuItemSearch() : false }
+      {showSearchButton ? menuItemSearch() : false}
       {showSearch ? renderSearch() : false}
     </div>
   );

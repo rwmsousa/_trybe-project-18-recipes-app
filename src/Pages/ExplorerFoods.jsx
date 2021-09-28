@@ -28,17 +28,15 @@ function ExplorerFoods() {
       <Header />
       <Link
         to="/explorar/comidas/ingredientes"
-        data-testid="explore-by-ingredient"
       >
-        <button type="button">
+        <button type="button" data-testid="explore-by-ingredient">
           Por Ingredientes
         </button>
       </Link>
       <Link
         to="/explorar/comidas/area"
-        data-testid="explore-by-area"
       >
-        <button type="button">
+        <button type="button" data-testid="explore-by-area">
           Por Local de Origem
         </button>
       </Link>

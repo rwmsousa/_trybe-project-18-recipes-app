@@ -1,23 +1,31 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
+import { fetchByCategoryFoods } from '../services';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../Context/Context';
-import { fetchByCategoryFoods } from '../services';
 
 function Foods() {
+<<<<<<< HEAD
+=======
+  const history = useHistory();
+
+>>>>>>> main-group-17-dev
   const [foodsClone, setFoodsClone] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
   const {
     setCurrentPage,
     categories,
     setCategories,
+<<<<<<< HEAD
     setDetails,
     setYouTube,
+=======
+    setIdFoodDetails,
+>>>>>>> main-group-17-dev
     foods,
     setFoods,
   } = useContext(Context);
-  const history = useHistory();
 
   useEffect(() => {
     async function fetchFoods() {
@@ -26,14 +34,38 @@ function Foods() {
       ).then((data) => data.json());
 
       const magicNumber = 12;
-      const SplitArray = meals.splice(0, magicNumber);
+      const SplitArray = meals.filter((item, idx) => (
+        idx < magicNumber
+      ));
 
       setFoods(SplitArray);
       setFoodsClone(SplitArray);
     }
-    fetchFoods();
+    async function fetchIngFoods() {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+        .then((data) => data.json());
+      const SplitArray = response.meals
+        .filter((i) => i.strIngredient1 === history.location.state[0]);
+      console.log(SplitArray);
+      if (SplitArray.length === 0) {
+        setFoods([]);
+        setFoodsClone([]);
+      } else {
+        setFoods(SplitArray);
+        setFoodsClone(SplitArray);
+      }
+    }
+    if (history.action === 'PUSH') {
+      fetchIngFoods();
+    } else {
+      fetchFoods();
+    }
     setCurrentPage('Comidas');
+<<<<<<< HEAD
   }, [setCurrentPage, setFoods]);
+=======
+  }, [setCurrentPage, history, setFoods]);
+>>>>>>> main-group-17-dev
 
   useEffect(() => {
     async function fetchCategories() {
@@ -42,11 +74,13 @@ function Foods() {
       ).then((data) => data.json());
 
       const magicNumber = 5;
-      const SplitArray = meals.splice(0, magicNumber);
+      const SplitArray = meals.filter((item, idx) => (
+        idx < magicNumber
+      ));
       setCategories(SplitArray);
     }
     fetchCategories();
-  }, [categories, setCategories]);
+  }, [setCategories]);
 
   const HandleClick = async ({ target: { name, value } }) => {
     if (actualCategory === value) {
@@ -59,55 +93,54 @@ function Foods() {
   };
 
   const handleLink = ({ target: { value } }) => {
-    const magicNumber = 24;
-    const recipeToDetail = foodsClone.filter((food) => food.idMeal === value);
-    setDetails(recipeToDetail);
-    setYouTube((recipeToDetail[0].strYoutube).substr(magicNumber));
+    setIdFoodDetails(value);
     history.push(`/comidas/${value}`);
   };
 
   return (
-    <div className="foods">
-      <Header />
-      <ul>
-        <button
-          type="button"
-          onClick={ () => setFoods(foodsClone) }
-          data-testid="All-category-filter"
-        >
-          All
-        </button>
-        {categories.map((category) => (
+    foods.length === 1 ? history.push(`/comidas/${foods[0].idMeal}`)
+      : <div className="foods">
+        <Header />
+        <ul>
           <button
             type="button"
-            key={ category.strCategory }
-            data-testid={ `${category.strCategory}-category-filter` }
-            name={ category.strCategory }
-            value={ category.strCategory }
-            onClick={ (event) => HandleClick(event) }
+            onClick={ () => setFoods(foodsClone) }
+            data-testid="All-category-filter"
           >
-            {category.strCategory}
+            All
           </button>
-        ))}
-      </ul>
-      <ul>
-        {foods.map((food, idx) => (
-          <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
-            <img
-              src={ food.strMealThumb }
-              alt={ `Comida: ${food.strMeal}` }
-              width="150px"
-              data-testid={ `${idx}-card-img` }
-            />
-            <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
-            <button value={ food.idMeal } type="button" onClick={ handleLink }>
-              detalhes
+          {categories.map((category) => (
+            <button
+              type="button"
+              key={ category.strCategory }
+              data-testid={ `${category.strCategory}-category-filter` }
+              name={ category.strCategory }
+              value={ category.strCategory }
+              onClick={ (event) => HandleClick(event) }
+            >
+              {category.strCategory}
             </button>
-          </li>
-        ))}
-      </ul>
-      <Footer />
-    </div>
+          ))}
+        </ul>
+        <ul>
+          {!foods ? <p>Nenhum resultado encontrado!</p>
+            : foods.map((food, idx) => (
+              <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
+                <img
+                  src={ food.strMealThumb }
+                  alt={ `Comida: ${food.strMeal}` }
+                  width="150px"
+                  data-testid={ `${idx}-card-img` }
+                />
+                <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
+                <button value={ food.idMeal } type="button" onClick={ handleLink }>
+                  detalhes
+                </button>
+              </li>
+            ))}
+        </ul>
+        <Footer />
+        </div>
   );
 }
 
