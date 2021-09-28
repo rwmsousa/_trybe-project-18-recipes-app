@@ -1,16 +1,16 @@
-export async function fetchIngredient(ingredient) {
+export async function fetchIngredientFoods(ingredient) {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
   const data = await response.json();
   return data;
 }
 
-export async function fetchName(name) {
+export async function fetchNameFoods(name) {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
   const data = await response.json();
   return data;
 }
 
-export async function fetchFirstLetter(firstLetter) {
+export async function fetchFirstLetterFoods(firstLetter) {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`);
   const data = await response.json();
   return data;
@@ -47,6 +47,19 @@ export async function fetchRandomDrinkDetails() {
   const data = await response.json();
   return data;
 }
+
+export async function fetchFoodById(id) {
+  const response = await
+  fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const { meals } = await response.json();
+  return meals;
+}
+
+export async function fetchDrinkById(id) {
+  const response = await
+  fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const { drinks } = await response.json();
+  return drinks;
 
 export async function fetchIngredientofFoods() {
   const response = await

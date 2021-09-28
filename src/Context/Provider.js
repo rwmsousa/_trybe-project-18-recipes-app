@@ -9,12 +9,18 @@ function Provider({ children }) {
   const [showProfile, setShowProfile] = useState(true);
   const [showTitlePage, setShowTitlePage] = useState(true);
   const [showSearchButton, setSearchButton] = useState(true);
+  const [idFoodDetails, setIdFoodDetails] = useState('');
+  const [idDrinkDetails, setIdDrinkDetails] = useState('');
+  const [foods, setFoods] = useState([]);
   const [details, setDetails] = useState();
-  const [youTube, setYouTube] = useState('');
 
   const providerValue = {
     currentPage,
     setCurrentPage,
+    searchText,
+    setSearchText,
+    searchRadio,
+    setSearchRadio,
     foodName,
     setFoodName,
     categories,
@@ -25,10 +31,12 @@ function Provider({ children }) {
     setShowTitlePage,
     showSearchButton,
     setSearchButton,
-    details,
-    setDetails,
-    youTube,
-    setYouTube,
+    idFoodDetails,
+    setIdFoodDetails,
+    idDrinkDetails,
+    setIdDrinkDetails,
+    foods,
+    setFoods,
   };
 
   return (

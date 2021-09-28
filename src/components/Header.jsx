@@ -3,6 +3,19 @@ import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
+import { fetchIngredientFoods, fetchNameFoods, fetchFirstLetterFoods } from '../services';
+
+function Header() {
+  const [showSearch, setShowSearch] = useState(false);
+  const { showProfile, showTitlePage, showSearchButton } = useContext(Context);
+  const {
+    currentPage,
+    searchText,
+    setFoods,
+    setSearchText,
+    setSearchRadio,
+    searchRadio,
+  } = useContext(Context);
 import { fetchIngredient, fetchName, fetchFirstLetter } from '../services';
 
 function Header() {
@@ -30,6 +43,32 @@ function Header() {
     if (searchRadio === 'firstLetter') {
       fetchFirstLetter(searchText);
     }
+  };
+
+  async function handleClickSearch() {
+    if (searchRadio === 'searchIngredient') {
+      const { meals } = await fetchIngredientFoods(searchText);
+      // console.log(meals);
+      setFoods(meals);
+    }
+    if (searchRadio === 'searchName') {
+      const meals = await fetchNameFoods(searchText);
+      // console.log(meals);
+      setFoods(meals);
+    }
+    if (searchRadio === 'firstLetter') {
+      const meals = await fetchFirstLetterFoods(searchText);
+      // console.log(meals);
+      setFoods(meals);
+    }
+  }
+
+  const handleSearchText = ({ target: { value } }) => {
+    setSearchText(value);
+  };
+
+  const handleRadio = ({ target: { value } }) => {
+    setSearchRadio(value);
   };
 
   const renderSearch = () => (
@@ -78,7 +117,7 @@ function Header() {
           onChange={ handleRadio }
         />
       </label>
-      <button type="button" className="fetchBtn" onClick={ handleClick }>
+      <button type="button" className="fetchBtn" onClick={ handleClickSearch }>
         pesquisar
       </button>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
@@ -7,12 +7,14 @@ import { fetchByCategoryDrinks } from '../services';
 
 function Drinks() {
   const history = useHistory();
+
   const [drinks, setDrinks] = useState([]);
   const [drinksClone, setDrinksClone] = useState([]);
   const [categories, setCategories] = useState([]);
-  const { setCurrentPage } = useContext(Context);
   const [actualCategory, setActualCategory] = useState('');
-  // console.log(history.location.state[0]);
+
+  const { setCurrentPage, setIdDrinkDetails } = useContext(Context);
+
   useEffect(() => {
     async function fetchDrinks() {
       const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
@@ -49,7 +51,9 @@ function Drinks() {
         .then((data) => data.json());
 
       const magicNumber = 5;
-      const SplitArray = response.drinks.splice(0, magicNumber);
+      const SplitArray = response.drinks.filter((item, idx) => (
+        idx < magicNumber
+      ));
 
       setCategories(SplitArray);
     }
@@ -66,11 +70,23 @@ function Drinks() {
     }
   };
 
+  const handleLink = ({ target: { value } }) => {
+    // const magicNumber = 24;
+    // const recipeToDetail = drinksClone.filter((drink) => drink.idDrink === value);
+    // setDrinkDetails(recipeToDetail);
+    setIdDrinkDetails(value);
+    history.push(`/bebidas/${value}`);
+  };
+
   return (
     <div>
       <Header />
       <ul>
-        <button type="button" onClick={ () => setDrinks(drinksClone) }>
+        <button
+          type="button"
+          onClick={ () => setDrinks(drinksClone) }
+          data-testid="All-category-filter"
+        >
           All
         </button>
         {categories.map((category) => (
@@ -87,6 +103,25 @@ function Drinks() {
         ))}
       </ul>
       <ul>
+        {drinks.map((drink, idx) => (
+          <li key={ drink.idDrink }>
+            <img
+              src={ drink.strDrinkThumb }
+              alt={ `Bebida: ${drink.strDrink}` }
+              width="150px"
+              data-testid={ `${idx}-card-img` }
+            />
+            <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
+            <button
+              value={ drink.idDrink }
+              type="button"
+              onClick={ handleLink }
+              data-testid={ `${idx}-recipe-card` }
+            >
+              detalhes
+            </button>
+          </li>
+        ))}
         {drinks.length === 0 ? (<p> Nenhum Resultdo </p>)
           : drinks.map((drink, idx) => (
             <li data-testid={ `${idx}-recipe-card` } key={ drink.idDrink }>
