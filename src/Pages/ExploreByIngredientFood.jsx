@@ -10,7 +10,8 @@ function ExploreByIngredientFood() {
   const [data, setdata] = useState([]);
   const {
     setCurrentPage,
-    setSearchButton } = useContext(Context);
+    setSearchButton,
+    setTest1 } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Explorar Ingredientes');
@@ -25,6 +26,11 @@ function ExploreByIngredientFood() {
     fetch();
   }, []);
 
+  const handleClick = ({ target: { value } }) => {
+    setTest1(value);
+    history.push('/comidas');
+  };
+
   return (
     <div>
       <Header />
@@ -32,7 +38,8 @@ function ExploreByIngredientFood() {
         <button
           type="button"
           key={ item.strIngredient }
-          onClick={ () => history.push('/comidas', [item.strIngredient]) }
+          onClick={ handleClick }
+          value={ item.strIngredient }
         >
           <img
             src={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}.png` }

@@ -17,7 +17,8 @@ function Drinks() {
     categories,
     setCategories,
     setDrinks,
-    drinks } = useContext(Context);
+    drinks,
+    test } = useContext(Context);
 
   useEffect(() => {
     async function fetchDrinks() {
@@ -38,14 +39,12 @@ function Drinks() {
         .then((data) => data.json());
 
       const SplitArray = response.drinks
-        .filter((i) => i.strIngredient1 === history.location.state[0]);
+        .filter((i) => i.strIngredient1 === test);
 
       if (SplitArray.length === 0) {
         setDrinks([]);
-        setDrinksClone([]);
       } else {
         setDrinks(SplitArray);
-        setDrinksClone(SplitArray);
       }
     }
 
@@ -54,6 +53,7 @@ function Drinks() {
     } else {
       fetchDrinks();
     }
+
     setCurrentPage('Bebidas');
   }, [history]);
 
