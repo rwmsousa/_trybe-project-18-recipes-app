@@ -35,30 +35,9 @@ function Foods() {
       setFoods(SplitArray);
       setFoodsClone(SplitArray);
     }
-
-    async function fetchIngFoods() {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-        .then((data) => data.json());
-
-      const SplitArray = response.meals
-        .filter((i) => i.strIngredient1 === history.location.state[0]);
-
-      if (SplitArray.length === 0) {
-        setFoods([]);
-        setFoodsClone([]);
-      } else {
-        setFoods(SplitArray);
-        setFoodsClone(SplitArray);
-      }
-    }
-
-    if (history.action === 'PUSH') {
-      fetchIngFoods();
-    } else {
-      fetchFoods();
-    }
+    fetchFoods();
     setCurrentPage('Comidas');
-  }, [setCurrentPage, history, setFoods]);
+  }, [setCurrentPage, setFoods, foods]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -92,49 +71,48 @@ function Foods() {
   };
 
   return (
-    foods[0].length === 1 ? history.push(`/comidas/${foods[0].idMeal}`)
-      : <div className="foods">
-        <Header />
-        <ul>
+    <div className="foods">
+      <Header />
+      <ul>
+        <button
+          type="button"
+          onClick={ () => setFoods(foodsClone) }
+          data-testid="All-category-filter"
+        >
+          All
+        </button>
+        {categories.map((category) => (
           <button
             type="button"
-            onClick={ () => setFoods(foodsClone) }
-            data-testid="All-category-filter"
+            key={ category.strCategory }
+            data-testid={ `${category.strCategory}-category-filter` }
+            name={ category.strCategory }
+            value={ category.strCategory }
+            onClick={ (event) => HandleClick(event) }
           >
-            All
+            {category.strCategory}
           </button>
-          {categories.map((category) => (
-            <button
-              type="button"
-              key={ category.strCategory }
-              data-testid={ `${category.strCategory}-category-filter` }
-              name={ category.strCategory }
-              value={ category.strCategory }
-              onClick={ (event) => HandleClick(event) }
-            >
-              {category.strCategory}
-            </button>
+        ))}
+      </ul>
+      <ul>
+        {foods === [] ? <p>Nenhum resultado encontrado!</p>
+          : foods.map((food, idx) => (
+            <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
+              <img
+                src={ food.strMealThumb }
+                alt={ `Comida: ${food.strMeal}` }
+                width="150px"
+                data-testid={ `${idx}-card-img` }
+              />
+              <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
+              <button value={ food.idMeal } type="button" onClick={ handleLink }>
+                detalhes
+              </button>
+            </li>
           ))}
-        </ul>
-        <ul>
-          {!foods ? <p>Nenhum resultado encontrado!</p>
-            : foods.map((food, idx) => (
-              <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
-                <img
-                  src={ food.strMealThumb }
-                  alt={ `Comida: ${food.strMeal}` }
-                  width="150px"
-                  data-testid={ `${idx}-card-img` }
-                />
-                <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
-                <button value={ food.idMeal } type="button" onClick={ handleLink }>
-                  detalhes
-                </button>
-              </li>
-            ))}
-        </ul>
-        <Footer />
-      </div>
+      </ul>
+      <Footer />
+    </div>
   );
 }
 
