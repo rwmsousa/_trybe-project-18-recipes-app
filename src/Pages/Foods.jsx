@@ -6,26 +6,20 @@ import Footer from '../components/Footer';
 import Context from '../Context/Context';
 
 function Foods() {
-<<<<<<< HEAD
-=======
   const history = useHistory();
 
->>>>>>> main-group-17-dev
   const [foodsClone, setFoodsClone] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
   const {
     setCurrentPage,
     categories,
     setCategories,
-<<<<<<< HEAD
-    setDetails,
-    setYouTube,
-=======
     setIdFoodDetails,
->>>>>>> main-group-17-dev
     foods,
     setFoods,
   } = useContext(Context);
+
+  // console.log(foods);
 
   useEffect(() => {
     async function fetchFoods() {
@@ -61,11 +55,7 @@ function Foods() {
       fetchFoods();
     }
     setCurrentPage('Comidas');
-<<<<<<< HEAD
-  }, [setCurrentPage, setFoods]);
-=======
   }, [setCurrentPage, history, setFoods]);
->>>>>>> main-group-17-dev
 
   useEffect(() => {
     async function fetchCategories() {
@@ -98,7 +88,7 @@ function Foods() {
   };
 
   return (
-    foods.length === 1 ? history.push(`/comidas/${foods[0].idMeal}`)
+    foods[0].length === 1 ? history.push(`/comidas/${foods[0].idMeal}`)
       : <div className="foods">
         <Header />
         <ul>
@@ -140,7 +130,7 @@ function Foods() {
             ))}
         </ul>
         <Footer />
-        </div>
+      </div>
   );
 }
 

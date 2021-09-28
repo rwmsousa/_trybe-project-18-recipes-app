@@ -12,7 +12,6 @@ function Provider({ children }) {
   const [showSearchButton, setSearchButton] = useState(true);
   const [idFoodDetails, setIdFoodDetails] = useState('');
   const [idDrinkDetails, setIdDrinkDetails] = useState('');
-  const [foods, setFoods] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [details, setDetails] = useState();
   const [searchText, setSearchText] = useState('');
@@ -41,8 +40,6 @@ function Provider({ children }) {
     setIdFoodDetails,
     idDrinkDetails,
     setIdDrinkDetails,
-    foods,
-    setFoods,
     details,
     setDetails,
     drinks,
