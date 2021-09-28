@@ -11,7 +11,8 @@ function ExploreByIngredientDrink() {
   const [data, setdata] = useState([]);
   const {
     setCurrentPage,
-    setSearchButton } = useContext(Context);
+    setSearchButton,
+    setDrinks } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Explorar Ingredientes');
@@ -25,7 +26,23 @@ function ExploreByIngredientDrink() {
     }
     fetch();
   }, []);
-  // console.log(history);
+
+  function handleClick({ target: { value } }) {
+    async function fetchIngDrinks() {
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+        .then((date) => date.json());
+      const SplitArray = response.drinks
+        .filter((i) => i.strIngredient1 === value);
+      if (SplitArray.length === 0) {
+        setDrinks([]);
+      } else {
+        setDrinks(SplitArray);
+      }
+    }
+    fetchIngDrinks();
+    history.push('/bebidas');
+  }
+
   return (
     <div>
       <Header />
@@ -33,7 +50,8 @@ function ExploreByIngredientDrink() {
         <button
           type="button"
           key={ item.strIngredient1 }
-          onClick={ () => history.push('/bebidas', [item.strIngredient1]) }
+          onClick={ handleClick }
+          value={ item.strIngredient1 }
         >
           <img
             src={ `https://www.themealdb.com/images/ingredients/${item.strIngredient1}.png` }

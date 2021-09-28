@@ -24,25 +24,9 @@ function Drinks() {
       setDrinks(SplitArray);
       setDrinksClone(SplitArray);
     }
-    async function fetchIngDrinks() {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-        .then((data) => data.json());
-      const SplitArray = response.drinks
-        .filter((i) => i.strIngredient1 === history.location.state[0]);
-      if (SplitArray.length === 0) {
-        setDrinks([]);
-      } else {
-        setDrinks(SplitArray);
-        setDrinksClone(SplitArray);
-      }
-    }
-    if (history.action === 'PUSH') {
-      fetchIngDrinks();
-    } else {
-      fetchDrinks();
-    }
+    fetchDrinks();
     setCurrentPage('Bebidas');
-  }, [setCurrentPage, history, setDrinks]);
+  }, [setCurrentPage, setDrinks]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -58,6 +42,7 @@ function Drinks() {
     }
     fetchCategories();
   }, []);
+
   const HandleClick = async ({ target: { name, value } }) => {
     if (actualCategory === value) {
       setDrinks(drinksClone);
@@ -65,13 +50,10 @@ function Drinks() {
       const arrayCategory = await fetchByCategoryDrinks(name);
       setDrinks(arrayCategory);
       setActualCategory(value);
-    
+    }
   };
 
   const handleLink = ({ target: { value } }) => {
-    // const magicNumber = 24;
-    // const recipeToDetail = drinksClone.filter((drink) => drink.idDrink === value);
-    // setDrinkDetails(recipeToDetail);
     setIdDrinkDetails(value);
     history.push(`/bebidas/${value}`);
   };
@@ -103,7 +85,7 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        { !drinks ? <p>Nenhum resultado encontrado!</p>
+        {drinks === [] ? (<p> Nenhum Resultdo </p>)
           : drinks.map((drink, idx) => (
             <li key={ drink.idDrink }>
               <img
