@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 
 function Provider({ children }) {
-  const [currentPage, setCurrentPage] = useState(''); // variável utilizada para alterar o título da página no header.
-  const [searchText, setSearchText] = useState('');
-  const [searchRadio, setSearchRadio] = useState('');// variável utilizada
+  const [currentPage, setCurrentPage] = useState(''); // variável utilizada para alterar o título da página no header.// variável utilizada
   const [foodName, setFoodName] = useState([]);
   const [categories, setCategories] = useState([]);
   const [showProfile, setShowProfile] = useState(true);
@@ -14,6 +12,7 @@ function Provider({ children }) {
   const [idFoodDetails, setIdFoodDetails] = useState('');
   const [idDrinkDetails, setIdDrinkDetails] = useState('');
   const [foods, setFoods] = useState([]);
+  const [details, setDetails] = useState();
 
   const providerValue = {
     currentPage,
