@@ -17,10 +17,7 @@ function Foods() {
     setIdFoodDetails,
     foods,
     setFoods,
-    test1,
   } = useContext(Context);
-
-  console.log(foods);
 
   useEffect(() => {
     async function fetchFoods() {
@@ -36,28 +33,9 @@ function Foods() {
       setFoods(SplitArray);
       setFoodsClone(SplitArray);
     }
-
-    async function fetchIngFoods() {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-        .then((data) => data.json());
-
-      const SplitArray = response.meals
-        .filter((i) => i.strIngredient1 === test1);
-
-      if (SplitArray.length === 0) {
-        setFoods([{}]);
-      } else {
-        setFoods(SplitArray);
-      }
-    }
-
-    if (history.action === 'PUSH') {
-      fetchIngFoods();
-    } else {
-      fetchFoods();
-    }
+    fetchFoods();
     setCurrentPage('Comidas');
-  }, [setCurrentPage, history, setFoods]);
+  }, [setCurrentPage, setFoods]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -115,9 +93,9 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        {!foods ? <p>Nenhum resultado encontrado!</p>
+        {foods === [] ? <p>Nenhum resultado encontrado!</p>
           : foods.map((food, idx) => (
-            <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
+            <li key={ food.idMeal }>
               <img
                 src={ food.strMealThumb }
                 alt={ `Comida: ${food.strMeal}` }
@@ -125,7 +103,12 @@ function Foods() {
                 data-testid={ `${idx}-card-img` }
               />
               <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
-              <button value={ food.idMeal } type="button" onClick={ handleLink }>
+              <button
+                value={ food.idMeal }
+                type="button"
+                onClick={ handleLink }
+                data-testid={ `${idx}-recipe-card` }
+              >
                 detalhes
               </button>
             </li>

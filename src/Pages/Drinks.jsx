@@ -18,7 +18,7 @@ function Drinks() {
     setCategories,
     setDrinks,
     drinks,
-    test } = useContext(Context);
+  } = useContext(Context);
 
   useEffect(() => {
     async function fetchDrinks() {
@@ -33,29 +33,9 @@ function Drinks() {
       setDrinks(SplitArray);
       setDrinksClone(SplitArray);
     }
-
-    async function fetchIngDrinks() {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-        .then((data) => data.json());
-
-      const SplitArray = response.drinks
-        .filter((i) => i.strIngredient1 === test);
-
-      if (SplitArray.length === 0) {
-        setDrinks([]);
-      } else {
-        setDrinks(SplitArray);
-      }
-    }
-
-    if (history.action === 'PUSH') {
-      fetchIngDrinks();
-    } else {
-      fetchDrinks();
-    }
-
+    fetchDrinks();
     setCurrentPage('Bebidas');
-  }, [history]);
+  }, [setCurrentPage, setDrinks]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -117,40 +97,26 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        {drinks.map((drink, idx) => (
-          <li key={ drink.idDrink }>
-            <img
-              src={ drink.strDrinkThumb }
-              alt={ `Bebida: ${drink.strDrink}` }
-              width="150px"
-              data-testid={ `${idx}-card-img` }
-            />
-            <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
-            <button
-              value={ drink.idDrink }
-              type="button"
-              onClick={ handleLink }
-              data-testid={ `${idx}-recipe-card` }
-            >
-              detalhes
-            </button>
-          </li>
-        ))}
-        {/* {drinks.length === 0 ? (<p> Nenhum Resultdo </p>)
+        {drinks === [] ? (<p> Nenhum Resultado </p>)
           : drinks.map((drink, idx) => (
-            <li data-testid={ `${idx}-recipe-card` } key={ drink.idMeal }>
+            <li key={ drink.idDrink }>
               <img
-                src={ drink.strMealThumb }
-                alt={ `Comida: ${drink.strMeal}` }
+                src={ drink.strDrinkThumb }
+                alt={ `Bebida: ${drink.strDrink}` }
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{drink.strMeal}</p>
-              <button value={ drink.idMeal } type="button" onClick={ handleLink }>
+              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
+              <button
+                value={ drink.idDrink }
+                type="button"
+                onClick={ handleLink }
+                data-testid={ `${idx}-recipe-card` }
+              >
                 detalhes
               </button>
             </li>
-          ))} */}
+          ))}
       </ul>
       <Footer />
     </div>

@@ -11,7 +11,7 @@ function ExploreByIngredientFood() {
   const {
     setCurrentPage,
     setSearchButton,
-    setTest1 } = useContext(Context);
+    setFoods } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Explorar Ingredientes');
@@ -27,7 +27,18 @@ function ExploreByIngredientFood() {
   }, []);
 
   const handleClick = ({ target: { value } }) => {
-    setTest1(value);
+    async function fetchIngFoods() {
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+        .then((date) => date.json());
+      const SplitArray = response.meals
+        .filter((i) => i.strIngredient1 === value);
+      if (SplitArray.length === 0) {
+        setFoods([]);
+      } else {
+        setFoods(SplitArray);
+      }
+    }
+    fetchIngFoods();
     history.push('/comidas');
   };
 
@@ -39,7 +50,7 @@ function ExploreByIngredientFood() {
           type="button"
           key={ item.strIngredient }
           onClick={ handleClick }
-          value={ item.strIngredient }
+          value={ [item.strIngredient] }
         >
           <img
             src={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}.png` }
