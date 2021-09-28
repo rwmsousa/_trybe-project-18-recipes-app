@@ -122,19 +122,6 @@ function Drinks() {
             </button>
           </li>
         ))}
-        {drinks.length === 0 ? (<p> Nenhum Resultdo </p>)
-          : drinks.map((drink, idx) => (
-            <li data-testid={ `${idx}-recipe-card` } key={ drink.idDrink }>
-              <img
-                src={ drink.strDrinkThumb }
-                alt={ `Bebida: ${drink.strDrink}` }
-                width="150px"
-                data-testid={ `${idx}-card-img` }
-              />
-              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
-              <Link to={ `/bebidas/${drink.idDrink}` }>detalhes</Link>
-            </li>
-          ))}
       </ul>
       <Footer />
     </div>
