@@ -4,6 +4,7 @@ import Context from './Context';
 
 function Provider({ children }) {
   const [currentPage, setCurrentPage] = useState(''); // variável utilizada para alterar o título da página no header.// variável utilizada
+  const [foods, setFoods] = useState([]);
   const [foodName, setFoodName] = useState([]);
   const [categories, setCategories] = useState([]);
   const [showProfile, setShowProfile] = useState(true);
@@ -17,6 +18,8 @@ function Provider({ children }) {
     setCurrentPage,
     foodName,
     setFoodName,
+    foods,
+    setFoods,
     categories,
     setCategories,
     showProfile,

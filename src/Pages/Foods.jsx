@@ -6,7 +6,6 @@ import Context from '../Context/Context';
 import { fetchByCategoryFoods } from '../services';
 
 function Foods() {
-  const [foods, setFoods] = useState([]);
   const [foodsClone, setFoodsClone] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
   const {
@@ -15,6 +14,8 @@ function Foods() {
     setCategories,
     setDetails,
     setYouTube,
+    foods,
+    setFoods,
   } = useContext(Context);
   const history = useHistory();
 
@@ -32,7 +33,7 @@ function Foods() {
     }
     fetchFoods();
     setCurrentPage('Comidas');
-  }, [setCurrentPage]);
+  }, [setCurrentPage, setFoods]);
 
   useEffect(() => {
     async function fetchCategories() {

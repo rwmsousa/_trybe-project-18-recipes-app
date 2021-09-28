@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
-import { fetchIngredient, fetchName, fetchFirstLetter } from '../services';
+// import { fetchIngredientFoods, fetchNameFoods, fetchFirstLetterFoods } from '../services';
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);
@@ -21,15 +21,21 @@ function Header() {
   };
 
   const handleClick = () => {
-    if (searchRadio === 'searchIngredient') {
-      fetchIngredient(searchText);
+    // if (searchRadio === 'searchIngredient') {
+    //   fetchIngredientFoods(searchText);
+    // }
+    // if (searchRadio === 'searchName') {
+    //   fetchNameFoods(searchText);
+    // }
+    // if (searchRadio === 'firstLetter') {
+    //   fetchFirstLetterFoods(searchText);
+    // }
+    async function fetchIngredientFoods(ingredient) {
+      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+      const data = await response.json();
+      return data;
     }
-    if (searchRadio === 'searchName') {
-      fetchName(searchText);
-    }
-    if (searchRadio === 'firstLetter') {
-      fetchFirstLetter(searchText);
-    }
+    console.log(fetchIngredientFoods(searchText));
   };
 
   const renderSearch = () => (
