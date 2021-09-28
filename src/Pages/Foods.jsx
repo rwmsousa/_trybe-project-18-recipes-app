@@ -71,8 +71,6 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
-  console.log(foods);
-
   return (
     <div className="foods">
       <Header />
