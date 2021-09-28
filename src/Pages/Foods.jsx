@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
+import { fetchByCategoryFoods } from '../services';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../Context/Context';
-import { fetchByCategoryFoods } from '../services';
 
 function Foods() {
   const history = useHistory();
@@ -88,8 +88,6 @@ function Foods() {
     // setYouTube((recipeToDetail[0].strYoutube).substr(magicNumber));
     history.push(`/comidas/${value}`);
   };
-
-  console.log(foods);
 
   return (
     <div className="foods">

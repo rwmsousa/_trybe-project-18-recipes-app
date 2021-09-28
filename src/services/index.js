@@ -60,6 +60,7 @@ export async function fetchDrinkById(id) {
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
   const { drinks } = await response.json();
   return drinks;
+}
 
 export async function fetchIngredientofFoods() {
   const response = await

@@ -16,14 +16,6 @@ function Header() {
     setSearchRadio,
     searchRadio,
   } = useContext(Context);
-import { fetchIngredient, fetchName, fetchFirstLetter } from '../services';
-
-function Header() {
-  const [showSearch, setShowSearch] = useState(false);
-  const [searchText, setSearchText] = useState('');
-  const [searchRadio, setSearchRadio] = useState('');
-  const { showProfile,
-    showTitlePage, showSearchButton, currentPage } = useContext(Context);
 
   const handleSearchText = ({ target: { value } }) => {
     setSearchText(value);
@@ -31,18 +23,6 @@ function Header() {
 
   const handleRadio = ({ target: { value } }) => {
     setSearchRadio(value);
-  };
-
-  const handleClick = () => {
-    if (searchRadio === 'searchIngredient') {
-      fetchIngredient(searchText);
-    }
-    if (searchRadio === 'searchName') {
-      fetchName(searchText);
-    }
-    if (searchRadio === 'firstLetter') {
-      fetchFirstLetter(searchText);
-    }
   };
 
   async function handleClickSearch() {
@@ -62,14 +42,6 @@ function Header() {
       setFoods(meals);
     }
   }
-
-  const handleSearchText = ({ target: { value } }) => {
-    setSearchText(value);
-  };
-
-  const handleRadio = ({ target: { value } }) => {
-    setSearchRadio(value);
-  };
 
   const renderSearch = () => (
     <div className="search">

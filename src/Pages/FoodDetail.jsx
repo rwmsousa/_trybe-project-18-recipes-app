@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { fetchFoodById } from '../services';
-import Header from '../components/Header';
 import IngredientsList from '../components/IngredientsList';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -35,28 +34,9 @@ function FoodDetail() {
     foodById();
   }, []);
 
-  console.log(video);
-  console.log(foodDetails);
-
-  // const YoutubeEmbed = ({ embedId }) => {
-  //   console.log(embedId);
-  //   return (
-  //   <iframe
-  //     width="853"
-  //     height="480"
-  //     src={embedId}
-  //     frameBorder="0"
-  //     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  //     allowFullScreen
-  //     title="Embedded youtube"
-  //   />
-  //   )
-  // };
-
   if (foodDetails.length > 0) {
     return (
       <div>
-        <Header />
         <img
           src={ foodDetails[0].strMealThumb }
           alt={ `${foodDetails[0].strMeal} recipe` }

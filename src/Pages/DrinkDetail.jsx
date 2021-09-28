@@ -22,18 +22,15 @@ function DrinkDetail() {
     setShowProfile(false);
     setShowTitlePage(false);
     setSearchButton(false);
-  }, [setCurrentPage, setShowTitlePage, setShowProfile, setSearchButton]);
+  });
 
   useEffect(() => {
     async function drinkById() {
       const getDrinkById = await fetchDrinkById(idDrinkDetails);
-      console.log(getDrinkById);
       setDrinksDetails(getDrinkById);
     }
     drinkById();
   }, []);
-
-  console.log(drinksDetails);
 
   if (drinksDetails.length > 0) {
     return (
