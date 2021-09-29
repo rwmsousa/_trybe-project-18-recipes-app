@@ -11,14 +11,13 @@ function Drinks() {
   const [drinksClone, setDrinksClone] = useState([]);
   const [categories, setCategories] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
+
   const { setCurrentPage, setIdDrinkDetails, drinks, setDrinks } = useContext(Context);
-  const magicNumberSearch = 12;
 
   useEffect(() => {
     async function fetchDrinks() {
-      const response = await fetch(
-        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+        .then((data) => data.json());
       const magicNumber = 12;
       const SplitArray = response.drinks.splice(0, magicNumber);
 
@@ -26,12 +25,10 @@ function Drinks() {
       setDrinksClone(SplitArray);
     }
     async function fetchIngDrinks() {
-      const response = await fetch(
-        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-      const SplitArray = response.drinks.filter(
-        (i) => i.strIngredient1 === history.location.state[0],
-      );
+      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+        .then((data) => data.json());
+      const SplitArray = response.drinks
+        .filter((i) => i.strIngredient1 === history.location.state[0]);
       if (SplitArray.length === 0) {
         setDrinks([]);
       } else {
@@ -45,7 +42,7 @@ function Drinks() {
       fetchDrinks();
     }
     setCurrentPage('Bebidas');
-  }, [history, setCurrentPage, setDrinks]);
+  }, [setCurrentPage, history, setDrinks]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -72,7 +69,6 @@ function Drinks() {
       setActualCategory(value);
     }
   };
-
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
     history.push(`/bebidas/${value}`);
@@ -120,7 +116,7 @@ function Drinks() {
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{drink.strDrink}</p>
+              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
               <button
                 value={ drink.idDrink }
                 type="button"
