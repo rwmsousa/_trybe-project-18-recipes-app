@@ -8,7 +8,6 @@ import { fetchByCategoryFoods } from '../services';
 function Foods() {
   const history = useHistory();
 
-  const [foodsClone, setFoodsClone] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
   const {
     setCurrentPage,
@@ -17,23 +16,12 @@ function Foods() {
     setIdFoodDetails,
     foods,
     setFoods,
+    foodsClone,
   } = useContext(Context);
 
   useEffect(() => {
-    async function fetchFoods() {
-      const { meals } = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-
-      const magicNumber = 12;
-      const SplitArray = meals.filter((item, idx) => idx < magicNumber);
-
-      await setFoods(SplitArray);
-      await setFoodsClone(SplitArray);
-    }
-    fetchFoods();
     setCurrentPage('Comidas');
-  }, [setCurrentPage, setFoods, foods]);
+  }, [setCurrentPage]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -63,8 +51,7 @@ function Foods() {
     setIdFoodDetails(value);
     history.push(`/comidas/${value}`);
   };
-
-  console.log(foods);
+console.log(foods);
   if (foods.length === 1) {
     const { idMeal } = foods[0];
     setIdFoodDetails(idMeal);

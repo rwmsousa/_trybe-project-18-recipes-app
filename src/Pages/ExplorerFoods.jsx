@@ -19,7 +19,6 @@ function ExplorerFoods() {
   async function handleClick() {
     const response = await fetchRandomFoodDetails();
     const id = response[0].idMeal;
-    console.log(`/comidas/${id}`);
     history.push(`/comidas/${id}`);
   }
 
