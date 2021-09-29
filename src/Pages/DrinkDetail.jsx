@@ -33,7 +33,7 @@ function DrinkDetail() {
     drinkById();
   }, [idDrinkDetails]);
 
-  if (drinksDetails.length > 0) {
+  if (drinksDetails && drinksDetails.length > 0) {
     return (
       <div>
         <img

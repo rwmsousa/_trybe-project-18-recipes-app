@@ -74,11 +74,14 @@ function Drinks() {
     history.push(`/bebidas/${value}`);
   };
 
-  if (drinks.length === 1) {
+  if (drinks && drinks.length === 1) {
+    console.log(drinks, 'entrou');
     const { idDrink } = drinks[0];
     setIdDrinkDetails(idDrink);
     history.push(`/bebidas/${idDrink}`);
   }
+
+  // console.log('drinks', drinks);
 
   return (
     <div>
@@ -105,9 +108,10 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        {drinks.length === 0 ? (
-          <p> Nenhum resultado encontrado! </p>
+        { !drinks ? (
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
+          // drinks.map((drink, idx) => (
           drinks.slice(0, magicNumberSearch).map((drink, idx) => (
             <li key={ drink.idDrink } data-testid={ `${idx}-recipe-card` }>
               <img

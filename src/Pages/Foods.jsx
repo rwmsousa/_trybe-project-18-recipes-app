@@ -41,7 +41,7 @@ function Foods() {
         (i) => i.strIngredient1 === history.location.state[0],
       );
 
-      if (SplitArray.length === 0) {
+      if (!SplitArray.length) {
         setFoods([]);
         setFoodsClone([]);
       } else {
@@ -87,12 +87,13 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
-  console.log(foods);
   if (foods && foods.length === 1) {
     const { idMeal } = foods[0];
     setIdFoodDetails(idMeal);
     history.push(`/comidas/${idMeal}`);
   }
+
+  // console.log('foods', foods);
 
   return (
     <div className="foods">
@@ -119,8 +120,8 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        { !foods.length ? (
-          <li>Nenhum resultado encontrado!</li>
+        { !foods ? (
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           foods.map((food, idx) => (
             <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
@@ -131,7 +132,11 @@ function Foods() {
                 data-testid={ `${idx}-card-img` }
               />
               <p data-testid={ `${idx}-card-name` }>{ food.strMeal }</p>
-              <button value={ food.idMeal } type="button" onClick={ handleLink }>
+              <button
+                value={ food.idMeal }
+                type="button"
+                onClick={ handleLink }
+              >
                 detalhes
               </button>
             </li>
