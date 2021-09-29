@@ -103,3 +103,21 @@ export async function fetchIngredientofDrinks() {
   const SplitArray = drinks.splice(0, magicNumber);
   return SplitArray;
 }
+
+export async function fetchFoods() {
+  const response = await
+  fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const { meals } = await response.json();
+  const magicNumber = 12;
+  const SplitArray = meals.filter((item, idx) => idx < magicNumber);
+  return SplitArray;
+}
+
+export async function fetchCategories() {
+  const response = await
+  fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+  const { meals } = await response.json();
+  const magicNumber = 5;
+  const SplitArray = meals.filter((item, idx) => idx < magicNumber);
+  return SplitArray;
+}
