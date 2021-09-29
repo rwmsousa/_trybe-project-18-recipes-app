@@ -28,8 +28,8 @@ function Foods() {
       const magicNumber = 12;
       const SplitArray = meals.filter((item, idx) => idx < magicNumber);
 
-      setFoods(SplitArray);
-      setFoodsClone(SplitArray);
+      await setFoods(SplitArray);
+      await setFoodsClone(SplitArray);
     }
 
     async function fetchIngFoods() {
@@ -87,12 +87,13 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
+  console.log(foods);
   if (foods.length === 1) {
     const { idMeal } = foods[0];
     setIdFoodDetails(idMeal);
     history.push(`/comidas/${idMeal}`);
   }
-  console.log(foods);
+
   return (
     <div className="foods">
       <Header />
@@ -118,8 +119,8 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        {foods.length === 0 ? (
-          <p> Nenhum resultado encontrado! </p>
+        { foods.length === 0 ? (
+          <li>Nenhum resultado encontrado!</li>
         ) : (
           foods.map((food, idx) => (
             <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
@@ -129,13 +130,12 @@ function Foods() {
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
+              <p data-testid={ `${idx}-card-name` }>{ food.strMeal }</p>
               <button value={ food.idMeal } type="button" onClick={ handleLink }>
                 detalhes
               </button>
             </li>
-          ))
-        )}
+          )))}
       </ul>
       <Footer />
     </div>

@@ -11,8 +11,8 @@ function Drinks() {
   const [drinksClone, setDrinksClone] = useState([]);
   const [categories, setCategories] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
-
   const { setCurrentPage, setIdDrinkDetails, drinks, setDrinks } = useContext(Context);
+  const magicNumberSearch = 12;
 
   useEffect(() => {
     async function fetchDrinks() {
@@ -112,8 +112,8 @@ function Drinks() {
         {drinks.length === 0 ? (
           <p> Nenhum resultado encontrado! </p>
         ) : (
-          drinks.map((drink, idx) => (
-            <li key={ drink.idDrink }>
+          drinks.slice(0, magicNumberSearch).map((drink, idx) => (
+            <li key={ drink.idDrink } data-testid={ `${idx}-recipe-card` }>
               <img
                 src={ drink.strDrinkThumb }
                 alt={ `Bebida: ${drink.strDrink}` }
