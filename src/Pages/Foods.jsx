@@ -68,8 +68,6 @@ function Foods() {
     history.push(`/comidas/${idMeal}`);
   }
 
-  // console.log('foods', foods);
-
   return (
     <div className="foods">
       <Header />

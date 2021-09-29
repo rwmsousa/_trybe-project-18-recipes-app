@@ -68,7 +68,6 @@ function Drinks() {
   };
 
   if (drinks && drinks.length === 1) {
-    console.log(drinks, 'entrou');
     const { idDrink } = drinks[0];
     setIdDrinkDetails(idDrink);
     history.push(`/bebidas/${idDrink}`);
