@@ -78,17 +78,20 @@ function DrinkDetail() {
       <h3>Instruções</h3>
       <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
       <h3>Recomendadas</h3>
-      {foodsClone.map((food, idx) => (
-        <section key={ food.idMeal }>
-          <img
-            src={ food.strMealThumb }
-            alt={ `prato: ${food.strMeal}` }
-            width="100px"
-            data-testid={ `${idx}-recomendation-card` }
-          />
-          <h6 data-testid={ `${idx}-recomendation-title` }>{ food.strMeal }</h6>
-        </section>
-      ))}
+      <section className="recomended-section">
+        {foodsClone.map((food, idx) => (
+          <div className="recomended-div" key={ food.idMeal }>
+            <img
+              src={ food.strMealThumb }
+              alt={ `prato: ${food.strMeal}` }
+              width="100px"
+              data-testid={ `${idx}-recomendation-card` }
+            />
+            <h6 data-testid={ `${idx}-recomendation-title` }>{ food.strMeal }</h6>
+
+          </div>
+        ))}
+      </section>
       <button type="button" data-testid="start-recipe-btn">
         iniciar receita
       </button>
