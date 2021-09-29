@@ -61,7 +61,6 @@ function Drinks() {
       setActualCategory(value);
     }
   };
-
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
     // history.push(`/bebidas/${value}`);
@@ -112,7 +111,7 @@ function Drinks() {
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{drink.strDrink}</p>
+              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
               <button
                 value={ drink.idDrink }
                 type="button"
