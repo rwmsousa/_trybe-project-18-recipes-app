@@ -91,18 +91,20 @@ function FoodDetail() {
           data-testid="video"
         />
         <h3>Recomendadas</h3>
-        {drinksClone.map((drink, idx) => (
-          <section key={ drink.idDrink }>
-            <img
-              src={ drink.strDrinkThumb }
-              alt={ `drink: ${drink.strDrink}` }
-              width="100px"
-              data-testid={ `${idx}-recomendation-card` }
-            />
-            <h6 data-testid={ `${idx}-recomendation-title` }>{ drink.strDrink }</h6>
-            <p>{ drink.strAlcoholic }</p>
-          </section>
-        ))}
+        <section className="recomended-section">
+          {drinksClone.map((drink, idx) => (
+            <div className="recomended-div" key={ drink.idDrink }>
+              <img
+                src={ drink.strDrinkThumb }
+                alt={ `drink: ${drink.strDrink}` }
+                width="100px"
+                data-testid={ `${idx}-recomendation-card` }
+              />
+              <h6 data-testid={ `${idx}-recomendation-title` }>{ drink.strDrink }</h6>
+              <p>{ drink.strAlcoholic }</p>
+            </div>
+          ))}
+        </section>
         <button type="button" data-testid="start-recipe-btn">
           iniciar receita
         </button>

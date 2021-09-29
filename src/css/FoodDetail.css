@@ -1,4 +1,17 @@
-#test {
-  margin: 180px;
-  
+.recomended-section {
+  overflow-x: scroll auto;
+  overflow-y: hidden;
+  white-space:nowrap;
+}
+
+.recomended-div {
+  box-shadow: 1px 1px 10px #999; 
+  margin: 15px;
+  max-height: 150px;
+  cursor: pointer;
+  display:inline-block;
+  *display:inline;
+  *zoom:1;
+  vertical-align:top;
+  text-align: center;
 }
