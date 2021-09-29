@@ -62,11 +62,12 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
-  // if (foods.length === 1) {
-  //   const { idMeal } = foods[0];
-  //   setIdFoodDetails(idMeal);
-  //   history.push(`/comidas/${idMeal}`);
-  // }
+  console.log(foods);
+  if (foods && foods.length === 1) {
+    const { idMeal } = foods[0];
+    setIdFoodDetails(idMeal);
+    history.push(`/comidas/${idMeal}`);
+  }
 
   return (
     <div className="foods">
@@ -93,7 +94,7 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        { foods.length === 0 ? (
+        { !foods.length ? (
           <li>Nenhum resultado encontrado!</li>
         ) : (
           foods.map((food, idx) => (
