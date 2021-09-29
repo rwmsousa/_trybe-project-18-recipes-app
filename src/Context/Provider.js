@@ -4,7 +4,8 @@ import Context from './Context';
 
 function Provider({ children }) {
   const [currentPage, setCurrentPage] = useState(''); // variável utilizada para alterar o título da página no header.// variável utilizada
-  const [foods, setFoods] = useState([{}]);
+  const [foods, setFoods] = useState([]);
+  const [foodsClone, setFoodsClone] = useState([]);
   const [foodName, setFoodName] = useState([]);
   const [categories, setCategories] = useState([]);
   const [showProfile, setShowProfile] = useState(true);
@@ -13,6 +14,7 @@ function Provider({ children }) {
   const [idFoodDetails, setIdFoodDetails] = useState('');
   const [idDrinkDetails, setIdDrinkDetails] = useState('');
   const [drinks, setDrinks] = useState([]);
+  const [drinksClone, setDrinksClone] = useState([]);
   const [details, setDetails] = useState();
   const [searchText, setSearchText] = useState('');
   const [searchRadio, setSearchRadio] = useState('');
@@ -30,6 +32,8 @@ function Provider({ children }) {
     setFoodName,
     foods,
     setFoods,
+    foodsClone,
+    setFoodsClone,
     categories,
     setCategories,
     showProfile,
@@ -50,6 +54,8 @@ function Provider({ children }) {
     setTest,
     test1,
     setTest1,
+    drinksClone,
+    setDrinksClone,
   };
 
   return (

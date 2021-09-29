@@ -26,19 +26,16 @@ function ExploreByIngredientDrink() {
     fetch();
   }, []);
 
-  const handleClick = ({ target: { value } }) => {
-    async function fetchIngDrinks() {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-        .then((date) => date.json());
-      const SplitArray = response.drinks
-        .filter((i) => i.strIngredient1 === value);
-      if (SplitArray.length === 0) {
-        setDrinks([]);
-      } else {
-        setDrinks(SplitArray);
-      }
+  const handleClick = async ({ target: { value } }) => {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+      .then((date) => date.json());
+    const SplitArray = response.drinks
+      .filter((i) => i.strIngredient1 === value);
+    if (SplitArray.length === 0) {
+      setDrinks([]);
+    } else {
+      setDrinks(SplitArray);
     }
-    fetchIngDrinks();
     history.push('/bebidas');
   };
 

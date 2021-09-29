@@ -26,19 +26,16 @@ function ExploreByIngredientFood() {
     fetch();
   }, []);
 
-  const handleClick = ({ target: { value } }) => {
-    async function fetchIngFoods() {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-        .then((date) => date.json());
-      const SplitArray = response.meals
-        .filter((i) => i.strIngredient1 === value);
-      if (SplitArray.length === 0) {
-        setFoods([]);
-      } else {
-        setFoods(SplitArray);
-      }
+  const handleClick = async ({ target: { value } }) => {
+    const { meals } = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+      .then((date) => date.json());
+    const SplitArray = meals
+      .filter((i) => i.strIngredient1 === value);
+    if (SplitArray.length === 0) {
+      setFoods([]);
+    } else {
+      setFoods(SplitArray);
     }
-    fetchIngFoods();
     history.push('/comidas');
   };
 

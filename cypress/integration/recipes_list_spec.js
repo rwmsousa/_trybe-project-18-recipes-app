@@ -360,7 +360,7 @@ describe.only('32 - Redirecione a pessoa usuária, ao clicar no card, para a tel
     });
 
     cy.get('[data-testid="0-recipe-card"]').click();
-
+    
     cy.location().should((loc) => expect(loc.pathname).to.eq('/bebidas/15997'));
-  });
+  });  
 });
