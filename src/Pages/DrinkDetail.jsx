@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 import { fetchDrinkById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import shareIcon from '../images/shareIcon.svg';
@@ -13,12 +14,13 @@ function DrinkDetail() {
     setShowProfile,
     setShowTitlePage,
     setSearchButton,
-    idDrinkDetails,
     foodsClone,
     setFoodsClone,
   } = useContext(Context);
-
   const [drinksDetails, setDrinksDetails] = useState([]);
+
+  const history = useHistory();
+  const id = history.location.pathname.split('/')[2];
 
   // useEffect para completar o state foodsClone para usar no drinkDetails em recomendações
   useEffect(() => {
@@ -44,7 +46,7 @@ function DrinkDetail() {
 
   useEffect(() => {
     async function drinkById() {
-      const getDrinkById = await fetchDrinkById(idDrinkDetails);
+      const getDrinkById = await fetchDrinkById(id);
 
       setDrinksDetails(getDrinkById);
     }

@@ -1,3 +1,5 @@
+/*  codigo fonte para essa seção 
+https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizontal-no-css */
 .recomended-section {
   overflow-x: scroll auto;
   overflow-y: hidden;
@@ -15,3 +17,4 @@
   vertical-align:top;
   text-align: center;
 }
+/* até aqui */
