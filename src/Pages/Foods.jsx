@@ -17,7 +17,6 @@ function Foods() {
     setIdFoodDetails,
     foods,
     setFoods,
-    searchRadio,
   } = useContext(Context);
 
   useEffect(() => {
@@ -89,37 +88,11 @@ function Foods() {
   };
 
   console.log(foods);
-  // if (foods.length === 1) {
-  //   const { idMeal } = foods[0];
-  //   setIdFoodDetails(idMeal);
-  //   history.push(`/comidas/${idMeal}`);
-  // }
-
-  const renderSearch = () => {
-    if (foods.length === 0 && searchRadio === 'firstLetter') {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    } else if (foods.length === 1) {
-      const { idMeal } = foods[0];
-      setIdFoodDetails(idMeal);
-      history.push(`/comidas/${idMeal}`);
-    } else {
-      return foods.map((food, idx) => (
-        <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
-          <img
-            src={ food.strMealThumb }
-            alt={ `Comida: ${food.strMeal}` }
-            width="150px"
-            data-testid={ `${idx}-card-img` }
-          />
-          <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
-          <button value={ food.idMeal } type="button" onClick={ handleLink }>
-            detalhes
-          </button>
-        </li>
-      ));
-    }
-    return <h1>Loading...</h1>;
-  };
+  if (foods.length === 1) {
+    const { idMeal } = foods[0];
+    setIdFoodDetails(idMeal);
+    history.push(`/comidas/${idMeal}`);
+  }
 
   return (
     <div className="foods">
@@ -146,7 +119,7 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        {/* { foods.length === 0 ? (
+        { foods.length === 0 ? (
           <li>Nenhum resultado encontrado!</li>
         ) : (
           foods.map((food, idx) => (
@@ -162,8 +135,7 @@ function Foods() {
                 detalhes
               </button>
             </li>
-          )))} */}
-        {renderSearch()}
+          )))}
       </ul>
       <Footer />
     </div>
