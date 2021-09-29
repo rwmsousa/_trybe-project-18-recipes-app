@@ -56,7 +56,6 @@ function DrinkDetail() {
   if (!drinksDetails || !drinksDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
-
   return (
     <div>
       <img

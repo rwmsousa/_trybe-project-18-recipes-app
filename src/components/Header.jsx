@@ -26,7 +26,6 @@ function Header() {
     setSearchText,
     setSearchRadio,
     searchRadio,
-    setSearchStart,
   } = useContext(Context);
 
   useEffect(() => {
@@ -48,7 +47,6 @@ function Header() {
     setSearchRadio(value);
   };
   async function handleClickSearch() {
-    setSearchStart(true);
     if (currentPage === 'Comidas') {
       switch (searchRadio) {
       case 'searchIngredient':

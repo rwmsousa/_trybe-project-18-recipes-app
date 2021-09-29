@@ -62,12 +62,13 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
-  console.log(foods);
   if (foods && foods.length === 1) {
     const { idMeal } = foods[0];
     setIdFoodDetails(idMeal);
     history.push(`/comidas/${idMeal}`);
   }
+
+  // console.log('foods', foods);
 
   return (
     <div className="foods">
@@ -94,8 +95,8 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        { !foods.length ? (
-          <li>Nenhum resultado encontrado!</li>
+        { !foods ? (
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           foods.map((food, idx) => (
             <li key={ food.idMeal }>
