@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
-import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
@@ -19,7 +18,6 @@ function Drinks() {
     setDrinks,
     drinksClone,
     setDrinksClone,
-    idDrinkDetails,
   } = useContext(Context);
 
   useEffect(() => {
@@ -63,19 +61,18 @@ function Drinks() {
       setActualCategory(value);
     }
   };
-
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
     // history.push(`/bebidas/${value}`);
   };
 
-  // if (drinks.length === 1) {
-  //   const { idDrink } = drinks[0];
-  //   setIdDrinkDetails(idDrink);
-  //   history.push(`/bebidas/${idDrink}`);
-  // }
+  if (drinks && drinks.length === 1) {
+    const { idDrink } = drinks[0];
+    setIdDrinkDetails(idDrink);
+    history.push(`/bebidas/${idDrink}`);
+  }
 
-  if (idDrinkDetails) return <Redirect to={ `/bebidas/${idDrinkDetails}` } />;
+  // console.log('drinks', drinks);
 
   return (
     <div>
@@ -102,18 +99,19 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        {!drinks ? (
-          <p> Nenhum resultado encontrado! </p>
+        { !drinks ? (
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
-          drinks.map((drink, idx) => (
-            <li key={ drink.idDrink }>
+          // drinks.map((drink, idx) => (
+          drinks.slice(0, magicNumberSearch).map((drink, idx) => (
+            <li key={ drink.idDrink } data-testid={ `${idx}-recipe-card` }>
               <img
                 src={ drink.strDrinkThumb }
                 alt={ `Bebida: ${drink.strDrink}` }
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{drink.strDrink}</p>
+              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
               <button
                 value={ drink.idDrink }
                 type="button"

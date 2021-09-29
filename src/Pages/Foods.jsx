@@ -27,8 +27,8 @@ function Foods() {
       const magicNumber = 12;
       const SplitArray = meals.filter((item, idx) => idx < magicNumber);
 
-      await setFoods(SplitArray);
-      await setFoodsClone(SplitArray);
+      setFoods(SplitArray);
+      setFoodsClone(SplitArray);
     }
     fetchFoods();
     setCurrentPage('Comidas');
@@ -62,11 +62,13 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
-  // if (foods.length === 1) {
-  //   const { idMeal } = foods[0];
-  //   setIdFoodDetails(idMeal);
-  //   history.push(`/comidas/${idMeal}`);
-  // }
+  if (foods && foods.length === 1) {
+    const { idMeal } = foods[0];
+    setIdFoodDetails(idMeal);
+    history.push(`/comidas/${idMeal}`);
+  }
+
+  // console.log('foods', foods);
 
   return (
     <div className="foods">
@@ -93,8 +95,8 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        { foods.length === 0 ? (
-          <li>Nenhum resultado encontrado!</li>
+        { !foods ? (
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           foods.map((food, idx) => (
             <li key={ food.idMeal }>
