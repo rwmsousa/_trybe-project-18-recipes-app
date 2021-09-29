@@ -43,9 +43,9 @@ function ExploreByIngredientFood() {
         >
           <input
             type="button"
+            data-testid={ `${i}-ingredient-card` }
             value={ item.strIngredient }
             onClick={ handleClick }
-            data-testid={ `${i}-ingredient-card` }
           />
           <input
             type="image"
