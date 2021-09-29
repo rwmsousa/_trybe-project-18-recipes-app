@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import searchIcon from '../images/searchIcon.svg';
@@ -26,7 +26,19 @@ function Header() {
     setSearchText,
     setSearchRadio,
     searchRadio,
+    setSearchStart,
   } = useContext(Context);
+
+  useEffect(() => {
+    if (
+      searchRadio === 'firstLetter'
+      && (searchText.length > 1)
+    ) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+      setSearchRadio('');
+      document.getElementById('input-first-letter').checked = false;
+    }
+  }, [searchRadio, searchText, setSearchRadio]);
 
   const handleSearchText = ({ target: { value } }) => {
     setSearchText(value);
@@ -37,6 +49,7 @@ function Header() {
   };
 
   async function handleClickSearch() {
+    setSearchStart(true);
     if (currentPage === 'Comidas') {
       switch (searchRadio) {
       case 'searchIngredient':
@@ -116,7 +129,12 @@ function Header() {
           onChange={ handleRadio }
         />
       </label>
-      <button type="button" className="fetchBtn" onClick={ handleClickSearch }>
+      <button
+        type="button"
+        className="fetchBtn"
+        data-testid="exec-search-btn"
+        onClick={ handleClickSearch }
+      >
         pesquisar
       </button>
     </div>
@@ -148,14 +166,9 @@ function Header() {
       <button
         type="button"
         onClick={ () => setShowSearch(!showSearch) }
-        data-testid="exec-search-btn"
+        data-testid="search-top-btn"
       >
-        <img
-          className="btnSearch"
-          src={ searchIcon }
-          data-testid="search-top-btn"
-          alt="icone de pesquisar"
-        />
+        <img className="btnSearch" src={ searchIcon } alt="icone de pesquisar" />
       </button>
     </div>
   );
