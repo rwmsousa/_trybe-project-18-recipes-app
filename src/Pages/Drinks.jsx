@@ -11,7 +11,7 @@ function Drinks() {
   const [drinksClone, setDrinksClone] = useState([]);
   const [categories, setCategories] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
-
+  const magicNumberSearch = 12;
   const { setCurrentPage, setIdDrinkDetails, drinks, setDrinks } = useContext(Context);
 
   useEffect(() => {

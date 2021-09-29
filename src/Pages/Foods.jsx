@@ -88,7 +88,7 @@ function Foods() {
   };
 
   console.log(foods);
-  if (foods.length === 1) {
+  if (foods && foods.length === 1) {
     const { idMeal } = foods[0];
     setIdFoodDetails(idMeal);
     history.push(`/comidas/${idMeal}`);
@@ -119,7 +119,7 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        { foods.length === 0 ? (
+        { !foods.length ? (
           <li>Nenhum resultado encontrado!</li>
         ) : (
           foods.map((food, idx) => (
