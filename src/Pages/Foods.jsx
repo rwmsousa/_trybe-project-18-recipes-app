@@ -31,30 +31,7 @@ function Foods() {
       await setFoods(SplitArray);
       await setFoodsClone(SplitArray);
     }
-
-    async function fetchIngFoods() {
-      const response = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-
-      const SplitArray = response.meals.filter(
-        (i) => i.strIngredient1 === history.location.state[0],
-      );
-
-      if (SplitArray.length === 0) {
-        setFoods([]);
-        setFoodsClone([]);
-      } else {
-        setFoods(SplitArray);
-        setFoodsClone(SplitArray);
-      }
-    }
-
-    if (history.action === 'PUSH') {
-      fetchIngFoods();
-    } else {
-      fetchFoods();
-    }
+    fetchFoods();
     setCurrentPage('Comidas');
   }, [setCurrentPage, setFoods, foods]);
 

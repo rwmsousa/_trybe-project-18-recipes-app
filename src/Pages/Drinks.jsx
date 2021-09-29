@@ -25,25 +25,7 @@ function Drinks() {
       setDrinks(SplitArray);
       setDrinksClone(SplitArray);
     }
-    async function fetchIngDrinks() {
-      const response = await fetch(
-        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-      const SplitArray = response.drinks.filter(
-        (i) => i.strIngredient1 === history.location.state[0],
-      );
-      if (SplitArray.length === 0) {
-        setDrinks([]);
-      } else {
-        setDrinks(SplitArray);
-        setDrinksClone(SplitArray);
-      }
-    }
-    if (history.action === 'PUSH') {
-      fetchIngDrinks();
-    } else {
-      fetchDrinks();
-    }
+    fetchDrinks();
     setCurrentPage('Bebidas');
   }, [history, setCurrentPage, setDrinks]);
 
