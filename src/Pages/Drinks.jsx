@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
@@ -18,7 +19,7 @@ function Drinks() {
     setDrinks,
     drinksClone,
     setDrinksClone,
-    setFoodsClone,
+    idDrinkDetails,
   } = useContext(Context);
 
   useEffect(() => {
@@ -33,44 +34,9 @@ function Drinks() {
       setDrinks(SplitArray);
       setDrinksClone(SplitArray);
     }
-
-    // async function fetchIngDrinks() {
-    //   const response = await fetch(
-    //     'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-    //   ).then((data) => data.json());
-
-    //   const SplitArray = response.drinks.filter(
-    //     (i) => i.strIngredient1 === history.location.state[0],
-    //   );
-    //   if (SplitArray.length === 0) {
-    //     setDrinks([]);
-    //   } else {
-    //     setDrinks(SplitArray);
-    //     setDrinksClone(SplitArray);
-    //   }
-    // }
-    // if (history.action === 'PUSH') {
-    //   fetchIngDrinks();
-    // } else {
     fetchDrinks();
-    // }
     setCurrentPage('Bebidas');
-  }, [setCurrentPage, setDrinks]);
-
-  // useEffect para completar o state foodsClone para usar no drinkDetails em recomendações
-  useEffect(() => {
-    async function fetchFoods() {
-      const { meals } = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-
-      const magicNumber = 12;
-      const SplitArray = meals.filter((item, idx) => idx < magicNumber);
-
-      setFoodsClone(SplitArray);
-    }
-    fetchFoods();
-  }, [setFoodsClone]);
+  }, [history, setCurrentPage, setDrinks, setDrinksClone]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -100,14 +66,16 @@ function Drinks() {
 
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
-    history.push(`/bebidas/${value}`);
+    // history.push(`/bebidas/${value}`);
   };
 
-  if (drinks.length === 1) {
-    const { idDrink } = drinks[0];
-    setIdDrinkDetails(idDrink);
-    history.push(`/bebidas/${idDrink}`);
-  }
+  // if (drinks.length === 1) {
+  //   const { idDrink } = drinks[0];
+  //   setIdDrinkDetails(idDrink);
+  //   history.push(`/bebidas/${idDrink}`);
+  // }
+
+  if (idDrinkDetails) return <Redirect to={ `/bebidas/${idDrinkDetails}` } />;
 
   return (
     <div>
@@ -134,7 +102,7 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        {drinks.length === 0 ? (
+        {!drinks ? (
           <p> Nenhum resultado encontrado! </p>
         ) : (
           drinks.map((drink, idx) => (
@@ -149,7 +117,7 @@ function Drinks() {
               <button
                 value={ drink.idDrink }
                 type="button"
-                onClick={ (e) => handleLink(e) }
+                onClick={ handleLink }
                 data-testid={ `${idx}-recipe-card` }
               >
                 detalhes

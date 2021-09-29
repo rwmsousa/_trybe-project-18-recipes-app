@@ -22,46 +22,22 @@ function Foods() {
 
   useEffect(() => {
     async function fetchFoods() {
-      const { meals } = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      const { meals } = await response.json();
       const magicNumber = 12;
       const SplitArray = meals.filter((item, idx) => idx < magicNumber);
 
-      setFoods(SplitArray);
-      setFoodsClone(SplitArray);
+      await setFoods(SplitArray);
+      await setFoodsClone(SplitArray);
     }
-
-    // async function fetchIngFoods() {
-    //   const { meals } = await fetch(
-    //     'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-    //   ).then((data) => data.json());
-
-    //   const SplitArray = meals.filter(
-    //     (i) => i.strIngredient1 === history.location.state[0],
-    //   );
-
-    //   if (SplitArray.length === 0) {
-    //     setFoods([]);
-    //   } else {
-    //     setFoods(SplitArray);
-    //   }
-    // }
-
-    // if (history.action === 'PUSH') {
-    //   fetchIngFoods();
-    // } else {
-      fetchFoods();
-    // }
+    fetchFoods();
     setCurrentPage('Comidas');
-  }, [setCurrentPage, setFoods]);
+  }, [setCurrentPage, setFoods, setFoodsClone]);
 
   useEffect(() => {
     async function fetchCategories() {
-      const { meals } = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
-      ).then((data) => data.json());
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+      const { meals } = await response.json();
 
       const magicNumber = 5;
       const SplitArray = meals.filter((item, idx) => idx < magicNumber);
@@ -82,16 +58,15 @@ function Foods() {
   };
 
   const handleLink = ({ target: { value } }) => {
-    console.log();
     setIdFoodDetails(value);
     history.push(`/comidas/${value}`);
   };
 
-  if (foods.length === 1) {
-    const { idMeal } = foods[0];
-    setIdFoodDetails(idMeal);
-    history.push(`/comidas/${idMeal}`);
-  }
+  // if (foods.length === 1) {
+  //   const { idMeal } = foods[0];
+  //   setIdFoodDetails(idMeal);
+  //   history.push(`/comidas/${idMeal}`);
+  // }
 
   return (
     <div className="foods">
@@ -118,8 +93,8 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        {foods.length === 0 ? (
-          <p> Nenhum resultado encontrado! </p>
+        { foods.length === 0 ? (
+          <li>Nenhum resultado encontrado!</li>
         ) : (
           foods.map((food, idx) => (
             <li key={ food.idMeal }>
@@ -139,8 +114,7 @@ function Foods() {
                 detalhes
               </button>
             </li>
-          ))
-        )}
+          )))}
       </ul>
       <Footer />
     </div>

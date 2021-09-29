@@ -20,6 +20,7 @@ function Provider({ children }) {
   const [searchRadio, setSearchRadio] = useState('');
   const [test, setTest] = useState('');
   const [test1, setTest1] = useState('');
+  const [searchStart, setSearchStart] = useState(false);
 
   const providerValue = {
     currentPage,
@@ -56,6 +57,8 @@ function Provider({ children }) {
     setTest1,
     drinksClone,
     setDrinksClone,
+    searchStart,
+    setSearchStart,
   };
 
   return (
