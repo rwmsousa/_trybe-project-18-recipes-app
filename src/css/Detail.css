@@ -21,7 +21,7 @@ https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizont
 /* até aqui */
 .start-recipe-button {
   position: fixed;
-  bottom: 0px;
+  bottom: 0;
   right: 200px;
   padding: 5px;
   border-radius: 10px;
