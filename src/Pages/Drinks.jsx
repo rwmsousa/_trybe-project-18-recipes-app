@@ -63,7 +63,7 @@ function Drinks() {
   };
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
-    // history.push(`/bebidas/${value}`);
+    history.push(`/bebidas/${value}`);
   };
 
   if (drinks && drinks.length === 1) {
@@ -71,8 +71,6 @@ function Drinks() {
     setIdDrinkDetails(idDrink);
     history.push(`/bebidas/${idDrink}`);
   }
-
-  // console.log('drinks', drinks);
 
   return (
     <div>
@@ -103,8 +101,8 @@ function Drinks() {
           alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           // drinks.map((drink, idx) => (
-          drinks.slice(0, magicNumberSearch).map((drink, idx) => (
-            <li key={ drink.idDrink } data-testid={ `${idx}-recipe-card` }>
+          drinks.map((drink, idx) => (
+            <li key={ drink.idDrink }>
               <img
                 src={ drink.strDrinkThumb }
                 alt={ `Bebida: ${drink.strDrink}` }
