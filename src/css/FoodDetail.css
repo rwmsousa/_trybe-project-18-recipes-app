@@ -3,13 +3,14 @@ https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizont
 .recomended-section {
   overflow-x: scroll auto;
   overflow-y: hidden;
+  height: 325px;
   white-space:nowrap;
 }
 
 .recomended-div {
   box-shadow: 1px 1px 10px #999; 
-  margin: 15px;
-  max-height: 150px;
+  margin: 20px;
+  max-height: 250px;
   cursor: pointer;
   display:inline-block;
   *display:inline;

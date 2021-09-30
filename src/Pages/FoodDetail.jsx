@@ -31,7 +31,7 @@ function FoodDetail() {
         'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
       ).then((data) => data.json());
 
-      const magicNumber = 12;
+      const magicNumber = 6;
       const SplitArray = response.drinks.filter((item, idx) => idx < magicNumber);
 
       setDrinksClone(SplitArray);
@@ -103,7 +103,7 @@ function FoodDetail() {
             <img
               src={ drink.strDrinkThumb }
               alt={ `drink: ${drink.strDrink}` }
-              width="100px"
+              width="200px"
               data-testid={ `${idx}-recomendation-card` }
             />
             <h6 data-testid={ `${idx}-recomendation-title` }>{ drink.strDrink }</h6>

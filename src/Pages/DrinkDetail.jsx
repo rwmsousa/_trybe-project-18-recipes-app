@@ -29,7 +29,7 @@ function DrinkDetail() {
         'https://www.themealdb.com/api/json/v1/1/search.php?s=',
       ).then((data) => data.json());
 
-      const magicNumber = 12;
+      const magicNumber = 6;
       const SplitArray = meals.filter((item, idx) => idx < magicNumber);
 
       setFoodsClone(SplitArray);
