@@ -7,34 +7,18 @@ import { fetchByCategoryDrinks } from '../services';
 
 function Drinks() {
   const history = useHistory();
-  const [actualCategory, setActualCategory] = useState('');
 
-  const {
-    setCurrentPage,
+  const [actualCategory, setActualCategory] = useState('');
+  const { setCurrentPage,
     categories,
     setCategories,
     setIdDrinkDetails,
-    drinks,
-    setDrinks,
-    drinksClone,
-    setDrinksClone,
-  } = useContext(Context);
+    drinks, setDrinks,
+    drinksClone } = useContext(Context);
 
   useEffect(() => {
-    async function fetchDrinks() {
-      const response = await fetch(
-        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-
-      const magicNumber = 12;
-      const SplitArray = response.drinks.filter((item, idx) => idx < magicNumber);
-
-      setDrinks(SplitArray);
-      setDrinksClone(SplitArray);
-    }
-    fetchDrinks();
     setCurrentPage('Bebidas');
-  }, [history, setCurrentPage, setDrinks, setDrinksClone]);
+  }, [setCurrentPage]);
 
   useEffect(() => {
     async function fetchCategories() {

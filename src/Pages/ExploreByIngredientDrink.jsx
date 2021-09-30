@@ -26,36 +26,41 @@ function ExploreByIngredientDrink() {
     fetch();
   }, []);
 
-  const handleClick = async ({ target: { value } }) => {
-    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-      .then((date) => date.json());
-    const SplitArray = response.drinks
-      .filter((i) => i.strIngredient1 === value);
-    if (SplitArray.length === 0) {
-      setDrinks([]);
-    } else {
-      setDrinks(SplitArray);
-    }
+  async function handleClick({ target: { value } }) {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${value}`);
+    const { drinks } = await response.json();
     history.push('/bebidas');
-  };
+    console.log(drinks);
+    return drinks.length === 0 ? setDrinks([]) : setDrinks(drinks);
+  }
 
   return (
     <div>
       <Header />
-      {data.map((item) => (
-        <button
-          type="button"
+      {data.map((item, i) => (
+        <div
           key={ item.strIngredient1 }
-          onClick={ handleClick }
-          value={ item.strIngredient1 }
+          // data-testid={ `${i}-ingredient-card` }
         >
-          <img
-            src={ `https://www.themealdb.com/images/ingredients/${item.strIngredient1}.png` }
+          <input
+            type="button"
+            value={ item.strIngredient1 }
+            onClick={ handleClick }
+            data-testid={ `${i}-ingredient-card` }
+          />
+          <input
+            type="image"
+            src={ `https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png` }
             alt={ item.strIngredient1 }
             width="100px"
+            // value={ item.strIngredient1 }
+            // onClick={ handleClick }
+            data-testid={ `${i}-card-img` }
           />
-          {item.strIngredient1}
-        </button>
+          <p data-testid={ `${i}-card-name` }>
+            { item.strIngredient1 }
+          </p>
+        </div>
       ))}
       <Footer />
     </div>

@@ -17,22 +17,11 @@ function Foods() {
     foods,
     setFoods,
     foodsClone,
-    setFoodsClone,
   } = useContext(Context);
 
   useEffect(() => {
-    async function fetchFoods() {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-      const { meals } = await response.json();
-      const magicNumber = 12;
-      const SplitArray = meals.filter((item, idx) => idx < magicNumber);
-
-      setFoods(SplitArray);
-      setFoodsClone(SplitArray);
-    }
-    fetchFoods();
     setCurrentPage('Comidas');
-  }, [setCurrentPage, setFoods, setFoodsClone]);
+  }, [setCurrentPage]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -61,12 +50,12 @@ function Foods() {
     setIdFoodDetails(value);
     history.push(`/comidas/${value}`);
   };
-
-  // if (foods && foods.length === 1) {
-  //   const { idMeal } = foods[0];
-  //   setIdFoodDetails(idMeal);
-  //   history.push(`/comidas/${idMeal}`);
-  // }
+  console.log(foods);
+  if (foods.length === 1) {
+    const { idMeal } = foods[0];
+    setIdFoodDetails(idMeal);
+    history.push(`/comidas/${idMeal}`);
+  }
 
   return (
     <div className="foods">

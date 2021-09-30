@@ -26,36 +26,40 @@ function ExploreByIngredientFood() {
     fetch();
   }, []);
 
-  const handleClick = async ({ target: { value } }) => {
-    const { meals } = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-      .then((date) => date.json());
-    const SplitArray = meals
-      .filter((i) => i.strIngredient1 === value);
-    if (SplitArray.length === 0) {
-      setFoods([]);
-    } else {
-      setFoods(SplitArray);
-    }
+  async function handleClick({ target: { value } }) {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`);
+    const { meals } = await response.json();
     history.push('/comidas');
-  };
+    return meals.length === 0 ? setFoods([]) : setFoods(meals);
+  }
 
   return (
     <div>
       <Header />
-      {data.map((item) => (
-        <button
-          type="button"
+      {data.map((item, i) => (
+        <div
           key={ item.strIngredient }
-          onClick={ handleClick }
-          value={ [item.strIngredient] }
+          // data-testid={ `${i}-ingredient-card` }
         >
-          <img
-            src={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}.png` }
+          <input
+            type="button"
+            data-testid={ `${i}-ingredient-card` }
+            value={ item.strIngredient }
+            onClick={ handleClick }
+          />
+          <input
+            type="image"
+            src={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}-Small.png` }
             alt={ item.strIngredient }
             width="100px"
+            // value={ item.strIngredient }
+            // onClick={ handleClick }
+            data-testid={ `${i}-card-img` }
           />
-          {item.strIngredient}
-        </button>
+          <p data-testid={ `${i}-card-name` }>
+            { item.strIngredient }
+          </p>
+        </div>
       ))}
       <Footer />
     </div>

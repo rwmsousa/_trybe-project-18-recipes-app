@@ -3,9 +3,6 @@ import Context from '../Context/Context';
 
 function SearchMealByName(type, food) {
   const value = useContext(Context);
-  console.log(value);
-  console.log(type);
-  console.log(food);
 
   return (
     <span>cae</span>
