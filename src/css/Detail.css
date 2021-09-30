@@ -19,3 +19,17 @@ https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizont
   text-align: center;
 }
 /* até aqui */
+.start-recipe-button {
+  position: fixed;
+  bottom: 0px;
+  right: 200px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.start-recipe-button:hover {
+  color: green;
+  background-color: white;
+  box-shadow: inset 0 0 1em yellowgreen , 0 0 1.5em green;
+  border: none;
+}

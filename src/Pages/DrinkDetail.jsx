@@ -4,7 +4,7 @@ import { fetchDrinkById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import '../css/FoodDetail.css';
+import '../css/Detail.css';
 // import Header from '../components/Header';
 import Context from '../Context/Context';
 
@@ -93,7 +93,11 @@ function DrinkDetail() {
           </div>
         ))}
       </section>
-      <button type="button" data-testid="start-recipe-btn">
+      <button
+        className="start-recipe-button"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
         iniciar receita
       </button>
     </div>

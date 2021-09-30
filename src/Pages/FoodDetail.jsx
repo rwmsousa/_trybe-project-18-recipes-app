@@ -4,7 +4,7 @@ import { fetchFoodById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import '../css/FoodDetail.css';
+import '../css/Detail.css';
 
 import Context from '../Context/Context';
 
@@ -111,7 +111,11 @@ function FoodDetail() {
           </div>
         ))}
       </section>
-      <button type="button" data-testid="start-recipe-btn">
+      <button
+        className="start-recipe-button"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
         iniciar receita
       </button>
     </div>
