@@ -62,13 +62,11 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
-  if (foods && foods.length === 1) {
-    const { idMeal } = foods[0];
-    setIdFoodDetails(idMeal);
-    history.push(`/comidas/${idMeal}`);
-  }
-
-  // console.log('foods', foods);
+  // if (foods && foods.length === 1) {
+  //   const { idMeal } = foods[0];
+  //   setIdFoodDetails(idMeal);
+  //   history.push(`/comidas/${idMeal}`);
+  // }
 
   return (
     <div className="foods">
