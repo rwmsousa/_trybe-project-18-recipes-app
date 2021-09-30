@@ -7,27 +7,19 @@ import { fetchByCategoryDrinks } from '../services';
 
 function Drinks() {
   const history = useHistory();
-
-  const [drinksClone, setDrinksClone] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
-  const { setCurrentPage, setIdDrinkDetails, drinks, setDrinks } = useContext(Context);
-  const magicNumberSearch = 12;
+  const quantityRecipes = 12;
+  const {
+    setCurrentPage,
+    categories,
+    setCategories,
+    setIdDrinkDetails,
+    drinks, setDrinks,
+    drinksClone } = useContext(Context);
 
   useEffect(() => {
-    async function fetchDrinks() {
-      const response = await fetch(
-        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-      const magicNumber = 12;
-      const SplitArray = response.drinks.splice(0, magicNumber);
-
-      setDrinks(SplitArray);
-      setDrinksClone(SplitArray);
-    }
-    fetchDrinks();
     setCurrentPage('Bebidas');
-  }, [history, setCurrentPage, setDrinks]);
+  }, [setCurrentPage]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -43,7 +35,7 @@ function Drinks() {
       setCategories(SplitArray);
     }
     fetchCategories();
-  }, []);
+  }, [setCategories]);
 
   const HandleClick = async ({ target: { name, value } }) => {
     if (actualCategory === value) {
@@ -54,13 +46,12 @@ function Drinks() {
       setActualCategory(value);
     }
   };
-
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
     history.push(`/bebidas/${value}`);
   };
 
-  if (drinks.length === 1) {
+  if (drinks && drinks.length === 1) {
     const { idDrink } = drinks[0];
     setIdDrinkDetails(idDrink);
     history.push(`/bebidas/${idDrink}`);
@@ -91,10 +82,10 @@ function Drinks() {
         ))}
       </ul>
       <ul>
-        {drinks.length === 0 ? (
-          <p> Nenhum resultado encontrado! </p>
+        { !drinks ? (
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
-          drinks.slice(0, magicNumberSearch).map((drink, idx) => (
+          drinks.slice(0, quantityRecipes).map((drink, idx) => (
             <li key={ drink.idDrink } data-testid={ `${idx}-recipe-card` }>
               <img
                 src={ drink.strDrinkThumb }
@@ -102,7 +93,7 @@ function Drinks() {
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{drink.strDrink}</p>
+              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
               <button
                 value={ drink.idDrink }
                 type="button"

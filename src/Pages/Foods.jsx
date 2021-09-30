@@ -7,9 +7,8 @@ import { fetchByCategoryFoods } from '../services';
 
 function Foods() {
   const history = useHistory();
-
-  const [foodsClone, setFoodsClone] = useState([]);
   const [actualCategory, setActualCategory] = useState('');
+
   const {
     setCurrentPage,
     categories,
@@ -17,29 +16,17 @@ function Foods() {
     setIdFoodDetails,
     foods,
     setFoods,
+    foodsClone,
   } = useContext(Context);
 
   useEffect(() => {
-    async function fetchFoods() {
-      const { meals } = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-
-      const magicNumber = 12;
-      const SplitArray = meals.filter((item, idx) => idx < magicNumber);
-
-      await setFoods(SplitArray);
-      await setFoodsClone(SplitArray);
-    }
-    fetchFoods();
     setCurrentPage('Comidas');
-  }, [setCurrentPage, setFoods, foods]);
+  }, [setCurrentPage]);
 
   useEffect(() => {
     async function fetchCategories() {
-      const { meals } = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
-      ).then((data) => data.json());
+      const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+      const { meals } = await response.json();
 
       const magicNumber = 5;
       const SplitArray = meals.filter((item, idx) => idx < magicNumber);
@@ -63,7 +50,6 @@ function Foods() {
     setIdFoodDetails(value);
     history.push(`/comidas/${value}`);
   };
-
   console.log(foods);
   if (foods.length === 1) {
     const { idMeal } = foods[0];
@@ -96,19 +82,24 @@ function Foods() {
         ))}
       </ul>
       <ul>
-        { foods.length === 0 ? (
-          <li>Nenhum resultado encontrado!</li>
+        { !foods ? (
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           foods.map((food, idx) => (
-            <li data-testid={ `${idx}-recipe-card` } key={ food.idMeal }>
+            <li key={ food.idMeal }>
               <img
                 src={ food.strMealThumb }
                 alt={ `Comida: ${food.strMeal}` }
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{ food.strMeal }</p>
-              <button value={ food.idMeal } type="button" onClick={ handleLink }>
+              <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
+              <button
+                value={ food.idMeal }
+                type="button"
+                onClick={ handleLink }
+                data-testid={ `${idx}-recipe-card` }
+              >
                 detalhes
               </button>
             </li>
