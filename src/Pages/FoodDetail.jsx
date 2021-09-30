@@ -4,7 +4,7 @@ import { fetchFoodById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import '../css/FoodDetail.css';
+import '../css/Detail.css';
 
 import Context from '../Context/Context';
 
@@ -31,7 +31,7 @@ function FoodDetail() {
         'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
       ).then((data) => data.json());
 
-      const magicNumber = 12;
+      const magicNumber = 6;
       const SplitArray = response.drinks.filter((item, idx) => idx < magicNumber);
 
       setDrinksClone(SplitArray);
@@ -103,7 +103,7 @@ function FoodDetail() {
             <img
               src={ drink.strDrinkThumb }
               alt={ `drink: ${drink.strDrink}` }
-              width="100px"
+              width="200px"
               data-testid={ `${idx}-recomendation-card` }
             />
             <h6 data-testid={ `${idx}-recomendation-title` }>{ drink.strDrink }</h6>
@@ -111,7 +111,11 @@ function FoodDetail() {
           </div>
         ))}
       </section>
-      <button type="button" data-testid="start-recipe-btn">
+      <button
+        className="start-recipe-button"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
         iniciar receita
       </button>
     </div>
