@@ -50,7 +50,7 @@ function Foods() {
     setIdFoodDetails(value);
     history.push(`/comidas/${value}`);
   };
-  console.log(foods);
+
   if (foods.length === 1) {
     const { idMeal } = foods[0];
     setIdFoodDetails(idMeal);

@@ -35,14 +35,14 @@ function DrinkDetail() {
       setFoodsClone(SplitArray);
     }
     fetchFoods();
-  }, []);
+  }, [setFoodsClone]);
 
   useEffect(() => {
     setCurrentPage('Detalhes');
     setShowProfile(false);
     setShowTitlePage(false);
     setSearchButton(false);
-  }, []);
+  }, [setCurrentPage, setSearchButton, setShowProfile, setShowTitlePage]);
 
   useEffect(() => {
     async function drinkById() {
@@ -51,7 +51,7 @@ function DrinkDetail() {
       setDrinksDetails(getDrinkById);
     }
     drinkById();
-  }, []);
+  }, [id]);
 
   if (!drinksDetails || !drinksDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
