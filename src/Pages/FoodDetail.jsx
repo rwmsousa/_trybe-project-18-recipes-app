@@ -18,14 +18,55 @@ function FoodDetail() {
   const [foodDetails, setFoodDetails] = useState([]);
   const [video, setVideo] = useState('');
   const [heartFavorite, setHeartFavorite] = useState(false);
-  // const [
-  //   storageFavorites,
-  //   setStorageFavorites] = useState([localStorage.getItem('favoriteRecipes')][0]
-  //     === '' || null ? [] : [...[localStorage.getItem('favoriteRecipes')]]);
-  const [storageFavorites, setStorageFavorites] = useState([...[localStorage.favoriteRecipes]]);
+  const [storageFavorites, setStorageFavorites] = useState([]);
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
+
+  // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
+  useEffect(() => {
+    if (localStorage.favoriteRecipes) {
+      console.log('entrou no useEffect if 1');
+      setStorageFavorites([JSON.parse(localStorage.favoriteRecipes)]);
+      if ([JSON.parse(localStorage.favoriteRecipes)]
+        .find((recipe) => recipe === +id) === +id) {
+        console.log('entrou no useEffect if 2');
+        setHeartFavorite(true);
+      } else {
+        console.log('entrou no useEffect else');
+        setHeartFavorite(false);
+      }
+    }
+  }, []); // ATENÇÃO!!!!!!!! Nao coloque dependências nesse useEffect com localStorage, sob risco de causar loop.
+
+  const handleFavorite = () => {
+    if (
+      localStorage.favoriteRecipes
+      && storageFavorites.find((recipe) => recipe === +id) === +id) {
+      console.log('entrou no if 1');
+      setHeartFavorite(false);
+      const newFavorites = storageFavorites.filter((recipe) => recipe !== +id);
+      setStorageFavorites(newFavorites);
+      localStorage.favoriteRecipes = [newFavorites];
+    } else if (
+      localStorage.favoriteRecipes
+      && !storageFavorites.find((recipe) => recipe === +id) === +id) {
+      console.log('entrou no if 2');
+      setHeartFavorite(true);
+      setStorageFavorites([+id, ...storageFavorites]);
+      localStorage.favoriteRecipes = [+id, ...storageFavorites];
+    } else if (!localStorage.favoriteRecipes) {
+      console.log('entrou no if 3');
+      setHeartFavorite(true);
+      setStorageFavorites([+id]);
+      localStorage.favoriteRecipes = [+id];
+    }
+  };
+  console.log('heart', heartFavorite);
+  console.log('id', +id);
+  console.log('find', storageFavorites.find((recipe) => recipe === +id));
+  console.log('storageFavorites', storageFavorites);
+  console.log('localstorage', localStorage.getItem('favoriteRecipes'));
 
   // useEffect para completar o state drinksClone para usar no foodDetails em recomendações
   useEffect(() => {
@@ -67,91 +108,6 @@ function FoodDetail() {
     setShowTitlePage,
     storageFavorites,
   ]);
-
-  // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
-  useEffect(() => {
-    setStorageFavorites([...[localStorage.favoriteRecipes]]);
-
-    if (!localStorage.favoriteRecipes) {
-      localStorage.favoriteRecipes = [null];
-      setHeartFavorite(false);
-    }
-
-    if (storageFavorites.find((recipe) => recipe === id) === id) {
-      setHeartFavorite(true);
-    } else {
-      setHeartFavorite(false);
-    }
-  }, []); // ATENÇÃO!!!!!!!! Nao coloque dependências nesse useEffect com localStorage, pois causará loop.
-
-  const handleFavorite = () => {
-    if (localStorage.favoriteRecipes
-      && (storageFavorites.find((recipe) => recipe === id) === id)) {
-      console.log('entrou no if 1');
-      setHeartFavorite(false);
-      const newFavorites = storageFavorites.filter((meal) => meal !== id);
-      localStorage.favoriteRecipes = [newFavorites];
-      setStorageFavorites(newFavorites);
-    } else {
-      console.log('entrou no else');
-      setHeartFavorite(true);
-      setStorageFavorites([...[id]]);
-      localStorage.favoriteRecipes = [...[id]];
-    }
-
-    if (localStorage.favoriteRecipes
-      && !storageFavorites.find((recipe) => recipe === id)) {
-      console.log('entrou no if 2');
-      setHeartFavorite(true);
-      setStorageFavorites([...[id]]);
-      localStorage.favoriteRecipes = [...[id]];
-    }
-
-    // if (!localStorage.favoriteRecipes) {
-    //   console.log('entrou no else');
-    //   setHeartFavorite(true);
-    //   setStorageFavorites([...[id]]);
-    //   localStorage.favoriteRecipes = [...[id]];
-    // }
-  };
-
-  // if (Array.isArray(storageFavorites)
-  //   && (storageFavorites.find((recipe) => recipe === id))) {
-  //   console.log('entrou no if 2');
-  //   const newFavorites = storageFavorites.filter((meal) => meal !== id);
-  //   setStorageFavorites(...[newFavorites]);
-  //   localStorage.removeItem('favoriteRecipes', id);
-  //   setHeartFavorite(false);
-  // }
-  // };
-
-  // const handleFavorite = () => {
-  //   if (Array.isArray(storageFavorites)
-  //       && !storageFavorites.find((recipe) => recipe === id)) {
-  //     console.log('entrou no if 1');
-  //     const newStorage = storageFavorites ? [...storageFavorites] : null;
-  //     newStorage.push(...[id]);
-  //     setStorageFavorites(newStorage);
-  //     localStorage.setItem('favoriteRecipes', newStorage);
-  //     setHeartFavorite(true);
-  //   }
-
-  //   if (Array.isArray(storageFavorites)
-  //     && (storageFavorites.find((recipe) => recipe === id))) {
-  //     console.log('entrou no if 2');
-  //     const newFavorites = storageFavorites.filter((meal) => meal !== id);
-  //     setStorageFavorites(...[newFavorites]);
-  //     localStorage.removeItem('favoriteRecipes', id);
-  //     setHeartFavorite(false);
-  //   }
-  // };
-
-  // console.log('stringify', storageFavorites.find((meal) => meal === JSON.stringify(id)));
-  console.log('id', id);
-  console.log('storageFavorites-type', typeof storageFavorites);
-  console.log('storageFavorites', storageFavorites);
-  console.log('localstorage', localStorage.getItem('favoriteRecipes'));
-  console.log('heartFavorite', heartFavorite);
 
   if (!foodDetails || !foodDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
