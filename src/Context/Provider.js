@@ -21,8 +21,6 @@ function Provider({ children }) {
   const [test, setTest] = useState('');
   const [test1, setTest1] = useState('');
   const [searchStart, setSearchStart] = useState(false);
-  const [foodsClone, setFoodsClone] = useState([]);
-  const [drinksClone, setDrinksClone] = useState([]);
 
   const providerValue = {
     currentPage,
@@ -61,10 +59,6 @@ function Provider({ children }) {
     setDrinksClone,
     searchStart,
     setSearchStart,
-    foodsClone,
-    setFoodsClone,
-    drinksClone,
-    setDrinksClone,
   };
 
   return (

@@ -14,9 +14,12 @@ function FoodDetail() {
     setShowProfile,
     setShowTitlePage,
     setSearchButton,
+    setIdFoodDetails,
     drinksClone,
     setDrinksClone,
+    foods,
   } = useContext(Context);
+  console.log(foods);
 
   const [foodDetails, setFoodDetails] = useState([]);
   const [video, setVideo] = useState('');
@@ -55,6 +58,11 @@ function FoodDetail() {
     }
     foodById();
   }, []);
+
+  const handleLink = ({ target: { value } }) => {
+    setIdFoodDetails(value);
+    history.push(`/comidas/${value}/in-progress`);
+  };
 
   if (!foodDetails || !foodDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
@@ -115,6 +123,7 @@ function FoodDetail() {
         className="start-recipe-button"
         type="button"
         data-testid="start-recipe-btn"
+        onClick={ handleLink }
       >
         iniciar receita
       </button>
