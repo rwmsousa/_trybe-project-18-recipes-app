@@ -18,7 +18,6 @@ function Explorer() {
   return (
     <div>
       <Header />
-      <h1 data-testid="page-title"> Explorar </h1>
       <Link
         to="/explorar/comidas"
         data-testid="explore-food"

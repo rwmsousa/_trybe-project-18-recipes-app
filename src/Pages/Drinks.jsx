@@ -15,11 +15,12 @@ function Drinks() {
     setCategories,
     setIdDrinkDetails,
     drinks, setDrinks,
-    drinksClone } = useContext(Context);
+    drinksClone, setSearchButton } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Bebidas');
-  }, [setCurrentPage]);
+    setSearchButton(true);
+  }, [setCurrentPage, setSearchButton]);
 
   useEffect(() => {
     async function fetchCategories() {

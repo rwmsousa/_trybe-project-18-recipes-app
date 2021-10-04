@@ -26,7 +26,7 @@ function Footer() {
     // await setFoodsClone(SplitArray);
   };
 
-  const handledrinkClick = async () => {
+  const handledrinkClick = () => {
     async function fetch() {
       const res = await fetchDrinks();
       setDrinks(res);

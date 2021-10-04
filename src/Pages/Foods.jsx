@@ -17,11 +17,13 @@ function Foods() {
     foods,
     setFoods,
     foodsClone,
+    setSearchButton,
   } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Comidas');
-  }, [setCurrentPage]);
+    setSearchButton(true);
+  }, [setCurrentPage, setSearchButton]);
 
   useEffect(() => {
     async function fetchCategories() {

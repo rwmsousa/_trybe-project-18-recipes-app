@@ -3,14 +3,7 @@ import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
-import {
-  fetchIngredientFoods,
-  fetchNameFoods,
-  fetchFirstLetterFoods,
-  fetchIngredientDrinks,
-  fetchNameDrinks,
-  fetchFirstLetterDrinks,
-} from '../services';
+import SearchBar from './SearchBar';
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);
@@ -21,9 +14,6 @@ function Header() {
     showSearchButton,
     currentPage,
     searchText,
-    setFoods,
-    setDrinks,
-    setSearchText,
     setSearchRadio,
     searchRadio,
   } = useContext(Context);
@@ -39,107 +29,9 @@ function Header() {
     }
   }, [searchRadio, searchText, setSearchRadio]);
 
-  const handleSearchText = ({ target: { value } }) => {
-    setSearchText(value);
-  };
-
-  const handleRadio = ({ target: { value } }) => {
-    setSearchRadio(value);
-  };
-  async function handleClickSearch() {
-    if (currentPage === 'Comidas') {
-      switch (searchRadio) {
-      case 'searchIngredient':
-        setFoods(await fetchIngredientFoods(searchText));
-        break;
-      case 'searchName':
-        setFoods(await fetchNameFoods(searchText));
-        break;
-      case 'firstLetter':
-        setFoods(await fetchFirstLetterFoods(searchText));
-        break;
-      default:
-        break;
-      }
-    }
-
-    if (currentPage === 'Bebidas') {
-      switch (searchRadio) {
-      case 'searchIngredient':
-        setDrinks(await fetchIngredientDrinks(searchText));
-        break;
-      case 'searchName':
-        setDrinks(await fetchNameDrinks(searchText));
-        break;
-      case 'firstLetter':
-        setDrinks(await fetchFirstLetterDrinks(searchText));
-        break;
-      default:
-        break;
-      }
-    }
-  }
-
-  const renderSearch = () => (
-    <div className="search">
-      <input
-        type="text"
-        data-testid="search-input"
-        name="searchInput"
-        className="searchInput"
-        value={ searchText }
-        onChange={ handleSearchText }
-      />
-      <label htmlFor="input-ingredient">
-        Ingrediente
-        <input
-          className="searchIngredient"
-          type="radio"
-          name="searchRadio"
-          id="input-ingredient"
-          data-testid="ingredient-search-radio"
-          value="searchIngredient"
-          onChange={ handleRadio }
-        />
-      </label>
-      <label htmlFor="input-name">
-        Nome
-        <input
-          className="searchName"
-          type="radio"
-          name="searchRadio"
-          id="input-name"
-          data-testid="name-search-radio"
-          value="searchName"
-          onChange={ handleRadio }
-        />
-      </label>
-      <label htmlFor="input-first-letter">
-        Primeira Letra
-        <input
-          className="firstLetter"
-          type="radio"
-          name="searchRadio"
-          id="input-first-letter"
-          data-testid="first-letter-search-radio"
-          value="firstLetter"
-          onChange={ handleRadio }
-        />
-      </label>
-      <button
-        type="button"
-        className="fetchBtn"
-        data-testid="exec-search-btn"
-        onClick={ handleClickSearch }
-      >
-        pesquisar
-      </button>
-    </div>
-  );
-
   const menuItemProfile = () => (
     <div>
-      <Link to="/perfil">
+      <Link to="/perfil" src={ profileIcon }>
         <img
           className="btnProfile"
           src={ profileIcon }
@@ -164,6 +56,7 @@ function Header() {
         type="button"
         onClick={ () => setShowSearch(!showSearch) }
         data-testid="search-top-btn"
+        src={ searchIcon }
       >
         <img className="btnSearch" src={ searchIcon } alt="icone de pesquisar" />
       </button>
@@ -175,7 +68,7 @@ function Header() {
       {showProfile ? menuItemProfile() : false}
       {showTitlePage ? menuItemTitlePage() : false}
       {showSearchButton ? menuItemSearch() : false}
-      {showSearch ? renderSearch() : false}
+      {showSearch ? SearchBar() : false}
     </div>
   );
 }
