@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
-import { fetchByCategoryFoods } from '../services';
+import { fetchByCategoryFoods, fetchFoods } from '../services';
 
 function Foods() {
   const history = useHistory();
@@ -17,11 +17,22 @@ function Foods() {
     foods,
     setFoods,
     foodsClone,
+    setSearchButton,
+    shouldUpdate,
+    setFoodsClone,
   } = useContext(Context);
 
   useEffect(() => {
+    async function fetch() {
+      const res = await fetchFoods();
+      setFoods(res);
+    }
+    if (shouldUpdate) {
+      fetch();
+    }
     setCurrentPage('Comidas');
-  }, [setCurrentPage]);
+    setSearchButton(true);
+  }, [setCurrentPage, setSearchButton, setFoods, shouldUpdate, setFoodsClone]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -41,6 +52,7 @@ function Foods() {
       setFoods(foodsClone);
     } else {
       const arrayCategory = await fetchByCategoryFoods(name);
+      console.log(arrayCategory);
       setFoods(arrayCategory);
       setActualCategory(value);
     }
@@ -50,11 +62,14 @@ function Foods() {
     setIdFoodDetails(value);
     history.push(`/comidas/${value}`);
   };
-  if (foods.length === 1) {
-    const { idMeal } = foods[0];
-    setIdFoodDetails(idMeal);
-    history.push(`/comidas/${idMeal}`);
-  }
+
+  useEffect(() => {
+    if (foods && foods.length === 1 && foods[0].idMeal !== '52968') {
+      const { idMeal } = foods[0];
+      setIdFoodDetails(idMeal);
+      history.push(`/comidas/${idMeal}`);
+    }
+  }, [foods, setIdFoodDetails, history]);
 
   return (
     <div className="foods">
@@ -82,7 +97,7 @@ function Foods() {
       </ul>
       <ul>
         { !foods ? (
-          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+          global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           foods.map((food, idx) => (
             <li key={ food.idMeal }>
