@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Form from '../components/Form';
 import Context from '../Context/Context';
 import '../css/login.css';
+import { fetchFoods } from '../services';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ function Login() {
   const [showPassword, setShowPassword] = useState('password');
   const [icon, setIcon] = useState('far fa-eye');
   const history = useHistory();
+  const { setFoods } = useContext(Context);
 
   const handleChange = ({ target: { value } }) => {
     const getButton = document.getElementById('submit-button');
@@ -25,10 +27,15 @@ function Login() {
   };
 
   const handleClick = () => {
+    async function fetch() {
+      const res = await fetchFoods();
+      setFoods(res);
+    }
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON
       .stringify({ email }));
+    fetch();
     history.push('/comidas');
     localStorage.setItem('doneRecipes', []);
     localStorage.setItem('favoriteRecipes', []);

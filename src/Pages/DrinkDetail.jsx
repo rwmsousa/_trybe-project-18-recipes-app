@@ -28,7 +28,7 @@ function DrinkDetail() {
     } else {
       setHeartFavorite(false);
     }
-  }, []); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
+  }, [id]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
   const handleFavorite = () => {
     if (!localStorage.favoriteRecipes) {

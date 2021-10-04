@@ -347,7 +347,7 @@ describe('41 - Redirecione a pessoa usuário caso o botão "Iniciar Receita" sej
   });
 });
 
-describe.only('42 - Implemente um botão de compartilhar e um de favoritar a receita', () => {
+describe('42 - Implemente um botão de compartilhar e um de favoritar a receita', () => {
   it('Verifica se os botões estão disponíveis na tela de detalhes de uma comida', () => {
     cy.visit('http://localhost:3000/comidas/52771', {
       onBeforeLoad(win) {
