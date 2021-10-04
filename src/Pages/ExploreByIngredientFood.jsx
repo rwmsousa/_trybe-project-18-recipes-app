@@ -12,7 +12,9 @@ function ExploreByIngredientFood() {
   const {
     setCurrentPage,
     setSearchButton,
-    setFoods } = useContext(Context);
+    setFoods,
+    setShouldUpdate,
+  } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Explorar Ingredientes');
@@ -25,13 +27,15 @@ function ExploreByIngredientFood() {
       setdata(res);
     }
     fetch();
-  }, []);
+    setShouldUpdate(false);
+  }, [setShouldUpdate]);
 
   async function handleClick(value) {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`);
     const { meals } = await response.json();
+    console.log(meals);
+    setFoods(meals);
     history.push('/comidas');
-    return meals.length === 0 ? setFoods([]) : setFoods(meals);
   }
 
   return (
