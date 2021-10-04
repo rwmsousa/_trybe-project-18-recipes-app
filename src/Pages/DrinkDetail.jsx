@@ -26,7 +26,7 @@ function DrinkDetail() {
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
     if (localStorage.favoriteRecipes && JSON
-      .parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+      .parse(localStorage.favoriteRecipes).find((recipeId) => recipeId.id === id)) {
       setHeartFavorite(true);
     } else {
       setHeartFavorite(false);
@@ -36,23 +36,41 @@ function DrinkDetail() {
   const handleFavorite = () => {
     if (!localStorage.favoriteRecipes) {
       setHeartFavorite(true);
-      return localStorage.setItem('favoriteRecipes', JSON.stringify([id]));
+      return localStorage.setItem('favoriteRecipes', JSON.stringify([
+        {
+          id: drinksDetails[0].idDrink,
+          type: 'bebida',
+          area: '',
+          category: drinksDetails[0].strCategory,
+          alcoholicOrNot: drinksDetails[0].strAlcoholic,
+          name: drinksDetails[0].strDrink,
+          image: drinksDetails[0].strDrinkThumb,
+        },
+      ]));
     }
 
-    if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+    if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId.id === id)) {
       setHeartFavorite(false);
       return localStorage
         .setItem('favoriteRecipes', JSON.stringify(
           JSON.parse(localStorage.favoriteRecipes)
-            .filter((recipeId) => recipeId !== id),
+            .filter((recipeId) => recipeId.id !== id),
         ));
     }
 
     if (
-      !JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+      !JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId.id === id)) {
       setHeartFavorite(true);
       const storageFavorites = JSON.parse(localStorage.favoriteRecipes);
-      storageFavorites.push(id);
+      storageFavorites.push({
+        id: drinksDetails[0].idDrink,
+        type: 'bebida',
+        area: '',
+        category: drinksDetails[0].strCategory,
+        alcoholicOrNot: drinksDetails[0].strAlcoholic,
+        name: drinksDetails[0].strDrink,
+        image: drinksDetails[0].strDrinkThumb,
+      });
       return localStorage.setItem('favoriteRecipes', JSON.stringify(storageFavorites));
     }
   };
