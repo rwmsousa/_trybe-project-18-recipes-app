@@ -49,6 +49,7 @@ function Footer() {
         data-testid="drinks-bottom-btn"
         type="button"
         onClick={ handledrinkClick }
+        src={ drinkicon }
       >
         <img src={ drinkicon } alt="drink icon" />
       </Link>
@@ -56,6 +57,7 @@ function Footer() {
         to="/explorar"
         data-testid="explore-bottom-btn"
         type="button"
+        src={ exploreicon }
       >
         <img src={ exploreicon } alt="explore icon" />
       </Link>
@@ -64,6 +66,7 @@ function Footer() {
         data-testid="food-bottom-btn"
         type="button"
         onClick={ handlefoodClick }
+        src={ mealicon }
       >
         <img src={ mealicon } alt="meal icon" />
       </Link>

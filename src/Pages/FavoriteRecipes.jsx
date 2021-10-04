@@ -59,7 +59,6 @@ function FavoriteRecipes() {
           </p>
         </div>
       </div> */}
-      <Footer />
     </div>
   );
 }
