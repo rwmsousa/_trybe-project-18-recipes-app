@@ -4,6 +4,8 @@ import { fetchFoodById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import '../css/Detail.css';
 import Context from '../Context/Context';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function FoodDetail() {
   const {
@@ -24,7 +26,8 @@ function FoodDetail() {
 
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
-    if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+    if (localStorage.favoriteRecipes && JSON
+      .parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
       setHeartFavorite(true);
     } else {
       setHeartFavorite(false);
@@ -117,11 +120,18 @@ function FoodDetail() {
         data-testid="favorite-btn"
         className="favorite-btn"
         onClick={ handleFavorite }
+        src="blackHeartIcon whiteHeartIcon"
       >
         {heartFavorite ? (
-          <i className="fas fa-heart fa-heart-favorite" />
+          <img
+            src={ blackHeartIcon }
+            alt="coracao favoritado"
+          />
         ) : (
-          <i className="fas fa-heart fa-heart-unfavorite" />
+          <img
+            src={ whiteHeartIcon }
+            alt="coracao nao favoritado"
+          />
         )}
       </button>
       <h3>Ingredientes</h3>

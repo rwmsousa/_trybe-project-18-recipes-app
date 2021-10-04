@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
-import { fetchByCategoryDrinks } from '../services';
+import { fetchByCategoryDrinks, fetchDrinks } from '../services';
 
 function Drinks() {
   const history = useHistory();
@@ -15,12 +15,21 @@ function Drinks() {
     setCategories,
     setIdDrinkDetails,
     drinks, setDrinks,
-    drinksClone, setSearchButton } = useContext(Context);
+    drinksClone, setSearchButton,
+    shouldUpdate, setDrinksClone } = useContext(Context);
 
   useEffect(() => {
+    async function fetch() {
+      const res = await fetchDrinks();
+      setDrinks(res);
+      setDrinksClone(res);
+    }
+    if (shouldUpdate) {
+      fetch();
+    }
     setCurrentPage('Bebidas');
     setSearchButton(true);
-  }, [setCurrentPage, setSearchButton]);
+  }, [setCurrentPage, setSearchButton, shouldUpdate, setDrinks, setDrinksClone]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -52,11 +61,13 @@ function Drinks() {
     history.push(`/bebidas/${value}`);
   };
 
-  if (drinks && drinks.length === 1) {
-    const { idDrink } = drinks[0];
-    setIdDrinkDetails(idDrink);
-    history.push(`/bebidas/${idDrink}`);
-  }
+  useEffect(() => {
+    if (drinks && drinks.length === 1) {
+      const { idDrink } = drinks[0];
+      setIdDrinkDetails(idDrink);
+      history.push(`/bebidas/${idDrink}`);
+    }
+  }, []);
 
   return (
     <div>
@@ -87,7 +98,7 @@ function Drinks() {
           alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           drinks.slice(0, quantityRecipes).map((drink, idx) => (
-            <li key={ drink.idDrink } data-testid={ `${idx}-recipe-card` }>
+            <li key={ drink.idDrink }>
               <img
                 src={ drink.strDrinkThumb }
                 alt={ `Bebida: ${drink.strDrink}` }

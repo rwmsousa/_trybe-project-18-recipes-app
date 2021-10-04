@@ -8,7 +8,11 @@ import Context from '../Context/Context';
 import { fetchFoods, fetchDrinks } from '../services';
 
 function Footer() {
-  const { setFoods, setFoodsClone, setDrinks, setDrinksClone } = useContext(Context);
+  const { setFoods,
+    setFoodsClone,
+    setDrinks,
+    setDrinksClone,
+    setShouldUpdate } = useContext(Context);
 
   const handlefoodClick = () => {
     async function fetch() {
@@ -17,6 +21,7 @@ function Footer() {
       setFoodsClone(res);
     }
     fetch();
+    setShouldUpdate(false);
     // const { meals } = await fetch(
     //   'https://www.themealdb.com/api/json/v1/1/search.php?s=',
     // ).then((data) => data.json());
@@ -33,6 +38,7 @@ function Footer() {
       setDrinksClone(res);
     }
     fetch();
+    setShouldUpdate(false);
     // const { drinks } = await fetch(
     //   'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
     // ).then((data) => data.json());
