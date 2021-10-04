@@ -45,7 +45,7 @@ export async function fetchByCategoryFoods(category) {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
   const data = await response.json();
   const magicNumber = 12;
-  const SplitArray = data.meals.splice(0, magicNumber);
+  const SplitArray = data.meals.slice(0, magicNumber);
   return SplitArray;
 }
 
@@ -54,7 +54,7 @@ export async function fetchByCategoryDrinks(category) {
   fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
   const { drinks } = await response.json();
   const magicNumber = 12;
-  const SplitArray = drinks.splice(0, magicNumber);
+  const SplitArray = drinks.slice(0, magicNumber);
   return SplitArray;
 }
 
@@ -92,7 +92,7 @@ export async function fetchIngredientofFoods() {
   fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
   const { meals } = await response.json();
   const magicNumber = 12;
-  const SplitArray = meals.splice(0, magicNumber);
+  const SplitArray = meals.slice(0, magicNumber);
   return SplitArray;
 }
 
@@ -101,7 +101,7 @@ export async function fetchIngredientofDrinks() {
   fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
   const { drinks } = await response.json();
   const magicNumber = 12;
-  const SplitArray = drinks.splice(0, magicNumber);
+  const SplitArray = drinks.slice(0, magicNumber);
   return SplitArray;
 }
 
@@ -111,6 +111,15 @@ export async function fetchFoods() {
   const { meals } = await response.json();
   const magicNumber = 12;
   const SplitArray = meals.filter((item, idx) => idx < magicNumber);
+  return SplitArray;
+}
+
+export async function fetchDrinks() {
+  const response = await
+  fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const { drinks } = await response.json();
+  const magicNumber = 12;
+  const SplitArray = drinks.filter((item, idx) => idx < magicNumber);
   return SplitArray;
 }
 
