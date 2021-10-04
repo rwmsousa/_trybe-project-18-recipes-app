@@ -23,7 +23,7 @@ function Header() {
       searchRadio === 'firstLetter'
       && (searchText.length > 1)
     ) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
       setSearchRadio('');
       document.getElementById('input-first-letter').checked = false;
     }

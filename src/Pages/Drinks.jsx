@@ -67,7 +67,7 @@ function Drinks() {
       setIdDrinkDetails(idDrink);
       history.push(`/bebidas/${idDrink}`);
     }
-  }, []);
+  }, [drinks, setIdDrinkDetails, history]);
 
   return (
     <div>
@@ -95,7 +95,7 @@ function Drinks() {
       </ul>
       <ul>
         { !drinks ? (
-          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+          global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           drinks.slice(0, quantityRecipes).map((drink, idx) => (
             <li key={ drink.idDrink }>
