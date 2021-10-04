@@ -4,18 +4,18 @@ https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizont
   overflow-x: scroll auto;
   overflow-y: hidden;
   height: 325px;
-  white-space:nowrap;
+  white-space: nowrap;
 }
 
 .recomended-div {
-  box-shadow: 1px 1px 10px #999; 
+  box-shadow: 1px 1px 10px #999;
   margin: 20px;
   max-height: 250px;
   cursor: pointer;
-  display:inline-block;
-  *display:inline;
-  *zoom:1;
-  vertical-align:top;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: top;
   text-align: center;
 }
 /* até aqui */
@@ -30,6 +30,29 @@ https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizont
 .start-recipe-button:hover {
   color: green;
   background-color: white;
-  box-shadow: inset 0 0 1em yellowgreen , 0 0 1.5em green;
+  box-shadow: inset 0 0 1em yellowgreen, 0 0 1.5em green;
   border: none;
+}
+
+.favorite-btn,
+.share-btn {
+  border: none;
+  background-color: transparent;
+  margin: 10px;
+}
+
+.fa-heart-favorite {
+  color: red;
+  font-size: 25px;
+  outline: none;
+}
+
+.fa-heart-unfavorite {
+  color: grey;
+  font-size: 25px;
+}
+
+.fa-share-alt {
+  color: grey;
+  font-size: 25px;
 }
