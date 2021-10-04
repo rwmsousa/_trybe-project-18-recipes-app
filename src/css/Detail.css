@@ -1,43 +1,46 @@
-/*  codigo fonte para essa seção 
-https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizontal-no-css */
+/*  codigo fonte para essa seção
+https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizontal-no-css
+*/
+
 .recomended-section {
+  height: 325px;
   overflow-x: scroll auto;
   overflow-y: hidden;
-  height: 325px;
   white-space: nowrap;
 }
 
 .recomended-div {
   box-shadow: 1px 1px 10px #999;
-  margin: 20px;
-  max-height: 250px;
   cursor: pointer;
   display: inline-block;
-  *display: inline;
-  *zoom: 1;
-  vertical-align: top;
+
+  /* *display: inline; */
+  margin: 20px;
+  max-height: 250px;
   text-align: center;
+  vertical-align: top;
+  *zoom: 1;
 }
+
 /* até aqui */
 .start-recipe-button {
-  position: fixed;
-  bottom: 0;
-  right: 200px;
-  padding: 5px;
   border-radius: 10px;
+  bottom: 0;
+  padding: 5px;
+  position: fixed;
+  right: 200px;
 }
 
 .start-recipe-button:hover {
-  color: green;
   background-color: white;
-  box-shadow: inset 0 0 1em yellowgreen, 0 0 1.5em green;
   border: none;
+  box-shadow: inset 0 0 1em yellowgreen , 0 0 1.5em green;
+  color: green;
 }
 
-.favorite-btn,
-.share-btn {
-  border: none;
+.favorite-btn, .share-btn {
   background-color: transparent;
+  border: none;
   margin: 10px;
 }
 
