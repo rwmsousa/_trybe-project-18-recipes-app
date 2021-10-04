@@ -12,7 +12,9 @@ function ExploreByIngredientDrink() {
   const {
     setCurrentPage,
     setSearchButton,
-    setDrinks } = useContext(Context);
+    setDrinks,
+    setShouldUpdate,
+  } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Explorar Ingredientes');
@@ -30,6 +32,7 @@ function ExploreByIngredientDrink() {
   async function handleClick(value) {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${value}`);
     const { drinks } = await response.json();
+    setShouldUpdate(false);
     history.push('/bebidas');
     return drinks.length === 0 ? setDrinks([]) : setDrinks(drinks);
   }

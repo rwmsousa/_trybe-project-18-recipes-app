@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
-import { fetchByCategoryFoods } from '../services';
+import { fetchByCategoryFoods, fetchFoods } from '../services';
 
 function Foods() {
   const history = useHistory();
@@ -17,11 +17,23 @@ function Foods() {
     foods,
     setFoods,
     foodsClone,
+    setSearchButton,
+    shouldUpdate,
+    setFoodsClone,
   } = useContext(Context);
 
   useEffect(() => {
+    async function fetch() {
+      const res = await fetchFoods();
+      setFoods(res);
+      setFoodsClone(res);
+    }
+    if (shouldUpdate) {
+      fetch();
+    }
     setCurrentPage('Comidas');
-  }, [setCurrentPage]);
+    setSearchButton(true);
+  }, [setCurrentPage, setSearchButton, setFoods, shouldUpdate, setFoodsClone]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -51,11 +63,13 @@ function Foods() {
     history.push(`/comidas/${value}`);
   };
 
-  if (foods.length === 1) {
-    const { idMeal } = foods[0];
-    setIdFoodDetails(idMeal);
-    history.push(`/comidas/${idMeal}`);
-  }
+  useEffect(() => {
+    if (foods.length === 1) {
+      const { idMeal } = foods[0];
+      setIdFoodDetails(idMeal);
+      history.push(`/comidas/${idMeal}`);
+    }
+  }, []);
 
   return (
     <div className="foods">
