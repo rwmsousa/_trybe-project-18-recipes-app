@@ -7,9 +7,10 @@ import { fetchByCategoryDrinks } from '../services';
 
 function Drinks() {
   const history = useHistory();
-
   const [actualCategory, setActualCategory] = useState('');
-  const { setCurrentPage,
+  const quantityRecipes = 12;
+  const {
+    setCurrentPage,
     categories,
     setCategories,
     setIdDrinkDetails,
@@ -84,9 +85,8 @@ function Drinks() {
         { !drinks ? (
           alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
-          // drinks.map((drink, idx) => (
-          drinks.map((drink, idx) => (
-            <li key={ drink.idDrink }>
+          drinks.slice(0, quantityRecipes).map((drink, idx) => (
+            <li key={ drink.idDrink } data-testid={ `${idx}-recipe-card` }>
               <img
                 src={ drink.strDrinkThumb }
                 alt={ `Bebida: ${drink.strDrink}` }

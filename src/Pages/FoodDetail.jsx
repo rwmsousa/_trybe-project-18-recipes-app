@@ -2,10 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { fetchFoodById } from '../services';
 import IngredientsList from '../components/IngredientsList';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../css/Detail.css';
-
 import Context from '../Context/Context';
 
 function FoodDetail() {
@@ -20,9 +17,43 @@ function FoodDetail() {
 
   const [foodDetails, setFoodDetails] = useState([]);
   const [video, setVideo] = useState('');
+  const [heartFavorite, setHeartFavorite] = useState(false);
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
+
+  // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
+  useEffect(() => {
+    if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+      setHeartFavorite(true);
+    } else {
+      setHeartFavorite(false);
+    }
+  }, []); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
+
+  const handleFavorite = () => {
+    if (!localStorage.favoriteRecipes) {
+      setHeartFavorite(true);
+      return localStorage.setItem('favoriteRecipes', JSON.stringify([id]));
+    }
+
+    if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+      setHeartFavorite(false);
+      return localStorage
+        .setItem('favoriteRecipes', JSON.stringify(
+          JSON.parse(localStorage.favoriteRecipes)
+            .filter((recipeId) => recipeId !== id),
+        ));
+    }
+
+    if (
+      !JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+      setHeartFavorite(true);
+      const storageFavorites = JSON.parse(localStorage.favoriteRecipes);
+      storageFavorites.push(id);
+      return localStorage.setItem('favoriteRecipes', JSON.stringify(storageFavorites));
+    }
+  };
 
   // useEffect para completar o state drinksClone para usar no foodDetails em recomendações
   useEffect(() => {
@@ -32,19 +63,14 @@ function FoodDetail() {
       ).then((data) => data.json());
 
       const magicNumber = 6;
-      const SplitArray = response.drinks.filter((item, idx) => idx < magicNumber);
+      const SplitArray = response.drinks.filter(
+        (item, idx) => idx < magicNumber,
+      );
 
       setDrinksClone(SplitArray);
     }
     fetchDrinks();
-  }, []);
-
-  useEffect(() => {
-    setCurrentPage('Detalhes');
-    setShowProfile(false);
-    setShowTitlePage(false);
-    setSearchButton(false);
-  });
+  }, [setDrinksClone]);
 
   useEffect(() => {
     async function foodById() {
@@ -54,7 +80,20 @@ function FoodDetail() {
       setVideo(getFoodById[0].strYoutube.substr(magicNumber));
     }
     foodById();
-  }, []);
+  }, [id]);
+
+  useEffect(() => {
+    setCurrentPage('Detalhes');
+    setShowProfile(false);
+    setShowTitlePage(false);
+    setSearchButton(false);
+  }, [
+    id,
+    setCurrentPage,
+    setSearchButton,
+    setShowProfile,
+    setShowTitlePage,
+  ]);
 
   if (!foodDetails || !foodDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
@@ -70,11 +109,20 @@ function FoodDetail() {
       />
       <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
       <span data-testid="recipe-category">{foodDetails[0].strCategory}</span>
-      <button type="button" data-testid="share-btn">
-        <img src={ shareIcon } alt="share icon" />
+      <button type="button" data-testid="share-btn" className="share-btn">
+        <i className="fas fa-share-alt" />
       </button>
-      <button type="button" data-testid="favorite-btn">
-        <img src={ whiteHeartIcon } alt="favorites icon" />
+      <button
+        type="button"
+        data-testid="favorite-btn"
+        className="favorite-btn"
+        onClick={ handleFavorite }
+      >
+        {heartFavorite ? (
+          <i className="fas fa-heart fa-heart-favorite" />
+        ) : (
+          <i className="fas fa-heart fa-heart-unfavorite" />
+        )}
       </button>
       <h3>Ingredientes</h3>
       <IngredientsList list={ foodDetails } />
@@ -106,8 +154,8 @@ function FoodDetail() {
               width="200px"
               data-testid={ `${idx}-recomendation-card` }
             />
-            <h6 data-testid={ `${idx}-recomendation-title` }>{ drink.strDrink }</h6>
-            <p>{ drink.strAlcoholic }</p>
+            <h6 data-testid={ `${idx}-recomendation-title` }>{drink.strDrink}</h6>
+            <p>{drink.strAlcoholic}</p>
           </div>
         ))}
       </section>
