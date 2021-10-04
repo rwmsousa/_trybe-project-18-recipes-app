@@ -18,55 +18,42 @@ function FoodDetail() {
   const [foodDetails, setFoodDetails] = useState([]);
   const [video, setVideo] = useState('');
   const [heartFavorite, setHeartFavorite] = useState(false);
-  const [storageFavorites, setStorageFavorites] = useState([]);
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
 
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
-    if (localStorage.favoriteRecipes) {
-      console.log('entrou no useEffect if 1');
-      setStorageFavorites([JSON.parse(localStorage.favoriteRecipes)]);
-      if ([JSON.parse(localStorage.favoriteRecipes)]
-        .find((recipe) => recipe === +id) === +id) {
-        console.log('entrou no useEffect if 2');
-        setHeartFavorite(true);
-      } else {
-        console.log('entrou no useEffect else');
-        setHeartFavorite(false);
-      }
+    if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+      setHeartFavorite(true);
+    } else {
+      setHeartFavorite(false);
     }
-  }, []); // ATENÇÃO!!!!!!!! Nao coloque dependências nesse useEffect com localStorage, sob risco de causar loop.
+  }, []); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
   const handleFavorite = () => {
-    if (
-      localStorage.favoriteRecipes
-      && storageFavorites.find((recipe) => recipe === +id) === +id) {
-      console.log('entrou no if 1');
+    if (!localStorage.favoriteRecipes) {
+      setHeartFavorite(true);
+      return localStorage.setItem('favoriteRecipes', JSON.stringify([id]));
+    }
+
+    if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
       setHeartFavorite(false);
-      const newFavorites = storageFavorites.filter((recipe) => recipe !== +id);
-      setStorageFavorites(newFavorites);
-      localStorage.favoriteRecipes = [newFavorites];
-    } else if (
-      localStorage.favoriteRecipes
-      && !storageFavorites.find((recipe) => recipe === +id) === +id) {
-      console.log('entrou no if 2');
+      return localStorage
+        .setItem('favoriteRecipes', JSON.stringify(
+          JSON.parse(localStorage.favoriteRecipes)
+            .filter((recipeId) => recipeId !== id),
+        ));
+    }
+
+    if (
+      !JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
       setHeartFavorite(true);
-      setStorageFavorites([+id, ...storageFavorites]);
-      localStorage.favoriteRecipes = [+id, ...storageFavorites];
-    } else if (!localStorage.favoriteRecipes) {
-      console.log('entrou no if 3');
-      setHeartFavorite(true);
-      setStorageFavorites([+id]);
-      localStorage.favoriteRecipes = [+id];
+      const storageFavorites = JSON.parse(localStorage.favoriteRecipes);
+      storageFavorites.push(id);
+      return localStorage.setItem('favoriteRecipes', JSON.stringify(storageFavorites));
     }
   };
-  console.log('heart', heartFavorite);
-  console.log('id', +id);
-  console.log('find', storageFavorites.find((recipe) => recipe === +id));
-  console.log('storageFavorites', storageFavorites);
-  console.log('localstorage', localStorage.getItem('favoriteRecipes'));
 
   // useEffect para completar o state drinksClone para usar no foodDetails em recomendações
   useEffect(() => {
@@ -106,7 +93,6 @@ function FoodDetail() {
     setSearchButton,
     setShowProfile,
     setShowTitlePage,
-    storageFavorites,
   ]);
 
   if (!foodDetails || !foodDetails.length) {
