@@ -131,3 +131,10 @@ export async function fetchCategories() {
   const SplitArray = meals.filter((item, idx) => idx < magicNumber);
   return SplitArray;
 }
+
+export async function fetchFoodByArea() {
+  const response = await
+  fetch('www.themealdb.com/api/json/v1/1/list.php?a=list');
+  const { meals } = await response.json();
+  return meals;
+}

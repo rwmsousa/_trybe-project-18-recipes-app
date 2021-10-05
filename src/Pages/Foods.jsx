@@ -97,7 +97,7 @@ function Foods() {
       </ul>
       <ul>
         { !foods ? (
-          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+          global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           foods.map((food, idx) => (
             <li key={ food.idMeal }>
