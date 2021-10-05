@@ -54,7 +54,7 @@ describe('Favorite recipes screen', () => {
     });
   });
 
-  describe.only('61 - Desenvolva a tela de maneira que, caso a receita do card seja uma comida, ela deve possuir: a foto da receita, o nome, a categoria, a area, um botão de compartilhar e um de "desfavoritar"', () => {
+  describe('61 - Desenvolva a tela de maneira que, caso a receita do card seja uma comida, ela deve possuir: a foto da receita, o nome, a categoria, a area, um botão de compartilhar e um de "desfavoritar"', () => {
     it('O card possui os atributos corretos de uma comida', () => {
       cy.get('[data-testid="0-horizontal-image"]')
         .should('have.attr', 'src')
@@ -87,7 +87,7 @@ describe('Favorite recipes screen', () => {
     });
   });
 
-  describe('63 - Desenvolva a solução de maneira que o botão de compartilhar deve copiar a URL da tela de detalhes da receita para o clipboard', () => {
+  describe.only('63 - Desenvolva a solução de maneira que o botão de compartilhar deve copiar a URL da tela de detalhes da receita para o clipboard', () => {
     it('Ao clicar no botão de compartilhar deve aparecer a mensagem "Link copiado!"', () => {
       cy.get('[data-testid="0-horizontal-share-btn"]').click();
 

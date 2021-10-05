@@ -9,6 +9,7 @@ function FavoriteRecipes() {
     setCurrentPage,
     setSearchButton } = useContext(Context);
 
+  const [msgClipboard, setMsgClipboard] = useState(false);
   const [favoriteStorage, setFavoriteStorage] = useState([]);
 
   useEffect(() => {
@@ -36,11 +37,24 @@ function FavoriteRecipes() {
     setFavoriteStorage(filterDrink);
   };
 
-  console.log(favoriteStorage);
+  const handleShare = (url) => {
+    navigator.clipboard.writeText(`http://localhost:3000${url}`);
+    const timerMsg = 5000;
+    setMsgClipboard(true);
+    setTimeout(() => setMsgClipboard(false), timerMsg);
+  };
 
   return (
     <div>
       <Header />
+      {msgClipboard ? (
+        <div
+          className="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Link copiado!</strong>
+        </div>
+      ) : null }
       <div className="buttonsRecipesFavorites">
         <button
           value="all"
@@ -98,7 +112,9 @@ function FavoriteRecipes() {
             <button
               type="button"
               data-testid={ `${index}-horizontal-share-btn` }
+              onClick={ () => handleShare(`/${recipe.type}s/${recipe.id}`) }
               className="share-btn"
+              // value={ `/${recipe.type}s/${recipe.id}` }
               src={ shareIcon }
             >
               <img src={ shareIcon } alt="share link" />
