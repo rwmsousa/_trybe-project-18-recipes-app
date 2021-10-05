@@ -81,7 +81,7 @@ function FavoriteRecipes() {
           Drinks
         </button>
       </div>
-      {favoriteStorage.map((recipe, index) => (
+      {favoriteStorage && favoriteStorage.map((recipe, index) => (
         <div key={ recipe.id } className="cardRecipes">
           <img
             src={ recipe.image }

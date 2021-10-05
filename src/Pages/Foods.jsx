@@ -26,6 +26,7 @@ function Foods() {
     async function fetch() {
       const res = await fetchFoods();
       setFoods(res);
+      setFoodsClone(res);
     }
     if (shouldUpdate) {
       fetch();
@@ -52,7 +53,6 @@ function Foods() {
       setFoods(foodsClone);
     } else {
       const arrayCategory = await fetchByCategoryFoods(name);
-      console.log(arrayCategory);
       setFoods(arrayCategory);
       setActualCategory(value);
     }
