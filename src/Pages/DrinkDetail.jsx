@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
+import copy from 'clipboard-copy';
 import { fetchDrinkById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import '../css/Detail.css';
@@ -7,6 +8,7 @@ import '../css/Detail.css';
 import Context from '../Context/Context';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 
 function DrinkDetail() {
   const {
@@ -19,6 +21,7 @@ function DrinkDetail() {
   } = useContext(Context);
   const [drinksDetails, setDrinksDetails] = useState([]);
   const [heartFavorite, setHeartFavorite] = useState(false);
+  const [msgClipboard, setMsgClipboard] = useState(false);
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
@@ -109,6 +112,14 @@ function DrinkDetail() {
   if (!drinksDetails || !drinksDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
+
+  const shareLink = () => {
+    const timerMsg = 5000;
+    setMsgClipboard(true);
+    copy(`http://localhost:3000${history.location.pathname}`);
+    setTimeout(() => setMsgClipboard(false), timerMsg);
+  };
+
   return (
     <div>
       <img
@@ -121,9 +132,25 @@ function DrinkDetail() {
       <span data-testid="recipe-category">
         {drinksDetails[0].strAlcoholic}
       </span>
-      <button type="button" data-testid="share-btn" className="share-btn">
-        <i className="fas fa-share-alt" />
+
+      {msgClipboard ? (
+        <div
+          className="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Link copiado!</strong>
+        </div>
+      ) : null }
+
+      <button
+        type="button"
+        data-testid="share-btn"
+        className="share-btn"
+        onClick={ shareLink }
+      >
+        <img src={ shareIcon } alt="share link" />
       </button>
+
       <button
         type="button"
         data-testid="favorite-btn"
