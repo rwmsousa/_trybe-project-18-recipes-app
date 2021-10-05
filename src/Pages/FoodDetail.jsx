@@ -42,6 +42,8 @@ function FoodDetail() {
 
     if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
       setHeartFavorite(false);
+      // setFavoriteFoodId(favoriteFoodId.filter((food) => food !== id));
+
       return localStorage
         .setItem('favoriteRecipes', JSON.stringify(
           JSON.parse(localStorage.favoriteRecipes)
