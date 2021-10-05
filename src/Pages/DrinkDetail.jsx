@@ -16,6 +16,7 @@ function DrinkDetail() {
     setShowProfile,
     setShowTitlePage,
     setSearchButton,
+    setIdDrinkDetails,
     foodsClone,
     setFoodsClone,
   } = useContext(Context);
@@ -109,6 +110,12 @@ function DrinkDetail() {
     drinkById();
   }, [id]);
 
+  const handleLink = ({ target: { value } }) => {
+    setIdDrinkDetails(value);
+    history.push(`/bebidas/${value}/in-progress`);
+    console.log(value);
+  };
+
   if (!drinksDetails || !drinksDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
@@ -193,6 +200,8 @@ function DrinkDetail() {
         className="start-recipe-button"
         type="button"
         data-testid="start-recipe-btn"
+        value={ drinksDetails[0].idDrink }
+        onClick={ handleLink }
       >
         iniciar receita
       </button>
