@@ -30,13 +30,13 @@ function ExploreByIngredientFood() {
     setShouldUpdate(false);
   }, [setShouldUpdate]);
 
-  async function handleClick(value) {
+  const handleClick = async (value) => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`);
     const { meals } = await response.json();
     console.log(meals);
     setFoods(meals);
     history.push('/comidas');
-  }
+  };
 
   return (
     <div>

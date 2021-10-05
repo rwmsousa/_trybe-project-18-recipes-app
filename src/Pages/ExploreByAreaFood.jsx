@@ -1,32 +1,58 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
-import { fetchFoods, fetchFoodByArea } from '../services';
+import { fetchFoodByArea, fetchFoods, fetchAreaofFoods } from '../services';
 
 function ExploreByAreaFood() {
-  const [areas, setareas] = useState();
-  const [foodsarea, setfoodsarea] = useState();
+  const history = useHistory();
   const { setCurrentPage,
+    setIdFoodDetails,
+    areas,
+    foodsarea,
+    setfoodsarea,
+    foodsareaClone,
+    setareas,
+    setfoodsareaClone,
   } = useContext(Context);
 
   useEffect(() => {
-    async function fetch() {
+    const fetch = async () => {
+      const res2 = await fetchAreaofFoods();
       const res = await fetchFoods();
-      const res2 = await fetchFoodByArea();
-      setfoodsarea(res);
       setareas(res2);
-    }
+      setfoodsarea(res);
+      setfoodsareaClone(res);
+    };
     fetch();
     setCurrentPage('Explorar Origem');
-  }, [setCurrentPage, setfoodsarea]);
+  }, [setCurrentPage, setareas, setfoodsarea, setfoodsareaClone]);
+
+  const handleLink = ({ target: { value } }) => {
+    setIdFoodDetails(value);
+    history.push(`/comidas/${value}`);
+  };
+
+  const handleChange = async ({ target: { value } }) => {
+    if (value === 'all') {
+      setfoodsarea(foodsareaClone);
+    } else {
+      const res = await fetchFoodByArea(value);
+      setfoodsarea(res);
+    }
+  };
 
   return (
     <div>
       <Header />
-      <select name="dropdownArea" data-testId="explore-by-area-dropdown">
-        <option value="all">All</option>
-        {areas.map((a, i) => (
+      <select
+        name="dropdownArea"
+        data-testId="explore-by-area-dropdown"
+        onChange={ handleChange }
+      >
+        <option value="all" data-testId="All-option">All</option>
+        {areas.map((a) => (
           <option
             key={ a.strArea }
             value={ a.strArea }

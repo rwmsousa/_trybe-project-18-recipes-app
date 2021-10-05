@@ -132,9 +132,18 @@ export async function fetchCategories() {
   return SplitArray;
 }
 
-export async function fetchFoodByArea() {
+export async function fetchAreaofFoods() {
   const response = await
-  fetch('www.themealdb.com/api/json/v1/1/list.php?a=list');
+  fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
   const { meals } = await response.json();
   return meals;
+}
+
+export async function fetchFoodByArea(area) {
+  const response = await
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
+  const { meals } = await response.json();
+  const magicNumber = 12;
+  const SplitArray = meals.filter((item, idx) => idx < magicNumber);
+  return SplitArray;
 }

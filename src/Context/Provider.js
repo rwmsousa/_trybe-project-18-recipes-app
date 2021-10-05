@@ -22,6 +22,9 @@ function Provider({ children }) {
   const [test1, setTest1] = useState('');
   const [searchStart, setSearchStart] = useState(false);
   const [shouldUpdate, setShouldUpdate] = useState(true);
+  const [areas, setareas] = useState([]);
+  const [foodsarea, setfoodsarea] = useState([]);
+  const [foodsareaClone, setfoodsareaClone] = useState([]);
 
   const providerValue = {
     currentPage,
@@ -62,6 +65,12 @@ function Provider({ children }) {
     setSearchStart,
     shouldUpdate,
     setShouldUpdate,
+    areas,
+    setareas,
+    foodsarea,
+    setfoodsarea,
+    foodsareaClone,
+    setfoodsareaClone,
   };
 
   return (

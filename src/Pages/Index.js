@@ -6,7 +6,6 @@ import Profile from './Profile';
 import DrinkDetail from './DrinkDetail';
 import DrinkInProgress from './DrinkInProgress';
 import ExploreByAreaFood from './ExploreByAreaFood';
-import ExploreByAreaDrinks from './ExploreByAreaDrinks';
 import ExploreByIngredientFood from './ExploreByIngredientFood';
 import ExploreByIngredientDrink from './ExploreByIngredientDrink';
 import ExplorerDrinks from './ExplorerDrinks';
@@ -15,6 +14,7 @@ import FavoriteRecipes from './FavoriteRecipes';
 import FoodDetail from './FoodDetail';
 import FoodInProgress from './FoodInProgress';
 import RecipesMade from './RecipesMade';
+import NotFound from './NotFound';
 
 export {
   Login,
@@ -25,7 +25,6 @@ export {
   DrinkDetail,
   DrinkInProgress,
   ExploreByAreaFood,
-  ExploreByAreaDrinks,
   ExploreByIngredientDrink,
   ExploreByIngredientFood,
   ExplorerDrinks,
@@ -34,4 +33,5 @@ export {
   FoodDetail,
   FoodInProgress,
   RecipesMade,
+  NotFound,
 };
