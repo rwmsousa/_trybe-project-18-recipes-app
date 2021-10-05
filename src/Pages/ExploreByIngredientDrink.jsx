@@ -27,12 +27,12 @@ function ExploreByIngredientDrink() {
       setdata(res);
     }
     fetch();
-  }, []);
+    setShouldUpdate(false);
+  }, [setShouldUpdate]);
 
   async function handleClick(value) {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${value}`);
     const { drinks } = await response.json();
-    setShouldUpdate(false);
     history.push('/bebidas');
     return drinks.length === 0 ? setDrinks([]) : setDrinks(drinks);
   }

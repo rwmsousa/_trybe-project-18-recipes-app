@@ -26,7 +26,6 @@ function Foods() {
     async function fetch() {
       const res = await fetchFoods();
       setFoods(res);
-      setFoodsClone(res);
     }
     if (shouldUpdate) {
       fetch();
@@ -53,6 +52,7 @@ function Foods() {
       setFoods(foodsClone);
     } else {
       const arrayCategory = await fetchByCategoryFoods(name);
+      console.log(arrayCategory);
       setFoods(arrayCategory);
       setActualCategory(value);
     }
@@ -64,12 +64,12 @@ function Foods() {
   };
 
   useEffect(() => {
-    if (foods.length === 1) {
+    if (foods && foods.length === 1 && foods[0].idMeal !== '52968') {
       const { idMeal } = foods[0];
       setIdFoodDetails(idMeal);
       history.push(`/comidas/${idMeal}`);
     }
-  }, []);
+  }, [foods, setIdFoodDetails, history]);
 
   return (
     <div className="foods">

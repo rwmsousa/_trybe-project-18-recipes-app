@@ -11,7 +11,15 @@ function DrinkInProgress() {
 
   return (
     <div>
-      adsflgkjldfg
+      <div>
+        <h3>Ingredientes</h3>
+      </div>
+      <div>
+        <h3>Instruções</h3>
+      </div>
+      <div>
+        <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+      </div>
     </div>
   );
 }
