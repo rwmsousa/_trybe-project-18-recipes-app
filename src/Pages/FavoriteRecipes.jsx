@@ -81,7 +81,7 @@ function FavoriteRecipes() {
               className="categoryCard"
               data-testid={ `${index}-horizontal-top-text` }
             >
-              { recipe.category }
+              { `${recipe.area} - ${recipe.category}` }
             </p>
             <p
               className="titleCard"
@@ -93,6 +93,7 @@ function FavoriteRecipes() {
               type="button"
               data-testid={ `${index}-horizontal-share-btn` }
               className="share-btn"
+              src={ shareIcon }
             >
               <img src={ shareIcon } alt="share link" />
             </button>

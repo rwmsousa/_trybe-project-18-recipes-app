@@ -36,7 +36,7 @@ describe('Favorite recipes screen', () => {
     });
   });
 
-  describe.only('60 - Implemente os elementos da tela de receitas favoritas (cumulativo com os atributos em comum com a tela de receitas feitas) respeitando os atributos descritos no protótipo', () => {
+  describe('60 - Implemente os elementos da tela de receitas favoritas (cumulativo com os atributos em comum com a tela de receitas feitas) respeitando os atributos descritos no protótipo', () => {
     it('Todos os data-testids, cumulativo com os atributos em comum com a tela de receitas feitas, estão disponíveis', () => {
       cy.get('[data-testid="filter-by-all-btn"]');
       cy.get('[data-testid="filter-by-food-btn"]');
@@ -54,7 +54,7 @@ describe('Favorite recipes screen', () => {
     });
   });
 
-  describe('61 - Desenvolva a tela de maneira que, caso a receita do card seja uma comida, ela deve possuir: a foto da receita, o nome, a categoria, a area, um botão de compartilhar e um de "desfavoritar"', () => {
+  describe.only('61 - Desenvolva a tela de maneira que, caso a receita do card seja uma comida, ela deve possuir: a foto da receita, o nome, a categoria, a area, um botão de compartilhar e um de "desfavoritar"', () => {
     it('O card possui os atributos corretos de uma comida', () => {
       cy.get('[data-testid="0-horizontal-image"]')
         .should('have.attr', 'src')
