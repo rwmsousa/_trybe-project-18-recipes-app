@@ -36,7 +36,7 @@ describe('Favorite recipes screen', () => {
     });
   });
 
-  describe('60 - Implemente os elementos da tela de receitas favoritas (cumulativo com os atributos em comum com a tela de receitas feitas) respeitando os atributos descritos no protótipo', () => {
+  describe.only('60 - Implemente os elementos da tela de receitas favoritas (cumulativo com os atributos em comum com a tela de receitas feitas) respeitando os atributos descritos no protótipo', () => {
     it('Todos os data-testids, cumulativo com os atributos em comum com a tela de receitas feitas, estão disponíveis', () => {
       cy.get('[data-testid="filter-by-all-btn"]');
       cy.get('[data-testid="filter-by-food-btn"]');

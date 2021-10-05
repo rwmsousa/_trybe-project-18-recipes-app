@@ -1,6 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
 import Header from '../components/Header';
 import Context from '../Context/Context';
+import shareIcon from '../images/shareIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function FavoriteRecipes() {
   const {
@@ -12,12 +14,26 @@ function FavoriteRecipes() {
   useEffect(() => {
     setCurrentPage('Receitas Favoritas');
     setSearchButton(false);
+
+    const AllFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    setFavoriteStorage(AllFavorite);
   }, [setCurrentPage, setSearchButton]);
 
-  const handleClick = () => {
+  const handleClickAll = () => {
+    const AllFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    setFavoriteStorage(AllFavorite);
+  };
+
+  const handleClickFood = () => {
     const favoriteFood = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const filterFood = favoriteFood.filter((food) => food.type === 'comida');
     setFavoriteStorage(filterFood);
+  };
+
+  const handleClickDrink = () => {
+    const favoriteDrink = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const filterDrink = favoriteDrink.filter((food) => food.type === 'bebida');
+    setFavoriteStorage(filterDrink);
   };
 
   console.log(favoriteStorage);
@@ -29,7 +45,7 @@ function FavoriteRecipes() {
         <button
           value="all"
           type="button"
-          onClick={ handleClick }
+          onClick={ handleClickAll }
           data-testid="filter-by-all-btn"
         >
           All
@@ -37,7 +53,7 @@ function FavoriteRecipes() {
         <button
           value="food"
           type="button"
-          onClick={ handleClick }
+          onClick={ handleClickFood }
           data-testid="filter-by-food-btn"
         >
           Food
@@ -45,7 +61,7 @@ function FavoriteRecipes() {
         <button
           value="drink"
           type="button"
-          onClick={ handleClick }
+          onClick={ handleClickDrink }
           data-testid="filter-by-drink-btn"
         >
           Drinks
@@ -53,45 +69,41 @@ function FavoriteRecipes() {
       </div>
       {favoriteStorage.map((recipe, index) => (
         <div key={ recipe.id } className="cardRecipes">
-          <div className="divImageCard">
-            <img
-              src={ recipe.strMealThumb }
-              alt={ recipe.strMeal }
-              className="immageCard"
-              data-testid={ `"${index}-horizontal-image"` }
-            />
-          </div>
+          <img
+            src={ recipe.image }
+            alt={ recipe.name }
+            className="immageCard"
+            data-testid={ `${index}-horizontal-image` }
+            width="300px"
+          />
           <div className="infoCard">
             <p
               className="categoryCard"
-              data-testid={ `"${index}-horizontal-top-text"` }
+              data-testid={ `${index}-horizontal-top-text` }
             >
-              { recipe.strCategory }
+              { recipe.category }
             </p>
             <p
               className="titleCard"
-              data-testid={ `"${index}-horizontal-name"` }
+              data-testid={ `${index}-horizontal-name` }
             >
-              { recipe.strMeal }
+              { recipe.name }
             </p>
-            <p
-              className="dateCard"
-              data-testid={ `"${index}-horizontal-done-date"` }
+            <button
+              type="button"
+              data-testid={ `${index}-horizontal-share-btn` }
+              className="share-btn"
             >
-              não entendi
-            </p>
-            <img
-              src=""
-              alt=""
-              className="shareCard"
-              data-testid={ `"${index}-horizontal-share-btn"` }
-            />
-            <p
-              className="tagCard"
-              data-testid={ `${index}-${recipe.strTags}-horizontal-tag` }
+              <img src={ shareIcon } alt="share link" />
+            </button>
+            <button
+              type="button"
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              className="favorite-btn"
+              src="blackHeartIcon"
             >
-              { recipe.strTags }
-            </p>
+              <img src={ blackHeartIcon } alt="coracao favoritado" />
+            </button>
           </div>
         </div>
       ))}

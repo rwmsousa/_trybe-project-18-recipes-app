@@ -174,7 +174,6 @@ function FoodDetail() {
       >
         <img src={ shareIcon } alt="share link" />
       </button>
-
       <button
         type="button"
         data-testid="favorite-btn"
