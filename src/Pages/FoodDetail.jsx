@@ -104,6 +104,7 @@ function FoodDetail() {
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
     history.push(`/comidas/${value}/in-progress`);
+    console.log(value);
   };
 
   if (!foodDetails || !foodDetails.length) {
@@ -177,26 +178,15 @@ function FoodDetail() {
           </div>
         ))}
       </section>
-      {foods.map((food, idx) => (
-        <li key={ food.idMeal }>
-          <img
-            src={ food.strMealThumb }
-            alt={ `Comida: ${food.strMeal}` }
-            width="150px"
-            data-testid={ `${idx}-card-img` }
-          />
-          <p data-testid={ `${idx}-card-name` }>{food.strMeal}</p>
-          <button
-            className="start-recipe-button"
-            value={ food.idMeal }
-            type="button"
-            data-testid="start-recipe-btn"
-            onClick={ handleLink }
-          >
-            iniciar receita
-          </button>
-        </li>
-      ))}
+      <button
+        className="start-recipe-button"
+        type="button"
+        data-testid="start-recipe-btn"
+        value={ foodDetails[0].idMeal }
+        onClick={ handleLink }
+      >
+        iniciar receita
+      </button>
     </div>
   );
 }
