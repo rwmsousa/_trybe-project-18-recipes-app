@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import Header from '../components/Header';
 import Context from '../Context/Context';
-import { fetchFoodById } from '../services';
 
 function FavoriteRecipes() {
   const {
@@ -9,23 +8,19 @@ function FavoriteRecipes() {
     setSearchButton } = useContext(Context);
 
   const [favoriteStorage, setFavoriteStorage] = useState([]);
-  const [arrayFavorites, setArrayFavorites] = useState([]);
 
   useEffect(() => {
     setCurrentPage('Receitas Favoritas');
     setSearchButton(false);
   }, [setCurrentPage, setSearchButton]);
 
-  const handleClick = () => (
-    setFavoriteStorage(JSON.parse(localStorage.getItem('favoriteRecipes')))
-  );
+  const handleClick = () => {
+    const favoriteFood = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const filterFood = favoriteFood.filter((food) => food.type === 'comida');
+    setFavoriteStorage(filterFood);
+  };
 
-  favoriteStorage.map(async (favoriteID) => {
-    const resultado = await fetchFoodById(favoriteID);
-    setArrayFavorites(resultado);
-  });
-
-  // console.log(arrayFavorites);
+  console.log(favoriteStorage);
 
   return (
     <div>
@@ -56,37 +51,32 @@ function FavoriteRecipes() {
           Drinks
         </button>
       </div>
-      {/* {favoritos
-      && (
-        <div className="cardRecipes">
+      {favoriteStorage.map((recipe, index) => (
+        <div key={ recipe.id } className="cardRecipes">
           <div className="divImageCard">
             <img
-              src={ favoritos[0].strMealThumb }
-              alt={ favoritos[0].strMeal }
+              src={ recipe.strMealThumb }
+              alt={ recipe.strMeal }
               className="immageCard"
-              // data-testid={ `"${index}-horizontal-image"` }
-              data-testid="0-horizontal-image"
+              data-testid={ `"${index}-horizontal-image"` }
             />
           </div>
           <div className="infoCard">
             <p
               className="categoryCard"
-              // data-testid={ `"${index}-horizontal-top-text"` }
-              data-testid="0-horizontal-top-text"
+              data-testid={ `"${index}-horizontal-top-text"` }
             >
-              { favoritos[0].strCategory }
+              { recipe.strCategory }
             </p>
             <p
               className="titleCard"
-              data-testid="0-horizontal-name"
-              // data-testid={ `"${index}-horizontal-name"` }
+              data-testid={ `"${index}-horizontal-name"` }
             >
-              { favoritos[0].strMeal }
+              { recipe.strMeal }
             </p>
             <p
               className="dateCard"
-              data-testid="0-horizontal-done-date"
-              // data-testid={ `"${index}-horizontal-done-date"` }
+              data-testid={ `"${index}-horizontal-done-date"` }
             >
               não entendi
             </p>
@@ -94,19 +84,17 @@ function FavoriteRecipes() {
               src=""
               alt=""
               className="shareCard"
-              data-testid="0-horizontal-share-btn"
-              // data-testid={ `"${index}-horizontal-share-btn"` }
+              data-testid={ `"${index}-horizontal-share-btn"` }
             />
             <p
               className="tagCard"
-              data-testid={ `0-${favoritos[0].strTags}-horizontal-tag` }
-              // data-testid={ `${index}-${favoritos[0].strTags}-horizontal-tag` }
+              data-testid={ `${index}-${recipe.strTags}-horizontal-tag` }
             >
-              { favoritos[0].strTags }
+              { recipe.strTags }
             </p>
           </div>
         </div>
-      )} */}
+      ))}
     </div>
   );
 }
