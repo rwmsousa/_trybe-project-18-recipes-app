@@ -84,6 +84,12 @@ function FavoriteRecipes() {
               { `${recipe.area} - ${recipe.category}` }
             </p>
             <p
+              className="categoryCard"
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { recipe.alcoholicOrNot }
+            </p>
+            <p
               className="titleCard"
               data-testid={ `${index}-horizontal-name` }
             >
