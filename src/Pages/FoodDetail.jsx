@@ -1,11 +1,13 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
+import copy from 'clipboard-copy';
 import { fetchFoodById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import '../css/Detail.css';
 import Context from '../Context/Context';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 
 function FoodDetail() {
   const {
@@ -23,14 +25,19 @@ function FoodDetail() {
   const [foodDetails, setFoodDetails] = useState([]);
   const [video, setVideo] = useState('');
   const [heartFavorite, setHeartFavorite] = useState(false);
+  const [msgClipboard, setMsgClipboard] = useState(false);
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
 
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
-    if (localStorage.favoriteRecipes && JSON
-      .parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+    if (
+      localStorage.favoriteRecipes
+      && JSON.parse(localStorage.favoriteRecipes).find(
+        (recipeId) => recipeId.id === id,
+      )
+    ) {
       setHeartFavorite(true);
     } else {
       setHeartFavorite(false);
@@ -40,24 +47,51 @@ function FoodDetail() {
   const handleFavorite = () => {
     if (!localStorage.favoriteRecipes) {
       setHeartFavorite(true);
-      return localStorage.setItem('favoriteRecipes', JSON.stringify([id]));
+      return localStorage.setItem('favoriteRecipes', JSON.stringify([
+        {
+          id: foodDetails[0].idMeal,
+          type: 'comida',
+          area: foodDetails[0].strArea,
+          category: foodDetails[0].strCategory,
+          alcoholicOrNot: '',
+          name: foodDetails[0].strMeal,
+          image: foodDetails[0].strMealThumb,
+        },
+      ]));
     }
 
-    if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+    if (JSON.parse(localStorage.favoriteRecipes).find(
+      (recipeId) => recipeId.id === id,
+    )
+    ) {
       setHeartFavorite(false);
-      return localStorage
-        .setItem('favoriteRecipes', JSON.stringify(
-          JSON.parse(localStorage.favoriteRecipes)
-            .filter((recipeId) => recipeId !== id),
-        ));
+      return localStorage.setItem('favoriteRecipes', JSON.stringify(
+        JSON.parse(localStorage.favoriteRecipes).filter(
+          (recipeId) => recipeId.id !== id,
+        ),
+      ));
     }
 
     if (
-      !JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId === id)) {
+      !JSON.parse(localStorage.favoriteRecipes).find(
+        (recipeId) => recipeId.id === id,
+      )
+    ) {
       setHeartFavorite(true);
       const storageFavorites = JSON.parse(localStorage.favoriteRecipes);
-      storageFavorites.push(id);
-      return localStorage.setItem('favoriteRecipes', JSON.stringify(storageFavorites));
+      storageFavorites.push({
+        id: foodDetails[0].idMeal,
+        type: 'comida',
+        area: foodDetails[0].strArea,
+        category: foodDetails[0].strCategory,
+        alcoholicOrNot: '',
+        name: foodDetails[0].strMeal,
+        image: foodDetails[0].strMealThumb,
+      });
+      return localStorage.setItem(
+        'favoriteRecipes',
+        JSON.stringify(storageFavorites),
+      );
     }
   };
 
@@ -93,13 +127,7 @@ function FoodDetail() {
     setShowProfile(false);
     setShowTitlePage(false);
     setSearchButton(false);
-  }, [
-    id,
-    setCurrentPage,
-    setSearchButton,
-    setShowProfile,
-    setShowTitlePage,
-  ]);
+  }, [id, setCurrentPage, setSearchButton, setShowProfile, setShowTitlePage]);
 
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
@@ -111,6 +139,13 @@ function FoodDetail() {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
 
+  const shareLink = () => {
+    const timerMsg = 5000;
+    setMsgClipboard(true);
+    copy(`http://localhost:3000${history.location.pathname}`);
+    setTimeout(() => setMsgClipboard(false), timerMsg);
+  };
+
   return (
     <div>
       <img
@@ -120,10 +155,26 @@ function FoodDetail() {
         width="400px"
       />
       <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
-      <span data-testid="recipe-category">{foodDetails[0].strCategory}</span>
-      <button type="button" data-testid="share-btn" className="share-btn">
-        <i className="fas fa-share-alt" />
+      <span data-testid="recipe-category">{ foodDetails[0].strCategory }</span>
+
+      {msgClipboard ? (
+        <div
+          className="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          <strong>Link copiado!</strong>
+        </div>
+      ) : null }
+
+      <button
+        type="button"
+        data-testid="share-btn"
+        className="share-btn"
+        onClick={ shareLink }
+      >
+        <img src={ shareIcon } alt="share link" />
       </button>
+
       <button
         type="button"
         data-testid="favorite-btn"
@@ -132,15 +183,9 @@ function FoodDetail() {
         src="blackHeartIcon whiteHeartIcon"
       >
         {heartFavorite ? (
-          <img
-            src={ blackHeartIcon }
-            alt="coracao favoritado"
-          />
+          <img src={ blackHeartIcon } alt="coracao favoritado" />
         ) : (
-          <img
-            src={ whiteHeartIcon }
-            alt="coracao nao favoritado"
-          />
+          <img src={ whiteHeartIcon } alt="coracao nao favoritado" />
         )}
       </button>
       <h3>Ingredientes</h3>
