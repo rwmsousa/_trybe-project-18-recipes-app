@@ -166,7 +166,7 @@ function DrinkInProgress() {
         {Object.keys(drinksDetails[0])
           .filter((k) => k.includes('Ingredient'))
           .map((value, idx) => (
-            drinksDetails[0][value] !== null && (
+            drinksDetails[0][value] !== null && drinksDetails[0][value] !== '' && (
               <label
                 htmlFor={ idx }
                 key={ idx }

@@ -43,7 +43,6 @@ function Login() {
     }
   };
 
-
   const handleClick = () => {
     async function fetch() {
       const res = await fetchFoods();

@@ -121,7 +121,7 @@ function FoodInProgress() {
     // copy(`http://localhost:3000${history.location.pathname}`);
     setTimeout(() => setMsgClipboard(false), timerMsg);
   };
-
+  console.log(foodDetails[0]);
   return (
     <div>
       <img
@@ -168,7 +168,7 @@ function FoodInProgress() {
         {Object.keys(foodDetails[0])
           .filter((k) => k.includes('Ingredient'))
           .map((value, idx) => (
-            foodDetails[0][value] !== '' && (
+            foodDetails[0][value] !== '' && foodDetails[0][value] !== null && (
               <label
                 htmlFor={ idx }
                 key={ idx }

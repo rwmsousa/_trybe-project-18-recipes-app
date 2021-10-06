@@ -17,6 +17,7 @@ function FoodDetail() {
     setSearchButton,
     setIdFoodDetails,
     drinksClone,
+    setDrinksClone,
   } = useContext(Context);
 
   const [foodDetails, setFoodDetails] = useState([]);
@@ -103,6 +104,18 @@ function FoodDetail() {
     }
     foodById();
   }, [id]);
+
+  useEffect(() => {
+    async function fetchDrinks() {
+      const { drinks } = await fetch(
+        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+      ).then((data) => data.json());
+      const magicNumber = 6;
+      const SplitArray = drinks.filter((item, idx) => idx < magicNumber);
+      setDrinksClone(SplitArray);
+    }
+    fetchDrinks();
+  }, [setDrinksClone]);
 
   useEffect(() => {
     setCurrentPage('Detalhes');
