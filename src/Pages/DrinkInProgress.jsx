@@ -1,13 +1,9 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
-// import copy from 'clipboard-copy';
-import { fetchDrinkById, handleCheckBoxChange } from '../services';
+import { fetchDrinkById, handleCheckBoxChange, currentData } from '../services';
 import '../css/Detail.css';
-// import Header from '../components/Header';
 import Context from '../Context/Context';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
+import ButtonsDetailsDrinks from '../components/ButtonsDetailsDrinks';
 
 function DrinkInProgress() {
   const {
@@ -15,69 +11,36 @@ function DrinkInProgress() {
     setShowProfile,
     setShowTitlePage,
     setSearchButton,
-    setIdDrinkDetails,
+    setMsgClipboard,
+    msgClipboard,
   } = useContext(Context);
   const [drinksDetails, setDrinksDetails] = useState([]);
-  const [heartFavorite, setHeartFavorite] = useState(false);
-  const [msgClipboard, setMsgClipboard] = useState(false);
+  const [showButtonFinished, setShowButtonFinished] = useState();
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
 
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
-    if (localStorage.favoriteRecipes && JSON
-      .parse(localStorage.favoriteRecipes).find((recipeId) => recipeId.id === id)) {
-      setHeartFavorite(true);
+    if (
+      localStorage.doneRecipes
+      && JSON.parse(localStorage.doneRecipes).find((recipeId) => recipeId.id === id)
+    ) {
+      setShowButtonFinished(false);
     } else {
-      setHeartFavorite(false);
+      setShowButtonFinished(true);
     }
   }, [id]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
-  const handleFavorite = () => {
-    if (!localStorage.favoriteRecipes) {
-      setHeartFavorite(true);
-      return localStorage.setItem('favoriteRecipes', JSON.stringify([
-        {
-          id: drinksDetails[0].idDrink,
-          type: 'bebida',
-          area: '',
-          category: drinksDetails[0].strCategory,
-          alcoholicOrNot: drinksDetails[0].strAlcoholic,
-          name: drinksDetails[0].strDrink,
-          image: drinksDetails[0].strDrinkThumb,
-        },
-      ]));
+  useEffect(() => {
+    async function foodById() {
+      const getDrinkById = await fetchDrinkById(id);
+      setDrinksDetails(getDrinkById);
     }
-
-    if (JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId.id === id)) {
-      setHeartFavorite(false);
-      return localStorage
-        .setItem('favoriteRecipes', JSON.stringify(
-          JSON.parse(localStorage.favoriteRecipes)
-            .filter((recipeId) => recipeId.id !== id),
-        ));
-    }
-
-    if (
-      !JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId.id === id)) {
-      setHeartFavorite(true);
-      const storageFavorites = JSON.parse(localStorage.favoriteRecipes);
-      storageFavorites.push({
-        id: drinksDetails[0].idDrink,
-        type: 'bebida',
-        area: '',
-        category: drinksDetails[0].strCategory,
-        alcoholicOrNot: drinksDetails[0].strAlcoholic,
-        name: drinksDetails[0].strDrink,
-        image: drinksDetails[0].strDrinkThumb,
-      });
-      return localStorage.setItem('favoriteRecipes', JSON.stringify(storageFavorites));
-    }
-  };
+    foodById();
+  }, [id]);
 
   // useEffect para completar o state foodsClone para usar no drinkDetails em recomendações
-
   useEffect(() => {
     setCurrentPage('Detalhes');
     setShowProfile(false);
@@ -94,11 +57,6 @@ function DrinkInProgress() {
     drinkById();
   }, [id]);
 
-  const handleLink = ({ target: { value } }) => {
-    setIdDrinkDetails(value);
-    history.push(`/bebidas/${value}/in-progress`);
-  };
-
   if (!drinksDetails || !drinksDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
@@ -107,8 +65,36 @@ function DrinkInProgress() {
     const timerMsg = 5000;
     setMsgClipboard(true);
     navigator.clipboard.writeText(`http://localhost:3000/bebidas/${url}`);
-    // copy(`http://localhost:3000${history.location.pathname}`);
     setTimeout(() => setMsgClipboard(false), timerMsg);
+  };
+
+  const finishRecipe = () => {
+    const drink = {
+      id: drinksDetails[0].idDrink,
+      type: 'bebida',
+      area: drinksDetails[0].strArea,
+      category: drinksDetails[0].strCategory,
+      alcoholicOrNot: '',
+      name: drinksDetails[0].strDrink,
+      image: drinksDetails[0].strDrinkThumb,
+      doneDate: currentData(),
+      tags: drinksDetails[0].strTags,
+    };
+
+    if (localStorage.doneRecipes) {
+      const getDones = JSON.parse([localStorage.doneRecipes]);
+      getDones.push(drink);
+      localStorage.doneRecipes = JSON.stringify(getDones);
+      setShowButtonFinished(false);
+    } else {
+      localStorage.doneRecipes = JSON.stringify([drink]);
+      setShowButtonFinished(false);
+    }
+  };
+
+  const stateButtons = {
+    msgClipboard,
+    shareLink,
   };
 
   return (
@@ -124,43 +110,8 @@ function DrinkInProgress() {
         {drinksDetails[0].strAlcoholic}
       </span>
 
-      {msgClipboard ? (
-        <div
-          className="alert alert-warning alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>Link copiado!</strong>
-        </div>
-      ) : null }
+      <ButtonsDetailsDrinks value={ stateButtons } />
 
-      <button
-        type="button"
-        data-testid="share-btn"
-        className="share-btn"
-        onClick={ () => shareLink(drinksDetails[0].idDrink) }
-      >
-        <img src={ shareIcon } alt="share link" />
-      </button>
-
-      <button
-        type="button"
-        data-testid="favorite-btn"
-        className="favorite-btn"
-        onClick={ handleFavorite }
-        src="blackHeartIcon whiteHeartIcon"
-      >
-        {heartFavorite ? (
-          <img
-            src={ blackHeartIcon }
-            alt="coracao favoritado"
-          />
-        ) : (
-          <img
-            src={ whiteHeartIcon }
-            alt="coracao nao favoritado"
-          />
-        )}
-      </button>
       <h3>Ingredientes</h3>
       <div>
         {Object.keys(drinksDetails[0])
@@ -184,15 +135,18 @@ function DrinkInProgress() {
           ))}
       </div>
       <h3>Instruções</h3>
-      <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
-      <button
-        className="start-recipe-button"
-        type="button"
-        data-testid="finish-recipe-btn"
-        onClick={ handleLink }
-      >
-        Finalizar receita
-      </button>
+      <p data-testid="instructions">{ drinksDetails[0].strInstructions }</p>
+
+      { showButtonFinished ? (
+        <button
+          className="start-recipe-button"
+          type="button"
+          data-testid="finish-recipe-btn"
+          onClick={ finishRecipe }
+        >
+          Finalizar receita
+        </button>
+      ) : null}
     </div>
   );
 }
