@@ -17,9 +17,7 @@ function FoodDetail() {
     setSearchButton,
     setIdFoodDetails,
     drinksClone,
-    foods,
   } = useContext(Context);
-  console.log(foods);
 
   const [foodDetails, setFoodDetails] = useState([]);
   const [video, setVideo] = useState('');
@@ -116,7 +114,6 @@ function FoodDetail() {
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
     history.push(`/comidas/${value}/in-progress`);
-    console.log(value);
   };
 
   if (!foodDetails || !foodDetails.length) {

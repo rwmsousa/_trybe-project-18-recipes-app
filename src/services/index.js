@@ -29,7 +29,6 @@ export async function fetchIngredientDrinks(ingredient) {
 export async function fetchNameDrinks(name) {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
   const data = await response.json();
-  // console.log(data, 'data');
   const { drinks } = data;
   return drinks;
 }
@@ -146,4 +145,14 @@ export async function fetchFoodByArea(area) {
   const magicNumber = 12;
   const SplitArray = meals.filter((item, idx) => idx < magicNumber);
   return SplitArray;
+}
+
+export function handleCheckBoxChange(target) {
+  const { parentNode } = target;
+  // console.log(parentNode.className);
+  if (parentNode.className === 'checked') {
+    parentNode.classList.remove('checked');
+  } else {
+    parentNode.classList.add('checked');
+  }
 }

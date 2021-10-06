@@ -1,14 +1,13 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
-import copy from 'clipboard-copy';
-import { fetchDrinkById } from '../services';
+// import copy from 'clipboard-copy';
+import { fetchDrinkById, handleCheckBoxChange } from '../services';
 import '../css/Detail.css';
 // import Header from '../components/Header';
 import Context from '../Context/Context';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
-import handleCheckBoxChange from '../functions';
 
 function DrinkInProgress() {
   const {
@@ -98,17 +97,17 @@ function DrinkInProgress() {
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
     history.push(`/bebidas/${value}/in-progress`);
-    console.log(value);
   };
 
   if (!drinksDetails || !drinksDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
-  console.log(drinksDetails);
-  const shareLink = () => {
+
+  const shareLink = (url) => {
     const timerMsg = 5000;
     setMsgClipboard(true);
-    copy(`http://localhost:3000${history.location.pathname}`);
+    navigator.clipboard.writeText(`http://localhost:3000/bebidas/${url}`);
+    // copy(`http://localhost:3000${history.location.pathname}`);
     setTimeout(() => setMsgClipboard(false), timerMsg);
   };
 
@@ -138,7 +137,7 @@ function DrinkInProgress() {
         type="button"
         data-testid="share-btn"
         className="share-btn"
-        onClick={ shareLink }
+        onClick={ () => shareLink(drinksDetails[0].idDrink) }
       >
         <img src={ shareIcon } alt="share link" />
       </button>
