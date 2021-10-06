@@ -29,13 +29,21 @@ function DrinkDetail() {
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
     if (
-      localStorage.doneRecipes && JSON.parse(localStorage.doneRecipes)
-        .find((recipeId) => recipeId.id === id)
+      localStorage.startedRecipe && JSON.parse(localStorage.startedRecipe)
+        .find((recipeId) => recipeId === id)
     ) {
       setShowButtonInitRecipe(false);
     } else {
       setShowButtonInitRecipe(true);
     }
+    // if (
+    //   localStorage.doneRecipes && JSON.parse(localStorage.doneRecipes)
+    //     .find((recipeId) => recipeId.id === id)
+    // ) {
+    //   setShowButtonInitRecipe(false);
+    // } else {
+    //   setShowButtonInitRecipe(true);
+    // }
   }, [id]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
   // useEffect para completar o state foodsClone para usar no drinkDetails em recomendações
@@ -64,7 +72,6 @@ function DrinkDetail() {
   useEffect(() => {
     async function drinkById() {
       const getDrinkById = await fetchDrinkById(id);
-
       setDrinksDetails(getDrinkById);
     }
     drinkById();
@@ -72,7 +79,15 @@ function DrinkDetail() {
 
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
-    
+    if (localStorage.startedRecipe && !JSON.parse([localStorage.startedRecipe])
+      .find((recipe) => recipe === id)) {
+      const getStarted = JSON.parse([localStorage.startedRecipe]);
+      getStarted.push(id);
+      localStorage.startedRecipe = JSON.stringify(getStarted);
+    }
+    if (!localStorage.startedRecipe) {
+      localStorage.startedRecipe = JSON.stringify([id]);
+    }
     history.push(`/bebidas/${value}/in-progress`);
   };
 
@@ -123,7 +138,7 @@ function DrinkDetail() {
           </div>
         ))}
       </section>
-      {showButtonInitRecipe ? (
+      { showButtonInitRecipe ? (
         <button
           button
           className="start-recipe-button"
@@ -132,7 +147,7 @@ function DrinkDetail() {
           value={ drinksDetails[0].idDrink }
           onClick={ handleLink }
         >
-          Iniciar Receita
+          Continuar Receita
         </button>
       ) : (
         <button
@@ -143,7 +158,7 @@ function DrinkDetail() {
           value={ drinksDetails[0].idDrink }
           onClick={ handleLink }
         >
-          Continuar Receita
+          Iniciar Receita
         </button>
       )}
     </div>

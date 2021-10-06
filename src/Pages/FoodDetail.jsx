@@ -29,8 +29,8 @@ function FoodDetail() {
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
     if (
-      localStorage.doneRecipes
-      && JSON.parse(localStorage.doneRecipes).find((recipeId) => recipeId.id === id)
+      localStorage.startedRecipe && JSON.parse(localStorage.startedRecipe)
+        .find((recipeId) => recipeId === id)
     ) {
       setShowButtonInitRecipe(false);
     } else {
@@ -70,6 +70,15 @@ function FoodDetail() {
 
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
+    if (localStorage.startedRecipe && !JSON.parse([localStorage.startedRecipe])
+      .find((recipe) => recipe === id)) {
+      const getStarted = JSON.parse([localStorage.startedRecipe]);
+      getStarted.push(id);
+      localStorage.startedRecipe = JSON.stringify(getStarted);
+    }
+    if (!localStorage.startedRecipe) {
+      localStorage.startedRecipe = JSON.stringify([id]);
+    }
     history.push(`/comidas/${value}/in-progress`);
   };
 
