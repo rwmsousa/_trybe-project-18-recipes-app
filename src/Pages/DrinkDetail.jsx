@@ -21,30 +21,9 @@ function DrinkDetail() {
   } = useContext(Context);
 
   const [msgClipboard, setMsgClipboard] = useState(false);
-  const [showButtonInitRecipe, setShowButtonInitRecipe] = useState(true);
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
-
-  // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
-  useEffect(() => {
-    if (
-      localStorage.startedRecipe && JSON.parse(localStorage.startedRecipe)
-        .find((recipeId) => recipeId === id)
-    ) {
-      setShowButtonInitRecipe(false);
-    } else {
-      setShowButtonInitRecipe(true);
-    }
-    // if (
-    //   localStorage.doneRecipes && JSON.parse(localStorage.doneRecipes)
-    //     .find((recipeId) => recipeId.id === id)
-    // ) {
-    //   setShowButtonInitRecipe(false);
-    // } else {
-    //   setShowButtonInitRecipe(true);
-    // }
-  }, [id]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
   // useEffect para completar o state foodsClone para usar no drinkDetails em recomendações
   useEffect(() => {
@@ -138,29 +117,30 @@ function DrinkDetail() {
           </div>
         ))}
       </section>
-      { showButtonInitRecipe ? (
-        <button
-          button
-          className="start-recipe-button"
-          type="button"
-          data-testid="start-recipe-btn"
-          value={ drinksDetails[0].idDrink }
-          onClick={ handleLink }
-        >
-          Continuar Receita
-        </button>
-      ) : (
-        <button
-          button
-          className="start-recipe-button"
-          type="button"
-          data-testid="start-recipe-btn"
-          value={ drinksDetails[0].idDrink }
-          onClick={ handleLink }
-        >
-          Iniciar Receita
-        </button>
-      )}
+      { localStorage.startedRecipe && JSON.parse(localStorage.startedRecipe)
+        .find((recipeId) => recipeId === id) ? (
+          <button
+            button
+            className="start-recipe-button"
+            type="button"
+            data-testid="start-recipe-btn"
+            value={ drinksDetails[0].idDrink }
+            onClick={ handleLink }
+          >
+            Continuar Receita
+          </button>
+        ) : (
+          <button
+            button
+            className="start-recipe-button"
+            type="button"
+            data-testid="start-recipe-btn"
+            value={ drinksDetails[0].idDrink }
+            onClick={ handleLink }
+          >
+            Iniciar Receita
+          </button>
+        )}
     </div>
   );
 }

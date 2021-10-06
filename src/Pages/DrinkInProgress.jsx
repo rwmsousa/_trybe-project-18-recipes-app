@@ -90,6 +90,7 @@ function DrinkInProgress() {
       localStorage.doneRecipes = JSON.stringify([drink]);
       setShowButtonFinished(false);
     }
+    history.push('/receitas-feitas');
   };
 
   const stateButtons = {

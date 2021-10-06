@@ -21,22 +21,9 @@ function FoodDetail() {
   const [foodDetails, setFoodDetails] = useState([]);
   const [video, setVideo] = useState('');
   const [msgClipboard, setMsgClipboard] = useState(false);
-  const [showButtonInitRecipe, setShowButtonInitRecipe] = useState();
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
-
-  // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
-  useEffect(() => {
-    if (
-      localStorage.startedRecipe && JSON.parse(localStorage.startedRecipe)
-        .find((recipeId) => recipeId === id)
-    ) {
-      setShowButtonInitRecipe(false);
-    } else {
-      setShowButtonInitRecipe(true);
-    }
-  }, [id, setShowButtonInitRecipe]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
   // useEffect para completar o state drinksClone para usar no foodDetails em recomendações
   useEffect(() => {
@@ -147,17 +134,18 @@ function FoodDetail() {
           </div>
         ))}
       </section>
-      { showButtonInitRecipe ? (
-        <button
-          button
-          className="start-recipe-button"
-          type="button"
-          data-testid="start-recipe-btn"
-          value={ foodDetails[0].idMeal }
-          onClick={ handleLink }
-        >
-          Continuar Receita
-        </button>)
+      { localStorage.startedRecipe && JSON.parse(localStorage.startedRecipe)
+        .find((recipeId) => recipeId === id) ? (
+          <button
+            button
+            className="start-recipe-button"
+            type="button"
+            data-testid="start-recipe-btn"
+            value={ foodDetails[0].idMeal }
+            onClick={ handleLink }
+          >
+            Continuar Receita
+          </button>)
         : (
           <button
             button
