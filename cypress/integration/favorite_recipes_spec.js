@@ -87,7 +87,7 @@ describe('Favorite recipes screen', () => {
     });
   });
 
-  describe.only('63 - Desenvolva a solução de maneira que o botão de compartilhar deve copiar a URL da tela de detalhes da receita para o clipboard', () => {
+  describe('63 - Desenvolva a solução de maneira que o botão de compartilhar deve copiar a URL da tela de detalhes da receita para o clipboard', () => {
     it('Ao clicar no botão de compartilhar deve aparecer a mensagem "Link copiado!"', () => {
       cy.get('[data-testid="0-horizontal-share-btn"]').click();
 

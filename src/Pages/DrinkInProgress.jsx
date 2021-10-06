@@ -98,13 +98,11 @@ function DrinkInProgress() {
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
     history.push(`/bebidas/${value}/in-progress`);
-    console.log(value);
   };
 
   if (!drinksDetails || !drinksDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
-  console.log(drinksDetails);
   const shareLink = () => {
     const timerMsg = 5000;
     setMsgClipboard(true);
