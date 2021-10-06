@@ -9,7 +9,6 @@ function Form() {
     handleShowPassword,
     icon,
     showPassword,
-    setEmail,
   } = useContext(Context);
 
   return (
@@ -21,7 +20,7 @@ function Form() {
           id="input-email"
           placeholder="Insira seu e-mail"
           data-testid="email-input"
-          onChange={ (e) => setEmail(e.target.value) }
+          onChange={ handleChange }
         />
       </div>
       <div className="field space ">
