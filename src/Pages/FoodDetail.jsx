@@ -17,7 +17,6 @@ function FoodDetail() {
     setSearchButton,
     setIdFoodDetails,
     drinksClone,
-    setDrinksClone,
     foods,
   } = useContext(Context);
   console.log(foods);
@@ -96,21 +95,6 @@ function FoodDetail() {
   };
 
   // useEffect para completar o state drinksClone para usar no foodDetails em recomendações
-  useEffect(() => {
-    async function fetchDrinks() {
-      const response = await fetch(
-        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-      ).then((data) => data.json());
-
-      const magicNumber = 6;
-      const SplitArray = response.drinks.filter(
-        (item, idx) => idx < magicNumber,
-      );
-
-      setDrinksClone(SplitArray);
-    }
-    fetchDrinks();
-  }, [setDrinksClone]);
 
   useEffect(() => {
     async function foodById() {
