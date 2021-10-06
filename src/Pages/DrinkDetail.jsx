@@ -113,7 +113,6 @@ function DrinkDetail() {
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
     history.push(`/bebidas/${value}/in-progress`);
-    console.log(value);
   };
 
   if (!drinksDetails || !drinksDetails.length) {

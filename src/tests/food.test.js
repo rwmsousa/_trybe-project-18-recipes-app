@@ -36,7 +36,7 @@ describe('Testa pagina Food.js', () => {
     expect(header).toBeInTheDocument();
   });
 
-  test('Verifica que existem 5 botôes de categorias', async () => {
+  test('Verifica que existem 5 botôes de categorias', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/comidas');
 
@@ -45,14 +45,17 @@ describe('Testa pagina Food.js', () => {
     expect(pathname).toBe('/comidas');
 
     // const allButton = await screen.findByText('All');
+    // console.log(allButton);
     // const beefButton = await screen.findByText('Beef');
+
+    // console.log(beefButton);
     // const breakfastButton = await screen.findByText('Breakfast');
     // const chickenButton = await screen.findByText('Chicken');
     // const dessertButton = await screen.findByText('Dessert');
     // const goatButton = await screen.findByText('Goat');
 
-    // const allButton = screen.findByTestId('All-category-filter');
-    // const beefButton = screen.findByTestId('Beef-category-filter');
+    const allButton = screen.findByTestId('All-category-filter');
+    const beefButton = screen.findByTestId('Beef-category-filter');
     // const breakfastButton = screen.findByTestId('Breakfast-category-filter');
     // const chickenButton = screen.findByTestId('Chicken-category-filter');
     // const dessertButton = screen.findByTestId('Dessert-category-filter');
@@ -65,8 +68,8 @@ describe('Testa pagina Food.js', () => {
     // const dessertButton = screen.findByRole('button', { name: 'Dessert' });
     // const goatButton = screen.findByRole('button', { name: 'Goat' });
 
-    // expect(allButton).toBeInTheDocument();
-    // expect(beefButton).toBeInTheDocument();
+    expect(allButton).toBeInTheDocument();
+    expect(beefButton).toBeInTheDocument();
     // expect(breakfastButton).toBeInTheDocument();
     // expect(chickenButton).toBeInTheDocument();
     // expect(dessertButton).toBeInTheDocument();

@@ -29,7 +29,6 @@ export async function fetchIngredientDrinks(ingredient) {
 export async function fetchNameDrinks(name) {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
   const data = await response.json();
-  // console.log(data, 'data');
   const { drinks } = data;
   return drinks;
 }

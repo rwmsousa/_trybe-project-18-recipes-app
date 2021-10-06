@@ -14,17 +14,35 @@ function Login() {
   const history = useHistory();
   const { setFoods } = useContext(Context);
 
-  const handleChange = ({ target: { value } }) => {
+  const validateLogin = (inputEmail, inputPassword) => {
     const getButton = document.getElementById('submit-button');
     const validEmail = /\S+@\S+\.\S+/;
-    const magicNumber = 5;
-    setPassword(value);
+    const magicNumber = 6;
 
-    if (validEmail.test(email) && password.length > magicNumber) {
-      setButton(!button);
+    if (validEmail.test(inputEmail) && inputPassword.length > magicNumber) {
+      setButton(false);
       getButton.classList.add('test');
+    } else {
+      setButton(true);
+      getButton.classList.remove('test');
     }
   };
+
+  const handleChange = ({ target: { value, id } }) => {
+    switch (id) {
+    case 'input-email':
+      setEmail(value);
+      validateLogin(value, password);
+      break;
+    case 'input-password':
+      setPassword(value);
+      validateLogin(email, value);
+      break;
+    default:
+      break;
+    }
+  };
+
 
   const handleClick = () => {
     async function fetch() {

@@ -109,7 +109,6 @@ function FoodInProgress() {
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
     history.push(`/comidas/${value}/in-progress`);
-    console.log(value);
   };
 
   if (!foodDetails || !foodDetails.length) {
