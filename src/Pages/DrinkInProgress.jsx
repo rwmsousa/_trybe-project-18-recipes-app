@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import copy from 'clipboard-copy';
-import { fetchDrinkById } from '../services';
+import { fetchDrinkById, currentData } from '../services';
 import '../css/Detail.css';
 // import Header from '../components/Header';
 import Context from '../Context/Context';
@@ -16,11 +16,11 @@ function DrinkInProgress() {
     setShowProfile,
     setShowTitlePage,
     setSearchButton,
-    setIdDrinkDetails,
   } = useContext(Context);
   const [drinksDetails, setDrinksDetails] = useState([]);
   const [heartFavorite, setHeartFavorite] = useState(false);
   const [msgClipboard, setMsgClipboard] = useState(false);
+  const [showButtonFinished, setShowButtonFinished] = useState();
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
@@ -33,7 +33,23 @@ function DrinkInProgress() {
     } else {
       setHeartFavorite(false);
     }
+    if (
+      localStorage.doneRecipes
+      && JSON.parse(localStorage.doneRecipes).find((recipeId) => recipeId.id === id)
+    ) {
+      setShowButtonFinished(false);
+    } else {
+      setShowButtonFinished(true);
+    }
   }, [id]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
+
+  useEffect(() => {
+    async function foodById() {
+      const getDrinkById = await fetchDrinkById(id);
+      setDrinksDetails(getDrinkById);
+    }
+    foodById();
+  }, [id]);
 
   const handleFavorite = () => {
     if (!localStorage.favoriteRecipes) {
@@ -95,21 +111,39 @@ function DrinkInProgress() {
     drinkById();
   }, [id]);
 
-  const handleLink = ({ target: { value } }) => {
-    setIdDrinkDetails(value);
-    history.push(`/bebidas/${value}/in-progress`);
-    console.log(value);
-  };
-
   if (!drinksDetails || !drinksDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
-  console.log(drinksDetails);
+
   const shareLink = () => {
     const timerMsg = 5000;
     setMsgClipboard(true);
     copy(`http://localhost:3000${history.location.pathname}`);
     setTimeout(() => setMsgClipboard(false), timerMsg);
+  };
+
+  const finishRecipe = () => {
+    const drink = {
+      id: drinksDetails[0].idDrink,
+      type: 'bebida',
+      area: drinksDetails[0].strArea,
+      category: drinksDetails[0].strCategory,
+      alcoholicOrNot: '',
+      name: drinksDetails[0].strDrink,
+      image: drinksDetails[0].strDrinkThumb,
+      doneDate: currentData(),
+      tags: drinksDetails[0].strTags,
+    };
+
+    if (localStorage.doneRecipes) {
+      const getDones = JSON.parse([localStorage.doneRecipes]);
+      getDones.push(drink);
+      localStorage.doneRecipes = JSON.stringify(getDones);
+      setShowButtonFinished(false);
+    } else {
+      localStorage.doneRecipes = JSON.stringify([drink]);
+      setShowButtonFinished(false);
+    }
   };
 
   return (
@@ -185,15 +219,18 @@ function DrinkInProgress() {
           ))}
       </div>
       <h3>Instruções</h3>
-      <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
-      <button
-        className="start-recipe-button"
-        type="button"
-        data-testid="finish-recipe-btn"
-        onClick={ handleLink }
-      >
-        Finalizar receita
-      </button>
+      <p data-testid="instructions">{ drinksDetails[0].strInstructions }</p>
+
+      { showButtonFinished ? (
+        <button
+          className="start-recipe-button"
+          type="button"
+          data-testid="finish-recipe-btn"
+          onClick={ finishRecipe }
+        >
+          Finalizar receita
+        </button>
+      ) : null}
     </div>
   );
 }

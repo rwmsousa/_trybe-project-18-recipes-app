@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import copy from 'clipboard-copy';
-import { fetchFoodById } from '../services';
+import { fetchFoodById, currentData } from '../services';
 // import IngredientsList from '../components/IngredientsList';
 import '../css/Detail.css';
 import Context from '../Context/Context';
@@ -16,12 +16,12 @@ function FoodInProgress() {
     setShowProfile,
     setShowTitlePage,
     setSearchButton,
-    setIdFoodDetails,
   } = useContext(Context);
 
   const [foodDetails, setFoodDetails] = useState([]);
   const [heartFavorite, setHeartFavorite] = useState(false);
   const [msgClipboard, setMsgClipboard] = useState(false);
+  const [showButtonFinished, setShowButtonFinished] = useState();
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
@@ -37,6 +37,15 @@ function FoodInProgress() {
       setHeartFavorite(true);
     } else {
       setHeartFavorite(false);
+    }
+
+    if (
+      localStorage.doneRecipes
+      && JSON.parse(localStorage.doneRecipes).find((recipeId) => recipeId.id === id)
+    ) {
+      setShowButtonFinished(false);
+    } else {
+      setShowButtonFinished(true);
     }
   }, [id]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
@@ -56,16 +65,16 @@ function FoodInProgress() {
       ]));
     }
 
-    if (JSON.parse(localStorage.favoriteRecipes).find(
-      (recipeId) => recipeId.id === id,
-    )
+    if (
+      JSON.parse(localStorage.favoriteRecipes).find((recipeId) => recipeId.id === id)
     ) {
       setHeartFavorite(false);
-      return localStorage.setItem('favoriteRecipes', JSON.stringify(
-        JSON.parse(localStorage.favoriteRecipes).filter(
-          (recipeId) => recipeId.id !== id,
-        ),
-      ));
+      return localStorage.setItem('favoriteRecipes',
+        JSON.stringify(
+          JSON.parse(localStorage.favoriteRecipes).filter(
+            (recipeId) => recipeId.id !== id,
+          ),
+        ));
     }
 
     if (
@@ -106,12 +115,6 @@ function FoodInProgress() {
     setSearchButton(false);
   }, [id, setCurrentPage, setSearchButton, setShowProfile, setShowTitlePage]);
 
-  const handleLink = ({ target: { value } }) => {
-    setIdFoodDetails(value);
-    history.push(`/comidas/${value}/in-progress`);
-    console.log(value);
-  };
-
   if (!foodDetails || !foodDetails.length) {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
@@ -123,6 +126,30 @@ function FoodInProgress() {
     setTimeout(() => setMsgClipboard(false), timerMsg);
   };
 
+  const finishRecipe = () => {
+    const food = {
+      id: foodDetails[0].idMeal,
+      type: 'comida',
+      area: foodDetails[0].strArea,
+      category: foodDetails[0].strCategory,
+      alcoholicOrNot: '',
+      name: foodDetails[0].strMeal,
+      image: foodDetails[0].strMealThumb,
+      doneDate: currentData(),
+      tags: foodDetails[0].strTags,
+    };
+
+    if (localStorage.doneRecipes) {
+      const getDones = JSON.parse([localStorage.doneRecipes]);
+      getDones.push(food);
+      localStorage.doneRecipes = JSON.stringify(getDones);
+      setShowButtonFinished(false);
+    } else {
+      localStorage.doneRecipes = JSON.stringify([food]);
+      setShowButtonFinished(false);
+    }
+  };
+
   return (
     <div>
       <img
@@ -132,7 +159,7 @@ function FoodInProgress() {
         width="400px"
       />
       <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
-      <span data-testid="recipe-category">{ foodDetails[0].strCategory }</span>
+      <span data-testid="recipe-category">{foodDetails[0].strCategory}</span>
 
       {msgClipboard ? (
         <div
@@ -141,7 +168,7 @@ function FoodInProgress() {
         >
           <strong>Link copiado!</strong>
         </div>
-      ) : null }
+      ) : null}
 
       <button
         type="button"
@@ -168,8 +195,8 @@ function FoodInProgress() {
       <div>
         {Object.keys(foodDetails[0])
           .filter((k) => k.includes('Ingredient'))
-          .map((value, idx) => (
-            foodDetails[0][value] !== '' && (
+          .map(
+            (value, idx) => foodDetails[0][value] !== '' && (
               <label
                 htmlFor={ idx }
                 key={ idx }
@@ -183,19 +210,23 @@ function FoodInProgress() {
                 />
                 {foodDetails[0][value]}
               </label>
-            )
-          ))}
+            ),
+          )}
       </div>
       <h3>Instruções</h3>
-      <p data-testid="instructions">{foodDetails[0].strInstructions}</p>
-      <button
-        className="start-recipe-button"
-        type="button"
-        data-testid="finish-recipe-btn"
-        onClick={ handleLink }
-      >
-        Finalizar receita
-      </button>
+      <p data-testid="instructions">{ foodDetails[0].strInstructions }</p>
+
+      { showButtonFinished ? (
+        <button
+          className="start-recipe-button"
+          type="button"
+          data-testid="finish-recipe-btn"
+          onClick={ finishRecipe }
+        >
+          Finalizar receita
+        </button>)
+        : null}
+
     </div>
   );
 }

@@ -23,6 +23,8 @@ function DrinkDetail() {
   const [drinksDetails, setDrinksDetails] = useState([]);
   const [heartFavorite, setHeartFavorite] = useState(false);
   const [msgClipboard, setMsgClipboard] = useState(false);
+  const [showButtonInitRecipe, setShowButtonInitRecipe] = useState();
+  // const [showButtonStarted, setShowButtonStarted] = useState();
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
@@ -35,6 +37,24 @@ function DrinkDetail() {
     } else {
       setHeartFavorite(false);
     }
+
+    if (
+      localStorage.doneRecipes
+      && JSON.parse(localStorage.doneRecipes).find((recipeId) => recipeId.id === id)
+    ) {
+      setShowButtonInitRecipe(false);
+    } else {
+      setShowButtonInitRecipe(true);
+    }
+
+    // if (
+    //   localStorage.startedRecipe
+    //   && JSON.parse(localStorage.startedRecipe).find((recipeId) => recipeId === id)
+    // ) {
+    //   setShowButtonStarted(true);
+    // } else {
+    //   setShowButtonStarted(false);
+    // }
   }, [id]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
   const handleFavorite = () => {
@@ -112,8 +132,16 @@ function DrinkDetail() {
 
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
+    // if (localStorage.startedRecipe && !JSON.parse([localStorage.startedRecipe])
+    //   .find((recipe) => recipe === id)) {
+    //   const getStarted = JSON.parse([localStorage.startedRecipe]);
+    //   getStarted.push(id);
+    //   localStorage.startedRecipe = JSON.stringify(getStarted);
+    // }
+    // if (!localStorage.startedRecipe) {
+    //   localStorage.startedRecipe = JSON.stringify([id]);
+    // }
     history.push(`/bebidas/${value}/in-progress`);
-    console.log(value);
   };
 
   if (!drinksDetails || !drinksDetails.length) {
@@ -135,12 +163,12 @@ function DrinkDetail() {
         data-testid="recipe-photo"
         width="400px"
       />
-      <h1 data-testid="recipe-title">{drinksDetails[0].strDrink}</h1>
+      <h1 data-testid="recipe-title">{ drinksDetails[0].strDrink }</h1>
       <span data-testid="recipe-category">
-        {drinksDetails[0].strAlcoholic}
+        { drinksDetails[0].strAlcoholic }
       </span>
 
-      {msgClipboard ? (
+      { msgClipboard ? (
         <div
           className="alert alert-warning alert-dismissible fade show"
           role="alert"
@@ -165,7 +193,7 @@ function DrinkDetail() {
         onClick={ handleFavorite }
         src="blackHeartIcon whiteHeartIcon"
       >
-        {heartFavorite ? (
+        { heartFavorite ? (
           <img
             src={ blackHeartIcon }
             alt="coracao favoritado"
@@ -175,15 +203,15 @@ function DrinkDetail() {
             src={ whiteHeartIcon }
             alt="coracao nao favoritado"
           />
-        )}
+        ) }
       </button>
       <h3>Ingredientes</h3>
       <IngredientsList list={ drinksDetails } />
       <h3>Instruções</h3>
-      <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
+      <p data-testid="instructions">{ drinksDetails[0].strInstructions }</p>
       <h3>Recomendadas</h3>
       <section className="recomended-section">
-        {foodsClone.map((food, idx) => (
+        { foodsClone.map((food, idx) => (
           <div className="recomended-div" key={ food.idMeal }>
             <img
               src={ food.strMealThumb }
@@ -194,17 +222,31 @@ function DrinkDetail() {
             <h6 data-testid={ `${idx}-recomendation-title` }>{ food.strMeal }</h6>
 
           </div>
-        ))}
+        )) }
       </section>
-      <button
-        className="start-recipe-button"
-        type="button"
-        data-testid="start-recipe-btn"
-        value={ drinksDetails[0].idDrink }
-        onClick={ handleLink }
-      >
-        iniciar receita
-      </button>
+      { showButtonInitRecipe ? (
+        <button
+          button
+          className="start-recipe-button"
+          type="button"
+          data-testid="start-recipe-btn"
+          value={ drinksDetails[0].idDrink }
+          onClick={ handleLink }
+        >
+          Continuar Receita
+        </button>)
+        : (
+          <button
+            button
+            className="start-recipe-button"
+            type="button"
+            data-testid="start-recipe-btn"
+            value={ drinksDetails[0].idDrink }
+            onClick={ handleLink }
+          >
+            Iniciar Receita
+          </button>
+        ) }
     </div>
   );
 }

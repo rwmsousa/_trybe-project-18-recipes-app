@@ -25,6 +25,7 @@ function FoodDetail() {
   const [video, setVideo] = useState('');
   const [heartFavorite, setHeartFavorite] = useState(false);
   const [msgClipboard, setMsgClipboard] = useState(false);
+  const [showButtonInitRecipe, setShowButtonInitRecipe] = useState();
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
@@ -41,7 +42,16 @@ function FoodDetail() {
     } else {
       setHeartFavorite(false);
     }
-  }, [id]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
+
+    if (
+      localStorage.doneRecipes
+      && JSON.parse(localStorage.doneRecipes).find((recipeId) => recipeId.id === id)
+    ) {
+      setShowButtonInitRecipe(false);
+    } else {
+      setShowButtonInitRecipe(true);
+    }
+  }, [id, setShowButtonInitRecipe]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
   const handleFavorite = () => {
     if (!localStorage.favoriteRecipes) {
@@ -115,8 +125,16 @@ function FoodDetail() {
 
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
+    // if (localStorage.startedRecipe && !JSON.parse([localStorage.startedRecipe])
+    //   .find((recipe) => recipe === id)) {
+    //   const getStarted = JSON.parse([localStorage.startedRecipe]);
+    //   getStarted.push(id);
+    //   localStorage.startedRecipe = JSON.stringify(getStarted);
+    // }
+    // if (!localStorage.startedRecipe) {
+    //   localStorage.startedRecipe = JSON.stringify([id]);
+    // }
     history.push(`/comidas/${value}/in-progress`);
-    console.log(value);
   };
 
   if (!foodDetails || !foodDetails.length) {
@@ -206,15 +224,29 @@ function FoodDetail() {
           </div>
         ))}
       </section>
-      <button
-        className="start-recipe-button"
-        type="button"
-        data-testid="start-recipe-btn"
-        value={ foodDetails[0].idMeal }
-        onClick={ handleLink }
-      >
-        iniciar receita
-      </button>
+      { showButtonInitRecipe ? (
+        <button
+          button
+          className="start-recipe-button"
+          type="button"
+          data-testid="start-recipe-btn"
+          value={ foodDetails[0].idMeal }
+          onClick={ handleLink }
+        >
+          Continuar Receita
+        </button>)
+        : (
+          <button
+            button
+            className="start-recipe-button"
+            type="button"
+            data-testid="start-recipe-btn"
+            value={ foodDetails[0].idMeal }
+            onClick={ handleLink }
+          >
+            Iniciar Receita
+          </button>
+        ) }
     </div>
   );
 }
