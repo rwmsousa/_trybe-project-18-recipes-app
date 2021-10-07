@@ -1,10 +1,12 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import shareIcon from '../images/shareIcon.svg';
 
 function RecipesMade() {
+  const history = useHistory();
   const {
     setCurrentPage,
     setSearchButton } = useContext(Context);
@@ -85,8 +87,8 @@ function RecipesMade() {
         <div key={ recipe.id } className="cardRecipes">
           { recipe.type === 'comida'
             ? (
-              <Link
-                to={ `/comidas/${recipe.id}` }
+              <button
+                onClick={ () => history.push(`/comidas/${recipe.id}`) }
                 type="button"
               >
                 <img
@@ -96,10 +98,10 @@ function RecipesMade() {
                   data-testid={ `${index}-horizontal-image` }
                   width="300px"
                 />
-              </Link>)
+              </button>)
             : (
-              <Link
-                to={ `/bebidas/${recipe.id}` }
+              <button
+                onClick={ () => history.push(`/bebidas/${recipe.id}`) }
                 type="button"
               >
                 <img
@@ -109,7 +111,7 @@ function RecipesMade() {
                   data-testid={ `${index}-horizontal-image` }
                   width="300px"
                 />
-              </Link>) }
+              </button>) }
 
           <div className="infoCard">
             <p
@@ -127,29 +129,25 @@ function RecipesMade() {
 
             { recipe.type === 'comida'
               ? (
-                <p
+                <button
                   className="titleCard"
                   data-testid={ `${index}-horizontal-name` }
+                  onClick={ () => history.push(`/comidas/${recipe.id}`) }
+                  type="button"
                 >
-                  <Link
-                    to={ `/comidas/${recipe.id}` }
-                    type="button"
-                  >
-                    { recipe.name }
-                  </Link>
-                </p>)
+                  { recipe.name }
+                </button>
+              )
               : (
-                <p
+                <button
                   className="titleCard"
                   data-testid={ `${index}-horizontal-name` }
+                  onClick={ () => history.push(`/bebidas/${recipe.id}`) }
+                  type="button"
                 >
-                  <Link
-                    to={ `/bebidas/${recipe.id}` }
-                    type="button"
-                  >
-                    { recipe.name }
-                  </Link>
-                </p>)}
+                  { recipe.name }
+                </button>
+              )}
 
             <p data-testid={ `${index}-horizontal-done-date` }>
               Feita em
