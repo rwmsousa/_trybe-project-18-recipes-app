@@ -3,7 +3,8 @@ import { useHistory } from 'react-router';
 import { fetchFoodById, handleCheckBoxChange, currentData } from '../services';
 import '../css/Detail.css';
 import Context from '../Context/Context';
-import ButtonsDetailsFoods from '../components/ButtonsDetailsFoods';
+import HandleShare from '../components/HandleShareFood';
+import HandleFavorite from '../components/HandleFavoriteFood';
 
 function FoodInProgress() {
   const {
@@ -77,9 +78,11 @@ function FoodInProgress() {
       getDones.push(food);
       localStorage.doneRecipes = JSON.stringify(getDones);
       setShowButtonFinished(false);
+      history.push('/receitas-feitas');
     } else {
       localStorage.doneRecipes = JSON.stringify([food]);
       setShowButtonFinished(false);
+      history.push('/receitas-feitas');
     }
   };
 
@@ -99,7 +102,8 @@ function FoodInProgress() {
       <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
       <span data-testid="recipe-category">{foodDetails[0].strCategory}</span>
 
-      <ButtonsDetailsFoods value={ stateButtons } />
+      <HandleShare value={ stateButtons } />
+      <HandleFavorite foodDetails={ foodDetails } />
 
       <h3>Ingredientes</h3>
       <div>

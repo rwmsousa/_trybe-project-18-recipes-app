@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import shareIcon from '../images/shareIcon.svg';
@@ -9,6 +10,7 @@ function FavoriteRecipes() {
     setCurrentPage,
     setSearchButton } = useContext(Context);
 
+  const [update, setUpdate] = useState(true);
   const [msgClipboard, setMsgClipboard] = useState(false);
   const [favoriteStorage, setFavoriteStorage] = useState([]);
 
@@ -18,7 +20,7 @@ function FavoriteRecipes() {
 
     const AllFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     setFavoriteStorage(AllFavorite);
-  }, [setCurrentPage, setSearchButton]);
+  }, [setCurrentPage, setSearchButton, update]);
 
   const handleClickAll = () => {
     const AllFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -42,6 +44,14 @@ function FavoriteRecipes() {
     const timerMsg = 5000;
     setMsgClipboard(true);
     setTimeout(() => setMsgClipboard(false), timerMsg);
+  };
+
+  const handleFavorite = (recipeId) => {
+    console.log(recipeId);
+    const getFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const newFavorites = getFavorites.filter((favorite) => favorite.id !== recipeId);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    setUpdate(!update);
   };
 
   return (
@@ -83,13 +93,15 @@ function FavoriteRecipes() {
       </div>
       {favoriteStorage && favoriteStorage.map((recipe, index) => (
         <div key={ recipe.id } className="cardRecipes">
-          <img
-            src={ recipe.image }
-            alt={ recipe.name }
-            className="immageCard"
-            data-testid={ `${index}-horizontal-image` }
-            width="300px"
-          />
+          <Link to={ `/${recipe.type}s/${recipe.id}` }>
+            <img
+              src={ recipe.image }
+              alt={ recipe.name }
+              className="immageCard"
+              data-testid={ `${index}-horizontal-image` }
+              width="300px"
+            />
+          </Link>
           <div className="infoCard">
             <p
               className="categoryCard"
@@ -114,18 +126,22 @@ function FavoriteRecipes() {
               data-testid={ `${index}-horizontal-share-btn` }
               onClick={ () => handleShare(`/${recipe.type}s/${recipe.id}`) }
               className="share-btn"
-              // value={ `/${recipe.type}s/${recipe.id}` }
               src={ shareIcon }
             >
               <img src={ shareIcon } alt="share link" />
             </button>
             <button
               type="button"
+              onClick={ () => handleFavorite(recipe.id) }
+              name={ recipe.id }
               data-testid={ `${index}-horizontal-favorite-btn` }
               className="favorite-btn"
               src="blackHeartIcon"
             >
-              <img src={ blackHeartIcon } alt="coracao favoritado" />
+              <img
+                src={ blackHeartIcon }
+                alt="coracao favoritado"
+              />
             </button>
           </div>
         </div>

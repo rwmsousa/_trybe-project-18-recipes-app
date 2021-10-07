@@ -27,8 +27,11 @@ function Provider({ children }) {
   const [foodsareaClone, setfoodsareaClone] = useState([]);
   const [drinksDetails, setDrinksDetails] = useState([]);
   const [heartFavorite, setHeartFavorite] = useState(false);
+  const [foodDetails, setFoodDetails] = useState([]);
 
   const providerValue = {
+    foodDetails,
+    setFoodDetails,
     currentPage,
     setCurrentPage,
     searchText,
