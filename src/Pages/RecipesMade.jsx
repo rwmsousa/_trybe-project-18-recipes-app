@@ -156,7 +156,7 @@ function RecipesMade() {
               {recipe.doneDate}
             </p>
 
-            {/* { recipe.tags[0]
+            { recipe.tags && recipe.tags[0]
               ? (
                 <p
                   key={ recipe.tags[0] }
@@ -166,7 +166,7 @@ function RecipesMade() {
                 </p>)
               : null }
 
-            { recipe.tags[1]
+            { recipe.tags && recipe.tags[1]
               ? (
                 <p
                   key={ recipe.tags[1] }
@@ -174,14 +174,13 @@ function RecipesMade() {
                 >
                   {recipe.tags[1]}
                 </p>)
-              : null} */}
+              : null}
 
             <button
               type="button"
               data-testid={ `${index}-horizontal-share-btn` }
               onClick={ () => handleShare(`/${recipe.type}s/${recipe.id}`) }
               className="share-btn"
-              // value={ `/${recipe.type}s/${recipe.id}` }
               src={ shareIcon }
             >
               <img src={ shareIcon } alt="share link" />
