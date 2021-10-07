@@ -146,17 +146,14 @@ function RecipesMade() {
             {
               recipe.type && recipe.type === 'bebida'
                 ? (
-                  <p
+                  <Link
+                    to={ `/bebidas/${recipe.id}` }
+                    type="button"
                     className="titleCard"
                     data-testid={ `${index}-horizontal-name` }
                   >
-                    <Link
-                      to={ `/bebidas/${recipe.id}` }
-                      type="button"
-                    >
-                      { recipe.name }
-                    </Link>
-                  </p>
+                    { recipe.name }
+                  </Link>
                 ) : null
             }
 
