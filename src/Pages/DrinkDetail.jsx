@@ -26,6 +26,11 @@ function DrinkDetail() {
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
 
+  useEffect(() => {
+    const arr = [];
+    localStorage.inProgressRecipes = JSON.stringify(arr);
+  }, []);
+
   // useEffect para completar o state foodsClone para usar no drinkDetails em recomendações
   useEffect(() => {
     async function fetchFoods() {
@@ -59,14 +64,14 @@ function DrinkDetail() {
 
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
-    if (localStorage.startedRecipe && !JSON.parse([localStorage.startedRecipe])
+    if (localStorage.inProgressRecipes && !JSON.parse([localStorage.inProgressRecipes])
       .find((recipe) => recipe === id)) {
-      const getStarted = JSON.parse([localStorage.startedRecipe]);
+      const getStarted = JSON.parse([localStorage.inProgressRecipes]);
       getStarted.push(id);
-      localStorage.startedRecipe = JSON.stringify(getStarted);
+      localStorage.inProgressRecipes = JSON.stringify(getStarted);
     }
-    if (!localStorage.startedRecipe) {
-      localStorage.startedRecipe = JSON.stringify([id]);
+    if (!localStorage.inProgressRecipes) {
+      localStorage.inProgressRecipes = JSON.stringify([id]);
     }
     history.push(`/bebidas/${value}/in-progress`);
   };
@@ -119,7 +124,7 @@ function DrinkDetail() {
           </div>
         ))}
       </section>
-      { localStorage.startedRecipe && JSON.parse(localStorage.startedRecipe)
+      { !localStorage.inProgressRecipes && !JSON.parse(localStorage.inProgressRecipes)
         .find((recipeId) => recipeId === id) ? (
           <button
             button
@@ -129,7 +134,7 @@ function DrinkDetail() {
             value={ drinksDetails[0].idDrink }
             onClick={ handleLink }
           >
-            Continuar Receita
+            Iniciar Receita
           </button>
         ) : (
           <button
@@ -140,7 +145,7 @@ function DrinkDetail() {
             value={ drinksDetails[0].idDrink }
             onClick={ handleLink }
           >
-            Iniciar Receita
+            Continuar Receita
           </button>
         )}
     </div>
