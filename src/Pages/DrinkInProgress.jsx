@@ -12,11 +12,10 @@ function DrinkInProgress() {
     setShowProfile,
     setShowTitlePage,
     setSearchButton,
-    setMsgClipboard,
-    msgClipboard,
   } = useContext(Context);
   const [drinksDetails, setDrinksDetails] = useState([]);
-  const [showButtonFinished, setShowButtonFinished] = useState();
+  const [msgClipboard, setMsgClipboard] = useState(false);
+  const [showButtonFinished, setShowButtonFinished] = useState(false);
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
@@ -62,10 +61,10 @@ function DrinkInProgress() {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
 
-  const shareLink = (url) => {
+  const shareLink = () => {
     const timerMsg = 5000;
     setMsgClipboard(true);
-    navigator.clipboard.writeText(`http://localhost:3000/bebidas/${url}`);
+    navigator.clipboard.writeText(`http://localhost:3000/bebidas/${id}`);
     setTimeout(() => setMsgClipboard(false), timerMsg);
   };
 
@@ -101,6 +100,16 @@ function DrinkInProgress() {
     msgClipboard,
     shareLink,
   };
+
+  // function handleCheckBoxChange(target) {
+  //   const { parentNode } = target;
+  //   // console.log(parentNode.className);
+  //   if (parentNode.className === 'checked') {
+  //     parentNode.classList.remove('checked');
+  //   } else {
+  //     parentNode.classList.add('checked');
+  //   }
+  // }
 
   return (
     <div>
@@ -143,7 +152,7 @@ function DrinkInProgress() {
       <h3>Instruções</h3>
       <p data-testid="instructions">{ drinksDetails[0].strInstructions }</p>
 
-      { showButtonFinished ? (
+      { showButtonFinished && (
         <button
           className="start-recipe-button"
           type="button"
@@ -151,8 +160,7 @@ function DrinkInProgress() {
           onClick={ finishRecipe }
         >
           Finalizar receita
-        </button>
-      ) : null}
+        </button>)}
     </div>
   );
 }

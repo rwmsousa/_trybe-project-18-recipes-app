@@ -156,6 +156,7 @@ export function handleCheckBoxChange(target) {
     parentNode.classList.add('checked');
   }
 }
+
 export function currentData() {
   const data = new Date();
   const dia = String(data.getDate()).padStart(2, '0');
