@@ -78,9 +78,11 @@ function FoodInProgress() {
       getDones.push(food);
       localStorage.doneRecipes = JSON.stringify(getDones);
       setShowButtonFinished(false);
+      history.push('/receitas-feitas');
     } else {
       localStorage.doneRecipes = JSON.stringify([food]);
       setShowButtonFinished(false);
+      history.push('/receitas-feitas');
     }
   };
 

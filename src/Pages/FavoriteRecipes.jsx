@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import shareIcon from '../images/shareIcon.svg';
@@ -92,13 +93,15 @@ function FavoriteRecipes() {
       </div>
       {favoriteStorage && favoriteStorage.map((recipe, index) => (
         <div key={ recipe.id } className="cardRecipes">
-          <img
-            src={ recipe.image }
-            alt={ recipe.name }
-            className="immageCard"
-            data-testid={ `${index}-horizontal-image` }
-            width="300px"
-          />
+          <Link to={ `/${recipe.type}s/${recipe.id}` }>
+            <img
+              src={ recipe.image }
+              alt={ recipe.name }
+              className="immageCard"
+              data-testid={ `${index}-horizontal-image` }
+              width="300px"
+            />
+          </Link>
           <div className="infoCard">
             <p
               className="categoryCard"
