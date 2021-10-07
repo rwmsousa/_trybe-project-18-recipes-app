@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import shareIcon from '../images/shareIcon.svg';
@@ -42,7 +43,7 @@ function RecipesMade() {
     setMsgClipboard(true);
     setTimeout(() => setMsgClipboard(false), timerMsg);
   };
-
+  console.log(doneStorage);
   return (
     <div>
       <Header />
@@ -82,13 +83,34 @@ function RecipesMade() {
       </div>
       {doneStorage && doneStorage.map((recipe, index) => (
         <div key={ recipe.id } className="cardRecipes">
-          <img
-            src={ recipe.image }
-            alt={ recipe.name }
-            className="immageCard"
-            data-testid={ `${index}-horizontal-image` }
-            width="300px"
-          />
+          { recipe.type === 'comida'
+            ? (
+              <Link
+                to={ `/comidas/${recipe.id}` }
+                type="button"
+              >
+                <img
+                  src={ recipe.image }
+                  alt={ recipe.name }
+                  className="immageCard"
+                  data-testid={ `${index}-horizontal-image` }
+                  width="300px"
+                />
+              </Link>)
+            : (
+              <Link
+                to={ `/bebidas/${recipe.id}` }
+                type="button"
+              >
+                <img
+                  src={ recipe.image }
+                  alt={ recipe.name }
+                  className="immageCard"
+                  data-testid={ `${index}-horizontal-image` }
+                  width="300px"
+                />
+              </Link>) }
+
           <div className="infoCard">
             <p
               className="categoryCard"
@@ -103,19 +125,38 @@ function RecipesMade() {
               { recipe.alcoholicOrNot }
             </p>
 
-            <p
-              className="titleCard"
-              data-testid={ `${index}-horizontal-name` }
-            >
-              { recipe.name }
-            </p>
+            { recipe.type === 'comida'
+              ? (
+                <p
+                  className="titleCard"
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  <Link
+                    to={ `/comidas/${recipe.id}` }
+                    type="button"
+                  >
+                    { recipe.name }
+                  </Link>
+                </p>)
+              : (
+                <p
+                  className="titleCard"
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  <Link
+                    to={ `/bebidas/${recipe.id}` }
+                    type="button"
+                  >
+                    { recipe.name }
+                  </Link>
+                </p>)}
 
             <p data-testid={ `${index}-horizontal-done-date` }>
               Feita em
               {recipe.doneDate}
             </p>
 
-            { recipe.tags[0]
+            {/* { recipe.tags[0]
               ? (
                 <p
                   key={ recipe.tags[0] }
@@ -124,6 +165,7 @@ function RecipesMade() {
                   {recipe.tags[0]}
                 </p>)
               : null }
+
             { recipe.tags[1]
               ? (
                 <p
@@ -132,7 +174,7 @@ function RecipesMade() {
                 >
                   {recipe.tags[1]}
                 </p>)
-              : null}
+              : null} */}
 
             <button
               type="button"
