@@ -70,6 +70,7 @@ function DrinkInProgress() {
   };
 
   const finishRecipe = () => {
+    const url = '/receitas-feitas';
     const drink = {
       id: drinksDetails[0].idDrink,
       type: 'bebida',
@@ -87,13 +88,13 @@ function DrinkInProgress() {
       getDones.push(drink);
       localStorage.doneRecipes = JSON.stringify(getDones);
       setShowButtonFinished(false);
-      history.push('/receitas-feitas');
+      history.push(url);
     } else {
       localStorage.doneRecipes = JSON.stringify([drink]);
       setShowButtonFinished(false);
-      history.push('/receitas-feitas');
+      history.push(url);
     }
-    history.push('/receitas-feitas');
+    history.push(url);
   };
 
   const stateButtons = {

@@ -60,6 +60,7 @@ function FoodInProgress() {
   };
 
   const finishRecipe = () => {
+    const url = '/receitas-feitas';
     const food = {
       id: foodDetails[0].idMeal,
       type: 'comida',
@@ -77,13 +78,13 @@ function FoodInProgress() {
       getDones.push(food);
       localStorage.doneRecipes = JSON.stringify(getDones);
       setShowButtonFinished(false);
-      history.push('/receitas-feitas');
+      history.push(url);
     } else {
       localStorage.doneRecipes = JSON.stringify([food]);
       setShowButtonFinished(false);
-      history.push('/receitas-feitas');
+      history.push(url);
     }
-    history.push('/receitas-feitas');
+    history.push(url);
   };
 
   const stateButtons = {

@@ -36,7 +36,7 @@ function FoodDetail() {
       setVideo(getFoodById[0].strYoutube.substr(magicNumber));
     }
     foodById();
-  }, [id]);
+  }, [id, setFoodDetails]);
 
   useEffect(() => {
     async function fetchDrinks() {
