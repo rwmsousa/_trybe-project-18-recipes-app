@@ -93,6 +93,7 @@ function DrinkInProgress() {
       setShowButtonFinished(false);
       history.push('/receitas-feitas');
     }
+    history.push('/receitas-feitas');
   };
 
   const stateButtons = {

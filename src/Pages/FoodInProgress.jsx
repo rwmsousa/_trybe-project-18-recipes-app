@@ -56,7 +56,6 @@ function FoodInProgress() {
     const timerMsg = 5000;
     setMsgClipboard(true);
     navigator.clipboard.writeText(`http://localhost:3000/comidas/${url}`);
-    // copy(`http://localhost:3000${history.location.pathname}`);
     setTimeout(() => setMsgClipboard(false), timerMsg);
   };
 
@@ -84,6 +83,7 @@ function FoodInProgress() {
       setShowButtonFinished(false);
       history.push('/receitas-feitas');
     }
+    history.push('/receitas-feitas');
   };
 
   const stateButtons = {
