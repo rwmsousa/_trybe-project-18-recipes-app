@@ -85,7 +85,7 @@ function RecipesMade() {
       </div>
       {doneStorage && doneStorage.map((recipe, index) => (
         <div key={ recipe.id } className="cardRecipes">
-          { recipe.type === 'comida'
+          { recipe.type && recipe.type === 'comida'
             ? (
               <button
                 onClick={ () => history.push(`/comidas/${recipe.id}`) }
@@ -126,35 +126,33 @@ function RecipesMade() {
             >
               { recipe.alcoholicOrNot }
             </p>
-
             { recipe.type === 'comida'
               ? (
-                <button
+                <Link
                   className="titleCard"
                   data-testid={ `${index}-horizontal-name` }
-                  onClick={ () => history.push(`/comidas/${recipe.id}`) }
+                  to={ `/comidas/${recipe.id}` }
                   type="button"
                 >
                   { recipe.name }
-                </button>
+                </Link>
               )
               : (
-                <button
+                <Link
                   className="titleCard"
                   data-testid={ `${index}-horizontal-name` }
-                  onClick={ () => history.push(`/bebidas/${recipe.id}`) }
+                  to={ `/bebidas/${recipe.id}` }
                   type="button"
                 >
                   { recipe.name }
-                </button>
+                </Link>
               )}
-
             <p data-testid={ `${index}-horizontal-done-date` }>
               Feita em
               {recipe.doneDate}
             </p>
 
-            {/* { recipe.tags[0]
+            { recipe.tags && recipe.tags[0]
               ? (
                 <p
                   key={ recipe.tags[0] }
@@ -164,7 +162,7 @@ function RecipesMade() {
                 </p>)
               : null }
 
-            { recipe.tags[1]
+            { recipe.tags && recipe.tags[1]
               ? (
                 <p
                   key={ recipe.tags[1] }
@@ -172,14 +170,13 @@ function RecipesMade() {
                 >
                   {recipe.tags[1]}
                 </p>)
-              : null} */}
+              : null}
 
             <button
               type="button"
               data-testid={ `${index}-horizontal-share-btn` }
               onClick={ () => handleShare(`/${recipe.type}s/${recipe.id}`) }
               className="share-btn"
-              // value={ `/${recipe.type}s/${recipe.id}` }
               src={ shareIcon }
             >
               <img src={ shareIcon } alt="share link" />

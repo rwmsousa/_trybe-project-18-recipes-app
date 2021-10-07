@@ -115,12 +115,27 @@ function FavoriteRecipes() {
             >
               { recipe.alcoholicOrNot }
             </p>
-            <p
-              className="titleCard"
-              data-testid={ `${index}-horizontal-name` }
-            >
-              { recipe.name }
-            </p>
+            { recipe.type === 'comida'
+              ? (
+                <Link
+                  className="titleCard"
+                  data-testid={ `${index}-horizontal-name` }
+                  to={ `/comidas/${recipe.id}` }
+                  type="button"
+                >
+                  { recipe.name }
+                </Link>
+              )
+              : (
+                <Link
+                  className="titleCard"
+                  data-testid={ `${index}-horizontal-name` }
+                  to={ `/bebidas/${recipe.id}` }
+                  type="button"
+                >
+                  { recipe.name }
+                </Link>
+              )}
             <button
               type="button"
               data-testid={ `${index}-horizontal-share-btn` }
