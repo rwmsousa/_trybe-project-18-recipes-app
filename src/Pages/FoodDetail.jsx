@@ -5,9 +5,7 @@ import { fetchFoodById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import '../css/Detail.css';
 import Context from '../Context/Context';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
+import ButtonsDetailsFoods from '../components/ButtonsDetailsFoods';
 
 function FoodDetail() {
   const {
@@ -17,13 +15,13 @@ function FoodDetail() {
     setSearchButton,
     setIdFoodDetails,
     drinksClone,
-    foods,
+    setDrinksClone,
   } = useContext(Context);
 
   const [foodDetails, setFoodDetails] = useState([]);
   const [video, setVideo] = useState('');
-  const [heartFavorite, setHeartFavorite] = useState(false);
   const [msgClipboard, setMsgClipboard] = useState(false);
+  const [showButtonInitRecipe, setShowButtonInitRecipe] = useState();
 
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
@@ -31,70 +29,16 @@ function FoodDetail() {
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
     if (
-      localStorage.favoriteRecipes
-      && JSON.parse(localStorage.favoriteRecipes).find(
-        (recipeId) => recipeId.id === id,
-      )
+      localStorage.startedRecipe && JSON.parse(localStorage.startedRecipe)
+        .find((recipeId) => recipeId === id)
     ) {
-      setHeartFavorite(true);
+      setShowButtonInitRecipe(false);
     } else {
-      setHeartFavorite(false);
+      setShowButtonInitRecipe(true);
     }
-  }, [id]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
-
-  const handleFavorite = () => {
-    if (!localStorage.favoriteRecipes) {
-      setHeartFavorite(true);
-      return localStorage.setItem('favoriteRecipes', JSON.stringify([
-        {
-          id: foodDetails[0].idMeal,
-          type: 'comida',
-          area: foodDetails[0].strArea,
-          category: foodDetails[0].strCategory,
-          alcoholicOrNot: '',
-          name: foodDetails[0].strMeal,
-          image: foodDetails[0].strMealThumb,
-        },
-      ]));
-    }
-
-    if (JSON.parse(localStorage.favoriteRecipes).find(
-      (recipeId) => recipeId.id === id,
-    )
-    ) {
-      setHeartFavorite(false);
-      return localStorage.setItem('favoriteRecipes', JSON.stringify(
-        JSON.parse(localStorage.favoriteRecipes).filter(
-          (recipeId) => recipeId.id !== id,
-        ),
-      ));
-    }
-
-    if (
-      !JSON.parse(localStorage.favoriteRecipes).find(
-        (recipeId) => recipeId.id === id,
-      )
-    ) {
-      setHeartFavorite(true);
-      const storageFavorites = JSON.parse(localStorage.favoriteRecipes);
-      storageFavorites.push({
-        id: foodDetails[0].idMeal,
-        type: 'comida',
-        area: foodDetails[0].strArea,
-        category: foodDetails[0].strCategory,
-        alcoholicOrNot: '',
-        name: foodDetails[0].strMeal,
-        image: foodDetails[0].strMealThumb,
-      });
-      return localStorage.setItem(
-        'favoriteRecipes',
-        JSON.stringify(storageFavorites),
-      );
-    }
-  };
+  }, [id, setShowButtonInitRecipe]); // ATENÇÃO!!! Cuidado ao dependências nesse useEffect com localStorage, sob risco de causar loop.
 
   // useEffect para completar o state drinksClone para usar no foodDetails em recomendações
-
   useEffect(() => {
     async function foodById() {
       const getFoodById = await fetchFoodById(id);
@@ -106,6 +50,18 @@ function FoodDetail() {
   }, [id]);
 
   useEffect(() => {
+    async function fetchDrinks() {
+      const { drinks } = await fetch(
+        'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
+      ).then((data) => data.json());
+      const magicNumber = 6;
+      const SplitArray = drinks.filter((item, idx) => idx < magicNumber);
+      setDrinksClone(SplitArray);
+    }
+    fetchDrinks();
+  }, [setDrinksClone]);
+
+  useEffect(() => {
     setCurrentPage('Detalhes');
     setShowProfile(false);
     setShowTitlePage(false);
@@ -114,12 +70,17 @@ function FoodDetail() {
 
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
+    if (localStorage.startedRecipe && !JSON.parse([localStorage.startedRecipe])
+      .find((recipe) => recipe === id)) {
+      const getStarted = JSON.parse([localStorage.startedRecipe]);
+      getStarted.push(id);
+      localStorage.startedRecipe = JSON.stringify(getStarted);
+    }
+    if (!localStorage.startedRecipe) {
+      localStorage.startedRecipe = JSON.stringify([id]);
+    }
     history.push(`/comidas/${value}/in-progress`);
   };
-
-  if (!foodDetails || !foodDetails.length) {
-    return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
-  }
 
   const shareLink = () => {
     const timerMsg = 5000;
@@ -127,6 +88,16 @@ function FoodDetail() {
     copy(`http://localhost:3000${history.location.pathname}`);
     setTimeout(() => setMsgClipboard(false), timerMsg);
   };
+
+  const stateButtons = {
+    msgClipboard,
+    shareLink,
+    foodDetails,
+  };
+
+  if (!foodDetails || !foodDetails.length) {
+    return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
+  }
 
   return (
     <div>
@@ -139,36 +110,8 @@ function FoodDetail() {
       <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
       <span data-testid="recipe-category">{ foodDetails[0].strCategory }</span>
 
-      {msgClipboard ? (
-        <div
-          className="alert alert-warning alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>Link copiado!</strong>
-        </div>
-      ) : null }
+      <ButtonsDetailsFoods value={ stateButtons } />
 
-      <button
-        type="button"
-        data-testid="share-btn"
-        className="share-btn"
-        onClick={ shareLink }
-      >
-        <img src={ shareIcon } alt="share link" />
-      </button>
-      <button
-        type="button"
-        data-testid="favorite-btn"
-        className="favorite-btn"
-        onClick={ handleFavorite }
-        src="blackHeartIcon whiteHeartIcon"
-      >
-        {heartFavorite ? (
-          <img src={ blackHeartIcon } alt="coracao favoritado" />
-        ) : (
-          <img src={ whiteHeartIcon } alt="coracao nao favoritado" />
-        )}
-      </button>
       <h3>Ingredientes</h3>
       <IngredientsList list={ foodDetails } />
       <h3>Instructions</h3>
@@ -204,15 +147,29 @@ function FoodDetail() {
           </div>
         ))}
       </section>
-      <button
-        className="start-recipe-button"
-        type="button"
-        data-testid="start-recipe-btn"
-        value={ foodDetails[0].idMeal }
-        onClick={ handleLink }
-      >
-        iniciar receita
-      </button>
+      { showButtonInitRecipe ? (
+        <button
+          button
+          className="start-recipe-button"
+          type="button"
+          data-testid="start-recipe-btn"
+          value={ foodDetails[0].idMeal }
+          onClick={ handleLink }
+        >
+          Continuar Receita
+        </button>)
+        : (
+          <button
+            button
+            className="start-recipe-button"
+            type="button"
+            data-testid="start-recipe-btn"
+            value={ foodDetails[0].idMeal }
+            onClick={ handleLink }
+          >
+            Iniciar Receita
+          </button>
+        ) }
     </div>
   );
 }

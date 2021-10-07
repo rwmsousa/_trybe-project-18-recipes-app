@@ -2,8 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function IngredientsList({ list }) {
+  // const ing = Object.keys(list[0]).filter((k) => k.includes('Ingredient'));
+  // const mea = Object.keys(list[0]).filter((k) => k.includes('Measure'));
+  // const test = Object.entries(list[0]);
+
+  // console.log(test);
   return (
     <ul>
+      {/* {Object.entries(list[0])
+        .map((item, idx) => (
+          list[0][ing[idx]] !== null && (
+            <li
+              key={ idx }
+              data-testid={ `${idx}-ingredient-name-and-measure` }
+            >
+              { `${list[0][ing[idx]]} - ${list[0][mea[idx]]}` }
+            </li>
+          )
+        ))} */}
       <li data-testid="0-ingredient-name-and-measure">
         { `${list[0].strIngredient1} - ${list[0].strMeasure1}` }
       </li>
