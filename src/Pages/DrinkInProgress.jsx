@@ -3,7 +3,8 @@ import { useHistory } from 'react-router';
 import { fetchDrinkById, handleCheckBoxChange, currentData } from '../services';
 import '../css/Detail.css';
 import Context from '../Context/Context';
-import ButtonsDetailsDrinks from '../components/ButtonsDetailsDrinks';
+import HandleShare from '../components/HandleShareDrinks';
+import HandleFavorite from '../components/HandleFavoriteDrinks';
 
 function DrinkInProgress() {
   const {
@@ -110,7 +111,8 @@ function DrinkInProgress() {
         {drinksDetails[0].strAlcoholic}
       </span>
 
-      <ButtonsDetailsDrinks value={ stateButtons } />
+      <HandleShare value={ stateButtons } />
+      <HandleFavorite drinksDetails={ drinksDetails } />
 
       <h3>Ingredientes</h3>
       <div>

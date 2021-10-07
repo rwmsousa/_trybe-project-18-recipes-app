@@ -5,7 +5,8 @@ import { fetchFoodById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import '../css/Detail.css';
 import Context from '../Context/Context';
-import ButtonsDetailsFoods from '../components/ButtonsDetailsFoods';
+import HandleShare from '../components/HandleShareFood';
+import HandleFavorite from '../components/HandleFavoriteFood';
 
 function FoodDetail() {
   const {
@@ -16,9 +17,10 @@ function FoodDetail() {
     setIdFoodDetails,
     drinksClone,
     setDrinksClone,
+    foodDetails,
+    setFoodDetails,
   } = useContext(Context);
 
-  const [foodDetails, setFoodDetails] = useState([]);
   const [video, setVideo] = useState('');
   const [msgClipboard, setMsgClipboard] = useState(false);
   const [showButtonInitRecipe, setShowButtonInitRecipe] = useState();
@@ -92,7 +94,6 @@ function FoodDetail() {
   const stateButtons = {
     msgClipboard,
     shareLink,
-    foodDetails,
   };
 
   if (!foodDetails || !foodDetails.length) {
@@ -110,7 +111,8 @@ function FoodDetail() {
       <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
       <span data-testid="recipe-category">{ foodDetails[0].strCategory }</span>
 
-      <ButtonsDetailsFoods value={ stateButtons } />
+      <HandleShare value={ stateButtons } />
+      <HandleFavorite foodDetails={ foodDetails } />
 
       <h3>Ingredientes</h3>
       <IngredientsList list={ foodDetails } />

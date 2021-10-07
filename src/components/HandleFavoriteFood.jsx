@@ -1,18 +1,13 @@
-import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
-import Context from '../Context/Context';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
+import Context from '../Context/Context';
 
-function ButtonsDetals({ value }) {
-  const {
-    msgClipboard,
-    shareLink,
-    foodDetails } = value;
-
+function HandleFavorite({ foodDetails }) {
   const { heartFavorite, setHeartFavorite } = useContext(Context);
+
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
 
@@ -77,55 +72,34 @@ function ButtonsDetals({ value }) {
   };
 
   return (
-    <div>
-      { msgClipboard ? (
-        <div
-          className="alert alert-warning alert-dismissible fade show"
-          role="alert"
-        >
-          <strong>Link copiado!</strong>
-        </div>
-      ) : null }
-
-      <button
-        type="button"
-        data-testid="share-btn"
-        className="share-btn"
-        onClick={ shareLink }
-      >
-        <img src={ shareIcon } alt="share link" />
-      </button>
-
-      <button
-        type="button"
-        data-testid="favorite-btn"
-        className="favorite-btn"
-        onClick={ handleFavorite }
-        src="blackHeartIcon whiteHeartIcon"
-      >
-        { heartFavorite ? (
-          <img
-            src={ blackHeartIcon }
-            alt="coracao favoritado"
-          />
-        ) : (
-          <img
-            src={ whiteHeartIcon }
-            alt="coracao nao favoritado"
-          />
-        ) }
-      </button>
-    </div>
+    <button
+      type="button"
+      data-testid="favorite-btn"
+      className="favorite-btn"
+      onClick={ handleFavorite }
+      src="blackHeartIcon whiteHeartIcon"
+    >
+      { heartFavorite ? (
+        <img
+          src={ blackHeartIcon }
+          alt="coracao favoritado"
+        />
+      ) : (
+        <img
+          src={ whiteHeartIcon }
+          alt="coracao nao favoritado"
+        />
+      ) }
+    </button>
   );
 }
 
-ButtonsDetals.propTypes = {
-  handleFavorite: PropTypes.func,
-  heartFavorite: PropTypes.bool,
-  msgClipboard: PropTypes.func,
-  setHeartFavorite: PropTypes.func,
-  setMsgClipboard: PropTypes.func,
-  shareLink: PropTypes.func,
-}.isRequired;
+HandleFavorite.propTypes = {
+  foodDetails: PropTypes.arrayOf(),
+};
 
-export default ButtonsDetals;
+HandleFavorite.defaultProps = {
+  foodDetails: [],
+};
+
+export default HandleFavorite;

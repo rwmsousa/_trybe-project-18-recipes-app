@@ -5,7 +5,8 @@ import { fetchDrinkById } from '../services';
 import IngredientsList from '../components/IngredientsList';
 import '../css/Detail.css';
 import Context from '../Context/Context';
-import ButtonsDetailsDrinks from '../components/ButtonsDetailsDrinks';
+import HandleShare from '../components/HandleShareDrinks';
+import HandleFavorite from '../components/HandleFavoriteDrinks';
 
 function DrinkDetail() {
   const {
@@ -118,7 +119,8 @@ function DrinkDetail() {
       <h1 data-testid="recipe-title">{drinksDetails[0].strDrink}</h1>
       <span data-testid="recipe-category">{drinksDetails[0].strAlcoholic}</span>
 
-      <ButtonsDetailsDrinks value={ stateButtons } />
+      <HandleShare value={ stateButtons } />
+      <HandleFavorite drinksDetails={ drinksDetails } />
 
       <h3>Ingredientes</h3>
       <IngredientsList list={ drinksDetails } />
