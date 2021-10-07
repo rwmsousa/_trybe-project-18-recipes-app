@@ -83,7 +83,7 @@ function RecipesMade() {
       </div>
       {doneStorage && doneStorage.map((recipe, index) => (
         <div key={ recipe.id } className="cardRecipes">
-          { recipe.type === 'comida'
+          { recipe.type && recipe.type === 'comida'
             ? (
               <Link
                 to={ `/comidas/${recipe.id}` }
@@ -97,7 +97,9 @@ function RecipesMade() {
                   width="300px"
                 />
               </Link>)
-            : (
+            : null }
+          { recipe.type && recipe.type === 'bebida'
+            ? (
               <Link
                 to={ `/bebidas/${recipe.id}` }
                 type="button"
@@ -109,7 +111,8 @@ function RecipesMade() {
                   data-testid={ `${index}-horizontal-image` }
                   width="300px"
                 />
-              </Link>) }
+              </Link>)
+            : null }
 
           <div className="infoCard">
             <p
@@ -137,19 +140,25 @@ function RecipesMade() {
                   >
                     { recipe.name }
                   </Link>
-                </p>)
-              : (
-                <p
-                  className="titleCard"
-                  data-testid={ `${index}-horizontal-name` }
-                >
-                  <Link
-                    to={ `/bebidas/${recipe.id}` }
-                    type="button"
+                </p>
+              ) : null }
+
+            {
+              recipe.type && recipe.type === 'bebida'
+                ? (
+                  <p
+                    className="titleCard"
+                    data-testid={ `${index}-horizontal-name` }
                   >
-                    { recipe.name }
-                  </Link>
-                </p>)}
+                    <Link
+                      to={ `/bebidas/${recipe.id}` }
+                      type="button"
+                    >
+                      { recipe.name }
+                    </Link>
+                  </p>
+                ) : null
+            }
 
             <p data-testid={ `${index}-horizontal-done-date` }>
               Feita em
