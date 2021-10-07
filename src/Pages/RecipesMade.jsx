@@ -126,7 +126,7 @@ function RecipesMade() {
             >
               { recipe.alcoholicOrNot }
             </p>
-            { recipe.type === 'comida'
+            { recipe.type && recipe.type === 'comida'
               ? (
                 <Link
                   className="titleCard"
