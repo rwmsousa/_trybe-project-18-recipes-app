@@ -27,6 +27,11 @@ function FoodDetail() {
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
 
+  useEffect(() => {
+    const arr = [];
+    localStorage.inProgressRecipes = JSON.stringify(arr);
+  }, []);
+
   // useEffect para completar o state drinksClone para usar no foodDetails em recomendações
   useEffect(() => {
     async function foodById() {
@@ -59,14 +64,14 @@ function FoodDetail() {
 
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
-    if (localStorage.startedRecipe && !JSON.parse([localStorage.startedRecipe])
+    if (localStorage.inProgressRecipes && !JSON.parse([localStorage.inProgressRecipes])
       .find((recipe) => recipe === id)) {
-      const getStarted = JSON.parse([localStorage.startedRecipe]);
+      const getStarted = JSON.parse([localStorage.inProgressRecipes]);
       getStarted.push(id);
-      localStorage.startedRecipe = JSON.stringify(getStarted);
+      localStorage.inProgressRecipes = JSON.stringify(getStarted);
     }
-    if (!localStorage.startedRecipe) {
-      localStorage.startedRecipe = JSON.stringify([id]);
+    if (!localStorage.inProgressRecipes) {
+      localStorage.inProgressRecipes = JSON.stringify([id]);
     }
     history.push(`/comidas/${value}/in-progress`);
   };
@@ -136,7 +141,7 @@ function FoodDetail() {
           </div>
         ))}
       </section>
-      { localStorage.startedRecipe && JSON.parse(localStorage.startedRecipe)
+      { !localStorage.inProgressRecipes && !JSON.parse(localStorage.inProgressRecipes)
         .find((recipeId) => recipeId === id) ? (
           <button
             button
@@ -146,9 +151,9 @@ function FoodDetail() {
             value={ foodDetails[0].idMeal }
             onClick={ handleLink }
           >
-            Continuar Receita
-          </button>)
-        : (
+            Iniciar Receita
+          </button>
+        ) : (
           <button
             button
             className="start-recipe-button"
@@ -157,7 +162,7 @@ function FoodDetail() {
             value={ foodDetails[0].idMeal }
             onClick={ handleLink }
           >
-            Iniciar Receita
+            Continuar Receita
           </button>
         ) }
     </div>

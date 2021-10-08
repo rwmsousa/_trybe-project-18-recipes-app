@@ -1,3 +1,10 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Acme', sans-serif;
+}
+
 /*  codigo fonte para essa seção
 https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizontal-no-css
 */

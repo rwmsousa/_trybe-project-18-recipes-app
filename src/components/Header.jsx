@@ -1,13 +1,12 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../Context/Context';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBar from './SearchBar';
+import '../css/header.css';
 
 function Header() {
-  const [showSearch, setShowSearch] = useState(false);
-
   const {
     showProfile,
     showTitlePage,
@@ -15,7 +14,7 @@ function Header() {
     currentPage,
     searchText,
     setSearchRadio,
-    searchRadio,
+    searchRadio, showSearch, setShowSearch,
   } = useContext(Context);
 
   useEffect(() => {
@@ -30,14 +29,15 @@ function Header() {
   }, [searchRadio, searchText, setSearchRadio]);
 
   const menuItemProfile = () => (
-    <div>
+    <div className="menuItemProfile">
       <Link to="/perfil" src={ profileIcon }>
-        <img
+        {/* <img
           className="btnProfile"
           src={ profileIcon }
           data-testid="profile-top-btn"
           alt="icone de profile"
-        />
+        /> */}
+        <i className="far fa-user" data-testid="profile-top-btn" />
       </Link>
     </div>
   );
@@ -53,22 +53,28 @@ function Header() {
   const menuItemSearch = () => (
     <div>
       <button
+        className="menuItemSearch"
         type="button"
         onClick={ () => setShowSearch(!showSearch) }
         data-testid="search-top-btn"
         src={ searchIcon }
       >
-        <img className="btnSearch" src={ searchIcon } alt="icone de pesquisar" />
+        {/* <img className="btnSearch" src={ searchIcon } alt="icone de pesquisar" /> */ }
+        <i className="fas fa-search" />
       </button>
     </div>
   );
 
   return (
     <div className="header">
-      {showProfile ? menuItemProfile() : false}
-      {showTitlePage ? menuItemTitlePage() : false}
-      {showSearchButton ? menuItemSearch() : false}
-      {showSearch ? SearchBar() : false}
+      <div className="headerButtons">
+        {showProfile ? menuItemProfile() : false}
+        {showTitlePage ? menuItemTitlePage() : false}
+        {showSearchButton ? menuItemSearch() : false}
+      </div>
+      <div className="headerSearchBar">
+        {showSearch ? SearchBar() : false}
+      </div>
     </div>
   );
 }

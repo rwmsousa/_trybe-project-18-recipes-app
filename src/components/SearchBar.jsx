@@ -17,6 +17,7 @@ function SearchBar() {
     searchRadio,
     setSearchText,
     setSearchRadio,
+    setShowSearch,
   } = useContext(Context);
 
   const handleSearchText = ({ target: { value } }) => {
@@ -59,6 +60,7 @@ function SearchBar() {
         break;
       }
     }
+    setShowSearch(false);
   }
 
   return (
@@ -71,49 +73,51 @@ function SearchBar() {
         value={ searchText }
         onChange={ handleSearchText }
       />
-      <label htmlFor="input-ingredient">
-        Ingrediente
-        <input
-          className="searchIngredient"
-          type="radio"
-          name="searchRadio"
-          id="input-ingredient"
-          data-testid="ingredient-search-radio"
-          value="searchIngredient"
-          onChange={ handleRadio }
-        />
-      </label>
-      <label htmlFor="input-name">
-        Nome
-        <input
-          className="searchName"
-          type="radio"
-          name="searchRadio"
-          id="input-name"
-          data-testid="name-search-radio"
-          value="searchName"
-          onChange={ handleRadio }
-        />
-      </label>
-      <label htmlFor="input-first-letter">
-        Primeira Letra
-        <input
-          className="firstLetter"
-          type="radio"
-          name="searchRadio"
-          id="input-first-letter"
-          data-testid="first-letter-search-radio"
-          value="firstLetter"
-          onChange={ handleRadio }
-        />
-      </label>
+      <div className="inputsRadio">
+        <label htmlFor="input-ingredient">
+          Ingrediente
+          <input
+            className="searchIngredient"
+            type="radio"
+            name="searchRadio"
+            id="input-ingredient"
+            data-testid="ingredient-search-radio"
+            value="searchIngredient"
+            onChange={ handleRadio }
+          />
+        </label>
+        <label htmlFor="input-name">
+          Nome
+          <input
+            className="searchName"
+            type="radio"
+            name="searchRadio"
+            id="input-name"
+            data-testid="name-search-radio"
+            value="searchName"
+            onChange={ handleRadio }
+          />
+        </label>
+        <label htmlFor="input-first-letter">
+          Primeira Letra
+          <input
+            className="firstLetter"
+            type="radio"
+            name="searchRadio"
+            id="input-first-letter"
+            data-testid="first-letter-search-radio"
+            value="firstLetter"
+            onChange={ handleRadio }
+          />
+        </label>
+      </div>
       <button
         type="button"
         className="fetchBtn"
         data-testid="exec-search-btn"
         onClick={ handleClickSearch }
       >
-        pesquisar
+        Pesquisar
       </button>
     </div>
   );

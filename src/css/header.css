@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Acme', sans-serif;
+}
+
+.headerButtons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  background-color: #da2846;
+  margin-bottom: 10px;
+}
+
+.menuItemSearch {
+  background: none;
+  border: none;
+}
+
+.fa-search,
+.fa-user,
+.pageTitle {
+  font-size: 25px;
+  color: #98e2e1;
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.fetchBtn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #da2846;
+  background-color: #98e2e134;
+}
+
+.searchInput {
+  width: 60%;
+  border:1px solid #da2846;
+  border-radius: 5px;
+  background-color: #98e2e134;
+}
+
+.inputsRadio {
+  display: flex;
+  align-content: space-between;
+}
+
+.inputsRadio input {
+  margin: 10px;
+}
+
+.searchIngredient {
+  border: #da2846;
+
+}

@@ -52,10 +52,10 @@ function FoodInProgress() {
     return <i id="test" className="fas fa-spinner fa-pulse fa-10x" />;
   }
 
-  const shareLink = (url) => {
+  const shareLink = () => {
     const timerMsg = 5000;
     setMsgClipboard(true);
-    navigator.clipboard.writeText(`http://localhost:3000/comidas/${url}`);
+    navigator.clipboard.writeText(`http://localhost:3000/comidas/${id}`);
     setTimeout(() => setMsgClipboard(false), timerMsg);
   };
 
@@ -111,7 +111,8 @@ function FoodInProgress() {
         {Object.keys(foodDetails[0])
           .filter((k) => k.includes('Ingredient'))
           .map(
-            (value, idx) => foodDetails[0][value] !== '' && (
+            (value, idx) => foodDetails[0][value] !== ''
+            && foodDetails[0][value] !== null && (
               <label
                 htmlFor={ idx }
                 key={ idx }
@@ -131,7 +132,7 @@ function FoodInProgress() {
       <h3>Instruções</h3>
       <p data-testid="instructions">{ foodDetails[0].strInstructions }</p>
 
-      { showButtonFinished ? (
+      { showButtonFinished && (
         <button
           className="start-recipe-button"
           type="button"
@@ -139,8 +140,7 @@ function FoodInProgress() {
           onClick={ finishRecipe }
         >
           Finalizar receita
-        </button>)
-        : null}
+        </button>)}
 
     </div>
   );
