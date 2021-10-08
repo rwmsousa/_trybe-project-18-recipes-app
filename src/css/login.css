@@ -11,6 +11,7 @@
   background-size: cover;
   height: 100vh;
 }
+
 .bg-img:after {
   background: rgba(0, 0, 0, 0.226);
   content: '';
@@ -22,7 +23,10 @@
 }
 
 .appRecipe{
-background: linear-gradient(180deg, rgba(218,40,70,1) 0%, rgba(218,40,70,1) 0%, rgba(0, 0, 0, 0) 69%);
+background: linear-gradient(180deg, 
+rgba(218,40,70,1) 0%, 
+rgba(218,40,70,1) 0%, 
+rgba(0, 0, 0, 0) 69%);
 color: white;
 font-weight: bolder;
 height: 150px;
@@ -56,8 +60,8 @@ input {
 }
 
 .divPassword {
-  align-items:baseline;
   align-content: center;
+  align-items:baseline;
   display: flex;
   justify-content: flex-end;
 }
