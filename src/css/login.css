@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: 'Acme', sans-serif;
+  font-family: Acme, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -11,7 +11,6 @@
   background-size: cover;
   height: 100vh;
 }
-
 .bg-img:after {
   background: rgba(0, 0, 0, 0.226);
   content: '';
@@ -22,18 +21,15 @@
   width: 100%;
 }
 
-.appRecipe {
-  background: linear-gradient(
-    180deg,
-    rgba(218, 40, 70, 1) 0% rgba(218, 40, 70, 1) 0% rgba(0, 0, 0, 0) 69%
-  );
-  color: white;
-  font-weight: bolder;
-  height: 150px;
-  padding-top: 30px;
-  position: absolute;
-  text-align: center;
-  width: 100%;
+.appRecipe{
+background: linear-gradient(180deg, rgba(218,40,70,1) 0%, rgba(218,40,70,1) 0%, rgba(0, 0, 0, 0) 69%);
+color: white;
+font-weight: bolder;
+height: 150px;
+padding-top: 30px;
+position: absolute;
+text-align: center;
+width: 100%;
 }
 
 .content {
@@ -60,8 +56,8 @@ input {
 }
 
 .divPassword {
+  align-items:baseline;
   align-content: center;
-  align-items: baseline;
   display: flex;
   justify-content: flex-end;
 }

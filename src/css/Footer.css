@@ -7,9 +7,9 @@
 
 .footer {
   align-items: flex-end;
-  background: linear-gradient(
-    0deg rgba(218, 40, 70, 1) 0% rgba(218, 40, 70, 1) 0% rgba(0, 0, 0, 0) 69%
-  );
+  align-items: flex-end;
+  background: linear-gradient(0deg, rgba(218,40,70,1) 0%, rgba(218,40,70,1) 0%, rgba(0, 0, 0, 0) 69%);
+  background: linear-gradient(0deg, rgba(218, 40, 70, 1) 0%, rgba(218, 40, 70, 1) 0%, rgba(0, 0, 0, 0) 69%);
   bottom: 0;
   display: flex;
   height: 75px;
@@ -17,6 +17,11 @@
   position: fixed;
   width: 100%;
 }
+  .fa-cocktail, .fa-globe, .fa-utensils{
+    color: #98e2e1;
+    font-size:25px;
+    margin-bottom: 10px;
+  }
 .fa-cocktail,
 .fa-globe,
 .fa-utensils {
