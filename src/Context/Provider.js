@@ -28,6 +28,7 @@ function Provider({ children }) {
   const [drinksDetails, setDrinksDetails] = useState([]);
   const [heartFavorite, setHeartFavorite] = useState(false);
   const [foodDetails, setFoodDetails] = useState([]);
+  const [showSearch, setShowSearch] = useState(false);
 
   const providerValue = {
     foodDetails,
@@ -80,6 +81,8 @@ function Provider({ children }) {
     setDrinksDetails,
     heartFavorite,
     setHeartFavorite,
+    showSearch,
+    setShowSearch,
   };
 
   return (

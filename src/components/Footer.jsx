@@ -57,7 +57,8 @@ function Footer() {
         onClick={ handledrinkClick }
         src={ drinkicon }
       >
-        <img src={ drinkicon } alt="drink icon" />
+        {/* <img src={ drinkicon } alt="drink icon" /> */}
+        <i className="fas fa-cocktail" />
       </Link>
       <Link
         to="/explorar"
@@ -65,7 +66,8 @@ function Footer() {
         type="button"
         src={ exploreicon }
       >
-        <img src={ exploreicon } alt="explore icon" />
+        {/* <img src={ exploreicon } alt="explore icon" /> */}
+        <i className="fas fa-globe" />
       </Link>
       <Link
         to="/comidas"
@@ -74,7 +76,8 @@ function Footer() {
         onClick={ handlefoodClick }
         src={ mealicon }
       >
-        <img src={ mealicon } alt="meal icon" />
+        {/* <img src={ mealicon } alt="meal icon" /> */}
+        <i className="fas fa-utensils" />
       </Link>
     </div>
   );

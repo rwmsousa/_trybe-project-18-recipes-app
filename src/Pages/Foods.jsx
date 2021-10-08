@@ -79,6 +79,7 @@ function Foods() {
           type="button"
           onClick={ () => setFoods(foodsClone) }
           data-testid="All-category-filter"
+          className="All-category-filter"
         >
           All
         </button>
@@ -90,6 +91,7 @@ function Foods() {
             name={ category.strCategory }
             value={ category.strCategory }
             onClick={ (event) => HandleClick(event) }
+            className="buttonFilter"
           >
             {category.strCategory}
           </button>
