@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import { fetchByCategoryFoods, fetchFoods } from '../services';
+import '../css/foods.css';
 
 function Foods() {
   const history = useHistory();
@@ -74,12 +75,12 @@ function Foods() {
   return (
     <div className="foods">
       <Header />
-      <ul>
+      <ul className="categories">
         <button
           type="button"
           onClick={ () => setFoods(foodsClone) }
           data-testid="All-category-filter"
-          className="All-category-filter"
+          className="category-filter"
         >
           All
         </button>
@@ -91,18 +92,18 @@ function Foods() {
             name={ category.strCategory }
             value={ category.strCategory }
             onClick={ (event) => HandleClick(event) }
-            className="buttonFilter"
+            className="category-filter"
           >
             {category.strCategory}
           </button>
         ))}
       </ul>
-      <ul>
+      <ul className="cards">
         { !foods ? (
           global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           foods.map((food, idx) => (
-            <li key={ food.idMeal }>
+            <li key={ food.idMeal } className="li-card">
               <img
                 src={ food.strMealThumb }
                 alt={ `Comida: ${food.strMeal}` }
@@ -116,7 +117,7 @@ function Foods() {
                 onClick={ handleLink }
                 data-testid={ `${idx}-recipe-card` }
               >
-                detalhes
+                Detalhes
               </button>
             </li>
           )))}

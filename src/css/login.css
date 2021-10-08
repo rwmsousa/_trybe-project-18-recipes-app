@@ -1,8 +1,8 @@
 * {
   box-sizing: border-box;
+  font-family: 'Acme', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: 'Acme', sans-serif;
 }
 
 .bg-img {
@@ -24,17 +24,17 @@
 
 .appRecipe{
 background: linear-gradient(180deg, rgba(218,40,70,1) 0%, rgba(218,40,70,1) 0%, rgba(0, 0, 0, 0) 69%);
-position: absolute;
-width: 100%;
-height: 150px;
 color: white;
-text-align: center;
-padding-top: 30px;
 font-weight: bolder;
+height: 150px;
+padding-top: 30px;
+position: absolute;
+text-align: center;
+width: 100%;
 }
 
 .content {
-  /* background: rgba(255, 255, 255, 0.4); */
+  border-radius: 5px;
   left: 50%;
   padding: 50px 32px;
   position: absolute;
@@ -43,15 +43,13 @@ font-weight: bolder;
   transform: translate(-50%, -50%);
   width: 330px;
   z-index: 99;
-  border-radius: 5px;
 }
 
 .h1Login {
   color: white;
   font-size: 32px;
-  font-weight: 600;
-  margin: 30px 35px;
   font-weight: bolder;
+  margin: 30px 35px;
 }
 
 input {
@@ -59,31 +57,31 @@ input {
 }
 
 .divPassword {
-  display: flex;
-  align-items:baseline;
   align-content: center;
+  align-items:baseline;
+  display: flex;
   justify-content: flex-end;
 }
 
 .divPassword button {
-  position: absolute;
-  margin-top: 4px;
   background-color: transparent;
   border: none;
+  margin-top: 4px;
+  position: absolute;
 }
 
 .test {
   background-color: #da2846;
+  border: 1px solid #da2846;
   box-shadow: 0 0 1.5em #da2846;
   color: white;
   font-weight: 900;
-  border: 1px solid #da2846;
 }
 
 .test:hover {
-  box-shadow: inset 0 0 1em yellow, 0 0 5em green;
   color: yellow;
   border: 1px solid #da2846;
+  box-shadow: inset 0 0 1em yellow, 0 0 5em green;
 }
 
 .btn {

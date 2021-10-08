@@ -1,17 +1,17 @@
 * {
   box-sizing: border-box;
+  font-family: 'Acme', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: 'Acme', sans-serif;
 }
 
 .headerButtons {
+  align-items: center;
+  background-color: #da2846;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  padding: 10px 0;
-  background-color: #da2846;
   margin-bottom: 10px;
+  padding: 10px 0;
 }
 
 .menuItemSearch {
@@ -22,34 +22,34 @@
 .fa-search,
 .fa-user,
 .pageTitle {
-  font-size: 25px;
   color: #98e2e1;
+  font-size: 25px;
 }
 
 .search {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-bottom: 20px;
 }
 
 .fetchBtn {
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: 1px solid #da2846;
   background-color: #98e2e134;
+  border: 1px solid #da2846;
+  border-radius: 5px;
+  padding: 5px 10px;
 }
 
 .searchInput {
-  width: 60%;
+  background-color: #98e2e134;
   border:1px solid #da2846;
   border-radius: 5px;
-  background-color: #98e2e134;
+  width: 60%;
 }
 
 .inputsRadio {
-  display: flex;
   align-content: space-between;
+  display: flex;
 }
 
 .inputsRadio input {
@@ -58,5 +58,4 @@
 
 .searchIngredient {
   border: #da2846;
-
 }
