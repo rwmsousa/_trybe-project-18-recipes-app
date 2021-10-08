@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Acme', sans-serif;
 }
 
 .bg-img {
@@ -12,7 +13,7 @@
 }
 
 .bg-img:after {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.226);
   content: '';
   height: 100%;
   left: 0;
@@ -21,65 +22,72 @@
   width: 100%;
 }
 
+.appRecipe{
+background: linear-gradient(180deg, rgba(218,40,70,1) 0%, rgba(218,40,70,1) 0%, rgba(0, 0, 0, 0) 69%);
+position: absolute;
+width: 100%;
+height: 150px;
+color: white;
+text-align: center;
+padding-top: 30px;
+font-weight: bolder;
+}
+
 .content {
-  background: rgba(255, 255, 255, 0.4);
+  /* background: rgba(255, 255, 255, 0.4); */
   left: 50%;
-  padding: 60px 32px;
+  padding: 50px 32px;
   position: absolute;
   text-align: center;
-  top: 60%;
+  top: 45%;
   transform: translate(-50%, -50%);
-  width: 370px;
+  width: 330px;
   z-index: 99;
+  border-radius: 5px;
 }
 
-.content header {
+.h1Login {
   color: white;
-  font-family: Tahoma , sans-serif;
   font-size: 32px;
   font-weight: 600;
-  margin: 0 35px;
+  margin: 30px 35px;
+  font-weight: bolder;
 }
 
-.field {
-  background: rgba(255, 255, 255, 0.94);
+input {
+  margin-bottom: 20px;
+}
+
+button {
+  border: 1px solid #da2846;
+}
+
+.divPassword {
   display: flex;
-  height: 45px;
-  position: relative;
-  width: 100%;
+  align-items:baseline;
+  align-content: center;
+  justify-content: flex-end;
 }
 
-.field input {
-  background: transparent;
+.divPassword button {
+  position: absolute;
+  margin-top: 4px;
+  background-color: transparent;
   border: none;
-  color: #222;
-  font-family: Tahoma , sans-serif;
-  font-size: 16px;
-  height: 100%;
-  outline: none;
-  width: 100%;
-}
-
-.space {
-  margin-top: 16px;
-}
-
-.field span {
-  color: #222;
-  line-height: 45px;
-  width: 40px;
 }
 
 .test {
-  background-color: green;
-  box-shadow: inset 0 0 1em yellowgreen , 0 0 1.5em green;
-  color: yellowgreen;
+  background-color: #da2846;
+  box-shadow: 0 0 1.5em #da2846;
+  color: white;
   font-weight: 900;
+  border: 1px solid #da2846;
 }
 
 .test:hover {
-  box-shadow: inset 0 0 1em yellow , 0 0 5em green;
+  box-shadow: inset 0 0 1em yellow, 0 0 5em green;
   color: yellow;
+  border: 1px solid #da2846;
 }
 
 .btn {
