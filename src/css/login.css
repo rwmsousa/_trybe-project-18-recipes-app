@@ -22,15 +22,18 @@
   width: 100%;
 }
 
-.appRecipe{
-background: linear-gradient(180deg, rgba(218,40,70,1) 0%, rgba(218,40,70,1) 0%, rgba(0, 0, 0, 0) 69%);
-color: white;
-font-weight: bolder;
-height: 150px;
-padding-top: 30px;
-position: absolute;
-text-align: center;
-width: 100%;
+.appRecipe {
+  background: linear-gradient(
+    180deg,
+    rgba(218, 40, 70, 1) 0% rgba(218, 40, 70, 1) 0% rgba(0, 0, 0, 0) 69%
+  );
+  color: white;
+  font-weight: bolder;
+  height: 150px;
+  padding-top: 30px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
 }
 
 .content {
@@ -58,7 +61,7 @@ input {
 
 .divPassword {
   align-content: center;
-  align-items:baseline;
+  align-items: baseline;
   display: flex;
   justify-content: flex-end;
 }
@@ -79,9 +82,9 @@ input {
 }
 
 .test:hover {
-  color: yellow;
   border: 1px solid #da2846;
   box-shadow: inset 0 0 1em yellow, 0 0 5em green;
+  color: yellow;
 }
 
 .btn {
