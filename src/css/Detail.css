@@ -28,6 +28,7 @@ h1 {
 .header-detail {
   background-color: #da2846;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
@@ -52,6 +53,12 @@ h1 {
 .buttons {
   display: flex;
   align-items: center;
+}
+
+.favorite-btn, .share-btn {
+  background-color: #da2846;
+  border: none;
+  margin: 0 5px;
 }
 
 .ingredients,
