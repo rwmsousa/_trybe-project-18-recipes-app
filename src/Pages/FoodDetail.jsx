@@ -142,7 +142,6 @@ function FoodDetail() {
               <img
                 src={ drink.strDrinkThumb }
                 alt={ `drink: ${drink.strDrink}` }
-                width="200px"
                 data-testid={ `${idx}-recomendation-card` }
               />
               <h6 data-testid={ `${idx}-recomendation-title` }>{drink.strDrink}</h6>
@@ -175,7 +174,6 @@ function FoodDetail() {
             </button>
           ) }
       </div>
-
     </div>
   );
 }

@@ -87,6 +87,7 @@ iframe {
 .recomended-div img {
   border-radius: 5px 5px 0 0;
   margin-bottom: 10px;
+  width: 200px;
 }
 
 .start-recipe-button {

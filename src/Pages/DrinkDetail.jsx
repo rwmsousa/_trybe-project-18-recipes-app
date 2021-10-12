@@ -98,56 +98,68 @@ function DrinkDetail() {
         src={ drinksDetails[0].strDrinkThumb }
         alt={ `${drinksDetails[0].strDrink} recipe` }
         data-testid="recipe-photo"
-        width="400px"
+        className="thumbnail"
       />
-      <h1 data-testid="recipe-title">{drinksDetails[0].strDrink}</h1>
-      <span data-testid="recipe-category">{drinksDetails[0].strAlcoholic}</span>
-
-      <HandleShare value={ stateButtons } />
-      <HandleFavorite drinksDetails={ drinksDetails } />
-
-      <h3>Ingredientes</h3>
-      <IngredientsList list={ drinksDetails } />
-      <h3>Instruções</h3>
-      <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
-      <h3>Recomendadas</h3>
-      <section className="recomended-section">
-        {foodsClone.map((food, idx) => (
-          <div className="recomended-div" key={ food.idMeal }>
-            <img
-              src={ food.strMealThumb }
-              alt={ `prato: ${food.strMeal}` }
-              width="100px"
-              data-testid={ `${idx}-recomendation-card` }
-            />
-            <h6 data-testid={ `${idx}-recomendation-title` }>{food.strMeal}</h6>
-          </div>
-        ))}
-      </section>
-      { !localStorage.inProgressRecipes && !JSON.parse(localStorage.inProgressRecipes)
-        .find((recipeId) => recipeId === id) ? (
-          <button
-            button
-            className="start-recipe-button"
-            type="button"
-            data-testid="start-recipe-btn"
-            value={ drinksDetails[0].idDrink }
-            onClick={ handleLink }
+      <div className="header-detail">
+        <h1 data-testid="recipe-title">{drinksDetails[0].strDrink}</h1>
+        <div className="buttons">
+          <span
+            data-testid="recipe-category"
+            className="category"
           >
-            Iniciar Receita
-          </button>
-        ) : (
-          <button
-            button
-            className="start-recipe-button"
-            type="button"
-            data-testid="start-recipe-btn"
-            value={ drinksDetails[0].idDrink }
-            onClick={ handleLink }
-          >
-            Continuar Receita
-          </button>
-        )}
+            { drinksDetails[0].strAlcoholic }
+          </span>
+          <HandleShare value={ stateButtons } />
+          <HandleFavorite drinksDetails={ drinksDetails } />
+        </div>
+      </div>
+
+      <div className="ingredients">
+        <h3>Ingredientes</h3>
+        <IngredientsList list={ drinksDetails } />
+        <h3>Instruções</h3>
+        <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
+      </div>
+
+      <div className="recommended">
+        <h3>Recomendadas</h3>
+        <section className="recomended-section">
+          {foodsClone.map((food, idx) => (
+            <div className="recomended-div" key={ food.idMeal }>
+              <img
+                src={ food.strMealThumb }
+                alt={ `prato: ${food.strMeal}` }
+                data-testid={ `${idx}-recomendation-card` }
+              />
+              <h6 data-testid={ `${idx}-recomendation-title` }>{food.strMeal}</h6>
+            </div>
+          ))}
+        </section>
+        { !localStorage.inProgressRecipes && !JSON.parse(localStorage.inProgressRecipes)
+          .find((recipeId) => recipeId === id) ? (
+            <button
+              button
+              className="start-recipe-button"
+              type="button"
+              data-testid="start-recipe-btn"
+              value={ drinksDetails[0].idDrink }
+              onClick={ handleLink }
+            >
+              Iniciar Receita
+            </button>
+          ) : (
+            <button
+              button
+              className="start-recipe-button"
+              type="button"
+              data-testid="start-recipe-btn"
+              value={ drinksDetails[0].idDrink }
+              onClick={ handleLink }
+            >
+              Continuar Receita
+            </button>
+          )}
+      </div>
     </div>
   );
 }
