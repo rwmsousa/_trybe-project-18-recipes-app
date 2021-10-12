@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { fetchDrinkById, handleCheckBoxChange, currentData } from '../services';
-import '../css/Detail.css';
+import '../css/inProgress.css';
 import Context from '../Context/Context';
 import HandleShare from '../components/HandleShareDrinks';
 import HandleFavorite from '../components/HandleFavoriteDrinks';
@@ -117,40 +117,51 @@ function DrinkInProgress() {
         src={ drinksDetails[0].strDrinkThumb }
         alt={ `${drinksDetails[0].strDrink} recipe` }
         data-testid="recipe-photo"
-        width="400px"
+        className="thumbnail"
       />
-      <h1 data-testid="recipe-title">{drinksDetails[0].strDrink}</h1>
-      <span data-testid="recipe-category">
-        {drinksDetails[0].strAlcoholic}
-      </span>
-
-      <HandleShare value={ stateButtons } />
-      <HandleFavorite drinksDetails={ drinksDetails } />
-
-      <h3>Ingredientes</h3>
-      <div>
-        {Object.keys(drinksDetails[0])
-          .filter((k) => k.includes('Ingredient'))
-          .map((value, idx) => (
-            drinksDetails[0][value] !== null && drinksDetails[0][value] !== '' && (
-              <label
-                htmlFor={ idx }
-                key={ idx }
-                data-testid={ `${idx}-ingredient-step` }
-              >
-                <input
-                  type="checkbox"
-                  id={ idx }
-                  value={ drinksDetails[0][value] }
-                  onChange={ ({ target }) => handleCheckBoxChange(target) }
-                />
-                {drinksDetails[0][value]}
-              </label>
-            )
-          ))}
+      <div className="header-in-progress">
+        <h1 data-testid="recipe-title">{drinksDetails[0].strDrink}</h1>
+        <div className="buttons">
+          <span
+            data-testid="recipe-category"
+            className="category"
+          >
+            {drinksDetails[0].strAlcoholic}
+          </span>
+          <HandleShare value={ stateButtons } />
+          <HandleFavorite drinksDetails={ drinksDetails } />
+        </div>
       </div>
-      <h3>Instruções</h3>
-      <p data-testid="instructions">{ drinksDetails[0].strInstructions }</p>
+
+      <div className="ingredients">
+        <h3>Ingredientes</h3>
+        <div className="ingredient">
+          {Object.keys(drinksDetails[0])
+            .filter((k) => k.includes('Ingredient'))
+            .map((value, idx) => (
+              drinksDetails[0][value] !== null && drinksDetails[0][value] !== '' && (
+                <label
+                  htmlFor={ idx }
+                  key={ idx }
+                  data-testid={ `${idx}-ingredient-step` }
+                >
+                  <input
+                    type="checkbox"
+                    id={ idx }
+                    value={ drinksDetails[0][value] }
+                    onChange={ ({ target }) => handleCheckBoxChange(target) }
+                  />
+                  {drinksDetails[0][value]}
+                </label>
+              )
+            ))}
+        </div>
+      </div>
+
+      <div className="instrution">
+        <h3>Instruções</h3>
+        <p data-testid="instructions">{ drinksDetails[0].strInstructions }</p>
+      </div>
 
       { showButtonFinished && (
         <button
