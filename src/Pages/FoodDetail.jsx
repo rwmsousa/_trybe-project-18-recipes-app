@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import copy from 'clipboard-copy';
 import { fetchFoodById } from '../services';
 import IngredientsList from '../components/IngredientsList';
-import '../css/Detail.css';
+import '../css/detail.css';
 import Context from '../Context/Context';
 import HandleShare from '../components/HandleShareFood';
 import HandleFavorite from '../components/HandleFavoriteFood';
@@ -93,78 +93,89 @@ function FoodDetail() {
   }
 
   return (
-    <div>
+    <div className="detail">
       <img
         src={ foodDetails[0].strMealThumb }
         alt={ `${foodDetails[0].strMeal} recipe` }
         data-testid="recipe-photo"
-        width="400px"
+        className="thumbnail"
       />
-      <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
-      <span data-testid="recipe-category">{ foodDetails[0].strCategory }</span>
+      <div className="header-detail">
+        <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
+        <div className="buttons">
+          <span
+            data-testid="recipe-category"
+            className="category"
+          >
+            { foodDetails[0].strCategory }
+          </span>
+          <HandleShare value={ stateButtons } />
+          <HandleFavorite foodDetails={ foodDetails } />
+        </div>
+      </div>
 
-      <HandleShare value={ stateButtons } />
-      <HandleFavorite foodDetails={ foodDetails } />
-
-      <h3>Ingredientes</h3>
-      <IngredientsList list={ foodDetails } />
-      <h3>Instructions</h3>
-      <p data-testid="instructions">{foodDetails[0].strInstructions}</p>
-      <h3>Video</h3>
-      <iframe
-        width="560"
-        height="315"
-        src={ `https://www.youtube.com/embed/${video}` }
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer;
+      <div className="ingredients">
+        <h3>Ingredientes</h3>
+        <IngredientsList list={ foodDetails } />
+        <h3>Instructions</h3>
+        <p data-testid="instructions">{foodDetails[0].strInstructions}</p>
+        <h3>Video</h3>
+        <iframe
+          src={ `https://www.youtube.com/embed/${video}` }
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer;
         autoplay;
         clipboard-write;
         encrypted-media;
         gyroscope;
         picture-in-picture"
-        allowFullScreen
-        data-testid="video"
-      />
-      <h3>Recomendadas</h3>
-      <section className="recomended-section">
-        {drinksClone.map((drink, idx) => (
-          <div className="recomended-div" key={ drink.idDrink }>
-            <img
-              src={ drink.strDrinkThumb }
-              alt={ `drink: ${drink.strDrink}` }
-              width="200px"
-              data-testid={ `${idx}-recomendation-card` }
-            />
-            <h6 data-testid={ `${idx}-recomendation-title` }>{drink.strDrink}</h6>
-            <p>{drink.strAlcoholic}</p>
-          </div>
-        ))}
-      </section>
-      { !localStorage.inProgressRecipes && !JSON.parse(localStorage.inProgressRecipes)
-        .find((recipeId) => recipeId === id) ? (
-          <button
-            button
-            className="start-recipe-button"
-            type="button"
-            data-testid="start-recipe-btn"
-            value={ foodDetails[0].idMeal }
-            onClick={ handleLink }
-          >
-            Iniciar Receita
-          </button>
-        ) : (
-          <button
-            button
-            className="start-recipe-button"
-            type="button"
-            data-testid="start-recipe-btn"
-            value={ foodDetails[0].idMeal }
-            onClick={ handleLink }
-          >
-            Continuar Receita
-          </button>
-        ) }
+          allowFullScreen
+          data-testid="video"
+        />
+      </div>
+      <div className="recommended">
+        <h3>Recomendadas</h3>
+        <section className="recomended-section">
+          {drinksClone.map((drink, idx) => (
+            <div className="recomended-div" key={ drink.idDrink }>
+              <img
+                src={ drink.strDrinkThumb }
+                alt={ `drink: ${drink.strDrink}` }
+                width="200px"
+                data-testid={ `${idx}-recomendation-card` }
+              />
+              <h6 data-testid={ `${idx}-recomendation-title` }>{drink.strDrink}</h6>
+              <p>{drink.strAlcoholic}</p>
+            </div>
+          ))}
+        </section>
+        { !localStorage.inProgressRecipes && !JSON.parse(localStorage.inProgressRecipes)
+          .find((recipeId) => recipeId === id) ? (
+            <button
+              button
+              className="start-recipe-button"
+              type="button"
+              data-testid="start-recipe-btn"
+              value={ foodDetails[0].idMeal }
+              onClick={ handleLink }
+            >
+              Iniciar Receita
+            </button>
+          ) : (
+            <button
+              button
+              className="start-recipe-button"
+              type="button"
+              data-testid="start-recipe-btn"
+              value={ foodDetails[0].idMeal }
+              onClick={ handleLink }
+            >
+              Continuar Receita
+            </button>
+          ) }
+      </div>
+
     </div>
   );
 }

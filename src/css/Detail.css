@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: Acme , sans-serif;
+  font-family: Acme, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -8,6 +8,63 @@
 /*  codigo fonte para essa seção
 https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizontal-no-css
 */
+
+.detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.thumbnail {
+  width: 360px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  padding: 10px;
+  color: #98e2e1;
+}
+
+.header-detail {
+  background-color: #da2846;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.category {
+  background-color: #98e2e134;
+  border: 1px solid #98e2e1;
+  border-bottom: none;
+  border-left: none;
+  border-radius: 5px;
+  border-top: none;
+  font-size: 14px;
+  margin: 0 5px 5px;
+  padding: 5px 10px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  color: #98e2e1;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+}
+
+.ingredients,
+.recommended {
+  margin: 5px;
+  margin-bottom: 20px;
+}
+
+iframe {
+  width: 350px;
+  height: 250px;
+  border-radius: 5px;
+}
 
 .recomended-section {
   height: 325px;
@@ -20,49 +77,33 @@ https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizont
   box-shadow: 1px 1px 10px #999;
   cursor: pointer;
   display: inline-block;
-
-  /* *display: inline; */
   margin: 20px;
-  max-height: 250px;
+  max-height: 280px;
   text-align: center;
   vertical-align: top;
   zoom: 1;
 }
 
-/* até aqui */
+.recomended-div img {
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 10px;
+}
+
 .start-recipe-button {
   border-radius: 10px;
   bottom: 0;
   padding: 5px;
   position: fixed;
   right: 200px;
+  background-color: #da2846;
+  color: #98e2e1;
+  border-color: #98e2e1;
 }
 
 .start-recipe-button:hover {
   background-color: white;
   border: none;
-  box-shadow: inset 0 0 1em yellowgreen , 0 0 1.5em green;
+  box-shadow: inset 0 0 1em yellowgreen, 0 0 1.5em green;
   color: green;
 }
 
-.favorite-btn, .share-btn {
-  background-color: transparent;
-  border: none;
-  margin: 10px;
-}
-
-.fa-heart-favorite {
-  color: red;
-  font-size: 25px;
-  outline: none;
-}
-
-.fa-heart-unfavorite {
-  color: grey;
-  font-size: 25px;
-}
-
-.fa-share-alt {
-  color: grey;
-  font-size: 25px;
-}
