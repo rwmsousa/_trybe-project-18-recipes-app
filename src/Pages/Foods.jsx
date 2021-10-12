@@ -42,7 +42,8 @@ function Foods() {
       const { meals } = await response.json();
 
       const magicNumber = 5;
-      const SplitArray = meals.filter((item, idx) => idx < magicNumber);
+      const SplitArray = meals
+        .filter((item, idx) => idx < magicNumber);
 
       setCategories(SplitArray);
     }

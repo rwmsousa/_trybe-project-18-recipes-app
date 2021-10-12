@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
+import '../css/drinks.css';
 import { fetchByCategoryDrinks, fetchDrinks } from '../services';
 
 function Drinks() {
@@ -14,9 +15,13 @@ function Drinks() {
     categories,
     setCategories,
     setIdDrinkDetails,
-    drinks, setDrinks,
-    drinksClone, setSearchButton,
-    shouldUpdate, setDrinksClone } = useContext(Context);
+    drinks,
+    setDrinks,
+    drinksClone,
+    setSearchButton,
+    shouldUpdate,
+    setDrinksClone,
+  } = useContext(Context);
 
   useEffect(() => {
     async function fetch() {
@@ -70,13 +75,14 @@ function Drinks() {
   }, [drinks, setIdDrinkDetails, history]);
 
   return (
-    <div>
+    <div className="drinks">
       <Header />
-      <ul>
+      <ul className="categories">
         <button
           type="button"
           onClick={ () => setDrinks(drinksClone) }
           data-testid="All-category-filter"
+          className="category-filter"
         >
           All
         </button>
@@ -88,17 +94,18 @@ function Drinks() {
             name={ category.strCategory }
             value={ category.strCategory }
             onClick={ (event) => HandleClick(event) }
+            className="category-filter"
           >
             {category.strCategory}
           </button>
         ))}
       </ul>
-      <ul>
+      <ul className="cards">
         { !drinks ? (
           global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           drinks.slice(0, quantityRecipes).map((drink, idx) => (
-            <li key={ drink.idDrink }>
+            <li key={ drink.idDrink } className="li-card">
               <img
                 src={ drink.strDrinkThumb }
                 alt={ `Bebida: ${drink.strDrink}` }
