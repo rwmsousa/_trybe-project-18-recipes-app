@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { fetchFoodById, handleCheckBoxChange, currentData } from '../services';
-import '../css/Detail.css';
+import '../css/inProgress.css';
 import Context from '../Context/Context';
 import HandleShare from '../components/HandleShareFood';
 import HandleFavorite from '../components/HandleFavoriteFood';
@@ -11,8 +11,7 @@ function FoodInProgress() {
     setCurrentPage,
     setShowProfile,
     setShowTitlePage,
-    setSearchButton,
-  } = useContext(Context);
+    setSearchButton } = useContext(Context);
 
   const [foodDetails, setFoodDetails] = useState([]);
   const [msgClipboard, setMsgClipboard] = useState(false);
@@ -25,7 +24,9 @@ function FoodInProgress() {
   useEffect(() => {
     if (
       localStorage.doneRecipes
-      && JSON.parse(localStorage.doneRecipes).find((recipeId) => recipeId.id === id)
+      && JSON.parse(localStorage.doneRecipes).find(
+        (recipeId) => recipeId.id === id,
+      )
     ) {
       setShowButtonFinished(false);
     } else {
@@ -98,41 +99,52 @@ function FoodInProgress() {
         src={ foodDetails[0].strMealThumb }
         alt={ `${foodDetails[0].strMeal} recipe` }
         data-testid="recipe-photo"
-        width="400px"
+        className="thumbnail"
       />
-      <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
-      <span data-testid="recipe-category">{foodDetails[0].strCategory}</span>
-
-      <HandleShare value={ stateButtons } />
-      <HandleFavorite foodDetails={ foodDetails } />
-
-      <h3>Ingredientes</h3>
-      <div>
-        {Object.keys(foodDetails[0])
-          .filter((k) => k.includes('Ingredient'))
-          .map(
-            (value, idx) => foodDetails[0][value] !== ''
-            && foodDetails[0][value] !== null && (
-              <label
-                htmlFor={ idx }
-                key={ idx }
-                data-testid={ `${idx}-ingredient-step` }
-              >
-                <input
-                  type="checkbox"
-                  id={ idx }
-                  value={ foodDetails[0][value] }
-                  onChange={ ({ target }) => handleCheckBoxChange(target) }
-                />
-                {foodDetails[0][value]}
-              </label>
-            ),
-          )}
+      <div className="header-in-progress">
+        <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
+        <div className="buttons">
+          <span data-testid="recipe-category" className="category">
+            {foodDetails[0].strCategory}
+          </span>
+          <HandleShare value={ stateButtons } />
+          <HandleFavorite foodDetails={ foodDetails } />
+        </div>
       </div>
-      <h3>Instruções</h3>
-      <p data-testid="instructions">{ foodDetails[0].strInstructions }</p>
 
-      { showButtonFinished && (
+      <div className="ingredients">
+        <h3>Ingredientes</h3>
+        <div className="ingredient">
+          {Object.keys(foodDetails[0])
+            .filter((k) => k.includes('Ingredient'))
+            .map(
+              (value, idx) => foodDetails[0][value] !== ''
+                && foodDetails[0][value] !== null
+                && (
+                  <label
+                    htmlFor={ idx }
+                    key={ idx }
+                    data-testid={ `${idx}-ingredient-step` }
+                  >
+                    <input
+                      type="checkbox"
+                      id={ idx }
+                      value={ foodDetails[0][value] }
+                      onChange={ ({ target }) => handleCheckBoxChange(target) }
+                    />
+                    {foodDetails[0][value]}
+                  </label>
+                ),
+            )}
+        </div>
+      </div>
+
+      <div className="instrution">
+        <h3>Instruções</h3>
+        <p data-testid="instructions">{foodDetails[0].strInstructions}</p>
+      </div>
+
+      {showButtonFinished && (
         <button
           className="start-recipe-button"
           type="button"
@@ -140,8 +152,8 @@ function FoodInProgress() {
           onClick={ finishRecipe }
         >
           Finalizar receita
-        </button>)}
-
+        </button>
+      )}
     </div>
   );
 }

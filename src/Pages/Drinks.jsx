@@ -119,7 +119,7 @@ function Drinks() {
                 onClick={ handleLink }
                 data-testid={ `${idx}-recipe-card` }
               >
-                detalhes
+                Detalhes
               </button>
             </li>
           ))
