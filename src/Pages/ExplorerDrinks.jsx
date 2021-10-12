@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import { fetchRandomDrinkDetails } from '../services';
+import '../css/explorer.css';
 
 function ExplorerDrinks() {
   const history = useHistory();
@@ -26,27 +27,34 @@ function ExplorerDrinks() {
   return (
     <div>
       <Header />
-      <Link
-        to="/explorar/bebidas/ingredientes"
-      >
-        <button type="button" data-testid="explore-by-ingredient">
-          Por Ingredientes
-        </button>
-      </Link>
-      {/* <Link
+      <div className="content-explore">
+        <Link
+          to="/explorar/bebidas/ingredientes"
+        >
+          <button
+            type="button"
+            data-testid="explore-by-ingredient"
+            className="explore-btn"
+          >
+            Por Ingredientes
+          </button>
+        </Link>
+        {/* <Link
         to="/explorar/bebidas/area"
       >
         <button type="button" data-testid="explore-by-area">
           Por Local de Origem
         </button>
       </Link> */}
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleClick }
-      >
-        Me Surpreenda!
-      </button>
+        <button
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ handleClick }
+          className="explore-btn"
+        >
+          Me Surpreenda!
+        </button>
+      </div>
       <Footer />
     </div>
   );

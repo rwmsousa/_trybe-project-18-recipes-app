@@ -38,27 +38,32 @@ function ExplorerFoods() {
   return (
     <div>
       <Header />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ () => history.push('/explorar/comidas/ingredientes') }
-      >
-        Por Ingredientes
-      </button>
-      <button
-        type="button"
-        data-testid="explore-by-area"
-        onClick={ handleArea }
-      >
-        Por Local de Origem
-      </button>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleClick }
-      >
-        Me Surpreenda!
-      </button>
+      <div className="content-explore">
+        <button
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => history.push('/explorar/comidas/ingredientes') }
+          className="explore-btn"
+        >
+          Por Ingredientes
+        </button>
+        <button
+          type="button"
+          data-testid="explore-by-area"
+          onClick={ handleArea }
+          className="explore-btn"
+        >
+          Por Local de Origem
+        </button>
+        <button
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ handleClick }
+          className="explore-btn"
+        >
+          Me Surpreenda!
+        </button>
+      </div>
       <Footer />
     </div>
   );
