@@ -44,10 +44,7 @@
 
 .li-card p {
   background: linear-gradient(
-    180deg,
-    rgba(218, 40, 70, 1) 0%,
-    rgba(218, 40, 70, 1) 0%,
-    rgba(0, 0, 0, 0) 69%
+    180deg, rgba(218, 40, 70, 1) 0%, rgba(218, 40, 70, 1) 0%, rgba(0, 0, 0, 0) 69%
   );
   height: 40px;
   padding: 0 5px;

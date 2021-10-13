@@ -23,17 +23,14 @@
 }
 
 .appRecipe {
-background: linear-gradient(180deg,
-rgba(218,40,70,1) 0%,
-rgba(218,40,70,1) 0%,
-rgba(0, 0, 0, 0) 69%);
-color: white;
-font-weight: 900;
-height: 150px;
-padding-top: 30px;
-position: absolute;
-text-align: center;
-width: 100%;
+  background: linear-gradient(180deg, rgba(218,40,70,1) 0%, rgba(218,40,70,1) 0%, rgba(0, 0, 0, 0) 69%);
+  color: white;
+  font-weight: 900;
+  height: 150px;
+  padding-top: 30px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
 }
 
 .content {

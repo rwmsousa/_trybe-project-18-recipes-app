@@ -51,15 +51,13 @@ h1 {
   display: flex;
 }
 
-.favorite-btn,
-.share-btn {
+.favorite-btn, .share-btn {
   background-color: #da2846;
   border: none;
   margin: 0 5px;
 }
 
-.ingredients,
-.instrution {
+.ingredients, .instrution {
   margin: 5px;
   margin-bottom: 10px;
 }

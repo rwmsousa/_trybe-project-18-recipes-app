@@ -19,9 +19,7 @@
   border: none;
 }
 
-.fa-search,
-.fa-user,
-.pageTitle {
+.fa-search, .fa-user, .pageTitle {
   color: #98e2e1;
   font-size: 25px;
 }
