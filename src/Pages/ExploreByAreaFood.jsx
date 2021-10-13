@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import { fetchFoodByArea, fetchFoods, fetchAreaofFoods } from '../services';
+import '../css/exploreByArea.css';
 
 function ExploreByAreaFood() {
   const history = useHistory();
@@ -50,6 +51,7 @@ function ExploreByAreaFood() {
         name="dropdownArea"
         data-testId="explore-by-area-dropdown"
         onChange={ handleChange }
+        className="select-area"
       >
         <option value="all" data-testId="All-option">All</option>
         {areas.map((a) => (
@@ -62,12 +64,12 @@ function ExploreByAreaFood() {
           </option>
         ))}
       </select>
-      <ul>
+      <ul className="cards">
         { !foodsarea ? (
           global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
         ) : (
           foodsarea.map((food, idx) => (
-            <li key={ food.idMeal }>
+            <li key={ food.idMeal } className="li-card">
               <img
                 src={ food.strMealThumb }
                 alt={ `Comida: ${food.strMeal}` }
@@ -81,7 +83,7 @@ function ExploreByAreaFood() {
                 onClick={ handleLink }
                 data-testid={ `${idx}-recipe-card` }
               >
-                detalhes
+                Detalhes
               </button>
             </li>
           )))}
