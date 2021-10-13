@@ -86,7 +86,7 @@ input {
 
 .test:hover {
   border: 1px solid #da2846;
-  box-shadow: inset 0 0 1em yellow, 0 0 5em green;
+  box-shadow: inset 0 0 1em yellow , 0 0 5em green;
   color: yellow;
 }
 
