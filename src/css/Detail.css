@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: Acme, sans-serif;
+  font-family: Acme , sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -15,7 +15,7 @@ https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizont
 }
 
 .thumbnail {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
   margin-bottom: 10px;
   width: 360px;
 }
@@ -61,7 +61,7 @@ h1 {
   margin: 0 5px;
 }
 
-.ingredients,
+.ingredients ,
 .recommended {
   margin: 5px;
   margin-bottom: 20px;
@@ -111,7 +111,6 @@ iframe {
 .start-recipe-button:hover {
   background-color: white;
   border: none;
-  box-shadow: inset 0 0 1em yellowgreen, 0 0 1.5em green;
+  box-shadow: inset 0 0 1em yellowgreen , 0 0 1.5em green;
   color: green;
 }
-

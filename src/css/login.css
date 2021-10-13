@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: Acme, sans-serif;
+  font-family: Acme , sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -22,13 +22,13 @@
   width: 100%;
 }
 
-.appRecipe{
-background: linear-gradient(180deg, 
-rgba(218,40,70,1) 0%, 
-rgba(218,40,70,1) 0%, 
+.appRecipe {
+background: linear-gradient(180deg,
+rgba(218,40,70,1) 0%,
+rgba(218,40,70,1) 0%,
 rgba(0, 0, 0, 0) 69%);
 color: white;
-font-weight: bolder;
+font-weight: 900;
 height: 150px;
 padding-top: 30px;
 position: absolute;
@@ -51,7 +51,7 @@ width: 100%;
 .h1Login {
   color: white;
   font-size: 32px;
-  font-weight: bolder;
+  font-weight: 900;
   margin: 30px 35px;
 }
 
@@ -61,7 +61,7 @@ input {
 
 .divPassword {
   align-content: center;
-  align-items:baseline;
+  align-items: baseline;
   display: flex;
   justify-content: flex-end;
 }

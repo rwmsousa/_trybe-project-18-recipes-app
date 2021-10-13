@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import copy from 'clipboard-copy';
 import { fetchDrinkById } from '../services';
 import IngredientsList from '../components/IngredientsList';
-import '../css/detail.css';
+import '../css/Detail.css';
 import Context from '../Context/Context';
 import HandleShare from '../components/HandleShareDrinks';
 import HandleFavorite from '../components/HandleFavoriteDrinks';

@@ -1,15 +1,14 @@
 * {
   box-sizing: border-box;
-  font-family: Acme, sans-serif;
+  font-family: Acme , sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .content-explore {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  margin:0 5px;
+  margin: 0 5px;
 }
 
 .ingredient {

@@ -1,15 +1,15 @@
 * {
   box-sizing: border-box;
-  font-family: Acme, sans-serif;
+  font-family: Acme , sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .content-profile {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .content-profile p {
