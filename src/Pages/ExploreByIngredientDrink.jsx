@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import { fetchIngredientofDrinks } from '../services';
+import '../css/exploreByIngredient.css';
 
 function ExploreByIngredientDrink() {
   const history = useHistory();
@@ -13,8 +14,7 @@ function ExploreByIngredientDrink() {
     setCurrentPage,
     setSearchButton,
     setDrinks,
-    setShouldUpdate,
-  } = useContext(Context);
+    setShouldUpdate } = useContext(Context);
 
   useEffect(() => {
     setCurrentPage('Explorar Ingredientes');
@@ -31,7 +31,9 @@ function ExploreByIngredientDrink() {
   }, [setShouldUpdate]);
 
   async function handleClick(value) {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${value}`);
+    const response = await fetch(
+      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${value}`,
+    );
     const { drinks } = await response.json();
     history.push('/bebidas');
     return drinks.length === 0 ? setDrinks([]) : setDrinks(drinks);
@@ -40,45 +42,47 @@ function ExploreByIngredientDrink() {
   return (
     <div>
       <Header />
-      {data.map((item, i) => (
-        <Link
-          key={ item.strIngredient1 }
-          data-testid={ `${i}-ingredient-card` }
-          onClick={ () => handleClick(item.strIngredient1) }
-          to="/comidas"
-        >
-          <img
-            src={ `https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png` }
-            alt={ item.strIngredient1 }
-            width="100px"
-            data-testid={ `${i}-card-img` }
-          />
-          <p data-testid={ `${i}-card-name` }>{item.strIngredient1}</p>
-        </Link>
-        // <div
-        //   key={ item.strIngredient1 }
-        //   // data-testid={ `${i}-ingredient-card` }
-        // >
-        //   <input
-        //     type="button"
-        //     value={ item.strIngredient1 }
-        //     onClick={ handleClick }
-        //     data-testid={ `${i}-ingredient-card` }
-        //   />
-        //   <input
-        //     type="image"
-        //     src={ `https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png` }
-        //     alt={ item.strIngredient1 }
-        //     width="100px"
-        //     // value={ item.strIngredient1 }
-        //     // onClick={ handleClick }
-        //     data-testid={ `${i}-card-img` }
-        //   />
-        //   <p data-testid={ `${i}-card-name` }>
-        //     { item.strIngredient1 }
-        //   </p>
-        // </div>
-      ))}
+      <div className="content-explore">
+        {data.map((item, i) => (
+          <Link
+            key={ item.strIngredient1 }
+            data-testid={ `${i}-ingredient-card` }
+            onClick={ () => handleClick(item.strIngredient1) }
+            to="/comidas"
+            className="ingredient"
+          >
+            <img
+              src={ `https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png` }
+              alt={ item.strIngredient1 }
+              data-testid={ `${i}-card-img` }
+            />
+            <p data-testid={ `${i}-card-name` }>{item.strIngredient1}</p>
+          </Link>
+          // <div
+          //   key={ item.strIngredient1 }
+          //   // data-testid={ `${i}-ingredient-card` }
+          // >
+          //   <input
+          //     type="button"
+          //     value={ item.strIngredient1 }
+          //     onClick={ handleClick }
+          //     data-testid={ `${i}-ingredient-card` }
+          //   />
+          //   <input
+          //     type="image"
+          //     src={ `https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png` }
+          //     alt={ item.strIngredient1 }
+          //     width="100px"
+          //     // value={ item.strIngredient1 }
+          //     // onClick={ handleClick }
+          //     data-testid={ `${i}-card-img` }
+          //   />
+          //   <p data-testid={ `${i}-card-name` }>
+          //     { item.strIngredient1 }
+          //   </p>
+          // </div>
+        ))}
+      </div>
       <Footer />
     </div>
   );
