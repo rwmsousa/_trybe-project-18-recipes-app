@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import { fetchIngredientofFoods } from '../services';
+import '../css/exploreByIngredient.css';
 
 function ExploreByIngredientFood() {
   const history = useHistory();
@@ -40,21 +41,23 @@ function ExploreByIngredientFood() {
   return (
     <div>
       <Header />
-      {data.map((item, i) => (
-        <Link
-          key={ item.strIngredient }
-          data-testid={ `${i}-ingredient-card` }
-          onClick={ () => handleClick(item.strIngredient) }
-          to="/comidas"
-        >
-          <img
-            src={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}-Small.png` }
-            alt={ item.strIngredient }
-            width="100px"
-            data-testid={ `${i}-card-img` }
-          />
-          <p data-testid={ `${i}-card-name` }>{item.strIngredient}</p>
-        </Link>
+      <div className="content-explore">
+        {data.map((item, i) => (
+          <Link
+            key={ item.strIngredient }
+            data-testid={ `${i}-ingredient-card` }
+            onClick={ () => handleClick(item.strIngredient) }
+            to="/comidas"
+            className="ingredient"
+          >
+            <img
+              src={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}-Small.png` }
+              alt={ item.strIngredient }
+              width="100px"
+              data-testid={ `${i}-card-img` }
+            />
+            <p data-testid={ `${i}-card-name` }>{item.strIngredient}</p>
+          </Link>
         // <div
         //   key={ item.strIngredient }
         //   // data-testid={ `${i}-ingredient-card` }
@@ -78,7 +81,8 @@ function ExploreByIngredientFood() {
         //     { item.strIngredient }
         //   </p>
         // </div>
-      ))}
+        ))}
+      </div>
       <Footer />
     </div>
   );
