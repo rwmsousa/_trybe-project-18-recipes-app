@@ -24,7 +24,12 @@
 
 .appRecipe {
   background:
-  linear-gradient(180deg, rgba(218, 40, 70, 1) 0%, rgba(218, 40, 70, 1) 0%, rgba(0, 0, 0, 0) 69%);
+  linear-gradient(
+    180deg,
+    rgba(218, 40, 70, 1) 0%,
+    rgba(218, 40, 70, 1) 0%,
+    rgba(0, 0, 0, 0) 69%
+  );
   color: white;
   font-weight: 900;
   height: 150px;
