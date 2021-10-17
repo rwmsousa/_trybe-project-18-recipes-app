@@ -72,10 +72,10 @@ function SearchBar() {
         className="searchInput"
         value={ searchText }
         onChange={ handleSearchText }
+        placeholder="write a search term"
       />
       <div className="inputsRadio">
         <label htmlFor="input-ingredient">
-          Ingrediente
           <input
             className="searchIngredient"
             type="radio"
@@ -85,9 +85,9 @@ function SearchBar() {
             value="searchIngredient"
             onChange={ handleRadio }
           />
+          Ingredient
         </label>
         <label htmlFor="input-name">
-          Nome
           <input
             className="searchName"
             type="radio"
@@ -97,9 +97,9 @@ function SearchBar() {
             value="searchName"
             onChange={ handleRadio }
           />
+          Name
         </label>
         <label htmlFor="input-first-letter">
-          Primeira Letra
           <input
             className="firstLetter"
             type="radio"
@@ -109,6 +109,7 @@ function SearchBar() {
             value="firstLetter"
             onChange={ handleRadio }
           />
+          First Letter
         </label>
       </div>
       <button
@@ -117,7 +118,7 @@ function SearchBar() {
         data-testid="exec-search-btn"
         onClick={ handleClickSearch }
       >
-        Pesquisar
+        Search
       </button>
     </div>
   );

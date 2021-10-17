@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: Acme , sans-serif;
+  font-family: Acme, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -19,8 +19,10 @@
   border: none;
 }
 
-.fa-search, .fa-user, .pageTitle {
-  color: #F9B9BA;
+.fa-search,
+.fa-user,
+.pageTitle {
+  color: #f9b9ba;
   font-size: 25px;
 }
 
@@ -32,28 +34,93 @@
 }
 
 .fetchBtn {
-  background-color: #F9B9BA;
+  background-color: #f9b9ba;
   border: 1px solid #da2846;
   border-radius: 5px;
+  color: #da2846;
+  font-size: 10px;
   padding: 5px 10px;
 }
 
 .searchInput {
-  background-color: #F9B9BA;
+  background-color: #f9b9ba;
   border: 1px solid #da2846;
   border-radius: 5px;
   width: 60%;
+  color: #da2846;
+  line-height: 10px;
+  padding: 5px;
 }
 
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  color: #da284667;
+  padding: 5px;
+}
+
+input:focus:placeholder {
+  color: transparent;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+input:focus:-moz-placeholder {
+  color: transparent;
+} /* FF 4-18 */
+
+input:focus::-moz-placeholder {
+  color: transparent;
+} /* FF 19+ */
+
+input:focus:-ms-input-placeholder {
+  color: transparent;
+} /* IE 10+ */
+
 .inputsRadio {
-  align-content: space-between;
   display: flex;
 }
 
 .inputsRadio input {
   margin: 10px;
+  font-size: 10px;
 }
 
-.searchIngredient {
-  border: #da2846;
+label {
+  font-size: 12px;
+  align-items: center;
+  display: flex;
+  color: #da2846;
+}
+
+input[type='radio']:after {
+  align-content: space-between;
+  display: flex;
+  color: #da2846;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #f9b9ba;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #da2846;
+}
+
+input[type='radio']:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #da2846;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid #f9b9ba;
 }

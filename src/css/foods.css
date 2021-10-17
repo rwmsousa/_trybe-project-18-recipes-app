@@ -5,8 +5,13 @@
   padding: 0;
 }
 
+.foods {
+  margin-bottom: 40px;
+}
+
 .categories {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
 }
 

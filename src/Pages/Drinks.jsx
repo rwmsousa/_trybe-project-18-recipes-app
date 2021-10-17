@@ -112,14 +112,13 @@ function Drinks() {
                 width="150px"
                 data-testid={ `${idx}-card-img` }
               />
-              <p data-testid={ `${idx}-card-name` }>{ drink.strDrink }</p>
               <button
                 value={ drink.idDrink }
                 type="button"
                 onClick={ handleLink }
                 data-testid={ `${idx}-recipe-card` }
               >
-                Detalhes
+                { drink.strDrink }
               </button>
             </li>
           ))
