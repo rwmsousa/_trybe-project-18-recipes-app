@@ -21,6 +21,7 @@ function Drinks() {
     setSearchButton,
     shouldUpdate,
     setDrinksClone,
+    setShowSearch,
   } = useContext(Context);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function Drinks() {
     if (shouldUpdate) {
       fetch();
     }
-    setCurrentPage('Bebidas');
+    setCurrentPage('Drinks');
     setSearchButton(true);
   }, [setCurrentPage, setSearchButton, shouldUpdate, setDrinks, setDrinksClone]);
 
@@ -53,6 +54,7 @@ function Drinks() {
   }, [setCategories]);
 
   const HandleClick = async ({ target: { name, value } }) => {
+    setShowSearch(false);
     if (actualCategory === value) {
       setDrinks(drinksClone);
     } else {

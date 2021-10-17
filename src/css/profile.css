@@ -20,7 +20,7 @@
 
 .profile-done-btn, .profile-favorite-btn, .exit {
   background-color: #da2846;
-  border-color: #98e2e1;
+  border-color: #F9B9BA;
   border-radius: 10px;
   bottom: 0;
   margin-bottom: 10px;
@@ -30,5 +30,5 @@
 }
 
 .profile-done-btn a, .profile-favorite-btn a, .exit {
-  color: #98e2e1;
+  color: #F9B9BA;
 }

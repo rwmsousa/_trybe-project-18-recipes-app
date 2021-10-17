@@ -21,6 +21,7 @@ function Foods() {
     setSearchButton,
     shouldUpdate,
     setFoodsClone,
+    setShowSearch,
   } = useContext(Context);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function Foods() {
     if (shouldUpdate) {
       fetch();
     }
-    setCurrentPage('Comidas');
+    setCurrentPage('Foods');
     setSearchButton(true);
   }, [setCurrentPage, setSearchButton, setFoods, shouldUpdate, setFoodsClone]);
 
@@ -51,6 +52,7 @@ function Foods() {
   }, [setCategories]);
 
   const HandleClick = async ({ target: { name, value } }) => {
+    setShowSearch(false);
     if (actualCategory === value) {
       setFoods(foodsClone);
     } else {

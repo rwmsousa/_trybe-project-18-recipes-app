@@ -80,16 +80,13 @@ function Login() {
   };
 
   return (
-    <section className="bg-img">
-      <div className="appRecipe">
-        <h1>APP DE RECEITAS</h1>
-      </div>
+    <div className="login">
       <div className="content">
         <Context.Provider value={ myProps }>
           <Form />
         </Context.Provider>
       </div>
-    </section>
+    </div>
   );
 }
 
