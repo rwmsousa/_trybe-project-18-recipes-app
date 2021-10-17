@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+  font-family: Acme , sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.content-explore {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.explore-btn {
+  background-color: #da2846;
+  border-color: #98e2e1;
+  border-radius: 10px;
+  bottom: 0;
+  color: #98e2e1;
+  margin-bottom: 10px;
+  padding: 5px;
+  right: 200px;
+  text-align: center;
+  width: 200px;
+}

@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  font-family: Acme , sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.bg-img {
+  background: url('https://image.freepik.com/fotos-gratis/fatias-de-cenoura-broculos-cortados-ao-meio-tomates-dente-de-alho-e-pimenta-preta-ao-lado-de-papel-branco-em-branco-sobre-a-mesa-de-madeira_23-2148082828.jpg');
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+.bg-img:after {
+  background: rgba(0, 0, 0, 0.226);
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.appRecipe {
+
+  /* background:
+  linear-gradient(
+    180deg,
+    rgba(218, 40, 70, 1) 0%,
+    rgba(218, 40, 70, 1) 0%,
+    rgba(0, 0, 0, 0) 69%
+  ); */
+  color: white;
+  font-weight: 900;
+  height: 150px;
+  padding-top: 30px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.content {
+  border-radius: 5px;
+  left: 50%;
+  padding: 50px 32px;
+  position: absolute;
+  text-align: center;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  width: 330px;
+  z-index: 99;
+}
+
+.h1Login {
+  color: white;
+  font-size: 32px;
+  font-weight: 900;
+  margin: 30px 35px;
+}
+
+input {
+  margin-bottom: 20px;
+}
+
+.divPassword {
+  align-content: center;
+  align-items: baseline;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.divPassword button {
+  background-color: transparent;
+  border: none;
+  margin-top: 4px;
+  position: absolute;
+}
+
+.test {
+  background-color: #da2846;
+  border: 1px solid #da2846;
+  box-shadow: 0 0 1.5em #da2846;
+  color: white;
+  font-weight: 900;
+}
+
+.test:hover {
+  border: 1px solid #da2846;
+  box-shadow: inset 0 0 1em yellow , 0 0 5em green;
+  color: yellow;
+}
+
+.btn {
+  margin-top: 20px;
+}
