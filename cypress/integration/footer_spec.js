@@ -112,13 +112,13 @@ describe('21 - Exiba o menu inferior apenas nas telas indicadas pelo protótipo'
   });
 
   it('Tem footer na tela de explorar comidas por ingrediente', () => {
-    cy.visit('http://localhost:3000/explorar/comidas/ingredientes');
+    cy.visit('http://localhost:3000/explorar/comidas/ingredients');
 
     hasFooter();
   });
 
   it('Tem footer na tela de explorar bebidas por ingrediente', () => {
-    cy.visit('http://localhost:3000/explorar/bebidas/ingredientes');
+    cy.visit('http://localhost:3000/explorar/bebidas/ingredients');
 
     hasFooter();
   });

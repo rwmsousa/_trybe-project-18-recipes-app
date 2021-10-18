@@ -94,15 +94,15 @@ describe('10 - Implemente um ícone para a tela de perfil, um título e um ícon
   });
 
   it('O header tem os ícones corretos na tela de explorar comidas por ingrediente', () => {
-    cy.visit('http://localhost:3000/explorar/comidas/ingredientes');
+    cy.visit('http://localhost:3000/explorar/comidas/ingredients');
 
-    hasHeader('Explorar Ingredientes', false);
+    hasHeader('Explorar Ingredients', false);
   });
 
   it('O header tem os ícones corretos na tela de explorar bebidas por ingrediente', () => {
-    cy.visit('http://localhost:3000/explorar/bebidas/ingredientes');
+    cy.visit('http://localhost:3000/explorar/bebidas/ingredients');
 
-    hasHeader('Explorar Ingredientes', false);
+    hasHeader('Explorar Ingredients', false);
   });
 
   it('O header tem os ícones corretos na tela de explorar comidas por local de origem', () => {

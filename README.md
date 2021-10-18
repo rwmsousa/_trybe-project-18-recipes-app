@@ -111,7 +111,7 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
     - [33 - Implemente os elementos da tela de detalhes de uma receita respeitando os atributos descritos no protótipo](#33---implemente-os-elementos-da-tela-de-detalhes-de-uma-receita-respeitando-os-atributos-descritos-no-protótipo)
     - [34 - Realize uma request para a API passando o `id` da receita que deve estar disponível nos parâmetros da URL](#34---realize-uma-request-para-a-api-passando-o-id-da-receita-que-deve-estar-disponível-nos-parâmetros-da-url)
-    - [35 - Desenvolva a tela de forma que contenha uma imagem da receita, o título, a categoria (ou se é ou não alcoólico), uma lista de ingredientes seguidos pelas quantidades, instruções, um vídeo do youtube "embedado" e recomendações](#35---desenvolva-a-tela-de-forma-que-contenha-uma-imagem-da-receita-o-título-a-categoria-ou-se-é-ou-não-alcoólico-uma-lista-de-ingredientes-seguidos-pelas-quantidades-instruções-um-vídeo-do-youtube-embedado-e-recomendações)
+    - [35 - Desenvolva a tela de forma que contenha uma imagem da receita, o título, a categoria (ou se é ou não alcoólico), uma lista de ingredients seguidos pelas quantidades, instruções, um vídeo do youtube "embedado" e recomendações](#35---desenvolva-a-tela-de-forma-que-contenha-uma-imagem-da-receita-o-título-a-categoria-ou-se-é-ou-não-alcoólico-uma-lista-de-ingredients-seguidos-pelas-quantidades-instruções-um-vídeo-do-youtube-embedado-e-recomendações)
     - [36 - Implemente as recomendações, para receitas de comida, a recomendação deverá ser bebida e vice-versa](#36---implemente-as-recomendações-para-receitas-de-comida-a-recomendação-deverá-ser-bebida-e-vice-versa)
     - [37 - Implemente os cards de recomendação, onde serão 6 cards, mas mostrando apenas 2 e o scroll é horizontal, similar a um `carousel`](#37---implemente-os-cards-de-recomendação-onde-serão-6-cards-mas-mostrando-apenas-2-e-o-scroll-é-horizontal-similar-a-um-carousel)
     - [38 - Desenvolva um botão de nome "Iniciar Receita" que deve ficar fixo na parte de baixo da tela o tempo todo](#38---desenvolva-um-botão-de-nome-iniciar-receita-que-deve-ficar-fixo-na-parte-de-baixo-da-tela-o-tempo-todo)
@@ -128,12 +128,12 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
   <details>
     <summary>Tela de receita em progresso</summary>
 
-    - [47 - Desenvolva a tela de maneira que contenha uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredientes com suas respectivas quantidade e suas instruções](#47---desenvolva-a-tela-de-maneira-que-contenha-uma-imagem-da-receita-seu-titulo-sua-categoria-ou-se-a-bebida-é-alcoólica-ou-não-uma-lista-de-ingredientes-com-suas-respectivas-quantidade-e-suas-instruções)
-    - [48 - Desenvolva um checkbox para cada item da lista de ingredientes](#48---desenvolva-um-checkbox-para-cada-item-da-lista-de-ingredientes)
+    - [47 - Desenvolva a tela de maneira que contenha uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredients com suas respectivas quantidade e suas instruções](#47---desenvolva-a-tela-de-maneira-que-contenha-uma-imagem-da-receita-seu-titulo-sua-categoria-ou-se-a-bebida-é-alcoólica-ou-não-uma-lista-de-ingredients-com-suas-respectivas-quantidade-e-suas-instruções)
+    - [48 - Desenvolva um checkbox para cada item da lista de ingredients](#48---desenvolva-um-checkbox-para-cada-item-da-lista-de-ingredients)
     - [49 - Implemente uma lógica que, ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado" da lista](#49---implemente-uma-lógica-que-ao-clicar-no-checkbox-de-um-ingrediente-o-nome-dele-deve-ser-riscado-da-lista)
     - [50 - Salve o estado do progresso, que deve ser mantido caso a pessoa atualize a página ou volte para a mesma receita](#50---salve-o-estado-do-progresso-que-deve-ser-mantido-caso-a-pessoa-atualize-a-página-ou-volte-para-a-mesma-receita)
     - [51 - Desenvolva a lógica de favoritar e compartilhar, a lógica da tela de detalhes de uma receita se aplica aqui](#51---desenvolva-a-lógica-de-favoritar-e-compartilhar-a-lógica-da-tela-de-detalhes-de-uma-receita-se-aplica-aqui)
-    - [52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _"checkados"_ (marcados)](#52---implemente-a-solução-de-maneira-que-o-botão-de-finalizar-receita-só-pode-estar-habilitado-quando-todos-os-ingredientes-estiverem-checkados-marcados)
+    - [52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredients estiverem _"checkados"_ (marcados)](#52---implemente-a-solução-de-maneira-que-o-botão-de-finalizar-receita-só-pode-estar-habilitado-quando-todos-os-ingredients-estiverem-checkados-marcados)
     - [53 - Redirecione a pessoa usuária após clicar no botão "Finalizar receita", para a página de receitas feitas, cuja rota deve ser `/receitas-feitas`](#53---redirecione-a-pessoa-usuária-após-clicar-no-botão-finalizar-receita-para-a-página-de-receitas-feitas-cuja-rota-deve-ser-receitas-feitas)
   </details>
 
@@ -173,16 +173,16 @@ Aqui você vai encontrar os detalhes de como estruturar o desenvolvimento do seu
 
     - [70 - Implemente os elementos da tela de explorar bebidas ou comidas respeitando os atributos descritos no protótipo](#70---implemente-os-elementos-da-tela-de-explorar-bebidas-ou-comidas-respeitando-os-atributos-descritos-no-protótipo)
     - [71 - Desenvolva 3 botões: um para explorar por ingrediente, um para explorar por local de origem e um para pegar uma receita aleatória](#71---desenvolva-3-botões-um-para-explorar-por-ingrediente-um-para-explorar-por-local-de-origem-e-um-para-pegar-uma-receita-aleatória)
-    - [72 - Redirecione a pessoa usuária ao clicar em "Por Ingredientes", a rota deve mudar para a tela de explorar por ingredientes](#72---redirecione-a-pessoa-usuária-ao-clicar-em-por-ingredientes-para-a-tela-de-explorar-por-ingredientes)
+    - [72 - Redirecione a pessoa usuária ao clicar em "Por Ingredients", a rota deve mudar para a tela de explorar por ingredients](#72---redirecione-a-pessoa-usuária-ao-clicar-em-por-ingredients-para-a-tela-de-explorar-por-ingredients)
     - [73 - Redirecione a pessoa usuária ao clicar em "Por Local de Origem", a rota deve mudar para tela de explorar por local de origem](#73---redirecione-a-pessoa-usuária-ao-clicar-em-por-local-de-origem-a-rota-deve-mudar-para-tela-de-explorar-por-local-de-origem)
     - [74 - Redirecione a pessoa usuária ao clicar em "Me Surpreenda!", a rota deve mudar para a tela de detalhes de uma receita, que deve ser escolhida de forma aleatória através da API](#74---redirecione-a-pessoa-usuária-ao-clicar-em-me-surpreenda-a-rota-deve-mudar-para-a-tela-de-detalhes-de-uma-receita-que-deve-ser-escolhida-de-forma-aleatória-através-da-api)
   </details>
 
   <details>
-    <summary>Tela de explorar ingredientes</summary>
+    <summary>Tela de explorar ingredients</summary>
 
-    - [75 - Implemente os elementos da tela de explorar ingredientes respeitando os atributos descritos no protótipo](#75---implemente-os-elementos-da-tela-de-explorar-ingredientes-respeitando-os-atributos-descritos-no-protótipo)
-    - [76 - Desenvolva cards para os 12 primeiros ingredientes, de forma que cada card contenha o nome do ingrediente e uma foto](#76---desenvolva-cards-para-os-12-primeiros-ingredientes-de-forma-que-cada-card-contenha-o-nome-do-ingrediente-e-uma-foto)
+    - [75 - Implemente os elementos da tela de explorar ingredients respeitando os atributos descritos no protótipo](#75---implemente-os-elementos-da-tela-de-explorar-ingredients-respeitando-os-atributos-descritos-no-protótipo)
+    - [76 - Desenvolva cards para os 12 primeiros ingredients, de forma que cada card contenha o nome do ingrediente e uma foto](#76---desenvolva-cards-para-os-12-primeiros-ingredients-de-forma-que-cada-card-contenha-o-nome-do-ingrediente-e-uma-foto)
     - [77 -  Redireciona a pessoa usuária ao clicar no card do ingrediente, a rota deve mudar para tela principal de receitas mas mostrando apenas as receitas que contém o ingrediente escolhido](#77----redireciona-a-pessoa-usuária-ao-clicar-no-card-do-ingrediente-a-rota-deve-mudar-para-tela-principal-de-receitas-mas-mostrando-apenas-as-receitas-que-contém-o-ingrediente-escolhido)
   </details>
 
@@ -418,7 +418,7 @@ Para duplicar, basta seguir os passos:
 
 ### TheMealDB API
 
-O [TheMealDB](https://www.themealdb.com/) é um banco de dados aberto, mantido pela comunidade, com receitas e ingredientes de todo o mundo.
+O [TheMealDB](https://www.themealdb.com/) é um banco de dados aberto, mantido pela comunidade, com receitas e ingredients de todo o mundo.
 
 Os end-points são bastante ricos, você pode [vê-los aqui](https://www.themealdb.com/api.php)
 
@@ -489,17 +489,17 @@ O modelo de resposta para uma `meal` é o seguinte:
 
 ---
 
-Os ingredientes seguem uma ordem lógica onde o nome dele (`strIngredient1`) e a quantidade (`strMeasure1`) tem o mesmo número no final (1, nesse caso).
+Os ingredients seguem uma ordem lógica onde o nome dele (`strIngredient1`) e a quantidade (`strMeasure1`) tem o mesmo número no final (1, nesse caso).
 
-É possível listar todas as `categorias`, `áreas` e `ingredientes`:
+É possível listar todas as `categorias`, `áreas` e `ingredients`:
 
 ```
 categorias: https://www.themealdb.com/api/json/v1/1/list.php?c=list
 areas: https://www.themealdb.com/api/json/v1/1/list.php?a=list
-ingredientes: https://www.themealdb.com/api/json/v1/1/list.php?i=list
+ingredients: https://www.themealdb.com/api/json/v1/1/list.php?i=list
 ```
 
-As fotos dos ingredientes vêm de um end-point padronizado com a seguinte lógica:
+As fotos dos ingredients vêm de um end-point padronizado com a seguinte lógica:
 
 ```
 https://www.themealdb.com/images/ingredients/{nome-do-ingrediente}.png
@@ -583,7 +583,7 @@ As respostas seguem a mesma estrutura, com algumas particularidade relativas as 
 
 ---
 
-Os ingredientes seguem uma ordem lógica onde o nome dele (`strIngredient1`) e a quantidade (`strMeasure1`) tem o mesmo número no final (1, nesse caso).
+Os ingredients seguem uma ordem lógica onde o nome dele (`strIngredient1`) e a quantidade (`strMeasure1`) tem o mesmo número no final (1, nesse caso).
 
 ---
 
@@ -618,8 +618,8 @@ As rotas a serem utilizadas na aplicação devem ser as seguintes:
 * Tela de explorar: `/explorar`;
 * Tela de explorar comidas: `/explorar/comidas`;
 * Tela de explorar bebidas: `/explorar/bebidas`;
-* Tela de explorar comidas por ingrediente: `/explorar/comidas/ingredientes`;
-* Tela de explorar bebidas por ingrediente: `/explorar/bebidas/ingredientes`;
+* Tela de explorar comidas por ingrediente: `/explorar/comidas/ingredients`;
+* Tela de explorar bebidas por ingrediente: `/explorar/bebidas/ingredients`;
 * Tela de explorar comidas por local de origem: `/explorar/comidas/area`;
 * Tela de perfil: `/perfil`;
 * Tela de receitas feitas: `/receitas-feitas`;
@@ -681,11 +681,11 @@ No `localStorage` do navegador:
 ```
 {
     cocktails: {
-        id-da-bebida: [lista-de-ingredientes-utilizados],
+        id-da-bebida: [lista-de-ingredients-utilizados],
         ...
     },
     meals: {
-        id-da-comida: [lista-de-ingredientes-utilizados],
+        id-da-comida: [lista-de-ingredients-utilizados],
         ...
     }
 }
@@ -693,7 +693,7 @@ No `localStorage` do navegador:
 
 **Observações técnicas**
 
-* `id-da-bebida` e `id-da-comida` representam o ID de uma bebida e comida, respectivamente, e cada item da lista de ingredientes da respectiva receita deve ser representado apenas pelo número do ingrediente no formato numérico.
+* `id-da-bebida` e `id-da-comida` representam o ID de uma bebida e comida, respectivamente, e cada item da lista de ingredients da respectiva receita deve ser representado apenas pelo número do ingrediente no formato numérico.
 
 ### Ícones
 
@@ -1159,7 +1159,7 @@ A verificação será feita a partir dos atributos data-testids:
   * O botão de compartilhar deve possuir o atributo `data-testid="share-btn"`;
   * O botão de favoritar deve possuir o atributo `data-testid="favorite-btn"`;
   * O texto da categoria deve possuir o atributo `data-testid="recipe-category"`;
-  * Os ingredientes devem possuir o atributo `data-testid="${index}-ingredient-name-and-measure"`;
+  * Os ingredients devem possuir o atributo `data-testid="${index}-ingredient-name-and-measure"`;
   * O texto de instruções deve possuir o atributo `data-testid="instructions"`;
   * O vídeo, presente somente na tela de comidas, deve possuir o atributo `data-testid="video"`;
   * O card de receitas recomendadas deve possuir o atributo `data-testid="${index}-recomendation-card"`;
@@ -1184,9 +1184,9 @@ A verificação será feita a partir dos atributos data-testids:
   - Verifica se a requisição para a API de bebidas foi realizada
   ```
 
-### 35 - Desenvolva a tela de forma que contenha uma imagem da receita, o título, a categoria (ou se é ou não alcoólico), uma lista de ingredientes seguidos pelas quantidades, instruções, um vídeo do youtube "embedado" e recomendações
+### 35 - Desenvolva a tela de forma que contenha uma imagem da receita, o título, a categoria (ou se é ou não alcoólico), uma lista de ingredients seguidos pelas quantidades, instruções, um vídeo do youtube "embedado" e recomendações
 
-A verificação será feita através das receitas retornadas pela API, como por exemplo, o texto dos ingredientes e das instruções.
+A verificação será feita através das receitas retornadas pela API, como por exemplo, o texto dos ingredients e das instruções.
 
   Lembre-se: O vídeo do youtube só deve estar disponível para receitas de comida, já que não é retornado pela [API de bebidas](https://www.thecocktaildb.com/api.php).
 
@@ -1309,7 +1309,7 @@ Os ícones dos botões podem ser encontrados em `src/images/whiteHeartIcon.svg` 
 
  - **Observação:** lembre de componentizar muito bem os elementos em React nessa tela para evitar problemas de lógica e de complexidade ;).
 
-### 47 - Desenvolva a tela de maneira que contenha uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredientes com suas respectivas quantidade e suas instruções
+### 47 - Desenvolva a tela de maneira que contenha uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredients com suas respectivas quantidade e suas instruções
 
 Verifica se os atributos data-testid estão presentes na tela com suas respectivas quantidades:
 
@@ -1318,7 +1318,7 @@ Verifica se os atributos data-testid estão presentes na tela com suas respectiv
   * O botão de compartilhar deve possuir o atributo `data-testid="share-btn"`;
   * O botão de favoritar deve possuir o atributo `data-testid="favorite-btn"`;
   * O texto da categoria deve possuir o atributo `data-testid="recipe-category"`;
-  * Os ingredientes devem possuir o atributo `data-testid=${index}-ingredient-step`, a verificação será feita pelo length do atributo.
+  * Os ingredients devem possuir o atributo `data-testid=${index}-ingredient-step`, a verificação será feita pelo length do atributo.
   * O elemento de instruções deve possuir o atributo `data-testid="instructions"`;
   * O botão para finalizar a receita deve possuir o atributo `data-testid="finish-recipe-btn"`.
 
@@ -1328,12 +1328,12 @@ Verifica se os atributos data-testid estão presentes na tela com suas respectiv
   - verifica elementos de uma receita de bebida
   ```
 
-### 48 - Desenvolva um checkbox para cada item da lista de ingredientes
+### 48 - Desenvolva um checkbox para cada item da lista de ingredients
 
   O que será verificado:
   ```
-  - todos os ingredientes de uma receita de comida possuem um checkbox
-  - todos os ingredientes de uma receita de bebida possuem um checkbox
+  - todos os ingredients de uma receita de comida possuem um checkbox
+  - todos os ingredients de uma receita de bebida possuem um checkbox
   ```
 
 ### 49 - Implemente uma lógica que, ao clicar no checkbox de um ingrediente, o nome dele deve ser "riscado" da lista
@@ -1378,7 +1378,7 @@ O progresso das receitas devem ser salvos em `localStorage` na chave` inProgress
   - favorita receita de uma bebida
   ```
 
-### 52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _"checkados"_ (marcados)
+### 52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredients estiverem _"checkados"_ (marcados)
 
   O botão deve ficar desabilitado em quanto todos os checkboxs não forem marcados. O botão deve ficar fixo na parte de baixo da tela o tempo todo, semelhante ao botão de "Iniciar Receita"
 
@@ -1575,21 +1575,21 @@ Verifica se o atributo `data-testid="explore-food"` possui o texto "Explorar Com
 
 ### 71 - Desenvolva 3 botões: um para explorar por ingrediente, um para explorar por local de origem e um para pegar uma receita aleatória
 
-O nomes dos botões devem ser "Por Ingredientes" com o atributo `data-testid="explore-by-ingredient"`, "Por Local de Origem" com o atributo `data-testid="explore-by-area"` e "Me Surpreenda!" com o atributo `data-testid="explore-surprise"`, respectivamente.
+O nomes dos botões devem ser "Por Ingredients" com o atributo `data-testid="explore-by-ingredient"`, "Por Local de Origem" com o atributo `data-testid="explore-by-area"` e "Me Surpreenda!" com o atributo `data-testid="explore-surprise"`, respectivamente.
 Obs: se a opção escolhida for explorar bebidas, o botão para explorar por local de origem não deve estar disponível.
 
   O que será verificado:
   ```
-  - Tem os botões "Por Ingredientes", "Por Local de Origem" e "Me Surpreenda!" para a tela de explorar comidas;
-  - Tem apenas os botões "Por Ingredientes" e "Me Surpreenda!" para a tela de explorar bebidas.
+  - Tem os botões "Por Ingredients", "Por Local de Origem" e "Me Surpreenda!" para a tela de explorar comidas;
+  - Tem apenas os botões "Por Ingredients" e "Me Surpreenda!" para a tela de explorar bebidas.
   ```
 
-### 72 - Redirecione a pessoa usuária ao clicar em "Por Ingredientes", para a tela de explorar por ingredientes
+### 72 - Redirecione a pessoa usuária ao clicar em "Por Ingredients", para a tela de explorar por ingredients
 
   O que será verificado:
   ```
-  - Ao clicar no botão "Por Ingredientes" da tela de *explorar comidas* a rota muda para a página de explorar comidas por ingrediente;
-  - Ao clicar no botão "Por Ingredientes" da tela de *explorar bebidas* a rota muda para a página de explorar bebidas por ingrediente.
+  - Ao clicar no botão "Por Ingredients" da tela de *explorar comidas* a rota muda para a página de explorar comidas por ingrediente;
+  - Ao clicar no botão "Por Ingredients" da tela de *explorar bebidas* a rota muda para a página de explorar bebidas por ingrediente.
   ```
 
 ### 73 - Redirecione a pessoa usuária ao clicar em "Por Local de Origem", a rota deve mudar para tela de explorar por local de origem
@@ -1608,28 +1608,28 @@ Obs: se a opção escolhida for explorar bebidas, o botão para explorar por loc
 
   O que será verificado:
   ```
-  - Ao clicar no botão "Por Ingredientes" da tela de explorar comidas a rota muda para a página de detalhes de uma comida aleatória
+  - Ao clicar no botão "Por Ingredients" da tela de explorar comidas a rota muda para a página de detalhes de uma comida aleatória
   - Ao clicar no botão "Explorar Bebidas" da tela de explorar bebidas a rota muda para a página de detalhes de uma bebida aleatória
   ```
 
-## Tela de explorar ingredientes
+## Tela de explorar ingredients
 
-### 75 - Implemente os elementos da tela de explorar ingredientes respeitando os atributos descritos no protótipo
+### 75 - Implemente os elementos da tela de explorar ingredients respeitando os atributos descritos no protótipo
 
   A tela deve possuir os atributos `data-testid="${index}-ingredient-card"`, `data-testid="${index}-card-img"` e `data-testid="${index}-card-name"`, que estão relacionados ao card, imagem e nome do ingrediente respectivamente.
 
   O que será verificado:
   ```
-  - Tem os data-testids corretos para a tela de explorar comidas por ingredientes;
-  - Tem os data-testids corretos para a tela de explorar bebidas por ingredientes.
+  - Tem os data-testids corretos para a tela de explorar comidas por ingredients;
+  - Tem os data-testids corretos para a tela de explorar bebidas por ingredients.
   ```
 
-### 76 - Desenvolva cards para os 12 primeiros ingredientes, de forma que cada card contenha o nome do ingrediente e uma foto
+### 76 - Desenvolva cards para os 12 primeiros ingredients, de forma que cada card contenha o nome do ingrediente e uma foto
 
   O que será verificado:
   ```
-  - Tem o nome e a foto corretos para a tela de explorar comidas por ingredientes;
-  - Tem o nome e a foto corretos para a tela de explorar bebidas por ingredientes.
+  - Tem o nome e a foto corretos para a tela de explorar comidas por ingredients;
+  - Tem o nome e a foto corretos para a tela de explorar bebidas por ingredients.
   ```
 
 ### 77 -  Redireciona a pessoa usuária ao clicar no card do ingrediente, a rota deve mudar para tela principal de receitas mas mostrando apenas as receitas que contém o ingrediente escolhido

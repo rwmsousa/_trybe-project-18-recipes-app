@@ -54,7 +54,7 @@ function RecipesMade() {
           className="alert alert-warning alert-dismissible fade show"
           role="alert"
         >
-          <strong>Link copiado!</strong>
+          <strong>Copied link!</strong>
         </div>
       ) : null }
       <div className="buttonsRecipesFavorites">
@@ -131,7 +131,7 @@ function RecipesMade() {
                 <Link
                   className="titleCard"
                   data-testid={ `${index}-horizontal-name` }
-                  to={ `/comidas/${recipe.id}` }
+                  to={ `/foods/${recipe.id}` }
                   type="button"
                 >
                   { recipe.name }
@@ -141,7 +141,7 @@ function RecipesMade() {
                 <Link
                   className="titleCard"
                   data-testid={ `${index}-horizontal-name` }
-                  to={ `/bebidas/${recipe.id}` }
+                  to={ `/drinks/${recipe.id}` }
                   type="button"
                 >
                   { recipe.name }

@@ -29,7 +29,7 @@ function SearchBar() {
   };
 
   async function handleClickSearch() {
-    if (currentPage === 'Comidas') {
+    if (currentPage === 'Foods') {
       switch (searchRadio) {
       case 'searchIngredient':
         setFoods(await fetchIngredientFoods(searchText));
@@ -45,7 +45,7 @@ function SearchBar() {
       }
     }
 
-    if (currentPage === 'Bebidas') {
+    if (currentPage === 'Drinks') {
       switch (searchRadio) {
       case 'searchIngredient':
         setDrinks(await fetchIngredientDrinks(searchText));

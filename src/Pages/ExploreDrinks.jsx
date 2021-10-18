@@ -4,16 +4,14 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
 import { fetchRandomDrinkDetails } from '../services';
-import '../css/explorer.css';
+import '../css/explore.css';
 
-function ExplorerDrinks() {
+function ExploreDrinks() {
   const history = useHistory();
-  const {
-    setCurrentPage,
-    setSearchButton } = useContext(Context);
+  const { setCurrentPage, setSearchButton } = useContext(Context);
 
   useEffect(() => {
-    setCurrentPage('Explorar Bebidas');
+    setCurrentPage('Explore Drinks');
     setSearchButton(false);
   }, [setCurrentPage, setSearchButton]);
 
@@ -28,24 +26,15 @@ function ExplorerDrinks() {
     <div>
       <Header />
       <div className="content-explore">
-        <Link
-          to="/explorar/bebidas/ingredientes"
-        >
+        <Link to="/explore/drinks/ingredients">
           <button
             type="button"
             data-testid="explore-by-ingredient"
             className="explore-btn"
           >
-            Por Ingredientes
+            By Ingredients
           </button>
         </Link>
-        {/* <Link
-        to="/explorar/bebidas/area"
-      >
-        <button type="button" data-testid="explore-by-area">
-          Por Local de Origem
-        </button>
-      </Link> */}
         <button
           type="button"
           data-testid="explore-surprise"
@@ -60,4 +49,4 @@ function ExplorerDrinks() {
   );
 }
 
-export default ExplorerDrinks;
+export default ExploreDrinks;

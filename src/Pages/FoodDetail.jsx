@@ -64,8 +64,12 @@ function FoodDetail() {
 
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
-    if (localStorage.inProgressRecipes && !JSON.parse([localStorage.inProgressRecipes])
-      .find((recipe) => recipe === id)) {
+    if (
+      localStorage.inProgressRecipes
+      && !JSON.parse([localStorage.inProgressRecipes]).find(
+        (recipe) => recipe === id,
+      )
+    ) {
       const getStarted = JSON.parse([localStorage.inProgressRecipes]);
       getStarted.push(id);
       localStorage.inProgressRecipes = JSON.stringify(getStarted);
@@ -103,11 +107,8 @@ function FoodDetail() {
       <div className="header-detail">
         <h1 data-testid="recipe-title">{foodDetails[0].strMeal}</h1>
         <div className="buttons">
-          <span
-            data-testid="recipe-category"
-            className="category"
-          >
-            { foodDetails[0].strCategory }
+          <span data-testid="recipe-category" className="category">
+            {foodDetails[0].strCategory}
           </span>
           <HandleShare value={ stateButtons } />
           <HandleFavorite foodDetails={ foodDetails } />
@@ -115,7 +116,7 @@ function FoodDetail() {
       </div>
 
       <div className="ingredients">
-        <h3>Ingredientes</h3>
+        <h3>Ingredients</h3>
         <IngredientsList list={ foodDetails } />
         <h3>Instructions</h3>
         <p data-testid="instructions">{foodDetails[0].strInstructions}</p>
@@ -135,7 +136,7 @@ function FoodDetail() {
         />
       </div>
       <div className="recommended">
-        <h3>Recomendadas</h3>
+        <h3>Recommended</h3>
         <section className="recomended-section">
           {drinksClone.map((drink, idx) => (
             <div className="recomended-div" key={ drink.idDrink }>
@@ -144,13 +145,18 @@ function FoodDetail() {
                 alt={ `drink: ${drink.strDrink}` }
                 data-testid={ `${idx}-recomendation-card` }
               />
-              <h6 data-testid={ `${idx}-recomendation-title` }>{drink.strDrink}</h6>
+              <h6 data-testid={ `${idx}-recomendation-title` }>
+                {drink.strDrink}
+              </h6>
               <p>{drink.strAlcoholic}</p>
             </div>
           ))}
         </section>
-        { !localStorage.inProgressRecipes && !JSON.parse(localStorage.inProgressRecipes)
-          .find((recipeId) => recipeId === id) ? (
+        {!localStorage.inProgressRecipes
+        && !JSON.parse(localStorage.inProgressRecipes).find(
+          (recipeId) => recipeId === id,
+        )
+          ? (
             <button
               button
               className="start-recipe-button"
@@ -170,9 +176,9 @@ function FoodDetail() {
               value={ foodDetails[0].idMeal }
               onClick={ handleLink }
             >
-              Continuar Receita
+              Continue Recipe
             </button>
-          ) }
+          )}
       </div>
     </div>
   );

@@ -1,15 +1,15 @@
 import Login from './Login';
 import Drinks from './Drinks';
 import Foods from './Foods';
-import Explorer from './Explorer';
+import Explore from './Explore';
 import Profile from './Profile';
 import DrinkDetail from './DrinkDetail';
 import DrinkInProgress from './DrinkInProgress';
 import ExploreByAreaFood from './ExploreByAreaFood';
 import ExploreByIngredientFood from './ExploreByIngredientFood';
 import ExploreByIngredientDrink from './ExploreByIngredientDrink';
-import ExplorerDrinks from './ExplorerDrinks';
-import ExplorerFoods from './ExplorerFoods';
+import ExploreDrinks from './ExploreDrinks';
+import ExploreFoods from './ExploreFoods';
 import FavoriteRecipes from './FavoriteRecipes';
 import FoodDetail from './FoodDetail';
 import FoodInProgress from './FoodInProgress';
@@ -21,14 +21,14 @@ export {
   Drinks,
   Foods,
   Profile,
-  Explorer,
+  Explore,
   DrinkDetail,
   DrinkInProgress,
   ExploreByAreaFood,
   ExploreByIngredientDrink,
   ExploreByIngredientFood,
-  ExplorerDrinks,
-  ExplorerFoods,
+  ExploreDrinks,
+  ExploreFoods,
   FavoriteRecipes,
   FoodDetail,
   FoodInProgress,

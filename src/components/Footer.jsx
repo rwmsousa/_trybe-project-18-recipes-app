@@ -8,11 +8,13 @@ import Context from '../Context/Context';
 import { fetchFoods, fetchDrinks } from '../services';
 
 function Footer() {
-  const { setFoods,
+  const {
+    setFoods,
     setFoodsClone,
     setDrinks,
     setDrinksClone,
-    setShouldUpdate } = useContext(Context);
+    setShouldUpdate,
+  } = useContext(Context);
 
   const handlefoodClick = () => {
     async function fetch() {
@@ -51,7 +53,7 @@ function Footer() {
   return (
     <div data-testid="footer" className="footer">
       <Link
-        to="/bebidas"
+        to="/drinks"
         data-testid="drinks-bottom-btn"
         type="button"
         onClick={ handledrinkClick }
@@ -61,7 +63,7 @@ function Footer() {
         <i className="fas fa-cocktail" />
       </Link>
       <Link
-        to="/explorar"
+        to="/explore"
         data-testid="explore-bottom-btn"
         type="button"
         src={ exploreicon }
@@ -70,7 +72,7 @@ function Footer() {
         <i className="fas fa-globe" />
       </Link>
       <Link
-        to="/comidas"
+        to="/foods"
         data-testid="food-bottom-btn"
         type="button"
         onClick={ handlefoodClick }

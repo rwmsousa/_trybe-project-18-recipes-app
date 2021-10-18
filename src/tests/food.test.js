@@ -7,10 +7,10 @@ describe('Testa pagina Food.js', () => {
   test('verifica que existem dois icones no header', () => {
     const { history } = renderWithRouter(<App />);
 
-    history.push('/comidas');
+    history.push('/foods');
 
     const { pathname } = history.location;
-    expect(pathname).toBe('/comidas');
+    expect(pathname).toBe('/foods');
 
     // const iconOne = screen.getByTestId('profile-top-btn');
     // const iconTwo = screen.getByTestId('search-top-btn');
@@ -27,7 +27,7 @@ describe('Testa pagina Food.js', () => {
 
   test('Verifica que existe um titulo h1 no header', () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/comidas');
+    history.push('/foods');
 
     const header = screen.getByRole('heading', {
       level: 1,
@@ -38,11 +38,11 @@ describe('Testa pagina Food.js', () => {
 
   test('Verifica que existem 5 botôes de categorias', () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/comidas');
+    history.push('/foods');
 
     const { pathname } = history.location;
 
-    expect(pathname).toBe('/comidas');
+    expect(pathname).toBe('/foods');
 
     // const allButton = await screen.findByText('All');
     // console.log(allButton);

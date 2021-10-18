@@ -10,14 +10,11 @@ import '../css/exploreByIngredient.css';
 function ExploreByIngredientDrink() {
   const history = useHistory();
   const [data, setdata] = useState([]);
-  const {
-    setCurrentPage,
-    setSearchButton,
-    setDrinks,
-    setShouldUpdate } = useContext(Context);
+  const { setCurrentPage, setSearchButton, setDrinks, setShouldUpdate } =
+    useContext(Context);
 
   useEffect(() => {
-    setCurrentPage('Explorar Ingredientes');
+    setCurrentPage('Explorar Ingredients');
     setSearchButton(false);
   }, [setCurrentPage, setSearchButton]);
 
@@ -45,18 +42,18 @@ function ExploreByIngredientDrink() {
       <div className="content-explore">
         {data.map((item, i) => (
           <Link
-            key={ item.strIngredient1 }
-            data-testid={ `${i}-ingredient-card` }
-            onClick={ () => handleClick(item.strIngredient1) }
-            to="/comidas"
+            key={item.strIngredient1}
+            data-testid={`${i}-ingredient-card`}
+            onClick={() => handleClick(item.strIngredient1)}
+            to="/foods"
             className="ingredient"
           >
             <img
-              src={ `https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png` }
-              alt={ item.strIngredient1 }
-              data-testid={ `${i}-card-img` }
+              src={`https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png`}
+              alt={item.strIngredient1}
+              data-testid={`${i}-card-img`}
             />
-            <p data-testid={ `${i}-card-name` }>{item.strIngredient1}</p>
+            <p data-testid={`${i}-card-name`}>{item.strIngredient1}</p>
           </Link>
           // <div
           //   key={ item.strIngredient1 }

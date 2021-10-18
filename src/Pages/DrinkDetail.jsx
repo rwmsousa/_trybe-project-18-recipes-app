@@ -64,8 +64,12 @@ function DrinkDetail() {
 
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
-    if (localStorage.inProgressRecipes && !JSON.parse([localStorage.inProgressRecipes])
-      .find((recipe) => recipe === id)) {
+    if (
+      localStorage.inProgressRecipes
+      && !JSON.parse([localStorage.inProgressRecipes]).find(
+        (recipe) => recipe === id,
+      )
+    ) {
       const getStarted = JSON.parse([localStorage.inProgressRecipes]);
       getStarted.push(id);
       localStorage.inProgressRecipes = JSON.stringify(getStarted);
@@ -103,11 +107,8 @@ function DrinkDetail() {
       <div className="header-detail">
         <h1 data-testid="recipe-title">{drinksDetails[0].strDrink}</h1>
         <div className="buttons">
-          <span
-            data-testid="recipe-category"
-            className="category"
-          >
-            { drinksDetails[0].strAlcoholic }
+          <span data-testid="recipe-category" className="category">
+            {drinksDetails[0].strAlcoholic}
           </span>
           <HandleShare value={ stateButtons } />
           <HandleFavorite drinksDetails={ drinksDetails } />
@@ -115,14 +116,14 @@ function DrinkDetail() {
       </div>
 
       <div className="ingredients">
-        <h3>Ingredientes</h3>
+        <h3>Ingredients</h3>
         <IngredientsList list={ drinksDetails } />
         <h3>Instruções</h3>
         <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
       </div>
 
       <div className="recommended">
-        <h3>Recomendadas</h3>
+        <h3>Recommended</h3>
         <section className="recomended-section">
           {foodsClone.map((food, idx) => (
             <div className="recomended-div" key={ food.idMeal }>
@@ -135,8 +136,11 @@ function DrinkDetail() {
             </div>
           ))}
         </section>
-        { !localStorage.inProgressRecipes && !JSON.parse(localStorage.inProgressRecipes)
-          .find((recipeId) => recipeId === id) ? (
+        {!localStorage.inProgressRecipes
+        && !JSON.parse(localStorage.inProgressRecipes).find(
+          (recipeId) => recipeId === id,
+        )
+          ? (
             <button
               button
               className="start-recipe-button"
@@ -156,7 +160,7 @@ function DrinkDetail() {
               value={ drinksDetails[0].idDrink }
               onClick={ handleLink }
             >
-              Continuar Receita
+              Continue Recipe
             </button>
           )}
       </div>

@@ -14,7 +14,7 @@ function HandleShare({ value }) {
           className="alert alert-warning alert-dismissible fade show"
           role="alert"
         >
-          <strong>Link copiado!</strong>
+          <strong>Copied link!</strong>
         </div>
       ) : null }
 

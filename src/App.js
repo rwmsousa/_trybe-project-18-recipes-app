@@ -7,18 +7,18 @@ import {
   Foods,
   Drinks,
   Profile,
-  Explorer,
+  Explore,
   DrinkDetail,
   FoodDetail,
   FoodInProgress,
   DrinkInProgress,
   RecipesMade,
   FavoriteRecipes,
-  ExplorerFoods,
+  ExploreFoods,
   ExploreByAreaFood,
   ExploreByIngredientFood,
   ExploreByIngredientDrink,
-  ExplorerDrinks,
+  ExploreDrinks,
   NotFound,
 } from './Pages/Index';
 import Provider from './Context/Provider';
@@ -34,18 +34,18 @@ function App() {
         <Route exact path="/drinks/:id" component={ DrinkDetail } />
         <Route exact path="/foods/:id/in-progress" component={ FoodInProgress } />
         <Route exact path="/drinks/:id/in-progress" component={ DrinkInProgress } />
-        <Route exact path="/explorer" component={ Explorer } />
-        <Route exact path="/explorer/foods" component={ ExplorerFoods } />
-        <Route exact path="/explorer/drinks" component={ ExplorerDrinks } />
+        <Route exact path="/explore" component={ Explore } />
+        <Route exact path="/explore/foods" component={ ExploreFoods } />
+        <Route exact path="/explore/drinks" component={ ExploreDrinks } />
         <Route
-          path="/explorer/foods/ingredients"
+          path="/explore/foods/ingredients"
           component={ ExploreByIngredientFood }
         />
         <Route
-          path="/explorer/drinks/ingredients"
+          path="/explore/drinks/ingredients"
           component={ ExploreByIngredientDrink }
         />
-        <Route path="/explorer/foods/area" component={ ExploreByAreaFood } />
+        <Route path="/explore/foods/area" component={ ExploreByAreaFood } />
         <Route exact path="/profile" component={ Profile } />
         <Route path="/recipes-made" component={ RecipesMade } />
         <Route path="/recipes-favorites" component={ FavoriteRecipes } />

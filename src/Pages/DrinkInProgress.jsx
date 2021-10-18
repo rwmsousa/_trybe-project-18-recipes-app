@@ -7,12 +7,8 @@ import HandleShare from '../components/HandleShareDrinks';
 import HandleFavorite from '../components/HandleFavoriteDrinks';
 
 function DrinkInProgress() {
-  const {
-    setCurrentPage,
-    setShowProfile,
-    setShowTitlePage,
-    setSearchButton,
-  } = useContext(Context);
+  const { setCurrentPage, setShowProfile, setShowTitlePage, setSearchButton } =
+    useContext(Context);
   const [drinksDetails, setDrinksDetails] = useState([]);
   const [msgClipboard, setMsgClipboard] = useState(false);
   const [showButtonFinished, setShowButtonFinished] = useState(false);
@@ -23,8 +19,10 @@ function DrinkInProgress() {
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
     if (
-      localStorage.doneRecipes
-      && JSON.parse(localStorage.doneRecipes).find((recipeId) => recipeId.id === id)
+      localStorage.doneRecipes &&
+      JSON.parse(localStorage.doneRecipes).find(
+        (recipeId) => recipeId.id === id,
+      )
     ) {
       setShowButtonFinished(false);
     } else {
@@ -64,7 +62,7 @@ function DrinkInProgress() {
   const shareLink = () => {
     const timerMsg = 5000;
     setMsgClipboard(true);
-    navigator.clipboard.writeText(`http://localhost:3000/bebidas/${id}`);
+    navigator.clipboard.writeText(`http://localhost:3000/drinks/${id}`);
     setTimeout(() => setMsgClipboard(false), timerMsg);
   };
 
@@ -114,64 +112,64 @@ function DrinkInProgress() {
   return (
     <div>
       <img
-        src={ drinksDetails[0].strDrinkThumb }
-        alt={ `${drinksDetails[0].strDrink} recipe` }
+        src={drinksDetails[0].strDrinkThumb}
+        alt={`${drinksDetails[0].strDrink} recipe`}
         data-testid="recipe-photo"
         className="thumbnail"
       />
       <div className="header-in-progress">
         <h1 data-testid="recipe-title">{drinksDetails[0].strDrink}</h1>
         <div className="buttons">
-          <span
-            data-testid="recipe-category"
-            className="category"
-          >
+          <span data-testid="recipe-category" className="category">
             {drinksDetails[0].strAlcoholic}
           </span>
-          <HandleShare value={ stateButtons } />
-          <HandleFavorite drinksDetails={ drinksDetails } />
+          <HandleShare value={stateButtons} />
+          <HandleFavorite drinksDetails={drinksDetails} />
         </div>
       </div>
 
       <div className="ingredients">
-        <h3>Ingredientes</h3>
+        <h3>Ingredients</h3>
         <div className="ingredient">
           {Object.keys(drinksDetails[0])
             .filter((k) => k.includes('Ingredient'))
-            .map((value, idx) => (
-              drinksDetails[0][value] !== null && drinksDetails[0][value] !== '' && (
-                <label
-                  htmlFor={ idx }
-                  key={ idx }
-                  data-testid={ `${idx}-ingredient-step` }
-                >
-                  <input
-                    type="checkbox"
-                    id={ idx }
-                    value={ drinksDetails[0][value] }
-                    onChange={ ({ target }) => handleCheckBoxChange(target) }
-                  />
-                  {drinksDetails[0][value]}
-                </label>
-              )
-            ))}
+            .map(
+              (value, idx) =>
+                drinksDetails[0][value] !== null &&
+                drinksDetails[0][value] !== '' && (
+                  <label
+                    htmlFor={idx}
+                    key={idx}
+                    data-testid={`${idx}-ingredient-step`}
+                  >
+                    <input
+                      type="checkbox"
+                      id={idx}
+                      value={drinksDetails[0][value]}
+                      onChange={({ target }) => handleCheckBoxChange(target)}
+                    />
+                    {drinksDetails[0][value]}
+                  </label>
+                ),
+            )}
         </div>
       </div>
 
       <div className="instrution">
         <h3>Instruções</h3>
-        <p data-testid="instructions">{ drinksDetails[0].strInstructions }</p>
+        <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
       </div>
 
-      { showButtonFinished && (
+      {showButtonFinished && (
         <button
           className="start-recipe-button"
           type="button"
           data-testid="finish-recipe-btn"
-          onClick={ finishRecipe }
+          onClick={finishRecipe}
         >
           Finalizar receita
-        </button>)}
+        </button>
+      )}
     </div>
   );
 }

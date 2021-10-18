@@ -3,9 +3,13 @@ import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
-import { fetchRandomFoodDetails, fetchFoods, fetchAreaofFoods } from '../services';
+import {
+  fetchRandomFoodDetails,
+  fetchFoods,
+  fetchAreaofFoods,
+} from '../services';
 
-function ExplorerFoods() {
+function ExploreFoods() {
   const history = useHistory();
   const {
     setCurrentPage,
@@ -16,7 +20,7 @@ function ExplorerFoods() {
   } = useContext(Context);
 
   useEffect(() => {
-    setCurrentPage('Explorar Comidas');
+    setCurrentPage('Explore Foods');
     setSearchButton(false);
   }, [setCurrentPage, setSearchButton]);
 
@@ -32,7 +36,7 @@ function ExplorerFoods() {
     setareas(res2);
     setfoodsarea(res);
     setfoodsareaClone(res);
-    history.push('/explorer/foods/area');
+    history.push('/explore/foods/area');
   };
 
   return (
@@ -42,15 +46,15 @@ function ExplorerFoods() {
         <button
           type="button"
           data-testid="explore-by-ingredient"
-          onClick={ () => history.push('/explorer/foods/ingredients') }
+          onClick={() => history.push('/explore/foods/ingredients')}
           className="explore-btn"
         >
-          Por Ingredientes
+          Por Ingredients
         </button>
         <button
           type="button"
           data-testid="explore-by-area"
-          onClick={ handleArea }
+          onClick={handleArea}
           className="explore-btn"
         >
           Por Local de Origem
@@ -58,7 +62,7 @@ function ExplorerFoods() {
         <button
           type="button"
           data-testid="explore-surprise"
-          onClick={ handleClick }
+          onClick={handleClick}
           className="explore-btn"
         >
           Me Surpreenda!
@@ -69,4 +73,4 @@ function ExplorerFoods() {
   );
 }
 
-export default ExplorerFoods;
+export default ExploreFoods;

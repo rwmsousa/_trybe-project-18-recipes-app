@@ -102,7 +102,7 @@
     "description": "34 - Realize uma request para a API passando o `id` da receita que deve estar disponível nos parâmetros da URL",
     "bonus": false
   }, {
-    "description": "35 - Desenvolva a tela de forma que contenha uma imagem da receita, o título, a categoria (ou se é ou não alcoólico), uma lista de ingredientes seguidos pelas quantidades, instruções, um vídeo do youtube \"embedado\" e recomendações",
+    "description": "35 - Desenvolva a tela de forma que contenha uma imagem da receita, o título, a categoria (ou se é ou não alcoólico), uma lista de ingredients seguidos pelas quantidades, instruções, um vídeo do youtube \"embedado\" e recomendações",
     "bonus": false
   }, {
     "description": "36 - Implemente as recomendações, para receitas de comida, a recomendação deverá ser bebida e vice-versa",
@@ -138,10 +138,10 @@
     "description": "46 - Salve as receitas favoritas no `localStorage` na chave `favoriteRecipes`",
     "bonus": false
   }, {
-    "description": "47 - Desenvolva a tela de maneira que contenha uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredientes com suas respectivas quantidade e suas instruções",
+    "description": "47 - Desenvolva a tela de maneira que contenha uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredients com suas respectivas quantidade e suas instruções",
     "bonus": false
   }, {
-    "description": "48 - Desenvolva um checkbox para cada item da lista de ingredientes",
+    "description": "48 - Desenvolva um checkbox para cada item da lista de ingredients",
     "bonus": false
   }, {
     "description": "49 - Implemente uma lógica que, ao clicar no checkbox de um ingrediente, o nome dele deve ser \"riscado\" da lista",
@@ -153,7 +153,7 @@
     "description": "51 - Desenvolva a lógica de favoritar e compartilhar, a lógica da tela de detalhes de uma receita se aplica aqui",
     "bonus": false
   }, {
-    "description": "52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _\"checkados\"_ (marcados)",
+    "description": "52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredients estiverem _\"checkados\"_ (marcados)",
     "bonus": false
   }, {
     "description": "53 - Redirecione a pessoa usuária após clicar no botão \"Finalizar receita\", para a página de receitas feitas, cuja rota deve ser `/receitas-feitas`",
@@ -213,7 +213,7 @@
     "description": "71 - Desenvolva 3 botões: um para explorar por ingrediente, um para explorar por local de origem e um para pegar uma receita aleatória",
     "bonus": false
   }, {
-    "description": "72 - Redirecione a pessoa usuária ao clicar em \"Por Ingredientes\", a rota deve mudar para a tela de explorar por ingredientes",
+    "description": "72 - Redirecione a pessoa usuária ao clicar em \"Por Ingredients\", a rota deve mudar para a tela de explorar por ingredients",
     "bonus": false
   }, {
     "description": "73 - Redirecione a pessoa usuária ao clicar em \"Por Local de Origem\", a rota deve mudar para tela de explorar por local de origem",
@@ -222,10 +222,10 @@
     "description": "74 - Redirecione a pessoa usuária ao clicar em \"Me Surpreenda!\", a rota deve mudar para a tela de detalhes de uma receita, que deve ser escolhida de forma aleatória através da API",
     "bonus": false
   }, {
-    "description": "75 - Implemente os elementos da tela de explorar ingredientes respeitando os atributos descritos no protótipo",
+    "description": "75 - Implemente os elementos da tela de explorar ingredients respeitando os atributos descritos no protótipo",
     "bonus": false
   }, {
-    "description": "76 - Desenvolva cards para os 12 primeiros ingredientes, de forma que cada card contenha o nome do ingrediente e uma foto",
+    "description": "76 - Desenvolva cards para os 12 primeiros ingredients, de forma que cada card contenha o nome do ingrediente e uma foto",
     "bonus": false
   }, {
     "description": "77 -  Redireciona a pessoa usuária ao clicar no card do ingrediente, a rota deve mudar para tela principal de receitas mas mostrando apenas as receitas que contém o ingrediente escolhido",

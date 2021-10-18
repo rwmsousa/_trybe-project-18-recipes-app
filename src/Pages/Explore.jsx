@@ -3,16 +3,13 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Context from '../Context/Context';
-import '../css/explorer.css';
+import '../css/explore.css';
 
-function Explorer() {
-  const {
-    setCurrentPage,
-    setShowTitlePage,
-    setSearchButton } = useContext(Context);
+function Explore() {
+  const { setCurrentPage, setShowTitlePage, setSearchButton } = useContext(Context);
 
   useEffect(() => {
-    setCurrentPage('Explorar');
+    setCurrentPage('Explore');
     setSearchButton(false);
   }, [setCurrentPage, setShowTitlePage, setSearchButton]);
 
@@ -21,18 +18,18 @@ function Explorer() {
       <Header />
       <div className="content-explore">
         <Link
-          to="/explorar/comidas"
+          to="/explore/foods"
           data-testid="explore-food"
           className="explore-btn"
         >
-          Explorar Comidas
+          Explore Foods
         </Link>
         <Link
-          to="/explorar/bebidas"
+          to="/explore/drinks"
           data-testid="explore-drinks"
           className="explore-btn"
         >
-          Explorar Bebidas
+          Explore Drinks
         </Link>
       </div>
       <Footer />
@@ -40,4 +37,4 @@ function Explorer() {
   );
 }
 
-export default Explorer;
+export default Explore;

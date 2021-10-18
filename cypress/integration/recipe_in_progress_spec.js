@@ -6,7 +6,7 @@ afterEach(() => {
   });
 });
 
-describe('47 - Desenvolva a tela de maneira que contenha uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredientes com suas respectivas quantidade e suas instruções', () => {
+describe('47 - Desenvolva a tela de maneira que contenha uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredients com suas respectivas quantidade e suas instruções', () => {
   it('verifica elementos de uma receita de comida', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
@@ -42,8 +42,8 @@ describe('47 - Desenvolva a tela de maneira que contenha uma imagem da receita, 
   });
 });
 
-describe('48 - Desenvolva um checkbox para cada item da lista de ingredientes', () => {
-  it('todos os ingredientes de uma receita de comida possuem um checkbox', () => {
+describe('48 - Desenvolva um checkbox para cada item da lista de ingredients', () => {
+  it('todos os ingredients de uma receita de comida possuem um checkbox', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
         win.fetch = fetchMock;
@@ -55,7 +55,7 @@ describe('48 - Desenvolva um checkbox para cada item da lista de ingredientes', 
       .should('have.length', 8);
   });
 
-  it('todos os ingredientes de uma receita de bebida possuem um checkbox', () => {
+  it('todos os ingredients de uma receita de bebida possuem um checkbox', () => {
     cy.visit('http://localhost:3000/bebidas/178319/in-progress', {
       onBeforeLoad(win) {
         win.fetch = fetchMock;
@@ -407,7 +407,7 @@ describe('51 - Desenvolva a lógica de favoritar e compartilhar, a lógica da te
   });
 });
 
-describe('52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _"checkados"_ (marcados)', () => {
+describe('52 - Implemente a solução de maneira que o botão de finalizar receita só pode estar habilitado quando todos os ingredients estiverem _"checkados"_ (marcados)', () => {
   it('verifica se botão para finalizar está desabilitado em receitas de comidas', () => {
     cy.visit('http://localhost:3000/comidas/52771/in-progress', {
       onBeforeLoad(win) {
