@@ -15,13 +15,11 @@ https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizont
 }
 
 .thumbnail {
-  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
-  margin-bottom: 10px;
   width: 360px;
 }
 
 h1 {
-  color: #98e2e1;
+  color: #F9B9BA;
   padding: 10px;
 }
 
@@ -37,12 +35,12 @@ h1 {
 .category {
   align-items: center;
   background-color: #98e2e134;
-  border: 1px solid #98e2e1;
+  border: 1px solid #F9B9BA !important;
   border-bottom: none;
   border-left: none;
   border-radius: 5px;
   border-top: none;
-  color: #98e2e1;
+  color: #F9B9BA !important;
   display: flex;
   font-size: 14px;
   height: 30px;
