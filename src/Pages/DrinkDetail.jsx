@@ -73,7 +73,7 @@ function DrinkDetail() {
     if (!localStorage.inProgressRecipes) {
       localStorage.inProgressRecipes = JSON.stringify([id]);
     }
-    history.push(`/bebidas/${value}/in-progress`);
+    history.push(`/drinks/${value}/in-progress`);
   };
 
   const shareLink = () => {

@@ -35,7 +35,7 @@ function ExploreByIngredientDrink() {
       `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${value}`,
     );
     const { drinks } = await response.json();
-    history.push('/bebidas');
+    history.push('/drinks');
     return drinks.length === 0 ? setDrinks([]) : setDrinks(drinks);
   }
 

@@ -53,7 +53,7 @@ function Login() {
     localStorage.setItem('user', JSON
       .stringify({ email }));
     fetch();
-    history.push('/comidas');
+    history.push('/foods');
     localStorage.setItem('doneRecipes', []);
     localStorage.setItem('favoriteRecipes', []);
     localStorage.setItem('inProgressRecipes', {});

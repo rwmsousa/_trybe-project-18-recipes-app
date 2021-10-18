@@ -65,14 +65,14 @@ function Drinks() {
   };
   const handleLink = ({ target: { value } }) => {
     setIdDrinkDetails(value);
-    history.push(`/bebidas/${value}`);
+    history.push(`/drinks/${value}`);
   };
 
   useEffect(() => {
     if (drinks && drinks.length === 1) {
       const { idDrink } = drinks[0];
       setIdDrinkDetails(idDrink);
-      history.push(`/bebidas/${idDrink}`);
+      history.push(`/drinks/${idDrink}`);
     }
   }, [drinks, setIdDrinkDetails, history]);
 

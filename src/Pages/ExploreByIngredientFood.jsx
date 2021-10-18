@@ -35,7 +35,7 @@ function ExploreByIngredientFood() {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${value}`);
     const { meals } = await response.json();
     setFoods(meals);
-    history.push('/comidas');
+    history.push('/foods');
   };
 
   return (

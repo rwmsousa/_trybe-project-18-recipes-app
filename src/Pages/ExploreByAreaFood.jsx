@@ -32,7 +32,7 @@ function ExploreByAreaFood() {
 
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
-    history.push(`/comidas/${value}`);
+    history.push(`/foods/${value}`);
   };
 
   const handleChange = async ({ target: { value } }) => {

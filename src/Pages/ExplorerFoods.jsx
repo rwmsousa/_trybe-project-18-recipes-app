@@ -23,7 +23,7 @@ function ExplorerFoods() {
   const handleClick = async () => {
     const response = await fetchRandomFoodDetails();
     const id = response[0].idMeal;
-    history.push(`/comidas/${id}`);
+    history.push(`/foods/${id}`);
   };
 
   const handleArea = async () => {
@@ -32,7 +32,7 @@ function ExplorerFoods() {
     setareas(res2);
     setfoodsarea(res);
     setfoodsareaClone(res);
-    history.push('/explorar/comidas/area');
+    history.push('/explorer/foods/area');
   };
 
   return (
@@ -42,7 +42,7 @@ function ExplorerFoods() {
         <button
           type="button"
           data-testid="explore-by-ingredient"
-          onClick={ () => history.push('/explorar/comidas/ingredientes') }
+          onClick={ () => history.push('/explorer/foods/ingredients') }
           className="explore-btn"
         >
           Por Ingredientes

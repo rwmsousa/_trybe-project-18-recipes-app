@@ -64,14 +64,14 @@ function Foods() {
 
   const handleLink = ({ target: { value } }) => {
     setIdFoodDetails(value);
-    history.push(`/comidas/${value}`);
+    history.push(`/foods/${value}`);
   };
 
   useEffect(() => {
     if (foods && foods.length === 1 && foods[0].idMeal !== '52968') {
       const { idMeal } = foods[0];
       setIdFoodDetails(idMeal);
-      history.push(`/comidas/${idMeal}`);
+      history.push(`/foods/${idMeal}`);
     }
   }, [foods, setIdFoodDetails, history]);
 

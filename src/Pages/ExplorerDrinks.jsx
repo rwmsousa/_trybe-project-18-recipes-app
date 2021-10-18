@@ -21,7 +21,7 @@ function ExplorerDrinks() {
     const response = await fetchRandomDrinkDetails();
     const { drinks } = response;
     const id = drinks[0].idDrink;
-    history.push(`/bebidas/${id}`);
+    history.push(`/drinks/${id}`);
   }
 
   return (

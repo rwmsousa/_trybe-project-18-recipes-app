@@ -73,7 +73,7 @@ function FoodDetail() {
     if (!localStorage.inProgressRecipes) {
       localStorage.inProgressRecipes = JSON.stringify([id]);
     }
-    history.push(`/comidas/${value}/in-progress`);
+    history.push(`/foods/${value}/in-progress`);
   };
 
   const shareLink = () => {

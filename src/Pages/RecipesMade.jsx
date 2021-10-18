@@ -88,7 +88,7 @@ function RecipesMade() {
           { recipe.type && recipe.type === 'comida'
             ? (
               <button
-                onClick={ () => history.push(`/comidas/${recipe.id}`) }
+                onClick={ () => history.push(`/foods/${recipe.id}`) }
                 type="button"
               >
                 <img
@@ -101,7 +101,7 @@ function RecipesMade() {
               </button>)
             : (
               <button
-                onClick={ () => history.push(`/bebidas/${recipe.id}`) }
+                onClick={ () => history.push(`/drinks/${recipe.id}`) }
                 type="button"
               >
                 <img
