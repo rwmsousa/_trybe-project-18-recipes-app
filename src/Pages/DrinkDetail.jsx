@@ -26,11 +26,6 @@ function DrinkDetail() {
   const history = useHistory();
   const id = history.location.pathname.split('/')[2];
 
-  useEffect(() => {
-    const arr = [];
-    localStorage.inProgressRecipes = JSON.stringify(arr);
-  }, []);
-
   // useEffect para completar o state foodsClone para usar no drinkDetails em recomendações
   useEffect(() => {
     async function fetchFoods() {
@@ -137,7 +132,7 @@ function DrinkDetail() {
           ))}
         </section>
         {!localStorage.inProgressRecipes
-        && !JSON.parse(localStorage.inProgressRecipes).find(
+        || !JSON.parse(localStorage.inProgressRecipes).find(
           (recipeId) => recipeId === id,
         )
           ? (
