@@ -30,7 +30,7 @@ function Header() {
 
   const menuItemProfile = () => (
     <div className="menuItemProfile">
-      <Link to="/perfil" src={ profileIcon }>
+      <Link to="/profile" src={ profileIcon }>
         <i className="far fa-user" data-testid="profile-top-btn" />
       </Link>
     </div>

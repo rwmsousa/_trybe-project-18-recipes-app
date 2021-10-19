@@ -118,7 +118,7 @@ function DrinkDetail() {
       <div className="ingredients">
         <h3>Ingredients</h3>
         <IngredientsList list={ drinksDetails } />
-        <h3>Instruções</h3>
+        <h3>Instructions</h3>
         <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
       </div>
 

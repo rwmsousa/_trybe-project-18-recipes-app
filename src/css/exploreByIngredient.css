@@ -7,11 +7,12 @@
 
 .content-explore {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  margin: 0 5px;
+  margin: 0 5px 40px 5px;
 }
 
-.ingredient {
+.ingredient a {
   align-items: center;
   display: flex;
   flex-direction: column;

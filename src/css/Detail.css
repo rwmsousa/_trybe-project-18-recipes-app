@@ -15,11 +15,12 @@ https://pt.stackoverflow.com/questions/50942/como-adicionar-uma-rolagem-horizont
 }
 
 .thumbnail {
+  margin-bottom:0 !important;
   width: 360px;
 }
 
 h1 {
-  color: #F9B9BA;
+  color: #F9B9BA !important;
   padding: 10px;
 }
 
@@ -30,6 +31,8 @@ h1 {
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
 }
 
 .category {
@@ -62,6 +65,15 @@ h1 {
 .ingredients, .recommended {
   margin: 5px;
   margin-bottom: 20px;
+  color: rgba(0, 0, 0, 0.800);
+}
+
+.recommended {
+  margin-top: 40px;
+}
+
+.ingredients p {
+  color: rgba(0, 0, 0, 0.800);
 }
 
 iframe {
@@ -75,10 +87,11 @@ iframe {
   overflow-x: scroll auto;
   overflow-y: hidden;
   white-space: nowrap;
+  margin-bottom: 40px;
 }
 
 .recomended-div {
-  box-shadow: 1px 1px 10px #999;
+  /* box-shadow: 1px 1px 10px #999; */
   cursor: pointer;
   display: inline-block;
   margin: 20px;
@@ -86,23 +99,34 @@ iframe {
   text-align: center;
   vertical-align: top;
   zoom: 1;
+  color: rgba(0, 0, 0, 0.800);
+  background-color: #F9B9BA;
+  border: 1px solid #F9B9BA !important;
+  border-radius: 0 0 5px 5px !important;
+}
+
+.recomended-div p {
+  color: rgba(0, 0, 0, 0.800);
 }
 
 .recomended-div img {
-  border-radius: 5px 5px 0 0;
   margin-bottom: 10px;
   width: 200px;
+  border: 1px solid #F9B9BA;
+  border-radius: 5px 5px 0 0 !important;
 }
 
 .start-recipe-button {
   background-color: #da2846;
-  border-color: #98e2e1;
+  border-color: #F9B9BA !important;
   border-radius: 10px;
   bottom: 0;
-  color: #98e2e1;
+  color: #F9B9BA !important;
   padding: 5px;
   position: fixed;
-  right: 200px;
+  left: 200px;
+  width: 150px;
+  margin-bottom: 10px;
 }
 
 .start-recipe-button:hover {

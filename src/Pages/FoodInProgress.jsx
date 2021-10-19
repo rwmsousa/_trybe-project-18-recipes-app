@@ -7,8 +7,9 @@ import HandleShare from '../components/HandleShareFood';
 import HandleFavorite from '../components/HandleFavoriteFood';
 
 function FoodInProgress() {
-  const { setCurrentPage, setShowProfile, setShowTitlePage, setSearchButton } =
-    useContext(Context);
+  const {
+    setCurrentPage,
+    setShowProfile, setShowTitlePage, setSearchButton } = useContext(Context);
 
   const [foodDetails, setFoodDetails] = useState([]);
   const [msgClipboard, setMsgClipboard] = useState(false);
@@ -20,8 +21,8 @@ function FoodInProgress() {
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
     if (
-      localStorage.doneRecipes &&
-      JSON.parse(localStorage.doneRecipes).find(
+      localStorage.doneRecipes
+      && JSON.parse(localStorage.doneRecipes).find(
         (recipeId) => recipeId.id === id,
       )
     ) {
@@ -58,7 +59,7 @@ function FoodInProgress() {
   };
 
   const finishRecipe = () => {
-    const url = '/receitas-feitas';
+    const url = '/recipes-made';
     const food = {
       id: foodDetails[0].idMeal,
       type: 'comida',
@@ -93,8 +94,8 @@ function FoodInProgress() {
   return (
     <div>
       <img
-        src={foodDetails[0].strMealThumb}
-        alt={`${foodDetails[0].strMeal} recipe`}
+        src={ foodDetails[0].strMealThumb }
+        alt={ `${foodDetails[0].strMeal} recipe` }
         data-testid="recipe-photo"
         className="thumbnail"
       />
@@ -104,8 +105,8 @@ function FoodInProgress() {
           <span data-testid="recipe-category" className="category">
             {foodDetails[0].strCategory}
           </span>
-          <HandleShare value={stateButtons} />
-          <HandleFavorite foodDetails={foodDetails} />
+          <HandleShare value={ stateButtons } />
+          <HandleFavorite foodDetails={ foodDetails } />
         </div>
       </div>
 
@@ -115,19 +116,19 @@ function FoodInProgress() {
           {Object.keys(foodDetails[0])
             .filter((k) => k.includes('Ingredient'))
             .map(
-              (value, idx) =>
-                foodDetails[0][value] !== '' &&
-                foodDetails[0][value] !== null && (
+              (value, idx) => foodDetails[0][value] !== ''
+                && foodDetails[0][value] !== null
+                && (
                   <label
-                    htmlFor={idx}
-                    key={idx}
-                    data-testid={`${idx}-ingredient-step`}
+                    htmlFor={ idx }
+                    key={ idx }
+                    data-testid={ `${idx}-ingredient-step` }
                   >
                     <input
                       type="checkbox"
-                      id={idx}
-                      value={foodDetails[0][value]}
-                      onChange={({ target }) => handleCheckBoxChange(target)}
+                      id={ idx }
+                      value={ foodDetails[0][value] }
+                      onChange={ ({ target }) => handleCheckBoxChange(target) }
                     />
                     {foodDetails[0][value]}
                   </label>
@@ -137,7 +138,7 @@ function FoodInProgress() {
       </div>
 
       <div className="instrution">
-        <h3>Instruções</h3>
+        <h3>Instructions</h3>
         <p data-testid="instructions">{foodDetails[0].strInstructions}</p>
       </div>
 
@@ -146,7 +147,7 @@ function FoodInProgress() {
           className="start-recipe-button"
           type="button"
           data-testid="finish-recipe-btn"
-          onClick={finishRecipe}
+          onClick={ finishRecipe }
         >
           Finalizar receita
         </button>

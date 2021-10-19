@@ -7,8 +7,9 @@ import HandleShare from '../components/HandleShareDrinks';
 import HandleFavorite from '../components/HandleFavoriteDrinks';
 
 function DrinkInProgress() {
-  const { setCurrentPage, setShowProfile, setShowTitlePage, setSearchButton } =
-    useContext(Context);
+  const {
+    setCurrentPage,
+    setShowProfile, setShowTitlePage, setSearchButton } = useContext(Context);
   const [drinksDetails, setDrinksDetails] = useState([]);
   const [msgClipboard, setMsgClipboard] = useState(false);
   const [showButtonFinished, setShowButtonFinished] = useState(false);
@@ -19,8 +20,8 @@ function DrinkInProgress() {
   // useEffect utilizado para verificar se a receita foi marcada como favorita e colorir o ícone de vermelho.
   useEffect(() => {
     if (
-      localStorage.doneRecipes &&
-      JSON.parse(localStorage.doneRecipes).find(
+      localStorage.doneRecipes
+      && JSON.parse(localStorage.doneRecipes).find(
         (recipeId) => recipeId.id === id,
       )
     ) {
@@ -67,7 +68,7 @@ function DrinkInProgress() {
   };
 
   const finishRecipe = () => {
-    const url = '/receitas-feitas';
+    const url = '/recipes-made';
     const drink = {
       id: drinksDetails[0].idDrink,
       type: 'bebida',
@@ -99,21 +100,11 @@ function DrinkInProgress() {
     shareLink,
   };
 
-  // function handleCheckBoxChange(target) {
-  //   const { parentNode } = target;
-  //   // console.log(parentNode.className);
-  //   if (parentNode.className === 'checked') {
-  //     parentNode.classList.remove('checked');
-  //   } else {
-  //     parentNode.classList.add('checked');
-  //   }
-  // }
-
   return (
     <div>
       <img
-        src={drinksDetails[0].strDrinkThumb}
-        alt={`${drinksDetails[0].strDrink} recipe`}
+        src={ drinksDetails[0].strDrinkThumb }
+        alt={ `${drinksDetails[0].strDrink} recipe` }
         data-testid="recipe-photo"
         className="thumbnail"
       />
@@ -123,8 +114,8 @@ function DrinkInProgress() {
           <span data-testid="recipe-category" className="category">
             {drinksDetails[0].strAlcoholic}
           </span>
-          <HandleShare value={stateButtons} />
-          <HandleFavorite drinksDetails={drinksDetails} />
+          <HandleShare value={ stateButtons } />
+          <HandleFavorite drinksDetails={ drinksDetails } />
         </div>
       </div>
 
@@ -134,19 +125,19 @@ function DrinkInProgress() {
           {Object.keys(drinksDetails[0])
             .filter((k) => k.includes('Ingredient'))
             .map(
-              (value, idx) =>
-                drinksDetails[0][value] !== null &&
-                drinksDetails[0][value] !== '' && (
+              (value, idx) => drinksDetails[0][value] !== null
+                && drinksDetails[0][value] !== ''
+                && (
                   <label
-                    htmlFor={idx}
-                    key={idx}
-                    data-testid={`${idx}-ingredient-step`}
+                    htmlFor={ idx }
+                    key={ idx }
+                    data-testid={ `${idx}-ingredient-step` }
                   >
                     <input
                       type="checkbox"
-                      id={idx}
-                      value={drinksDetails[0][value]}
-                      onChange={({ target }) => handleCheckBoxChange(target)}
+                      id={ idx }
+                      value={ drinksDetails[0][value] }
+                      onChange={ ({ target }) => handleCheckBoxChange(target) }
                     />
                     {drinksDetails[0][value]}
                   </label>
@@ -156,7 +147,7 @@ function DrinkInProgress() {
       </div>
 
       <div className="instrution">
-        <h3>Instruções</h3>
+        <h3>Instructions</h3>
         <p data-testid="instructions">{drinksDetails[0].strInstructions}</p>
       </div>
 
@@ -165,7 +156,7 @@ function DrinkInProgress() {
           className="start-recipe-button"
           type="button"
           data-testid="finish-recipe-btn"
-          onClick={finishRecipe}
+          onClick={ finishRecipe }
         >
           Finalizar receita
         </button>

@@ -48,7 +48,7 @@ function App() {
         <Route path="/explore/foods/area" component={ ExploreByAreaFood } />
         <Route exact path="/profile" component={ Profile } />
         <Route path="/recipes-made" component={ RecipesMade } />
-        <Route path="/recipes-favorites" component={ FavoriteRecipes } />
+        <Route path="/recipes-favorite" component={ FavoriteRecipes } />
         <Route component={ NotFound } />
       </Switch>
     </Provider>

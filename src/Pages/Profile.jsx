@@ -9,7 +9,7 @@ function Profile() {
   const { setCurrentPage, setSearchButton } = useContext(Context);
 
   useEffect(() => {
-    setCurrentPage('Perfil');
+    setCurrentPage('Profile');
     setSearchButton(false);
   }, [setCurrentPage, setSearchButton]);
 
@@ -42,14 +42,14 @@ function Profile() {
           data-testid="profile-done-btn"
           className="profile-done-btn"
         >
-          <a href="receitas-feitas">Receitas Feitas</a>
+          <a href="/recipes-made">Recipes Made</a>
         </button>
         <button
           type="button"
           data-testid="profile-favorite-btn"
           className="profile-favorite-btn"
         >
-          <a href="/receitas-favoritas">Receitas Favoritas</a>
+          <a href="/recipes-favorite">Recipes Favorites</a>
         </button>
         <button
           type="button"

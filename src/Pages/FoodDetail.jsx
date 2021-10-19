@@ -153,7 +153,7 @@ function FoodDetail() {
           ))}
         </section>
         {!localStorage.inProgressRecipes
-        && !JSON.parse(localStorage.inProgressRecipes).find(
+        || !JSON.parse(localStorage.inProgressRecipes).find(
           (recipeId) => recipeId === id,
         )
           ? (
