@@ -46,7 +46,7 @@ function ExploreFoods() {
         <button
           type="button"
           data-testid="explore-by-ingredient"
-          onClick={() => history.push('/explore/foods/ingredients')}
+          onClick={ () => history.push('/explore/foods/ingredients') }
           className="explore-btn"
         >
           Por Ingredients
@@ -54,7 +54,7 @@ function ExploreFoods() {
         <button
           type="button"
           data-testid="explore-by-area"
-          onClick={handleArea}
+          onClick={ handleArea }
           className="explore-btn"
         >
           Por Local de Origem
@@ -62,7 +62,7 @@ function ExploreFoods() {
         <button
           type="button"
           data-testid="explore-surprise"
-          onClick={handleClick}
+          onClick={ handleClick }
           className="explore-btn"
         >
           Me Surpreenda!
