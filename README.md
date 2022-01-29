@@ -5,9 +5,9 @@
 # Bem vindo(a) ao projeto APP DE RECEITAS!
 
 
-Este projeto foi desenvolvido em equipe, durante o curso de desenvolvimento de software na Trybe. Fique a vontade para contribuir e utilizar.
+Este projeto foi desenvolvido em equipe, durante o módulo de front-end do curso de desenvolvimento de software na Trybe. Fique a vontade para contribuir e utilizar.
 
-O app de receitasv tiliza o que há de mais moderno dentro do ecossistema React: Hooks e Context API!
+O app de receitas utiliza o que há de mais moderno dentro do ecossistema React: Hooks e Context API!
 
 Nesta aplicação é possível ver, buscar, filtrar, favoritar e acompanhar o processo de preparação de receitas e drinks!
 
