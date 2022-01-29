@@ -1,6 +1,5 @@
-### Termos de uso
 
-Ao iniciar este projeto, você concorda com as diretrizes do Código de Ética e Conduta e do Manual da Pessoa Estudante da Trybe.
+![](gif-project.gif)
 
 ---
 
@@ -21,7 +20,7 @@ O layout tem como foco dispositivos móveis, então todos os protótipos vão es
 
 # Instruções para visualizar seu projeto
 
-### Instalação:
+##### Instalação:
 
 1. Clone o repositório
   * `git clone git@github.com:ricardo-sousa-dev/_trybe-project-18-recipes-app.git`
@@ -37,13 +36,13 @@ O layout tem como foco dispositivos móveis, então todos os protótipos vão es
 
 ## APIs utilizadas
 
-### TheMealDB API
+##### TheMealDB API
 
 O [TheMealDB](https://www.themealdb.com/) é um banco de dados aberto, mantido pela comunidade, com receitas e ingredients de todo o mundo.
 
 Os end-points são bastante ricos, você pode [vê-los aqui](https://www.themealdb.com/api.php)
 
-### The CockTailDB API
+##### The CockTailDB API
 
 Bem similar (inclusive mantida pela mesma entidade) a TheMealDB API, só que focado em bebidas.
 
@@ -53,11 +52,8 @@ Os end-points também são bastante ricos, você pode [vê-los aqui](https://www
 
 ## Detalhes técnicos
 
-Algumas coisas devem seguir um padrão pré-estabelecido para que os teste de correção funcionem corretamente.
 
-⚠️ Leia-os atentamente e siga à risca o que for pedido. O não cumprimento de um requisito, total ou parcialmente, impactará em sua avaliação. ⚠️
-
-### Rotas
+##### Rotas
 
 * Tela de login: `/`;
 * Tela principal de receitas de comidas: `/comidas`;
@@ -76,17 +72,17 @@ Algumas coisas devem seguir um padrão pré-estabelecido para que os teste de co
 * Tela de receitas feitas: `/receitas-feitas`;
 * Tela de receitas favoritas: `/receitas-favoritas`.
 
-### localStorage
+## localStorage
 
 O uso de `localStorage` é utilizado para que as informações não se percam caso a pessoa atualize a página.
 
-### Biblioteca `clipboard-copy`
+##### Biblioteca `clipboard-copy`
 
 Para os componentes que contêm a funcionalidade de favoritar pratos ou bebidas, foi utilizada a biblioteca `clipboard-copy` para copiar as informações da receita. Essa biblioteca já vem instalada no projeto.
 
 Para mais informações, consulte a [documentação](https://www.npmjs.com/package/clipboard-copy)
 
-### Biblioteca `Bootstrap` 
+##### Biblioteca `Bootstrap` 
 
 Alguns elementos foram adicionados com a lib `Bootstrap`. 
 Para mais informações, consulte a [documentação](https://react-bootstrap.github.io/components/buttons/):
@@ -99,30 +95,34 @@ Nesse projeto, a pessoa que estiver utilizando o app pode procurar uma receita e
 As telas sofrem variações dependendo do tipo da receita (se é comida ou bebida, no caso).
 
 
-### Tela de login
+##### Tela de login
 
-### Barra de busca - Header
+##### Barra de busca - Header
 
-### Menu inferior
+##### Menu inferior
 
-### Tela principal de receitas
+##### Tela principal de receitas
 
-### Tela de detalhes de uma receita
+##### Tela de detalhes de uma receita
  
-### Tela de receita em progresso
+##### Tela de receita em progresso
 
-### Tela de receitas feitas
+##### Tela de receitas feitas
 
-### Tela de receitas favoritas
+##### Tela de receitas favoritas
 
-### Tela de explorar
+##### Tela de explorar
 
-### Tela de explorar bebidas ou comidas
+##### Tela de explorar bebidas ou comidas
 
-### Tela de explorar ingredients
+##### Tela de explorar ingredients
 
-### Tela de explorar por local de origem/area
+##### Tela de explorar por local de origem/area
 
-### Tela de perfil
+##### Tela de perfil
+
+
+---
+
 
 Caso queira conversar a respeito do projeto, me envie um e-mail. :)
