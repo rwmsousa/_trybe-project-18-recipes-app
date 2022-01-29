@@ -17,7 +17,7 @@ function Login() {
   const validateLogin = (inputEmail, inputPassword) => {
     const getButton = document.getElementById('submit-button');
     const validEmail = /\S+@\S+\.\S+/;
-    const magicNumber = 6;
+    const magicNumber = 5;
 
     if (validEmail.test(inputEmail) && inputPassword.length > magicNumber) {
       setButton(false);

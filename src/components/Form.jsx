@@ -32,7 +32,7 @@ function Form() {
             className="form-control"
             type={ showPassword }
             id="input-password"
-            placeholder="Password"
+            placeholder="6 dígitos"
             data-testid="password-input"
             onChange={ handleChange }
           />

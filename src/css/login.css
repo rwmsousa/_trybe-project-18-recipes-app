@@ -13,7 +13,7 @@
 }
 
 .login-box h1 {
-  color: #da2846;
+  color: #d81132c5 !important;
   font-size: 25px;
   font-weight: 900;
   margin: 30px 35px;
@@ -45,7 +45,7 @@
 
 ::-webkit-input-placeholder {
   /* WebKit browsers */
-  color: #da2846 !important;
+  color: #da284655 !important;
   padding: 5px;
 }
 
