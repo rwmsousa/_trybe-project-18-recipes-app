@@ -7,13 +7,11 @@
 
 Este projeto foi desenvolvido em equipe, durante o curso de desenvolvimento de software na Trybe. Fique a vontade para contribuir e utilizar.
 
-IMPORTANTE: Este não é um projeto final de curso, portanto, considere que o código contido nele não aprsenta as melhores práticas de mercado, mas é aceitável para uma pessoa em aprendizado. 
+O app de receitasv tiliza o que há de mais moderno dentro do ecossistema React: Hooks e Context API!
 
-O app de receitas, utilizando o que há de mais moderno dentro do ecossistema React: Hooks e Context API!
+Nesta aplicação é possível ver, buscar, filtrar, favoritar e acompanhar o processo de preparação de receitas e drinks!
 
-Nela é possível ver, buscar, filtrar, favoritar e acompanhar o processo de preparação de receitas e drinks!
-
-A base de dados serão 2 APIs distintas, uma para comidas e outra para bebidas.
+Os dados das receitas vêm de 2 APIs distintas, uma para comidas e outra para bebidas.
 
 O layout tem como foco dispositivos móveis, então todos os protótipos vão estar desenvolvidos em telas menores.
 
