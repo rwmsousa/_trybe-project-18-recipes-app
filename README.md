@@ -83,7 +83,7 @@ Para os componentes que contêm a funcionalidade de favoritar pratos ou bebidas,
 
 Para mais informações, consulte a [documentação](https://www.npmjs.com/package/clipboard-copy)
 
-### `Bootstrap` 
+#### `Bootstrap` 
 
 Alguns elementos foram adicionados com a lib `Bootstrap`. 
 Para mais informações, consulte a [documentação](https://react-bootstrap.github.io/components/buttons/):
