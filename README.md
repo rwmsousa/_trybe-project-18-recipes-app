@@ -2,7 +2,7 @@
 ![](gif-project.gif)
 
 &nbsp;&nbsp;
-# Bem vindo(a) ao projeto de Receitas!
+# Bem vindo(a) ao projeto APP DE RECEITAS!
 
 
 Este projeto foi desenvolvido em equipe, durante o curso de desenvolvimento de software na Trybe. Fique a vontade para contribuir e utilizar.
@@ -19,12 +19,11 @@ O layout tem como foco dispositivos móveis, então todos os protótipos vão es
 
 &nbsp;&nbsp;
 
-# Instruções para visualizar seu projeto
+## Instruções para visualizar o projeto
 
-##### Instalação:
-
+#### Através do terminal do seu computador:
 1. Clone o repositório
-  * `git clone git@github.com:ricardo-sousa-dev/_trybe-project-18-recipes-app.git`
+    * `git clone git@github.com:ricardo-sousa-dev/_trybe-project-18-recipes-app.git`
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd _trybe-project-18-recipes-app.git`
 
@@ -51,7 +50,7 @@ Os end-points também são bastante ricos, você pode [vê-los aqui](https://www
 
 &nbsp;&nbsp;
 ## Detalhes técnicos
-
+&nbsp;
 ### Rotas
 
 * Tela de login: `/`;
