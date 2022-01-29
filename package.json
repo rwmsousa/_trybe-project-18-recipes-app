@@ -1,6 +1,9 @@
 {
   "name": "recipes-app-test",
   "version": "0.1.0",
+  "engines": {
+      "node": "14.x"
+    },
   "private": true,
   "dependencies": {
     "@jest/environment": "^27.2.2",
