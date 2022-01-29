@@ -128,4 +128,4 @@ As telas sofrem variações dependendo do tipo da receita (se é comida ou bebid
 ---
 &nbsp;
 
-Caso queira conversar a respeito do projeto, me envie um e-mail. :)
+Caso queira conversar a respeito do projeto, me envie um e-mail.  :)
