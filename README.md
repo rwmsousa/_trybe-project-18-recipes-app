@@ -1,7 +1,3 @@
-
-![](gif-project.gif)
-
-&nbsp;&nbsp;
 # Bem vindo(a) ao projeto APP DE RECEITAS!
 
 
@@ -15,6 +11,9 @@ Os dados das receitas vêm de 2 APIs distintas, uma para comidas e outra para be
 
 O layout tem como foco dispositivos móveis, então todos os protótipos vão estar desenvolvidos em telas menores.
 
+&nbsp;&nbsp;
+
+![](gif-project.gif)
 
 &nbsp;&nbsp;
 
